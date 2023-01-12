@@ -40,6 +40,7 @@ theme_override_constants/margin_bottom = 16
 [node name="NextTileDisplay" type="TextureRect" parent="UI/VBoxContainer/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
+stretch_mode = 5
 
 [node name="grid" type="Node2D" parent="."]
 script = ExtResource("2_b52qq")

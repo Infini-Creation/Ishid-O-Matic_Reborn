@@ -191,26 +191,41 @@ func add_tile(grid_position : Vector2, tile : Node2D) -> void:
 	add_child(tile)
 
 func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> bool:
+	# no neighbor = move not allowed
+	# else : check shape/color match
+	
+	var number_of_neighbor : int = 0
+	var same_shape_neighbor : int = 0
+	var same_color_neighbor : int = 0
+	
 	if grid_position.x > 0 and game_board[grid_position.x-1][grid_position.y] != null:
+		number_of_neighbor += 1
 		if game_board[grid_position.x-1][grid_position.y].shape == tile.shape:
 			print("tile in x-1,y pos has same shape")
 		if game_board[grid_position.x-1][grid_position.y].color == tile.color:
 			print("tile in x-1,y pos has same color")
 	if grid_position.x < 11 and game_board[grid_position.x+1][grid_position.y] != null:
+		number_of_neighbor += 1
 		if game_board[grid_position.x+1][grid_position.y].shape == tile.shape:
 			print("tile in x+1,y pos has same shape")
 		if game_board[grid_position.x+1][grid_position.y].color == tile.color:
 			print("tile in x+1,y pos has same color")
 	if grid_position.y > 0 and game_board[grid_position.x][grid_position.y-1] != null:
+		number_of_neighbor += 1
 		if game_board[grid_position.x][grid_position.y-1].shape == tile.shape:
 			print("tile in x,y-1 pos has same shape")
 		if game_board[grid_position.x][grid_position.y-1].color == tile.color:
 			print("tile in x,y-1 pos has same color")
 	if grid_position.y < 7 and game_board[grid_position.x][grid_position.y+1] != null:
+		number_of_neighbor += 1
 		if game_board[grid_position.x][grid_position.y+1].shape == tile.shape:
 			print("tile in x,y+1 pos has same shape")
 		if game_board[grid_position.x][grid_position.y+1].color == tile.color:
 			print("tile in x,y+1 pos has same color")
+	print ("NB="+str(number_of_neighbor))
+	
+	if (number_of_neighbor == 0):
+		return false
 	return true
 
 func preview_next_tile():
@@ -219,6 +234,11 @@ func preview_next_tile():
 		tile = deck[0]
 		print("(ds="+str(deck.size())+")Tile=["+str(tile)+"] c="+tile.color+" s="+tile.shape)
 		##$UI/VBoxContainer/MarginContainer/NextTileDisplay.texture = tile.get_child(0).texture
+		var NextTileDisplay = get_tree().get_root().get_node("Game").get_node("UI").get_node("VBoxContainer").get_node("MarginContainer").get_node("NextTileDisplay")
+		NextTileDisplay.texture = tile.get_node("Sprite2D").texture
+		NextTileDisplay.modulate = avail_tile_colors[tile.color]
+		print("decktext=" + str(NextTileDisplay.texture)) #/VBoxContainer/MarginContainer/NextTileDisplay
+		# ~signal NTD node from grid with text ref/color/shape and UI component just read tex and display it
 		
 	else:
 		pass
