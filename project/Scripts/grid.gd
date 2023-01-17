@@ -144,41 +144,46 @@ func init_board():
 	var shape_picked : Dictionary = {}
 	var color_picked : Dictionary = {}
 	var select_this_tile : bool = true
-	var next_tile : Node2D = null
+	var current_tile : Node2D = null
 	var unique_tiles_set : Array = []
 	var tileIndex : int = 0
+	var deck_index : int = 0
 	var iteration_needed : int = 0
 	
 	# TODO hardcoded values here to replace
 	while (shape_picked.size() < 6 and color_picked.size() < 6):
 
-		next_tile = pick_next_tile()
+		current_tile = deck[deck_index]
+		##deck_index += 1
+
 		iteration_needed += 1
 
-		print("next tile c=" + next_tile.color + " s=" + next_tile.shape)
+		print("next tile (di="+str(deck_index)+") c=" + current_tile.color + " s=" + current_tile.shape)
 		print("colors picked="+str(color_picked))
 		print("shapes picked="+str(shape_picked))
 		
-		if (color_picked.has(next_tile.color)):
-			print("color : " + next_tile.color + " have already been picked, rejected")
+		if (color_picked.has(current_tile.color)):
+			print("color : " + current_tile.color + " have already been picked, rejected")
 			select_this_tile = false
-		if (shape_picked.has(next_tile.shape)):
-			print("shape : " + next_tile.shape + " have already been picked, rejected")
+		if (shape_picked.has(current_tile.shape)):
+			print("shape : " + current_tile.shape + " have already been picked, rejected")
 			select_this_tile = false
 
 		print("tile selected="+str(select_this_tile))
 
 		if (select_this_tile == true):
-			print("tile["+str(next_tile)+"] added to unique tiles set")
-			unique_tiles_set.append(next_tile)
+			print("tile["+str(current_tile)+"] added to unique tiles set")
+			unique_tiles_set.append(current_tile)
 			
-			color_picked[next_tile.color] = 1
-			shape_picked[next_tile.shape] = 1
+			deck.remove_at(deck_index)
+			color_picked[current_tile.color] = 1
+			shape_picked[current_tile.shape] = 1
 		else:
-			print("tile["+str(next_tile)+"] NOT added to unique tiles set")
-			#~little helper put back tile to deck
-			deck.push_back(next_tile)
-			next_tile = null
+			print("tile["+str(current_tile)+"] NOT added to unique tiles set (di="+str(deck_index)+")")
+			
+			#deck.push_back(current_tile)
+			deck_index += 1
+			current_tile = null
 			select_this_tile = true
 
 	print("Iterations needed=" + str(iteration_needed))
@@ -212,10 +217,12 @@ func check_position_ok(grid_position : Vector2) -> bool:
 
 func pick_next_tile() -> Node2D:
 	var tile : Node2D = null
+	var DeckCountDisplay = get_tree().get_root().get_node("Game").get_node("UI").get_node("VBoxContainer").get_node("TmpAvailDeckTiles")
 	
 	if (deck.size() > 0):
 		tile = deck.pop_front()
 		print("PiNT: (ds="+str(deck.size())+")  Tile=["+str(tile)+"]")
+		DeckCountDisplay.text = str(deck.size())
 	return tile
 
 
@@ -228,62 +235,115 @@ func add_tile(grid_position : Vector2, tile : Node2D) -> void:
 
 
 func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> bool:
-	# no neighbor = move not allowed
-	# else : check shape/color match
+	#var same_shape_neighbor : int = 0
+	#var same_color_neighbor : int = 0
 	
-	var number_of_neighbor : int = 0
-	var same_shape_neighbor : int = 0
-	var same_color_neighbor : int = 0
+	# 2D array where second level hold same color (idx 0) and same shape (idx 1) properties
+	var adjacent_tiles : Array = [ [null,null], [null,null], [null,null], [null,null] ]
+	var adjacent_index : int = 0
+	#var neighbor_tile : int = 0
 	
 	if grid_position.x > 0 and game_board[grid_position.x-1][grid_position.y] != null:
-		number_of_neighbor += 1
+		#neighbor_tile += 1
+		#adjacent_tiles.append([])
+		#adjacent_tiles[adjacent_index].append([null, null])
 		if game_board[grid_position.x-1][grid_position.y].shape == tile.shape:
 			print("tile in x-1,y pos has same shape")
-			same_shape_neighbor += 1
+			#same_shape_neighbor += 1
+		adjacent_tiles[adjacent_index][0] = game_board[grid_position.x-1][grid_position.y].shape == tile.shape
 		if game_board[grid_position.x-1][grid_position.y].color == tile.color:
 			print("tile in x-1,y pos has same color")
-			same_color_neighbor += 1
+			#same_color_neighbor += 1
+		adjacent_tiles[adjacent_index][1] = game_board[grid_position.x-1][grid_position.y].color == tile.color
+		adjacent_index += 1
+	
 	if grid_position.x < 11 and game_board[grid_position.x+1][grid_position.y] != null:
-		number_of_neighbor += 1
+		#neighbor_tile += 1
+		#adjacent_tiles.append([])
+		#adjacent_tiles[adjacent_index].append([null, null])
 		if game_board[grid_position.x+1][grid_position.y].shape == tile.shape:
 			print("tile in x+1,y pos has same shape")
-			same_shape_neighbor += 1
+			#same_shape_neighbor += 1
+		adjacent_tiles[adjacent_index][0] = game_board[grid_position.x+1][grid_position.y].shape == tile.shape
 		if game_board[grid_position.x+1][grid_position.y].color == tile.color:
 			print("tile in x+1,y pos has same color")
-			same_color_neighbor += 1
+			#same_color_neighbor += 1
+		adjacent_tiles[adjacent_index][1] = game_board[grid_position.x+1][grid_position.y].color == tile.color
+		adjacent_index += 1
+		
 	if grid_position.y > 0 and game_board[grid_position.x][grid_position.y-1] != null:
-		number_of_neighbor += 1
+		#neighbor_tile += 1
+		#adjacent_tiles.append([])
+		#adjacent_tiles[adjacent_index].append([null, null])
 		if game_board[grid_position.x][grid_position.y-1].shape == tile.shape:
 			print("tile in x,y-1 pos has same shape")
-			same_shape_neighbor += 1
+			#same_shape_neighbor += 1
+		adjacent_tiles[adjacent_index][0] = game_board[grid_position.x][grid_position.y-1].shape == tile.shape
 		if game_board[grid_position.x][grid_position.y-1].color == tile.color:
 			print("tile in x,y-1 pos has same color")
-			same_color_neighbor += 1
+			#same_color_neighbor += 1
+		adjacent_tiles[adjacent_index][1] = game_board[grid_position.x][grid_position.y-1].color == tile.color
+		adjacent_index += 1
+		
 	if grid_position.y < 7 and game_board[grid_position.x][grid_position.y+1] != null:
-		number_of_neighbor += 1
+		#neighbor_tile += 1
+		#adjacent_tiles.append([])
+		#adjacent_tiles[adjacent_index].append([null, null])
 		if game_board[grid_position.x][grid_position.y+1].shape == tile.shape:
 			print("tile in x,y+1 pos has same shape")
-			same_shape_neighbor += 1
+			#same_shape_neighbor += 1
+		adjacent_tiles[adjacent_index][0] = game_board[grid_position.x][grid_position.y+1].shape == tile.shape
 		if game_board[grid_position.x][grid_position.y+1].color == tile.color:
 			print("tile in x,y+1 pos has same color")
-			same_color_neighbor += 1
-	print ("CAT: NB="+str(number_of_neighbor)+" scn="+str(same_color_neighbor)+" ssn="+str(same_shape_neighbor))
-	
-	if (number_of_neighbor == 0):
-		return false
-	
-	return true
+			#same_color_neighbor += 1
+		adjacent_tiles[adjacent_index][1] = game_board[grid_position.x][grid_position.y+1].color == tile.color
+		adjacent_index += 1
+		
+	print ("CAT: adji="+str(adjacent_index)+" adjt="+str(adjacent_tiles))
+
+	match adjacent_index:
+		0:
+			print("no neighbor case => FALSE")
+			return false
+		1:
+			print("one neighbor case:")
+			return (adjacent_tiles[0][0] or adjacent_tiles[0][1])
+		2:
+			print("two neighbors case:")
+			return (adjacent_tiles[0][0] and adjacent_tiles[1][1]) or (adjacent_tiles[0][1] and adjacent_tiles[1][0])
+		3:
+			print("three neighbors case:")
+			return ((adjacent_tiles[0][0] and adjacent_tiles[1][1] and adjacent_tiles[2][1]) or 
+					(adjacent_tiles[1][0] and adjacent_tiles[0][1] and adjacent_tiles[2][1]) or 
+					(adjacent_tiles[2][0] and adjacent_tiles[0][1] and adjacent_tiles[1][1]) or 
+					(adjacent_tiles[0][1] and adjacent_tiles[1][0] and adjacent_tiles[2][0]) or 
+					(adjacent_tiles[1][1] and adjacent_tiles[0][0] and adjacent_tiles[2][0]) or
+					(adjacent_tiles[2][1] and adjacent_tiles[0][0] and adjacent_tiles[1][0]))
+		4:
+			print("four neighbors case:")
+			return ((adjacent_tiles[0][0] and adjacent_tiles[1][0] and adjacent_tiles[2][1] and adjacent_tiles[3][1]) or
+					(adjacent_tiles[0][0] and adjacent_tiles[1][1] and adjacent_tiles[2][0] and adjacent_tiles[3][1]) or
+					(adjacent_tiles[0][0] and adjacent_tiles[1][1] and adjacent_tiles[2][1] and adjacent_tiles[3][0]) or
+					(adjacent_tiles[0][1] and adjacent_tiles[1][1] and adjacent_tiles[2][0] and adjacent_tiles[3][0]) or
+					(adjacent_tiles[0][1] and adjacent_tiles[1][0] and adjacent_tiles[2][1] and adjacent_tiles[3][0]) or
+					(adjacent_tiles[0][1] and adjacent_tiles[1][0] and adjacent_tiles[2][0] and adjacent_tiles[3][1]))
+
+	return false
 
 
 # ~add arg to print something only one
 # set flag to false outside (before the call), set it to true here at the end
 #reset ti to false after tile picked
-func preview_next_tile(next_tile : Node2D) -> void:
+# use signals here: 1 for count, 1 for tile
+#	update_deck(tile_removed)
+#	update_preview(tile)
+# + one init init_deck_signal(total tiles)
+func preview_next_tile(following_tile : Node2D) -> void:
 	var tile : Node2D
 	var NextTileDisplay = get_tree().get_root().get_node("Game").get_node("UI").get_node("VBoxContainer").get_node("MarginContainer").get_node("NextTileDisplay")
 	
-	if (next_tile != null):
-		tile = next_tile
+	if (following_tile != null):
+		tile = following_tile
 	else:
 		if (deck.size() > 0):
 			tile = deck[0]
