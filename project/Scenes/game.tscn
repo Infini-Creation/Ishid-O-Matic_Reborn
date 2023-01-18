@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://y6wrq7owermg"]
+[gd_scene load_steps=6 format=3 uid="uid://y6wrq7owermg"]
 
 [ext_resource type="Texture2D" uid="uid://dfwg8qoeppdln" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
 [ext_resource type="Script" path="res://Scripts/grid.gd" id="2_b52qq"]
+[ext_resource type="Script" path="res://Scripts/NextTileDisplay.gd" id="2_t061c"]
+[ext_resource type="Script" path="res://Scenes/TmpAvailDeckTiles.gd" id="3_y6n0w"]
 
 [sub_resource type="SystemFont" id="SystemFont_vr8di"]
 
@@ -54,6 +56,7 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 mouse_filter = 2
 stretch_mode = 5
+script = ExtResource("2_t061c")
 
 [node name="TmpAvailDeckTiles" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
@@ -67,6 +70,7 @@ theme_override_font_sizes/font_size = 60
 text = "72"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("3_y6n0w")
 
 [node name="grid" type="Node2D" parent="."]
 script = ExtResource("2_b52qq")
@@ -78,3 +82,7 @@ y_start = 248
 tile_size = 64
 tile_colors = 6
 tile_shapes = 6
+
+[connection signal="deck_initialized" from="grid" to="UI/VBoxContainer/TmpAvailDeckTiles" method="_on_grid_deck_initialized"]
+[connection signal="preview_tile" from="grid" to="UI/VBoxContainer/MarginContainer/NextTileDisplay" method="_on_grid_preview_tile"]
+[connection signal="tile_picked" from="grid" to="UI/VBoxContainer/TmpAvailDeckTiles" method="_on_grid_tile_picked"]

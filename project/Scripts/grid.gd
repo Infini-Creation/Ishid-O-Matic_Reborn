@@ -19,12 +19,11 @@ var avail_tile_shapes = [
 	preload("res://Scenes/tileF.tscn")
 ]
 
-#tmp
-#var avail_tile_shapes = ["A", "B", "C", "D", "E", "F"]
-#var avail_tile_colors = ["1", "2", "3", "4", "5", "6"]
-var avail_tile_colors = { "color1" : Color(221,0,221,1), "color2" : Color(0,204,204,1), "color3" : Color(221,0,0,1), "color4" : Color(17,85,255,1), "color5" : Color(0,170,0,1), "color6" : Color(238,170,0,1)}
+signal deck_initialized
+signal tile_picked
+signal preview_tile
 
-# could use only numbers for color as shape !
+var avail_tile_colors = { "color1" : Color(221,0,221,1), "color2" : Color(0,204,204,1), "color3" : Color(221,0,0,1), "color4" : Color(17,85,255,1), "color5" : Color(0,170,0,1), "color6" : Color(238,170,0,1)}
 
 var tiles = []
 var game_board : Array = []
@@ -54,9 +53,12 @@ func _process(_delta):
 		preview_next_tile(next_tile)
 		var mpos : Vector2 = get_mouse_grid_position()
 		##bad always work without delay/doing nothing when no click issued !
+
 		if (check_position_ok(mpos)):
 			print("position ok, proceed nt="+str(next_tile))
 			if (next_tile == null):
+				
+				# update deck & next tile display ONLY when tile is actually put on the board
 				print("pick next tile")
 				next_tile = pick_next_tile()
 				print("tile="+str(next_tile))
@@ -138,6 +140,7 @@ func init_deck():
 	#print("Decktmp("+str(deck.size())+")=["+str(deck)+"]")
 	deck.shuffle()
 	print("ID DecktmpS("+str(deck.size())+")=["+str(deck)+"]")
+	deck_initialized.emit(deck.size())
 	
 
 func init_board():
@@ -181,7 +184,6 @@ func init_board():
 		else:
 			print("tile["+str(current_tile)+"] NOT added to unique tiles set (di="+str(deck_index)+")")
 			
-			#deck.push_back(current_tile)
 			deck_index += 1
 			current_tile = null
 			select_this_tile = true
@@ -217,12 +219,12 @@ func check_position_ok(grid_position : Vector2) -> bool:
 
 func pick_next_tile() -> Node2D:
 	var tile : Node2D = null
-	var DeckCountDisplay = get_tree().get_root().get_node("Game").get_node("UI").get_node("VBoxContainer").get_node("TmpAvailDeckTiles")
 	
 	if (deck.size() > 0):
 		tile = deck.pop_front()
 		print("PiNT: (ds="+str(deck.size())+")  Tile=["+str(tile)+"]")
-		DeckCountDisplay.text = str(deck.size())
+		tile_picked.emit()
+
 	return tile
 
 
@@ -230,72 +232,60 @@ func add_tile(grid_position : Vector2, tile : Node2D) -> void:
 	print("AT: addtile called: pos=["+str(grid_position)+"] t=["+str(tile)+"]")
 	tile.position = grid_to_pixel(grid_position.x, grid_position.y)
 	game_board[grid_position.x][grid_position.y] = tile
-	#also fill board data to check tiles later !
 	add_child(tile)
 
 
 func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> bool:
-	#var same_shape_neighbor : int = 0
-	#var same_color_neighbor : int = 0
 	
 	# 2D array where second level hold same color (idx 0) and same shape (idx 1) properties
 	var adjacent_tiles : Array = [ [null,null], [null,null], [null,null], [null,null] ]
 	var adjacent_index : int = 0
-	#var neighbor_tile : int = 0
 	
 	if grid_position.x > 0 and game_board[grid_position.x-1][grid_position.y] != null:
-		#neighbor_tile += 1
-		#adjacent_tiles.append([])
-		#adjacent_tiles[adjacent_index].append([null, null])
+		
 		if game_board[grid_position.x-1][grid_position.y].shape == tile.shape:
 			print("tile in x-1,y pos has same shape")
-			#same_shape_neighbor += 1
+
 		adjacent_tiles[adjacent_index][0] = game_board[grid_position.x-1][grid_position.y].shape == tile.shape
 		if game_board[grid_position.x-1][grid_position.y].color == tile.color:
 			print("tile in x-1,y pos has same color")
-			#same_color_neighbor += 1
+
 		adjacent_tiles[adjacent_index][1] = game_board[grid_position.x-1][grid_position.y].color == tile.color
 		adjacent_index += 1
 	
 	if grid_position.x < 11 and game_board[grid_position.x+1][grid_position.y] != null:
-		#neighbor_tile += 1
-		#adjacent_tiles.append([])
-		#adjacent_tiles[adjacent_index].append([null, null])
+
 		if game_board[grid_position.x+1][grid_position.y].shape == tile.shape:
 			print("tile in x+1,y pos has same shape")
-			#same_shape_neighbor += 1
+
 		adjacent_tiles[adjacent_index][0] = game_board[grid_position.x+1][grid_position.y].shape == tile.shape
 		if game_board[grid_position.x+1][grid_position.y].color == tile.color:
 			print("tile in x+1,y pos has same color")
-			#same_color_neighbor += 1
+
 		adjacent_tiles[adjacent_index][1] = game_board[grid_position.x+1][grid_position.y].color == tile.color
 		adjacent_index += 1
 		
 	if grid_position.y > 0 and game_board[grid_position.x][grid_position.y-1] != null:
-		#neighbor_tile += 1
-		#adjacent_tiles.append([])
-		#adjacent_tiles[adjacent_index].append([null, null])
+
 		if game_board[grid_position.x][grid_position.y-1].shape == tile.shape:
 			print("tile in x,y-1 pos has same shape")
-			#same_shape_neighbor += 1
+
 		adjacent_tiles[adjacent_index][0] = game_board[grid_position.x][grid_position.y-1].shape == tile.shape
 		if game_board[grid_position.x][grid_position.y-1].color == tile.color:
 			print("tile in x,y-1 pos has same color")
-			#same_color_neighbor += 1
+
 		adjacent_tiles[adjacent_index][1] = game_board[grid_position.x][grid_position.y-1].color == tile.color
 		adjacent_index += 1
 		
 	if grid_position.y < 7 and game_board[grid_position.x][grid_position.y+1] != null:
-		#neighbor_tile += 1
-		#adjacent_tiles.append([])
-		#adjacent_tiles[adjacent_index].append([null, null])
+
 		if game_board[grid_position.x][grid_position.y+1].shape == tile.shape:
 			print("tile in x,y+1 pos has same shape")
-			#same_shape_neighbor += 1
+
 		adjacent_tiles[adjacent_index][0] = game_board[grid_position.x][grid_position.y+1].shape == tile.shape
 		if game_board[grid_position.x][grid_position.y+1].color == tile.color:
 			print("tile in x,y+1 pos has same color")
-			#same_color_neighbor += 1
+
 		adjacent_tiles[adjacent_index][1] = game_board[grid_position.x][grid_position.y+1].color == tile.color
 		adjacent_index += 1
 		
@@ -331,34 +321,23 @@ func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> bool:
 	return false
 
 
-# ~add arg to print something only one
-# set flag to false outside (before the call), set it to true here at the end
-#reset ti to false after tile picked
-# use signals here: 1 for count, 1 for tile
-#	update_deck(tile_removed)
-#	update_preview(tile)
-# + one init init_deck_signal(total tiles)
 func preview_next_tile(following_tile : Node2D) -> void:
 	var tile : Node2D
-	var NextTileDisplay = get_tree().get_root().get_node("Game").get_node("UI").get_node("VBoxContainer").get_node("MarginContainer").get_node("NextTileDisplay")
 	
 	if (following_tile != null):
+		preview_tile.emit(following_tile)
 		tile = following_tile
 	else:
 		if (deck.size() > 0):
 			tile = deck[0]
-		#print("PrNT: (ds="+str(deck.size())+")Tile=["+str(tile)+"] c="+tile.color+" s="+tile.shape)
-		##$UI/VBoxContainer/MarginContainer/NextTileDisplay.texture = tile.get_child(0).texture
-		#print("PrNT: decktext=" + str(NextTileDisplay.texture)) #/VBoxContainer/MarginContainer/NextTileDisplay
-		# ~signal NTD node from grid with text ref/color/shape and UI component just read tex and display it
-		
+
 		else:
 			pass #print("No more tile")
 			# reset tile text or add an empty deck icon
 
 	if (tile != null):
-		NextTileDisplay.texture = tile.get_node("Sprite2D").texture
-		NextTileDisplay.modulate = avail_tile_colors[tile.color]
+		preview_tile.emit(tile, avail_tile_colors[tile.color])
+
 
 
 func update_score():
