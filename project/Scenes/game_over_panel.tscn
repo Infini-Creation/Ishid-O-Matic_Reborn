@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://kljdgyody1hl"]
+
+[ext_resource type="Texture2D" uid="uid://crgkocvfytwc8" path="res://Arts/Gfx/Panels/GameOverPanel-background.png" id="1_l7mtr"]
+
+[node name="GameOverPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 224.0
+offset_top = 304.0
+offset_right = 800.0
+offset_bottom = 464.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_l7mtr")
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.234
+anchor_top = -0.835
+anchor_right = 1.0
+anchor_bottom = 1.912
+offset_left = 259.784
+offset_top = 150.6
+offset_right = -139.0
+offset_bottom = -160.92
+auto_translate = false
+localize_numeral_system = false
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+text = "NO MORE MOVES !
+Sorry, but there are no more moves possible !"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
