@@ -29,13 +29,35 @@ offset_top = 8.0
 offset_right = 1016.0
 offset_bottom = 240.0
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/HBoxContainer"]
+[node name="Player1ScoreMargin" type="MarginContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer/Player1ScoreMargin"]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="UI/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="UI/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Score" type="RichTextLabel" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="4waysSymbol" type="TextureRect" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="4waysCounter" type="RichTextLabel" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="LogoMargin" type="MarginContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+
+[node name="Player2ScoreMargin" type="MarginContainer" parent="UI/HBoxContainer"]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
@@ -82,7 +104,10 @@ y_start = 248
 tile_size = 64
 tile_colors = 6
 tile_shapes = 6
+player_name = "test"
+debug_enabled = true
 
 [connection signal="deck_initialized" from="grid" to="UI/VBoxContainer/TmpAvailDeckTiles" method="_on_grid_deck_initialized"]
 [connection signal="preview_tile" from="grid" to="UI/VBoxContainer/MarginContainer/NextTileDisplay" method="_on_grid_preview_tile"]
 [connection signal="tile_picked" from="grid" to="UI/VBoxContainer/TmpAvailDeckTiles" method="_on_grid_tile_picked"]
+[connection signal="tile_placed" from="grid" to="grid" method="_on_tile_placed"]
