@@ -20,6 +20,7 @@ var avail_tile_shapes = [
 	preload("res://Scenes/tileF.tscn")
 ]
 
+
 # last maybe not used at all
 enum HIGHLIGHT_MODE { HIGHLIGHT_NONE, FIRST_AVAIL_MOVE, ALL_AVAIL_MOVE, RANDOM_MOVE, HIGHER_SCORE_MOVE }
 var highlighted_cells : Array = []
@@ -37,7 +38,7 @@ var tiles = []
 var game_board : Array = []
 var deck : Array = []
 var next_tile : Node2D = null
-var tile_score : int = 0
+#var tile_score : int = 0
 var avail_move : int = -1
 
 # to remove soon
@@ -80,9 +81,10 @@ func _process(_delta):
 		if (avail_move == -1):
 			avail_move = check_available_move(HIGHLIGHT_MODE.HIGHLIGHT_NONE)
 			debug("_process: AM="+str(avail_move))
-			if (avail_move == 0):
+			if (avail_move == 0):#for testing gmae over panel : true: ##tmp 
 				debug("_process: no more move available, GAME OVER")
-				game_end.emit(false)
+				#game_end.emit(false) #to where ? which node ?
+				game_over(false)
 				quit = true #~just temp to exit main loop doing nothing
 			
 		var mpos : Vector2 = get_mouse_grid_position()
@@ -96,12 +98,13 @@ func _process(_delta):
 				debug("position ok, proceed nt="+str(next_tile))
 
 				# here loop: while tile not put on board, stay here
-				if check_adjacent_tiles(next_tile, mpos) == true:
+				var potential_tile_score = check_adjacent_tiles(next_tile, mpos)
+				if potential_tile_score > 0:
 					add_tile(mpos, next_tile)
 					pick_next_tile()
 					next_tile = null
 					avail_move = -1
-					#useless update_score()
+					update_score(potential_tile_score)
 
 				else:
 					##~gameover case TC
@@ -111,7 +114,9 @@ func _process(_delta):
 			#will be done before, to move there
 			debug("No more tile")
 			#game_end = true
-			game_end.emit(true)
+			# call gameover here which emit the signal to panel(s)
+			#game_end.emit(true)
+			game_over(true)
 			quit = true #~just temp to exit main loop doing nothing
 
 
@@ -237,18 +242,12 @@ func init_board():
 
 
 func check_position_ok(grid_position : Vector2) -> bool:
-	#var there_is_a_move : bool = false
-	#1. check cell is free
-	#2. check tile follow the rules
 	if (grid_position == Vector2(-1,-1)):
 		##print("invalid cell")
 		return false
 	if game_board[grid_position.x][grid_position.y] == null:
 		debug("CPOk: Cell["+str(grid_position)+"]:"+str(game_board[grid_position.x][grid_position.y]))
 		return true
-		#print ("check_position_ok: no more move available")
-		#game_end.emit(false)
-		#return false
 	else:
 		debug("Cell["+str(grid_position)+"] is occupied")
 	
@@ -256,21 +255,21 @@ func check_position_ok(grid_position : Vector2) -> bool:
 
 
 func check_available_move(highlight_mode : HIGHLIGHT_MODE) -> int:
-	var avail_move : int = 0
+	var possible_moves : int = 0
 
 	for column in range(0, board_width):
 		for row in range(0, board_height):
 			debug("CAM: check cell ["+str(column)+","+str(row)+"]")
 			if (game_board[column][row] != null):
 				debug("CAM: cell is already occupied, skip")
-			elif check_adjacent_tiles(next_tile, Vector2(column, row)) == true:
+			elif check_adjacent_tiles(next_tile, Vector2(column, row)) > 0:
 				debug("CAM: Move found["+str(column)+","+str(row)+"]")
 				if (highlight_mode == HIGHLIGHT_MODE.FIRST_AVAIL_MOVE):
-					avail_move = 1
+					possible_moves = 1
 				elif (highlight_mode == HIGHLIGHT_MODE.ALL_AVAIL_MOVE or highlight_mode == HIGHLIGHT_MODE.RANDOM_MOVE):
 					highlighted_cells.append(Vector2(column, row))
 				elif (highlight_mode == HIGHLIGHT_MODE.HIGHLIGHT_NONE):
-					avail_move += 1
+					possible_moves += 1
 
 	if (highlight_mode == HIGHLIGHT_MODE.RANDOM_MOVE):
 		pass #pick one item from array
@@ -278,7 +277,7 @@ func check_available_move(highlight_mode : HIGHLIGHT_MODE) -> int:
 	if (highlight_mode != HIGHLIGHT_MODE.HIGHLIGHT_NONE):
 		pass # actually lit the selected tiles
 
-	return avail_move
+	return possible_moves
 
 
 func pick_next_tile() -> Node2D:
@@ -297,11 +296,11 @@ func add_tile(grid_position : Vector2, tile : Node2D) -> void:
 	tile.position = grid_to_pixel(grid_position.x, grid_position.y)
 	game_board[grid_position.x][grid_position.y] = tile
 	add_child(tile)
-	update_score(tile_score)
+	#update_score(tile_score)
 
 
 #replace : bool => int (score) 0 or -1 as previous false
-func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> bool:
+func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> int:
 	
 	# 2D array where second level hold same color (idx 0) and same shape (idx 1) properties
 	var adjacent_tiles : Array = [ [null,null], [null,null], [null,null], [null,null] ]
@@ -309,7 +308,7 @@ func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> bool:
 	var allowed_move : bool = false
 	
 	if (tile == null or grid_position == null):
-		return false
+		return 0
 
 	if grid_position.x > 0 and game_board[grid_position.x-1][grid_position.y] != null:
 		
@@ -367,19 +366,19 @@ func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> bool:
 	match adjacent_index:
 		0:
 			debug("no neighbor case => FALSE")
-			return false
+			return 0
 		1:
 			debug("one neighbor case")
 			allowed_move = adjacent_tiles[0][0] or adjacent_tiles[0][1]
 			if allowed_move == true:
-				tile_placed.emit(1)
-				return true
+				#tile_placed.emit(1)
+				return 1
 		2:
 			debug("two neighbors case")
 			allowed_move = (adjacent_tiles[0][0] and adjacent_tiles[1][1]) or (adjacent_tiles[0][1] and adjacent_tiles[1][0])
 			if allowed_move == true:
-				tile_placed.emit(2)
-				return true
+				#tile_placed.emit(2)
+				return 2
 		3:
 			debug("three neighbors case")
 			allowed_move = ((adjacent_tiles[0][0] and adjacent_tiles[1][1] and adjacent_tiles[2][1]) or 
@@ -389,8 +388,8 @@ func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> bool:
 					(adjacent_tiles[1][1] and adjacent_tiles[0][0] and adjacent_tiles[2][0]) or
 					(adjacent_tiles[2][1] and adjacent_tiles[0][0] and adjacent_tiles[1][0]))
 			if allowed_move == true:
-				tile_placed.emit(3)
-				return true
+				#tile_placed.emit(3)
+				return 3
 		4:
 			debug("four neighbors case")
 			allowed_move = ((adjacent_tiles[0][0] and adjacent_tiles[1][0] and adjacent_tiles[2][1] and adjacent_tiles[3][1]) or
@@ -400,10 +399,10 @@ func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> bool:
 					(adjacent_tiles[0][1] and adjacent_tiles[1][0] and adjacent_tiles[2][1] and adjacent_tiles[3][0]) or
 					(adjacent_tiles[0][1] and adjacent_tiles[1][0] and adjacent_tiles[2][0] and adjacent_tiles[3][1]))
 			if allowed_move == true:
-				tile_placed.emit(4)
-				return true
+				#tile_placed.emit(4)
+				return 4
 
-	return false
+	return 0
 
 
 func preview_next_tile() -> Node2D:
@@ -426,22 +425,28 @@ func preview_next_tile() -> Node2D:
 		# reset tile text or add an empty deck icon
 
 
-# ~not used
 func update_score(score : int) -> void:
 	player1Score += TilesScore[score - 1]
 	if (score == 4):
 		player1Score += FourWaysBonus[FourWaysCount]
 		FourWaysCount += 1
-	debug("Player1 score=" + str(player1Score) + "(4wc="+str(FourWaysCount)+")")
+	debug("US: Player1 score=" + str(player1Score) + "(4wc="+str(FourWaysCount)+")")
 
 
 func highlight_cell(cell : Vector2) -> void:
+	# draw lines around cell then animate with colors cycle (tweens ?)
 	pass
 
 
 # ~game_end signal => call this to do some work and ~display game over screen => fill name => highscore
-func game_over():
-	pass
+func game_over(win : bool):
+	#=> load game over panel
+	##get_tree().get_child("GameOverPanel").visible = true #doesn't work (~func not called at all!)
+	if win == true:
+		debug("Game won")
+	else:
+		debug("Game loss")
+	game_end.emit(win)
 
 
 func save_highscore():
@@ -456,6 +461,7 @@ func debug(msg : String) -> void:
 	if (debug_enabled == true):
 		print(msg)
 
+# no longer in use
 func _on_tile_placed(score : int) -> void:
 	debug("otp: score=" + str(score))
-	tile_score = score
+	#tile_score = score
