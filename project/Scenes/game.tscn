@@ -1,12 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://y6wrq7owermg"]
+[gd_scene load_steps=11 format=3 uid="uid://y6wrq7owermg"]
 
 [ext_resource type="Texture2D" uid="uid://dfwg8qoeppdln" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
 [ext_resource type="Script" path="res://Scripts/grid.gd" id="2_b52qq"]
+[ext_resource type="Script" path="res://Scripts/Player1Score.gd" id="2_p7qwq"]
 [ext_resource type="Script" path="res://Scripts/NextTileDisplay.gd" id="2_t061c"]
+[ext_resource type="Script" path="res://Scripts/Player1_4waysCounter.gd" id="3_3vvym"]
 [ext_resource type="Script" path="res://Scenes/TmpAvailDeckTiles.gd" id="3_y6n0w"]
 [ext_resource type="PackedScene" uid="uid://kljdgyody1hl" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
 
-[sub_resource type="SystemFont" id="SystemFont_1hp08"]
+[sub_resource type="SystemFont" id="SystemFont_s6do4"]
+
+[sub_resource type="SystemFont" id="SystemFont_0g6ys"]
 
 [sub_resource type="SystemFont" id="SystemFont_vr8di"]
 
@@ -42,30 +46,71 @@ theme_override_constants/margin_bottom = 8
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer/Player1ScoreMargin"]
 layout_mode = 2
 
+[node name="Player1ScoreLabel" type="Label" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.584314, 0.403922, 0.937255, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.352941, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 9
+theme_override_fonts/font = SubResource("SystemFont_s6do4")
+theme_override_font_sizes/font_size = 36
+text = "Player One"
+
 [node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+alignment = 1
 
 [node name="Score" type="RichTextLabel" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_fonts/normal_font = SubResource("SystemFont_1hp08")
-theme_override_font_sizes/normal_font_size = 24
-text = "----AAAA	"
+theme_override_colors/default_color = Color(0.878431, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/normal_font = SubResource("SystemFont_0g6ys")
+theme_override_font_sizes/normal_font_size = 36
+text = "-----"
 fit_content_height = true
 scroll_active = false
 autowrap_mode = 0
 shortcut_keys_enabled = false
-visible_characters = 6
-visible_ratio = 0.666667
+meta_underlined = false
+hint_underlined = false
+deselect_on_focus_loss_enabled = false
+visible_characters = 4
+visible_ratio = 0.8
+script = ExtResource("2_p7qwq")
 
 [node name="4waysSymbol" type="TextureRect" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
 [node name="4waysCounter" type="RichTextLabel" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.878431, 0.878431, 0.878431, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/normal_font = SubResource("SystemFont_0g6ys")
+theme_override_font_sizes/normal_font_size = 36
+text = "--"
+fit_content_height = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+visible_characters = 1
+visible_ratio = 0.666667
+script = ExtResource("3_3vvym")
+
+[node name="4waysCounter1" type="RichTextLabel" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="LogoMargin" type="MarginContainer" parent="UI/HBoxContainer"]
@@ -129,3 +174,5 @@ visible = false
 [connection signal="preview_tile" from="grid" to="UI/VBoxContainer/MarginContainer/NextTileDisplay" method="_on_grid_preview_tile"]
 [connection signal="tile_picked" from="grid" to="UI/VBoxContainer/TmpAvailDeckTiles" method="_on_grid_tile_picked"]
 [connection signal="tile_placed" from="grid" to="grid" method="_on_tile_placed"]
+[connection signal="update_p1_fourways" from="grid" to="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer/4waysCounter" method="_on_grid_update_p_1_fourways"]
+[connection signal="update_p1_score" from="grid" to="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer/Score" method="_on_grid_update_p_1_score"]

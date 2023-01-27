@@ -31,6 +31,9 @@ signal preview_tile
 signal tile_placed
 signal game_end
 signal user_quit
+signal update_p1_score
+signal update_p1_fourways
+
 
 var avail_tile_colors = { "color1" : Color(221,0,221,1), "color2" : Color(0,204,204,1), "color3" : Color(221,0,0,1), "color4" : Color(17,85,255,1), "color5" : Color(0,170,0,1), "color6" : Color(238,170,0,1)}
 
@@ -430,6 +433,8 @@ func update_score(score : int) -> void:
 	if (score == 4):
 		player1Score += FourWaysBonus[FourWaysCount]
 		FourWaysCount += 1
+		update_p1_fourways.emit(FourWaysCount)
+	update_p1_score.emit(player1Score)
 	debug("US: Player1 score=" + str(player1Score) + "(4wc="+str(FourWaysCount)+")")
 
 
