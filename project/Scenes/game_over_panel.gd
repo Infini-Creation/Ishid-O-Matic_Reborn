@@ -6,8 +6,12 @@ func _ready():
 
 func _on_grid_game_end(win : bool):
 	print("GameOverPanel: game end signal received: w="+str(win))
-	show()
-	#get_tree().paused = true
+	if (win == false):
+		show()
+		#get_tree().paused = true
+	else:
+		#display highscore panel & register name + save => just emit button pressed or doing same as below
+		pass
 
 
 func _on_texture_button_pressed():
