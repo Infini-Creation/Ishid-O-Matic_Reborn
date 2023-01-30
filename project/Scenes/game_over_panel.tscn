@@ -26,22 +26,18 @@ offset_bottom = 768.0
 
 [node name="TextureButton" type="TextureButton" parent="CenterContainer"]
 layout_mode = 2
-shortcut_in_tooltip = false
 shortcut = SubResource("Shortcut_mf6hy")
+shortcut_in_tooltip = false
 texture_normal = ExtResource("1_l7mtr")
 
 [node name="Label" type="Label" parent="CenterContainer/TextureButton"]
 layout_direction = 1
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.251736
-anchor_top = -0.28125
-anchor_right = 0.251736
-anchor_bottom = -0.28125
-offset_left = -198.0
-offset_top = -64.0
-offset_right = 414.0
-offset_bottom = 188.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
@@ -53,7 +49,6 @@ Sorry, but there are no more moves possible !"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer"]
 visible = false
@@ -86,7 +81,6 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/normal_font_size = 28
 text = "NO MORE MOVES !
 Sorry, but there are no more moves possible !"
-fit_content_height = true
 scroll_active = false
 shortcut_keys_enabled = false
 
