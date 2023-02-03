@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://kljdgyody1hl"]
+[gd_scene load_steps=6 format=3 uid="uid://bbrhlfx2osij1"]
 
 [ext_resource type="Script" path="res://Scenes/game_over_panel.gd" id="1_gfoq6"]
-[ext_resource type="Texture2D" uid="uid://crgkocvfytwc8" path="res://Arts/Gfx/Panels/GameOverPanel-background.png" id="1_l7mtr"]
+[ext_resource type="Texture2D" uid="uid://bhtx7ng8r7s3o" path="res://Arts/Gfx/Panels/GameOverPanel-background.png" id="1_l7mtr"]
+[ext_resource type="Texture2D" uid="uid://crgkocvfytwc8" path="res://Arts/Gfx/Panels/GameOverPanel-background-old.png" id="2_n0egr"]
 
 [sub_resource type="Shortcut" id="Shortcut_mf6hy"]
 
@@ -55,7 +56,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("1_l7mtr")
+texture = ExtResource("2_n0egr")
 stretch_mode = 5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/TextureRect"]

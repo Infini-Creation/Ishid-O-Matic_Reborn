@@ -16,6 +16,7 @@ func _on_grid_game_end(win : bool):
 
 func _on_texture_button_pressed():
 	print("GameOverPanel: button pressed, go to highscores panel IF hs beat or main menu")
-	#TODO: check highscores
-	#TODO: ask name/update highscores data
+	#TODO: check highscores if one > lowest at least go to page
+	#TODO: put a new highscore line where it belongs
+	#TODO: ask name then update highscores data
 	#TODO: go to main menu
