@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://d20svwujcuyg2"]
+[gd_scene load_steps=2 format=3 uid="uid://d20svwujcuyg2"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_w46dk"]
 
 [node name="MainMenu" type="Control"]
 custom_minimum_size = Vector2(1024, 768)
@@ -8,29 +10,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_w46dk")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 776.0
+alignment = 1
+
+[node name="TopTilesStripe" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 64)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 640)
+layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="MainMenuContainer" type="GridContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="TopTilesStripe" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/MainMenuContainer"]
 layout_mode = 2
 
-[node name="MainMenuContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="BottomTilesStripe" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
+[node name="New 1P Game Label" type="Label" parent="VBoxContainer/MarginContainer/MainMenuContainer/HBoxContainer"]
+layout_mode = 2
+text = "New 1P"
+
+[node name="BottomTilesStripe" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 64)
 layout_mode = 2
