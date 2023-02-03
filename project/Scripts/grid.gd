@@ -23,7 +23,8 @@ var avail_tile_shapes = [
 
 # last maybe not used at all
 enum HIGHLIGHT_MODE { HIGHLIGHT_NONE, FIRST_AVAIL_MOVE, ALL_AVAIL_MOVE, RANDOM_MOVE, HIGHER_SCORE_MOVE }
-var highlighted_cells : Array = []
+#var highlighted_cells : PackedVector2Array = []
+var highlight_mode = HIGHLIGHT_MODE.HIGHLIGHT_NONE
 
 signal deck_initialized
 signal tile_picked
@@ -33,7 +34,7 @@ signal game_end
 signal user_quit
 signal update_p1_score
 signal update_p1_fourways
-
+signal highlight_board_cell
 
 var avail_tile_colors = { "color1" : Color(221,0,221,1), "color2" : Color(0,204,204,1), "color3" : Color(221,0,0,1), "color4" : Color(17,85,255,1), "color5" : Color(0,170,0,1), "color6" : Color(238,170,0,1)}
 
@@ -65,11 +66,27 @@ func _ready():
 	init_deck()
 	init_board()
 
+
+func _input(event):
+	if event.is_action_pressed("Quit"):
+		quit = true
+	elif event.is_action_pressed("Return_To_Menu"):
+		quit = true
+		#emit signal when added
+	elif event.is_action_pressed("Highlight_Mode"):
+		debug("previous enum value=" + str(highlight_mode))
+		highlight_mode += 1
+		highlight_mode %= HIGHLIGHT_MODE.size()
+		debug("previous enum value=" + str(highlight_mode))
+		# update highlighted cells (just reemit signal ?? => not redo check avail move call)
+		check_available_move(highlight_mode)
+
+
 func _process(_delta):
 	#later: take_time_from_deck (no more tile => win)
 	#	check_move_avail (false => gameover)
 	#	update_score
-	
+
 	# with game_over signal => remove this check
 	if (!quit): #!game_end and 
 		if (next_tile == null):
@@ -82,7 +99,7 @@ func _process(_delta):
 
 		#WARNING, MUST be done once no for all iteration of _process func
 		if (avail_move == -1):
-			avail_move = check_available_move(HIGHLIGHT_MODE.HIGHLIGHT_NONE)
+			avail_move = check_available_move(highlight_mode)
 			debug("_process: AM="+str(avail_move))
 			if (avail_move == 0):#for testing gmae over panel : true: ##tmp 
 				debug("_process: no more move available, GAME OVER")
@@ -171,6 +188,7 @@ func init_deck():
 
 	for shape in avail_tile_shapes:
 		# there are two of the same tiles in the deck, range (1,3) to loop twice
+		# hardcoded value to update (tile_repetition/dupe_in_deck)
 		for i in range(1,3):
 			for color in avail_tile_colors:
 				tile = shape.instantiate()
@@ -178,7 +196,7 @@ func init_deck():
 				tile.color = color
 				deck.append(tile)
 			
-	#print("Decktmp("+str(deck.size())+")=["+str(deck)+"]")
+	#debug("Decktmp("+str(deck.size())+")=["+str(deck)+"]")
 	deck.shuffle()
 	debug("ID DecktmpS("+str(deck.size())+")=["+str(deck)+"]")
 	deck_initialized.emit(deck.size())
@@ -193,8 +211,7 @@ func init_board():
 	var tileIndex : int = 0
 	var deck_index : int = 0
 	var iteration_needed : int = 0
-	
-	# TODO hardcoded values here to replace
+
 	while (shape_picked.size() < tile_shapes and color_picked.size() < tile_colors):
 
 		current_tile = deck[deck_index]
@@ -259,29 +276,57 @@ func check_position_ok(grid_position : Vector2) -> bool:
 
 func check_available_move(highlight_mode : HIGHLIGHT_MODE) -> int:
 	var possible_moves : int = 0
+	var cells : PackedVector2Array = cam_process_board()
+	
+	if (highlight_mode == HIGHLIGHT_MODE.FIRST_AVAIL_MOVE):
+		if cells.size() > 0:
+			highlight_cell([cells[0]])
+	elif (highlight_mode == HIGHLIGHT_MODE.RANDOM_MOVE):
+		for idx in randi_range(0, cells.size() - 1):
+			highlight_cell([cells[idx]])
+	elif (highlight_mode == HIGHLIGHT_MODE.ALL_AVAIL_MOVE):
+		#select n cells in array
+		highlight_cell(cells)
+	elif (highlight_mode == HIGHLIGHT_MODE.HIGHLIGHT_NONE):
+		pass
 
-	for column in range(0, board_width):
-		for row in range(0, board_height):
-			debug("CAM: check cell ["+str(column)+","+str(row)+"]")
-			if (game_board[column][row] != null):
-				debug("CAM: cell is already occupied, skip")
-			elif check_adjacent_tiles(next_tile, Vector2(column, row)) > 0:
-				debug("CAM: Move found["+str(column)+","+str(row)+"]")
-				if (highlight_mode == HIGHLIGHT_MODE.FIRST_AVAIL_MOVE):
-					possible_moves = 1
-				elif (highlight_mode == HIGHLIGHT_MODE.ALL_AVAIL_MOVE or highlight_mode == HIGHLIGHT_MODE.RANDOM_MOVE):
-					highlighted_cells.append(Vector2(column, row))
-				elif (highlight_mode == HIGHLIGHT_MODE.HIGHLIGHT_NONE):
-					possible_moves += 1
+	possible_moves = cells.size()
+	debug("CAM: availmoves=" + str(possible_moves))
+#	for column in range(0, board_width):
+#		for row in range(0, board_height):
+#			debug("CAM: check cell ["+str(column)+","+str(row)+"]")
+#			if (game_board[column][row] != null):
+#				debug("CAM: cell is already occupied, skip")
+#			elif check_adjacent_tiles(next_tile, Vector2(column, row)) > 0:
+#				debug("CAM: Move found["+str(column)+","+str(row)+"]")
+#				possible_moves += 1
+#				if (highlight_mode == HIGHLIGHT_MODE.FIRST_AVAIL_MOVE):
+#					highlighted_cells.append(Vector2(column, row))
+#					debug("break")
+#					break #only break inner loop
+#				elif (highlight_mode == HIGHLIGHT_MODE.ALL_AVAIL_MOVE or highlight_mode == HIGHLIGHT_MODE.RANDOM_MOVE):
+#					highlighted_cells.append(Vector2(column, row))
+#				elif (highlight_mode == HIGHLIGHT_MODE.HIGHLIGHT_NONE):
+#					pass
 
-	if (highlight_mode == HIGHLIGHT_MODE.RANDOM_MOVE):
-		pass #pick one item from array
-
-	if (highlight_mode != HIGHLIGHT_MODE.HIGHLIGHT_NONE):
-		pass # actually lit the selected tiles
+	#if (highlight_mode != HIGHLIGHT_MODE.HIGHLIGHT_NONE):
+	#	highlight_cell(cells[0])
 
 	return possible_moves
 
+func cam_process_board() -> PackedVector2Array:
+	var cells : PackedVector2Array = []
+	
+	for column in range(0, board_width):
+		for row in range(0, board_height):
+			debug("CAMpb: check cell ["+str(column)+","+str(row)+"]")
+			if (game_board[column][row] != null):
+				debug("CAMpb: cell is already occupied, skip")
+			elif check_adjacent_tiles(next_tile, Vector2(column, row)) > 0:
+				debug("CAMpb: Move found["+str(column)+","+str(row)+"]")
+				cells.append(Vector2(column, row))
+
+	return cells
 
 func pick_next_tile() -> Node2D:
 	var tile : Node2D = null
@@ -438,13 +483,26 @@ func update_score(score : int) -> void:
 	debug("US: Player1 score=" + str(player1Score) + "(4wc="+str(FourWaysCount)+")")
 
 
-func highlight_cell(cell : Vector2) -> void:
+func highlight_cell(cells : Array) -> void:
 	# draw lines around cell then animate with colors cycle (tweens ?)
-	pass
+	var coordinates_array = []
+	for cell in cells:
+		var Apoint = grid_to_pixel(cell.x, cell.y)
+		var Bpoint = Vector2(Apoint.x + 64, Apoint.y)
+		var Cpoint = Vector2(Apoint.x + 64, Apoint.y + 64)
+		var Dpoint = Vector2(Apoint.x, Apoint.y + 64)
+		var Epoint = Vector2(Apoint.x, Apoint.y)
+		coordinates_array.append([Apoint, Bpoint, Cpoint, Dpoint, Epoint])
+	#var Color ?
+	#anim/cycle
+	
+	highlight_board_cell.emit(coordinates_array)
+	
 
 
 # ~game_end signal => call this to do some work and ~display game over screen => fill name => highscore
 func game_over(win : bool):
+	# for all panel (so many ? just this one yet), fade background/blurr using overlay
 	#=> load game over panel
 	##get_tree().get_child("GameOverPanel").visible = true #doesn't work (~func not called at all!)
 	if win == true:
