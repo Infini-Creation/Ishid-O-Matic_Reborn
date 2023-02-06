@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://y6wrq7owermg"]
+[gd_scene load_steps=13 format=3 uid="uid://y6wrq7owermg"]
 
-[ext_resource type="Texture2D" uid="uid://dfwg8qoeppdln" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
+[ext_resource type="Texture2D" uid="uid://ty2ekqkwt1mb" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
 [ext_resource type="Script" path="res://Scenes/BoardOverlay.gd" id="1_bqqc7"]
 [ext_resource type="Script" path="res://Scripts/grid.gd" id="2_b52qq"]
 [ext_resource type="Script" path="res://Scripts/Player1Score.gd" id="2_p7qwq"]
 [ext_resource type="Script" path="res://Scripts/NextTileDisplay.gd" id="2_t061c"]
 [ext_resource type="Script" path="res://Scripts/Player1_4waysCounter.gd" id="3_3vvym"]
 [ext_resource type="Script" path="res://Scenes/TmpAvailDeckTiles.gd" id="3_y6n0w"]
-[ext_resource type="PackedScene" uid="uid://kljdgyody1hl" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
+[ext_resource type="Texture2D" uid="uid://cy4oiljoswgso" path="res://Arts/Gfx/Icons/4ways-icon.png" id="4_10f6x"]
+[ext_resource type="PackedScene" uid="uid://bbrhlfx2osij1" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
 
 [sub_resource type="SystemFont" id="SystemFont_s6do4"]
 
@@ -86,7 +87,6 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/normal_font = SubResource("SystemFont_0g6ys")
 theme_override_font_sizes/normal_font_size = 36
 text = "-----"
-fit_content_height = true
 scroll_active = false
 autowrap_mode = 0
 shortcut_keys_enabled = false
@@ -98,7 +98,13 @@ visible_ratio = 0.8
 script = ExtResource("2_p7qwq")
 
 [node name="4waysSymbol" type="TextureRect" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_10f6x")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="4waysCounter" type="RichTextLabel" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(120, 0)
@@ -110,7 +116,6 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/normal_font = SubResource("SystemFont_0g6ys")
 theme_override_font_sizes/normal_font_size = 36
 text = "--"
-fit_content_height = true
 scroll_active = false
 autowrap_mode = 0
 shortcut_keys_enabled = false
