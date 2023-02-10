@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6qamfl0rv7yq"]
+
+[ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_11m8e"]
+
+[node name="MiniTile" type="Sprite2D"]
+texture = ExtResource("1_11m8e")
