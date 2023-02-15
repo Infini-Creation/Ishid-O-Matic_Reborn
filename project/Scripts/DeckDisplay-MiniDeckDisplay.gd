@@ -34,6 +34,8 @@ func init_mini_deck(number_of_tiles : int) -> void:
 				add_child(tile)
 		print("tc="+str(tilecount))
 
+	#for child in get_children():
+	#	print("node("+str(child)+") pos="+str(child.position))
 
 func remove_tile():
 	# call by signal
@@ -41,7 +43,7 @@ func remove_tile():
 	var nodeIdx : int = get_child_count(false)
 	print("remove tile called, gcc="+str(nodeIdx))
 	if nodeIdx > 0:
-		print_tree()
+		#print_tree()
 		var node = get_child(0, false)
 		print("node ["+str(node)+"] will be removed")
 		remove_child(node) #that's works but remove from the end not the top
