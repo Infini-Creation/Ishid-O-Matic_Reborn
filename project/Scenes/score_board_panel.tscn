@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cv5n1yym3ni62"]
+
+[node name="ScoreBoard_Panel" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ScoreBoard_Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Player1_subPanel" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Logo_Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Player2_subPanel" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

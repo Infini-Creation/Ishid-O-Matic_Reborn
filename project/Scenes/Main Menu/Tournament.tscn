@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr7t8qonp8t07"]
+
+[ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_xbufv"]
+
+[sub_resource type="SystemFont" id="SystemFont_v2spc"]
+
+[node name="TournamentItem" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 188.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_xbufv")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = SubResource("SystemFont_v2spc")
+theme_override_font_sizes/font_size = 24
+text = "Tournament"
+horizontal_alignment = 1
+vertical_alignment = 1
