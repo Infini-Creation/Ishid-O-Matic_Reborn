@@ -1,18 +1,8 @@
 extends Control
 
-var avail_tile_shapes = [
-	preload("res://Scenes/tileA.tscn"),
-	preload("res://Scenes/tileB.tscn"),
-	preload("res://Scenes/tileC.tscn"),
-	preload("res://Scenes/tileD.tscn"),
-	preload("res://Scenes/tileE.tscn"),
-	preload("res://Scenes/tileF.tscn")
-]
-
-var avail_tile_colors = { "color1" : Color(221,0,221,1), "color2" : Color(0,204,204,1), "color3" : Color(221,0,0,1), "color4" : Color(17,85,255,1), "color5" : Color(0,170,0,1), "color6" : Color(238,170,0,1)}
 
 func _ready():
-	print("MainMenu: generate tile stripe")
+	Global.debug("MainMenu: generate tile stripe")
 	
 	var tile : Node2D = null
 	var tilesStripe : Array = []
@@ -24,22 +14,22 @@ func _ready():
 	tilesStripe.resize(16)
 	tilesDeck.resize(36)
 
-	for shape in avail_tile_shapes:
-		for color in avail_tile_colors:
+	for shape in Global.avail_tile_shapes:
+		for color in Global.avail_tile_colors:
 			tile = shape.instantiate()
-			tile.modulate = avail_tile_colors[color]
+			tile.modulate = Global.avail_tile_colors[color]
 			tile.color = color
 			tilesDeck[deckIdx] = tile
 			deckIdx += 1
 
 	tilesDeck.shuffle()
-	print("td="+str(tilesDeck.size()))
+	Global.debug("td="+str(tilesDeck.size()))
 	
 	var idx = 0
 	while idx <= 32:
 		# ko tile.transform.scaled(Vector2(0.5, 0.5))
 		#tile.scale = Vector2(0.5, 0.5)
-		print("idx="+str(idx))
+		Global.debug("idx="+str(idx))
 		tile = tilesDeck[idx]
 		tile.position.x += 64 * StripeIdx
 		#tilesStripe[StripeIdx] = tile

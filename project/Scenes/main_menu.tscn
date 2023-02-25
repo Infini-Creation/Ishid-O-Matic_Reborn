@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://d20svwujcuyg2"]
+[gd_scene load_steps=5 format=3 uid="uid://d20svwujcuyg2"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_w46dk"]
+[ext_resource type="PackedScene" uid="uid://ifrs2wp5p88" path="res://Scenes/Main Menu/OnePlayerItem.tscn" id="2_2tcqm"]
+[ext_resource type="PackedScene" uid="uid://b2q6e3ahrncl1" path="res://Scenes/Main Menu/TwoPlayersItem.tscn" id="3_brh50"]
+[ext_resource type="PackedScene" uid="uid://dr7t8qonp8t07" path="res://Scenes/Main Menu/Tournament.tscn" id="4_gcfoq"]
 
 [node name="MainMenu" type="Control"]
+clip_contents = true
 custom_minimum_size = Vector2(1024, 768)
 layout_mode = 3
 anchors_preset = 15
@@ -15,36 +19,121 @@ size_flags_vertical = 3
 script = ExtResource("1_w46dk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 1024.0
-offset_bottom = 776.0
+custom_minimum_size = Vector2(1024, 768)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
 [node name="TopTilesStripe" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1024, 64)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(1024, 640)
+[node name="DummyTextRectSpacer" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 200)
 layout_mode = 2
-theme_override_constants/margin_left = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 200)
+layout_mode = 2
+theme_override_constants/margin_left = 128
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 128
 theme_override_constants/margin_bottom = 16
 
 [node name="MainMenuContainer" type="GridContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 446
+theme_override_constants/v_separation = 54
+columns = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/MainMenuContainer"]
+[node name="OnePlayerItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("2_2tcqm")]
 layout_mode = 2
 
-[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/HBoxContainer"]
+[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+ignore_texture_size = true
+
+[node name="OnePlayerItem4" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("2_2tcqm")]
 layout_mode = 2
 
-[node name="New 1P Game Label" type="Label" parent="VBoxContainer/MarginContainer/MainMenuContainer/HBoxContainer"]
+[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem4"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+ignore_texture_size = true
+
+[node name="TwoPlayersItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("3_brh50")]
 layout_mode = 2
-text = "New 1P"
+
+[node name="OnePlayerItem2" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("2_2tcqm")]
+layout_mode = 2
+
+[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem2"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+ignore_texture_size = true
+
+[node name="TournamentItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("4_gcfoq")]
+layout_mode = 2
+
+[node name="OnePlayerItem3" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("2_2tcqm")]
+layout_mode = 2
+
+[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem3"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+ignore_texture_size = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="OnePlayerItem5" parent="VBoxContainer/MarginContainer2" instance=ExtResource("2_2tcqm")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer2/OnePlayerItem5"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+ignore_texture_size = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="BottomTilesStripe" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1024, 64)
 layout_mode = 2
+alignment = 2
