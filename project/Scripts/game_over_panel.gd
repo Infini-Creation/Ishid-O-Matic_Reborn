@@ -4,12 +4,13 @@ func _ready():
 	print("GameOverPanel: _ready call")
 
 
-func _on_grid_game_end(win : bool):
+func _on_game_game_end(win : bool):
 	print("GameOverPanel: game end signal received: w="+str(win))
 	if (win == false):
 		show()
 		#get_tree().paused = true
 	else:
+		# maybe display a game win panel and/or some festive animations
 		#display highscore panel & register name + save => just emit button pressed or doing same as below
 		pass
 
