@@ -2,6 +2,17 @@ extends Node
 
 @export var debug_enabled : bool
 
+var stats : Dictionary = {
+	"GamesPlayed": 0,
+	"GamesWon": 0,
+	"GamesLost": 0,
+	"TotalScore": 0,
+	"TotalTilesPlaced": 0,
+	"TotalFourWays": 0,
+	"TotalThreeWays": 0,
+	"TotalTwoWays": 0
+}
+
 var avail_tile_shapes = [
 	preload("res://Scenes/tileA.tscn"),
 	preload("res://Scenes/tileB.tscn"),
@@ -19,6 +30,12 @@ var avail_tile_colors = {
 	"color5" : Color(0,170,0,1),
 	"color6" : Color(238,170,0,1)
 }
+
+var tile_colors : int = 6
+var tile_shapes : int = 6
+
+var highscore_file = "user://highscores.dat"
+var settings_file = "user://settings.dat"
 
 func debug(msg : String) -> void:
 	if (debug_enabled == true):
