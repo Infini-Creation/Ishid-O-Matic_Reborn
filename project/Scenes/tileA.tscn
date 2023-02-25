@@ -1,10 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://xm6r1xdaov17"]
 
-[ext_resource type="PackedScene" uid="uid://bco58d4fs7bg1" path="res://Scenes/tile.tscn" id="1_fhn6g"]
+[ext_resource type="PackedScene" path="res://Scenes/tile.tscn" id="1_fhn6g"]
 [ext_resource type="Texture2D" uid="uid://bofaok261yf5a" path="res://Arts/Gfx/Tiles/dummy sets/tile-A1.png" id="2_6bv0n"]
 
 [node name="Tile" instance=ExtResource("1_fhn6g")]
-color = ""
 shape = "A"
 
 [node name="Sprite2D" parent="." index="0"]
