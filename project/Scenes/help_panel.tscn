@@ -1,0 +1,244 @@
+[gd_scene load_steps=7 format=3 uid="uid://lb3l2tsp01op"]
+
+[ext_resource type="Script" path="res://Scripts/help_panel.gd" id="1_r0ddy"]
+[ext_resource type="Texture2D" uid="uid://dlloxxecitrn3" path="res://Arts/Gfx/Panels/help panel.png" id="2_fpbrh"]
+[ext_resource type="Texture2D" uid="uid://d256gllpwthid" path="res://Arts/Gfx/Menu/ishido-help-previous-arrow.png" id="3_4xwqk"]
+[ext_resource type="Texture2D" uid="uid://csfojlg23jsah" path="res://Arts/Gfx/Menu/ishido-help-next-arrow.png" id="4_s4qct"]
+
+[sub_resource type="Shortcut" id="Shortcut_mf6hy"]
+
+[sub_resource type="SystemFont" id="SystemFont_4np4h"]
+subpixel_positioning = 0
+
+[node name="HelpPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+script = ExtResource("1_r0ddy")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = -76
+
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+action_mode = 0
+shortcut = SubResource("Shortcut_mf6hy")
+shortcut_in_tooltip = false
+texture_normal = ExtResource("2_fpbrh")
+stretch_mode = 5
+
+[node name="Page1" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -404.0
+offset_top = -279.0
+offset_right = 405.0
+offset_bottom = 279.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_4np4h")
+theme_override_font_sizes/font_size = 18
+text = "HELP
+
+Ishido is a puzzle board game consisting of a set of 72 stones and a game board of 96 squares.
+
+Every stone has two attributes: a color and a symbol. There are six colors and six symbols in each stone set, thus creating 36 unique stones. Since each stone comes in a pair, there are therefore 72 stones in each stone set.
+
+The primary objective of Ishido is to place all 72 stones onto the board of 96 squares. The challenge arises because stones must be placed adjacent to others that they match, either by color or symbol. When the board begins to fill up, this objective is not so easily accomplished.
+
+A valuable move is the 4-way, in which a stone is placed in the midst of four others, two of which are matched by color, and two which are matched by symbol.
+(source: wikipedia article)"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Page2" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -419.0
+offset_top = -279.0
+offset_right = 419.0
+offset_bottom = 279.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_4np4h")
+theme_override_font_sizes/font_size = 20
+text = "There are 72 tiles, two of each combination of six colors and six shapes.
+
+At the start of the game, there are six tiles on the board representing
+each shape and color.  To place an additional tile on the board, you
+must match at least one adjacent tile according to the following rules:
+
+  - To match a single tile, you must match either the color or shape.
+  - To match two tiles, you must match one shape and one color.
+  - To match three tiles, you must match two colors and one shape OR two
+    shapes and one color.
+  - To match four tiles, you must match two colors and two shapes."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Page3" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -419.0
+offset_top = -279.0
+offset_right = 419.0
+offset_bottom = 279.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_4np4h")
+theme_override_font_sizes/font_size = 20
+text = "Players receive points by legally placing stones next to other stones in
+the light, interior potion of the board (The Within).  The greater the
+number of sides legally matched, the greater the number of points earned.
+  
+Points earned for legal matches are:  
+  
+      Single-sided match            1 point  
+      Two-sided match               2 points  
+      Three-sided match             4 points  
+      Four-sided match (4-Way)      8 points
+
+Each 4-Way match earns bonus points and doubles the points awarded for  
+subsequent matches.  For example, after the first 4-Way, a single-sided
+match earns two points, a two-sided match earns four points, a three-sided
+match earns eight points, and a 4-Way earns 16 points.  The next 4-Way
+doubles the point scheme again, and so on. "
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Page4" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_4np4h")
+theme_override_font_sizes/font_size = 20
+text = "Bonuses awarded after each 4-Way match are:  
+  
+      First 4-Way                   25 points
+      Second 4-Way                  50 points
+      Third 4-Way                  100 points
+      Fourth 4-Way                 200 points
+      Fifth 4-Way                  400 points
+      Sixth 4-Way                  600 points
+      Seventh 4-Way                800 points
+      Eighth 4-Way               1,000 points
+      Ninth 4-Way                5,000 points
+      Tenth 4-Way               10,000 points
+      Eleventh 4-Way            25,000 points
+      Twelfth 4-Way             50,000 points"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Page5" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_4np4h")
+theme_override_font_sizes/font_size = 20
+text = "At the end of the game, bonuses are awarded when fewer than three stones
+remain in the pouch.  Bonuses awarded are:  
+  
+     Two stones left in pouch      100 points
+     One stone left in pouch       500 points
+     Empty pouch                  1000 points
+
+(source: page 3 to 5 from Amiga game manual available at www.lemonamiga.com)"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 678
+alignment = 1
+
+[node name="PreviousPage" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("3_4xwqk")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="NextPage" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture_normal = ExtResource("4_s4qct")
+ignore_texture_size = true
+stretch_mode = 4
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/PreviousPage" to="." method="_on_previous_page_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/NextPage" to="." method="_on_next_page_pressed"]
