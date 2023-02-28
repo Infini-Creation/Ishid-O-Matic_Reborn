@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbrhlfx2osij1"]
+[gd_scene load_steps=6 format=3 uid="uid://b3ps20yf6g8vx"]
 
-[ext_resource type="Script" path="res://Scenes/game_over_panel.gd" id="1_gfoq6"]
+[ext_resource type="Script" path="res://Scripts/game_over_panel.gd" id="1_aa75c"]
 [ext_resource type="Texture2D" uid="uid://bhtx7ng8r7s3o" path="res://Arts/Gfx/Panels/GameOverPanel-background.png" id="1_l7mtr"]
 [ext_resource type="Texture2D" uid="uid://crgkocvfytwc8" path="res://Arts/Gfx/Panels/GameOverPanel-background-old.png" id="2_n0egr"]
 
@@ -18,7 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 auto_translate = false
 localize_numeral_system = false
-script = ExtResource("1_gfoq6")
+script = ExtResource("1_aa75c")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
