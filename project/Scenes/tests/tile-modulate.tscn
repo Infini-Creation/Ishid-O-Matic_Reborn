@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3vfy43nyup2f"]
+
+[ext_resource type="Script" path="res://Scripts/tile-modulate.gd" id="1_lb8rk"]
+[ext_resource type="PackedScene" uid="uid://xm6r1xdaov17" path="res://Scenes/tileA.tscn" id="2_osgsl"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_lb8rk")
+
+[node name="Tile" parent="." instance=ExtResource("2_osgsl")]
+position = Vector2(102, 101)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://difup7wfnhqwk"]
 
-[ext_resource type="Script" path="res://Scripts/test_player1score.gd" id="1_j865e"]
-[ext_resource type="PackedScene" uid="uid://k13aykl28n7q" path="res://Scenes/player_1_sub_panel.tscn" id="2_0wif1"]
+[ext_resource type="Script" path="res://Scripts/test_player1score.gd" id="1_4f73c"]
+[ext_resource type="PackedScene" uid="uid://k13aykl28n7q" path="res://Scenes/player_1_sub_panel.tscn" id="2_8dmj8"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_j865e")
+script = ExtResource("1_4f73c")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -30,7 +30,7 @@ texture_filter = 1
 layout_mode = 2
 text = "Update4Ways"
 
-[node name="Player1_subPanel" parent="VBoxContainer" instance=ExtResource("2_0wif1")]
+[node name="Player1_subPanel" parent="VBoxContainer" instance=ExtResource("2_8dmj8")]
 layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ScoreButton" to="." method="_on_score_button_pressed"]

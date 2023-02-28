@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://h6ua5l0kgym3"]
 
-[ext_resource type="Script" path="res://Scripts/DeckDisplay-Test.gd" id="1_kv45y"]
-[ext_resource type="PackedScene" uid="uid://jo3oq724cigg" path="res://Scenes/deck_display.tscn" id="2_o6tvo"]
+[ext_resource type="Script" path="res://Scripts/DeckDisplay-Test.gd" id="1_8hol2"]
+[ext_resource type="PackedScene" uid="uid://jo3oq724cigg" path="res://Scenes/deck_display.tscn" id="2_sj6f7"]
 
 [node name="DeckDisplay-Test" type="Node2D"]
-script = ExtResource("1_kv45y")
+script = ExtResource("1_8hol2")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -34,7 +34,8 @@ text = "Pick a tile"
 [node name="TilePicked" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="DeckDisplay" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_o6tvo")]
+[node name="DeckDisplay" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_sj6f7")]
 position = Vector2(68, -16)
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="deck_initialized" from="MarginContainer/HBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_initialized"]
