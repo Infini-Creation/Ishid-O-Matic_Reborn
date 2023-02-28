@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bhf2k3vusbah"]
 
 [ext_resource type="Script" path="res://Scripts/player_2_sub_panel.gd" id="1_0rrab"]
-[ext_resource type="Texture2D" uid="uid://cy4oiljoswgso" path="res://Arts/Gfx/Icons/4ways-icon.png" id="2_totpv"]
+[ext_resource type="Texture2D" uid="uid://coce3131s58m8" path="res://Arts/Gfx/Icons/4ways-icon.png" id="2_totpv"]
 
 [sub_resource type="SystemFont" id="SystemFont_ftk0s"]
 subpixel_positioning = 0
@@ -43,35 +43,35 @@ text = "Player Two"
 texture_filter = 1
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 0
-offset_left = 13.0
-offset_top = 58.0
-offset_right = 50.0
-offset_bottom = 85.0
+offset_left = 12.0
+offset_top = 71.0
+offset_right = 52.0
+offset_bottom = 108.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = SubResource("SystemFont_kv4sg")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "-----"
 horizontal_alignment = 1
 visible_characters_behavior = 1
 
 [node name="FourWays Icon" type="Sprite2D" parent="."]
-position = Vector2(86.2, 72.512)
-scale = Vector2(0.14, 0.149)
+position = Vector2(96, 90)
+scale = Vector2(0.085, 0.086)
 texture = ExtResource("2_totpv")
 
 [node name="FourWays Counter" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 130.0
-offset_top = 58.0
-offset_right = 146.0
-offset_bottom = 84.0
+offset_left = 133.0
+offset_top = 71.0
+offset_right = 149.0
+offset_bottom = 108.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = SubResource("SystemFont_ap5rn")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "--"
 horizontal_alignment = 1
