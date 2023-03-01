@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ifrs2wp5p88"]
+[gd_scene load_steps=3 format=3 uid="uid://ciqalhvr0fm8j"]
 
-[ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_ahrxj"]
+[ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_akcrq"]
 
 [sub_resource type="SystemFont" id="SystemFont_v2spc"]
 subpixel_positioning = 0
@@ -21,7 +21,7 @@ offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="Button/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_ahrxj")
+texture = ExtResource("1_akcrq")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="Button/HBoxContainer"]
@@ -31,6 +31,6 @@ theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = SubResource("SystemFont_v2spc")
 theme_override_font_sizes/font_size = 24
-text = "Single Player"
+text = "   About"
 horizontal_alignment = 1
 vertical_alignment = 1

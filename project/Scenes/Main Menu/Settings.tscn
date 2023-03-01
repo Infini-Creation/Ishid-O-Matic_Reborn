@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ifrs2wp5p88"]
+[gd_scene load_steps=4 format=3 uid="uid://vtn37u3mpjb1"]
 
-[ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_ahrxj"]
+[ext_resource type="Script" path="res://Scripts/Menus/Settings.gd" id="1_5flb5"]
+[ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_w5kjp"]
 
 [sub_resource type="SystemFont" id="SystemFont_v2spc"]
 subpixel_positioning = 0
 
-[node name="OnePlayerItem" type="Control"]
+[node name="SettingsItem" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_5flb5")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
@@ -21,7 +23,7 @@ offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="Button/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_ahrxj")
+texture = ExtResource("1_w5kjp")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="Button/HBoxContainer"]
@@ -31,6 +33,7 @@ theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = SubResource("SystemFont_v2spc")
 theme_override_font_sizes/font_size = 24
-text = "Single Player"
-horizontal_alignment = 1
+text = "  Settings"
 vertical_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

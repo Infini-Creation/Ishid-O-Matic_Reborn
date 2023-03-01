@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://d20svwujcuyg2"]
+[gd_scene load_steps=12 format=3 uid="uid://d20svwujcuyg2"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_w46dk"]
 [ext_resource type="PackedScene" uid="uid://ifrs2wp5p88" path="res://Scenes/Main Menu/OnePlayerItem.tscn" id="2_2tcqm"]
 [ext_resource type="PackedScene" uid="uid://b2q6e3ahrncl1" path="res://Scenes/Main Menu/TwoPlayersItem.tscn" id="3_brh50"]
+[ext_resource type="PackedScene" uid="uid://vtn37u3mpjb1" path="res://Scenes/Main Menu/Settings.tscn" id="3_md58w"]
 [ext_resource type="PackedScene" uid="uid://dr7t8qonp8t07" path="res://Scenes/Main Menu/Tournament.tscn" id="4_gcfoq"]
+[ext_resource type="PackedScene" uid="uid://brngd5mluy5ee" path="res://Scenes/Main Menu/High_Scores.tscn" id="5_yx7jl"]
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_uthlc"]
+[ext_resource type="PackedScene" uid="uid://xm41ksbromya" path="res://Scenes/Main Menu/Help.tscn" id="8_q5rkr"]
+[ext_resource type="PackedScene" uid="uid://ciqalhvr0fm8j" path="res://Scenes/Main Menu/About.tscn" id="9_6ukg7"]
+[ext_resource type="PackedScene" uid="uid://rb4dmx2qlncg" path="res://Scenes/Main Menu/Quit.tscn" id="10_uyp60"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gtoju"]
 
 [node name="MainMenu" type="Control"]
 clip_contents = true
@@ -16,9 +24,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("6_uthlc")
 script = ExtResource("1_w46dk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+material = SubResource("CanvasItemMaterial_gtoju")
 custom_minimum_size = Vector2(1024, 768)
 layout_direction = 1
 layout_mode = 1
@@ -65,47 +75,26 @@ grow_vertical = 2
 action_mode = 0
 ignore_texture_size = true
 
-[node name="OnePlayerItem4" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("2_2tcqm")]
+[node name="SettingsItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("3_md58w")]
 layout_mode = 2
-
-[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem4"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-action_mode = 0
-ignore_texture_size = true
 
 [node name="TwoPlayersItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("3_brh50")]
 layout_mode = 2
 
-[node name="OnePlayerItem2" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("2_2tcqm")]
+[node name="HighScoresItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("5_yx7jl")]
 layout_mode = 2
-
-[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem2"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-action_mode = 0
-ignore_texture_size = true
+theme = ExtResource("6_uthlc")
 
 [node name="TournamentItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("4_gcfoq")]
+visible = false
 layout_mode = 2
 
-[node name="OnePlayerItem3" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("2_2tcqm")]
+[node name="HelpItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("8_q5rkr")]
 layout_mode = 2
+theme = ExtResource("6_uthlc")
 
-[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem3"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-action_mode = 0
-ignore_texture_size = true
+[node name="AboutItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("9_6ukg7")]
+layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1024, 64)
@@ -113,19 +102,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="OnePlayerItem5" parent="VBoxContainer/MarginContainer2" instance=ExtResource("2_2tcqm")]
+[node name="OnePlayerItem" parent="VBoxContainer/MarginContainer2" instance=ExtResource("10_uyp60")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer2/OnePlayerItem5"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-action_mode = 0
-ignore_texture_size = true
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1024, 100)
@@ -137,3 +117,5 @@ size_flags_vertical = 4
 custom_minimum_size = Vector2(1024, 64)
 layout_mode = 2
 alignment = 2
+
+[connection signal="help_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/HelpItem" to="." method="_on_help_item_help_requested"]

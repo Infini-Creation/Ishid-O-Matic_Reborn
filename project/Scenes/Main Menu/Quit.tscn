@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ifrs2wp5p88"]
+[gd_scene load_steps=3 format=3 uid="uid://rb4dmx2qlncg"]
 
-[ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_ahrxj"]
+[ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_5d6lj"]
 
 [sub_resource type="SystemFont" id="SystemFont_v2spc"]
 subpixel_positioning = 0
@@ -21,7 +21,7 @@ offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="Button/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_ahrxj")
+texture = ExtResource("1_5d6lj")
 stretch_mode = 3
 
 [node name="Label" type="Label" parent="Button/HBoxContainer"]
