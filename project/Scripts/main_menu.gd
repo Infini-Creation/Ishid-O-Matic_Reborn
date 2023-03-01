@@ -55,3 +55,7 @@ func _ready():
 #		#tilesStripe[StripeIdx] = tile
 #		StripeIdx += 1
 #		$VBoxContainer/BottomTilesStripe.add_child(tile)
+
+
+func _on_help_item_help_requested():
+	pass # Replace with function body.
