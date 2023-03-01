@@ -1,4 +1,4 @@
-extends RichTextLabel
+extends Label
 
-func _on_grid_update_p_1_score(score : int):
+func _on_update_player_score(score : int):
 	text = "%4d" % score

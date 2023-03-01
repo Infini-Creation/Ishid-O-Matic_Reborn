@@ -1,4 +1,5 @@
-extends RichTextLabel
+extends Label
 
-func _on_grid_update_p_1_fourways(count : int):
+func _on_update_player_fourways(count : int):
+	#print("4Wcounter updated: " + str(count))
 	text = "%2d" % count
