@@ -214,6 +214,31 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="Page6" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_4np4h")
+theme_override_font_sizes/font_size = 20
+text = "Controls
+
+Put a tile on the board using left mouse button
+
+H - highlight mode, cycling trough: None, first move available, all possible moves, a random move and the move giving you the best score (not yet implemented)."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
