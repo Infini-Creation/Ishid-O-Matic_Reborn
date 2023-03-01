@@ -1,28 +1,30 @@
-[gd_scene load_steps=13 format=3 uid="uid://y6wrq7owermg"]
+[gd_scene load_steps=9 format=3 uid="uid://d2ahme0nrumhy"]
 
+[ext_resource type="Script" path="res://Scripts/BoardOverlay.gd" id="1_4a5n6"]
 [ext_resource type="Texture2D" uid="uid://ty2ekqkwt1mb" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
-[ext_resource type="Script" path="res://Scenes/BoardOverlay.gd" id="1_bqqc7"]
-[ext_resource type="Script" path="res://Scripts/grid.gd" id="2_b52qq"]
-[ext_resource type="Script" path="res://Scripts/Player1Score.gd" id="2_p7qwq"]
-[ext_resource type="Script" path="res://Scripts/NextTileDisplay.gd" id="2_t061c"]
-[ext_resource type="Script" path="res://Scripts/Player1_4waysCounter.gd" id="3_3vvym"]
-[ext_resource type="Script" path="res://Scenes/TmpAvailDeckTiles.gd" id="3_y6n0w"]
-[ext_resource type="Texture2D" uid="uid://cy4oiljoswgso" path="res://Arts/Gfx/Icons/4ways-icon.png" id="4_10f6x"]
-[ext_resource type="PackedScene" uid="uid://bbrhlfx2osij1" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
-
-[sub_resource type="SystemFont" id="SystemFont_s6do4"]
-
-[sub_resource type="SystemFont" id="SystemFont_0g6ys"]
-
-[sub_resource type="SystemFont" id="SystemFont_vr8di"]
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_f3kqo"]
+[ext_resource type="PackedScene" uid="uid://jo3oq724cigg" path="res://Scenes/deck_display.tscn" id="3_8b4gb"]
+[ext_resource type="PackedScene" uid="uid://k13aykl28n7q" path="res://Scenes/player_1_sub_panel.tscn" id="3_ork0o"]
+[ext_resource type="PackedScene" uid="uid://bhf2k3vusbah" path="res://Scenes/player_2_sub_panel.tscn" id="5_203rc"]
+[ext_resource type="PackedScene" uid="uid://b3ps20yf6g8vx" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
+[ext_resource type="Texture2D" uid="uid://dxnjxcgev2own" path="res://Arts/Gfx/Panels/logo_background.png" id="5_kgt7k"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_f3kqo")
+base_board = PackedVector2Array(0, 0, 11, 0, 0, 7, 11, 7, 5, 3, 6, 4)
+board_width = 12
+board_height = 8
+x_start = 8
+y_start = 248
+tile_size = 64
+player_name = "test1"
 
 [node name="BoardOverlay" type="Node2D" parent="."]
 z_index = 5
-script = ExtResource("1_bqqc7")
+script = ExtResource("1_4a5n6")
 
 [node name="Timer" type="Timer" parent="BoardOverlay"]
+wait_time = 3.0
 
 [node name="Board" type="TextureRect" parent="."]
 z_index = -1
@@ -40,93 +42,18 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 1016.0
-offset_bottom = 240.0
+layout_mode = 1
+offset_right = 1024.0
+offset_bottom = 260.0
 
 [node name="Player1ScoreMargin" type="MarginContainer" parent="UI/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer/Player1ScoreMargin"]
-layout_mode = 2
-
-[node name="Player1ScoreLabel" type="Label" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.584314, 0.403922, 0.937255, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0.352941, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 4
-theme_override_constants/shadow_outline_size = 9
-theme_override_fonts/font = SubResource("SystemFont_s6do4")
-theme_override_font_sizes/font_size = 36
-text = "Player One"
-
-[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-
-[node name="Score" type="RichTextLabel" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_colors/default_color = Color(0.878431, 0.878431, 0.878431, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/normal_font = SubResource("SystemFont_0g6ys")
-theme_override_font_sizes/normal_font_size = 36
-text = "-----"
-scroll_active = false
-autowrap_mode = 0
-shortcut_keys_enabled = false
-meta_underlined = false
-hint_underlined = false
-deselect_on_focus_loss_enabled = false
-visible_characters = 4
-visible_ratio = 0.8
-script = ExtResource("2_p7qwq")
-
-[node name="4waysSymbol" type="TextureRect" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("4_10f6x")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="4waysCounter" type="RichTextLabel" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_colors/default_color = Color(0.878431, 0.878431, 0.878431, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/normal_font = SubResource("SystemFont_0g6ys")
-theme_override_font_sizes/normal_font_size = 36
-text = "--"
-scroll_active = false
-autowrap_mode = 0
-shortcut_keys_enabled = false
-meta_underlined = false
-hint_underlined = false
-deselect_on_focus_loss_enabled = false
-visible_characters = 2
-script = ExtResource("3_3vvym")
-
-[node name="4waysCounter1" type="RichTextLabel" parent="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer"]
-visible = false
+[node name="Player1_subPanel" parent="UI/HBoxContainer/Player1ScoreMargin" instance=ExtResource("3_ork0o")]
 layout_mode = 2
 
 [node name="MiddleContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
@@ -136,70 +63,42 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="LogoTexture" type="TextureRect" parent="UI/HBoxContainer/MiddleContainer/LogoMargin"]
-custom_minimum_size = Vector2(400, 202)
+custom_minimum_size = Vector2(512, 232)
 layout_mode = 2
+texture = ExtResource("5_kgt7k")
+stretch_mode = 5
 
 [node name="HelpersIcons" type="HBoxContainer" parent="UI/HBoxContainer/MiddleContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="Player2ScoreMargin" type="MarginContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Player2_subPanel" parent="UI/HBoxContainer/Player2ScoreMargin" instance=ExtResource("5_203rc")]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 layout_mode = 0
-offset_left = 784.0
-offset_top = 248.0
-offset_right = 1016.0
-offset_bottom = 760.0
+offset_left = 768.0
+offset_top = 232.0
+offset_right = 768.0
+offset_bottom = 232.0
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="NextTileDisplay" type="TextureRect" parent="UI/VBoxContainer/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-stretch_mode = 5
-script = ExtResource("2_t061c")
-
-[node name="TmpAvailDeckTiles" type="Label" parent="UI/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_constants/shadow_outline_size = 4
-theme_override_constants/line_spacing = 0
-theme_override_fonts/font = SubResource("SystemFont_vr8di")
-theme_override_font_sizes/font_size = 60
-text = "72"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("3_y6n0w")
+[node name="DeckDisplay" parent="UI/VBoxContainer" instance=ExtResource("3_8b4gb")]
 
 [node name="grid" type="Node2D" parent="."]
-script = ExtResource("2_b52qq")
-base_board = PackedVector2Array(0, 0, 11, 0, 0, 7, 11, 7, 5, 3, 6, 4)
-board_width = 12
-board_height = 8
-x_start = 8
-y_start = 248
-tile_size = 64
-tile_colors = 6
-tile_shapes = 6
-player_name = "test"
-debug_enabled = true
 
 [node name="GameOverPanel" parent="." instance=ExtResource("5_aflaq")]
 visible = false
+z_index = 4
 
-[connection signal="deck_initialized" from="grid" to="UI/VBoxContainer/TmpAvailDeckTiles" method="_on_grid_deck_initialized"]
-[connection signal="game_end" from="grid" to="GameOverPanel" method="_on_grid_game_end"]
-[connection signal="highlight_board_cell" from="grid" to="BoardOverlay" method="_on_grid_highlight_board_cell"]
-[connection signal="preview_tile" from="grid" to="UI/VBoxContainer/MarginContainer/NextTileDisplay" method="_on_grid_preview_tile"]
-[connection signal="tile_picked" from="grid" to="UI/VBoxContainer/TmpAvailDeckTiles" method="_on_grid_tile_picked"]
-[connection signal="tile_placed" from="grid" to="grid" method="_on_tile_placed"]
-[connection signal="update_p1_fourways" from="grid" to="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer/4waysCounter" method="_on_grid_update_p_1_fourways"]
-[connection signal="update_p1_score" from="grid" to="UI/HBoxContainer/Player1ScoreMargin/VBoxContainer/HBoxContainer/Score" method="_on_grid_update_p_1_score"]
+[connection signal="game_end" from="." to="GameOverPanel" method="_on_game_game_end"]
+[connection signal="highlight_board_cell" from="." to="BoardOverlay" method="_on_game_highlight_board_cell"]
+[connection signal="timeout" from="BoardOverlay/Timer" to="BoardOverlay" method="_on_timer_timeout"]
+[connection signal="deck_empty" from="UI/VBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_empty"]
+[connection signal="deck_initialized" from="UI/VBoxContainer/DeckDisplay" to="grid" method="_on_deck_display_deck_initialized"]
