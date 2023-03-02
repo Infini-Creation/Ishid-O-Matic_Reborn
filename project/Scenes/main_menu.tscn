@@ -1,17 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://d20svwujcuyg2"]
+[gd_scene load_steps=13 format=3 uid="uid://d20svwujcuyg2"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_w46dk"]
 [ext_resource type="PackedScene" uid="uid://ifrs2wp5p88" path="res://Scenes/Main Menu/OnePlayerItem.tscn" id="2_2tcqm"]
+[ext_resource type="Texture2D" uid="uid://bcjx22w3fqfry" path="res://Arts/Gfx/BaseColourTexture.png" id="3_b1wht"]
 [ext_resource type="PackedScene" uid="uid://b2q6e3ahrncl1" path="res://Scenes/Main Menu/TwoPlayersItem.tscn" id="3_brh50"]
 [ext_resource type="PackedScene" uid="uid://vtn37u3mpjb1" path="res://Scenes/Main Menu/Settings.tscn" id="3_md58w"]
+[ext_resource type="PackedScene" uid="uid://lb3l2tsp01op" path="res://Scenes/help_panel.tscn" id="4_a260f"]
 [ext_resource type="PackedScene" uid="uid://dr7t8qonp8t07" path="res://Scenes/Main Menu/Tournament.tscn" id="4_gcfoq"]
 [ext_resource type="PackedScene" uid="uid://brngd5mluy5ee" path="res://Scenes/Main Menu/High_Scores.tscn" id="5_yx7jl"]
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_uthlc"]
 [ext_resource type="PackedScene" uid="uid://xm41ksbromya" path="res://Scenes/Main Menu/Help.tscn" id="8_q5rkr"]
 [ext_resource type="PackedScene" uid="uid://ciqalhvr0fm8j" path="res://Scenes/Main Menu/About.tscn" id="9_6ukg7"]
 [ext_resource type="PackedScene" uid="uid://rb4dmx2qlncg" path="res://Scenes/Main Menu/Quit.tscn" id="10_uyp60"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gtoju"]
 
 [node name="MainMenu" type="Control"]
 clip_contents = true
@@ -24,38 +24,57 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+auto_translate = false
+localize_numeral_system = false
+mouse_filter = 1
 theme = ExtResource("6_uthlc")
 script = ExtResource("1_w46dk")
 
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(1024, 768)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme = ExtResource("6_uthlc")
+texture = ExtResource("3_b1wht")
+region_rect = Rect2(1024, 768, 0, 0)
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-material = SubResource("CanvasItemMaterial_gtoju")
 custom_minimum_size = Vector2(1024, 768)
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -4.0
-offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="TopTilesStripe" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1024, 64)
 layout_mode = 2
+size_flags_vertical = 0
+auto_translate = false
+localize_numeral_system = false
 
 [node name="DummyTextRectSpacer" type="TextureRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(1024, 200)
+custom_minimum_size = Vector2(1024, 162)
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(1024, 200)
+custom_minimum_size = Vector2(1024, 232)
 layout_mode = 2
 theme_override_constants/margin_left = 128
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 128
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="MainMenuContainer" type="GridContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
@@ -97,15 +116,17 @@ theme = ExtResource("6_uthlc")
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(1024, 64)
+custom_minimum_size = Vector2(1024, 128)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+theme_override_constants/margin_right = 316
+theme_override_constants/margin_bottom = 44
 
-[node name="OnePlayerItem" parent="VBoxContainer/MarginContainer2" instance=ExtResource("10_uyp60")]
+[node name="QuitItem" parent="VBoxContainer/MarginContainer2" instance=ExtResource("10_uyp60")]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 0
+auto_translate = false
+localize_numeral_system = false
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1024, 100)
@@ -118,4 +139,18 @@ custom_minimum_size = Vector2(1024, 64)
 layout_mode = 2
 alignment = 2
 
+[node name="HelpPanel" parent="." instance=ExtResource("4_a260f")]
+visible = false
+z_index = 5
+layout_mode = 2
+anchors_preset = 0
+mouse_force_pass_scroll_events = false
+
+[connection signal="oneplayer_game_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem" to="." method="_on_one_player_item_oneplayer_game_requested"]
+[connection signal="settings_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/SettingsItem" to="." method="_on_settings_item_settings_requested"]
+[connection signal="twoplayers_game_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/TwoPlayersItem" to="." method="_on_two_players_item_twoplayers_game_requested"]
+[connection signal="highscores_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/HighScoresItem" to="." method="_on_high_scores_item_highscores_requested"]
 [connection signal="help_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/HelpItem" to="." method="_on_help_item_help_requested"]
+[connection signal="about_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/AboutItem" to="." method="_on_about_item_about_requested"]
+[connection signal="quit_requested" from="VBoxContainer/MarginContainer2/QuitItem" to="." method="_on_quit_item_quit_requested"]
+[connection signal="help_panel_closed" from="HelpPanel" to="." method="_on_help_panel_help_panel_closed"]
