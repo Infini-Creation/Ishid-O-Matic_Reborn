@@ -1,6 +1,5 @@
 extends Control
 
-
 @onready var PagesHolder : Array = [
 	$CenterContainer/VBoxContainer/TextureButton/Page1,
 	$CenterContainer/VBoxContainer/TextureButton/Page2,
@@ -9,6 +8,8 @@ extends Control
 	$CenterContainer/VBoxContainer/TextureButton/Page5,
 	$CenterContainer/VBoxContainer/TextureButton/Page6
 ]
+
+signal help_panel_closed
 
 var current_page : int = 0
 var previous_page : int = 0
@@ -27,7 +28,9 @@ func update_page(prevPage : int, nextPage : int) -> void:
 # to remove eventually
 func _on_texture_button_pressed():
 	Global.debug("HelpPanel: button pressed, close it")
-	queue_free()
+	help_panel_closed.emit()
+	hide()
+	#queue_free()
 
 func _on_previous_page_pressed():
 	Global.debug("HelpPanel: previous pressed")
