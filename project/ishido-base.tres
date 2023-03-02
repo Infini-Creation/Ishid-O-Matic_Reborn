@@ -1,4 +1,29 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://0js83h3tu5ft"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://0js83h3tu5ft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lo8e6"]
+bg_color = Color(0.286275, 0.219608, 0.113725, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 12
+shadow_color = Color(0.243137, 0.145098, 0.0823529, 0.45098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_po5tk"]
+bg_color = Color(0.745098, 0.611765, 0.411765, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 12
+shadow_color = Color(0.243137, 0.145098, 0.0823529, 0.45098)
+shadow_size = 4
+shadow_offset = Vector2(4, 4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iaieh"]
 bg_color = Color(0.666667, 0.533333, 0.333333, 1)
@@ -24,6 +49,8 @@ shadow_offset = Vector2(4, 4)
 
 [resource]
 Button/colors/testc = Color(0, 0, 0, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_lo8e6")
+Button/styles/hover = SubResource("StyleBoxFlat_po5tk")
 Button/styles/normal = SubResource("StyleBoxFlat_iaieh")
 Button/styles/pressed = SubResource("StyleBoxFlat_t7l7r")
 MarginContainer/colors/test = Color(0.564706, 0.372549, 0.156863, 1)
