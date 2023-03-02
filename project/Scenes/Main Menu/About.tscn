@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://ciqalhvr0fm8j"]
+[gd_scene load_steps=4 format=3 uid="uid://ciqalhvr0fm8j"]
 
 [ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_akcrq"]
+[ext_resource type="Script" path="res://Scripts/Menus/About.gd" id="1_q4eeu"]
 
 [sub_resource type="SystemFont" id="SystemFont_v2spc"]
 subpixel_positioning = 0
 
-[node name="OnePlayerItem" type="Control"]
+[node name="AboutItem" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_q4eeu")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
@@ -34,3 +36,5 @@ theme_override_font_sizes/font_size = 24
 text = "   About"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

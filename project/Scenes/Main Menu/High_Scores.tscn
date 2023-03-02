@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://brngd5mluy5ee"]
+[gd_scene load_steps=4 format=3 uid="uid://brngd5mluy5ee"]
 
+[ext_resource type="Script" path="res://Scripts/Menus/High_Scores.gd" id="1_14leq"]
 [ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_gfsih"]
 
 [sub_resource type="SystemFont" id="SystemFont_v2spc"]
 subpixel_positioning = 0
 
-[node name="OnePlayerItem" type="Control"]
+[node name="HighScoresItem" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_14leq")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
@@ -34,3 +36,5 @@ theme_override_font_sizes/font_size = 24
 text = " High Scores"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
