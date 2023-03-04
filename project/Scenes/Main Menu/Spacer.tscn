@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bfuadn5q4xyxq"]
+
+[node name="SpacerItem" type="Control"]
+custom_minimum_size = Vector2(94, 40)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 40.0
+stretch_mode = 3
