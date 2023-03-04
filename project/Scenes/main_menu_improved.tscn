@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://br48snne8lp04"]
+
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_0j35d"]
+[ext_resource type="Script" path="res://Scripts/main_menu_improved.gd" id="1_ltboi"]
+[ext_resource type="Texture2D" uid="uid://bcjx22w3fqfry" path="res://Arts/Gfx/BaseColourTexture.png" id="2_uqssm"]
+[ext_resource type="PackedScene" uid="uid://lb3l2tsp01op" path="res://Scenes/help_panel.tscn" id="4_0m6b0"]
+[ext_resource type="PackedScene" uid="uid://cod6gfhmkgr58" path="res://Scenes/about_panel.tscn" id="5_hlvuh"]
+
+[node name="MainMenu-Improved" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ltboi")
+
+[node name="BackgroundTexture" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(1024, 768)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme = ExtResource("1_0j35d")
+texture = ExtResource("2_uqssm")
+region_rect = Rect2(1024, 768, 0, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(1024, 768)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TopTilesStripe" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 64)
+layout_mode = 2
+size_flags_vertical = 0
+auto_translate = false
+localize_numeral_system = false
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 640)
+layout_mode = 2
+
+[node name="DummyLabel" type="Label" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Your Scene HERE !
+(this should NOT 
+be visible !)"
+horizontal_alignment = 1
+
+[node name="BottomTilesStripe" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1024, 64)
+layout_mode = 2
+alignment = 2
+
+[node name="HelpPanel" parent="." instance=ExtResource("4_0m6b0")]
+visible = false
+layout_mode = 1
+
+[node name="AboutPanel" parent="." instance=ExtResource("5_hlvuh")]
+visible = false
+layout_mode = 1
+
+[connection signal="help_panel_closed" from="HelpPanel" to="." method="_on_help_panel_help_panel_closed"]
