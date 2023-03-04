@@ -6,6 +6,7 @@
 subpixel_positioning = 0
 
 [node name="TournamentItem" type="Control"]
+custom_minimum_size = Vector2(188, 40)
 layout_mode = 3
 anchors_preset = 0
 

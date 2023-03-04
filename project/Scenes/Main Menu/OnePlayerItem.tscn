@@ -7,8 +7,11 @@
 subpixel_positioning = 0
 
 [node name="OnePlayerItem" type="Control"]
+custom_minimum_size = Vector2(188, 40)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 188.0
+offset_bottom = 40.0
 script = ExtResource("1_e8a1a")
 
 [node name="Button" type="Button" parent="."]
