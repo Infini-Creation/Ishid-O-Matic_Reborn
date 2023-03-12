@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw8fhr4x4r4ev"]
+
+[ext_resource type="Script" path="res://Scripts/test-MCC-ColorValue.gd" id="1_3lgj7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ca8cn"]
+
+[sub_resource type="SystemFont" id="SystemFont_lxape"]
+
+[sub_resource type="SystemFont" id="SystemFont_tuk2c"]
+
+[node name="Modulate-Color-Component" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 350.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 40.0
+texture = SubResource("CanvasTexture_ca8cn")
+draw_center = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Color Component" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_lxape")
+theme_override_font_sizes/font_size = 20
+text = " R "
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(255, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 255.0
+
+[node name="Color Value" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_tuk2c")
+theme_override_font_sizes/font_size = 20
+text = "255"
+horizontal_alignment = 1
+script = ExtResource("1_3lgj7")
+
+[connection signal="value_changed" from="HBoxContainer/HSlider" to="HBoxContainer/Color Value" method="_on_h_slider_value_changed"]
