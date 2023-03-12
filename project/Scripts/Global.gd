@@ -5,6 +5,11 @@ extends Node
 const SETTINGS_FILE_PATH = "user://settings.ini"
 const HIGHSCORES_FILE_PATH = "user://highscores.dat"
 
+const HIGHSCORES_SCORE_START = 100
+const HIGHSCORES_SCORE_STEP = 10
+const HIGHSCORES_FOURWAYS_STEP = 3
+const HIGHSCORES_TILES_REMAINING_STEP = 4
+
 var stats : Dictionary = {
 	"GamesPlayed": 0,
 	"GamesWon": 0,
@@ -38,6 +43,17 @@ var highScores : Dictionary = {
 	"TwoPlayers" : [],
 	"Tournament": []
 }
+
+var dummyNames : Array = [
+	"Robert Brandner",
+	"Brad Fregger",
+	"Michael Feinberg",
+	"Ian Gilman",
+	"Mike Sandige",
+	"John Sullivan",
+	"Sean Cummins",
+	"Steven Samorodin"
+]
 
 var avail_tile_shapes = [
 	preload("res://Scenes/tileA.tscn"),
@@ -103,28 +119,59 @@ func load_config():
 
 
 func initialize_high_scores():
+	var score : int
+	var fourways : int
+	var tilesRemaining : int
+	var random_name : String
+
 	for gameType in highScores:
 		highScores[gameType] = []
-		for idx in randi_range(0, 9):
-			highScores[gameType][idx] = [0, 0, 0]
-			#score from 10 to 100 by 10, rem tiles from 32 to 0 by 4
-			# 4w: 1 to 3
+		highScores[gameType].resize(10)
+		
+		score = HIGHSCORES_SCORE_START
+		fourways = HIGHSCORES_FOURWAYS_STEP
+		tilesRemaining = 0
+
+			#add names !!
+		for idx in range(0, 10):
+			if (gameType != "Tournament"):
+				random_name = dummyNames[randi_range(0,dummyNames.size() - 1)]
+			else:
+				random_name = ""
+			
+			highScores[gameType][idx] = [random_name, score, fourways, tilesRemaining]
+			#debug("init array idx="+str(idx))
+			score -= HIGHSCORES_SCORE_STEP
+			if (idx + 1) % HIGHSCORES_FOURWAYS_STEP == 0:
+				fourways -= 1
+			tilesRemaining += HIGHSCORES_TILES_REMAINING_STEP
 
 
 func load_high_scores():
 	var highscores = ConfigFile.new()
 	var error = highscores.load(HIGHSCORES_FILE_PATH)
 	if error != OK:
-		Global.debug("error=["+error+"]") #TODO: deal with eror
+		Global.debug("load_high_scores: error=["+str(error)+"]") #TODO: deal with eror
 	else:
 		pass
 
 
 func save_high_scores():
 	var highscores = ConfigFile.new()
+	var saved_value : String
 	
 	#TODO: save data
-
+	# data struct ?
+	# section=1P,2P, tour
+	#	key rank1=v1,v2,v3
+	#	...
+	for gameType in highScores:
+		for idx in range(0, 10):
+			#highScores[gameType][idx] = [score, fourways, tilesRemaining]
+			
+			saved_value = str(highScores[gameType][idx][0])+","+str(highScores[gameType][idx][1])+","+str(highScores[gameType][idx][2])
+			highscores.set_value(gameType, "rank-"+str(idx), saved_value)
+			
 	var error = highscores.save(HIGHSCORES_FILE_PATH)
 	if error != OK:
 		Global.debug("error=["+error+"]") #TODO: deal with eror
