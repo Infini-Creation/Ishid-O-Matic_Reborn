@@ -132,7 +132,6 @@ func initialize_high_scores():
 		fourways = HIGHSCORES_FOURWAYS_STEP
 		tilesRemaining = 0
 
-			#add names !!
 		for idx in range(0, 10):
 			if (gameType != "Tournament"):
 				random_name = dummyNames[randi_range(0,dummyNames.size() - 1)]
@@ -148,33 +147,48 @@ func initialize_high_scores():
 
 
 func load_high_scores():
-	var highscores = ConfigFile.new()
-	var error = highscores.load(HIGHSCORES_FILE_PATH)
+	var highscores = FileAccess.open(HIGHSCORES_FILE_PATH, FileAccess.READ)
+	var error = FileAccess.get_open_error()
 	if error != OK:
 		Global.debug("load_high_scores: error=["+str(error)+"]") #TODO: deal with eror
+		#deal with filenotfound => init hs
 	else:
-		pass
+		var gameType : String
+		
+		for gtidx in range(0,3):
+			gameType = highscores.get_pascal_string()
+			highScores[gameType] = []
+			highScores[gameType].resize(10)
+			
+			for idx in range(0, 10):
+				highScores[gameType][idx] = []
+				highScores[gameType][idx].resize(4)
+				
+				highScores[gameType][idx][0] = highscores.get_pascal_string()
+				highScores[gameType][idx][1] = highscores.get_16()
+				highScores[gameType][idx][2] = highscores.get_8()
+				highScores[gameType][idx][3] = highscores.get_8()
+				#highscores.get_error()
+	highscores.close()
 
 
 func save_high_scores():
-	var highscores = ConfigFile.new()
-	var saved_value : String
-	
-	#TODO: save data
-	# data struct ?
-	# section=1P,2P, tour
-	#	key rank1=v1,v2,v3
-	#	...
+	var highscores = FileAccess.open(HIGHSCORES_FILE_PATH, FileAccess.WRITE)
+	var error = FileAccess.get_open_error()
+	if error != Error.OK:
+		Global.debug("save_high_scores: error=["+error+"]") #TODO: deal with eror
+
 	for gameType in highScores:
+		highscores.store_pascal_string(gameType)
+
 		for idx in range(0, 10):
-			#highScores[gameType][idx] = [score, fourways, tilesRemaining]
+			highscores.store_pascal_string(highScores[gameType][idx][0])
+			highscores.store_16(highScores[gameType][idx][1])
+			highscores.store_8(highScores[gameType][idx][2])
+			highscores.store_8(highScores[gameType][idx][3])
+			#highscores.get_error()
 			
-			saved_value = str(highScores[gameType][idx][0])+","+str(highScores[gameType][idx][1])+","+str(highScores[gameType][idx][2])
-			highscores.set_value(gameType, "rank-"+str(idx), saved_value)
-			
-	var error = highscores.save(HIGHSCORES_FILE_PATH)
-	if error != OK:
-		Global.debug("error=["+error+"]") #TODO: deal with eror
+	highscores.close()
 
 
 func debug(msg : String) -> void:
