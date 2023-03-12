@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cj2ardh87k01v"]
+
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_plfsj"]
+[ext_resource type="Script" path="res://Scripts/Menus/MainMenuButtons.gd" id="2_f2ex5"]
+[ext_resource type="PackedScene" uid="uid://ifrs2wp5p88" path="res://Scenes/Main Menu/OnePlayerItem.tscn" id="3_mqlwa"]
+
+[node name="Control" type="Control"]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_plfsj")
+script = ExtResource("2_f2ex5")
+
+[node name="ButtonsGroup" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ButtonsRow1" type="HBoxContainer" parent="ButtonsGroup"]
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="OnePlayerItem" parent="ButtonsGroup/ButtonsRow1" instance=ExtResource("3_mqlwa")]
+layout_mode = 2
+
+[connection signal="oneplayer_game_requested" from="ButtonsGroup/ButtonsRow1/OnePlayerItem" to="." method="_on_one_player_item_oneplayer_game_requested"]
