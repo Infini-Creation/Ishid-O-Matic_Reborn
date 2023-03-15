@@ -10,6 +10,15 @@ const HIGHSCORES_SCORE_STEP = 10
 const HIGHSCORES_FOURWAYS_STEP = 3
 const HIGHSCORES_TILES_REMAINING_STEP = 4
 
+const GAMETYPE_ONEPLAYER : String = "OnePlayer"
+const GAMETYPE_TWOPLAYERS : String = "TwoPlayers"
+const GAMETYPE_TOURNAMENT : String = "Tournament"
+
+const HIGHSCORES_NAME_IDX = 0
+const HIGHSCORES_SCORE_IDX = 1
+const HIGHSCORES_FOURWAYS_IDX = 2
+const HIGHSCORES_TILESREMAINING_IDX = 3
+
 var stats : Dictionary = {
 	"GamesPlayed": 0,
 	"GamesWon": 0,
@@ -164,10 +173,10 @@ func load_high_scores():
 				highScores[gameType][idx] = []
 				highScores[gameType][idx].resize(4)
 				
-				highScores[gameType][idx][0] = highscores.get_pascal_string()
-				highScores[gameType][idx][1] = highscores.get_16()
-				highScores[gameType][idx][2] = highscores.get_8()
-				highScores[gameType][idx][3] = highscores.get_8()
+				highScores[gameType][idx][HIGHSCORES_NAME_IDX] = highscores.get_pascal_string()
+				highScores[gameType][idx][HIGHSCORES_SCORE_IDX] = highscores.get_16()
+				highScores[gameType][idx][HIGHSCORES_FOURWAYS_IDX] = highscores.get_8()
+				highScores[gameType][idx][HIGHSCORES_TILESREMAINING_IDX] = highscores.get_8()
 				#highscores.get_error()
 	highscores.close()
 
@@ -182,14 +191,23 @@ func save_high_scores():
 		highscores.store_pascal_string(gameType)
 
 		for idx in range(0, 10):
-			highscores.store_pascal_string(highScores[gameType][idx][0])
-			highscores.store_16(highScores[gameType][idx][1])
-			highscores.store_8(highScores[gameType][idx][2])
-			highscores.store_8(highScores[gameType][idx][3])
+			highscores.store_pascal_string(highScores[gameType][idx][HIGHSCORES_NAME_IDX])
+			highscores.store_16(highScores[gameType][idx][HIGHSCORES_SCORE_IDX])
+			highscores.store_8(highScores[gameType][idx][HIGHSCORES_FOURWAYS_IDX])
+			highscores.store_8(highScores[gameType][idx][HIGHSCORES_TILESREMAINING_IDX])
 			#highscores.get_error()
 			
 	highscores.close()
 
+
+func add_high_score(gameType, playerName : String, score : int, fourWays : int, tilesRemaining : int)  -> void:
+	for scoreIdx in range(0, highScores[gameType].size()):
+		debug("score="+str(score)+" vs hs="+str(highScores[gameType][scoreIdx][HIGHSCORES_SCORE_IDX]))
+		if score >= highScores[gameType][scoreIdx][HIGHSCORES_SCORE_IDX]:
+			highScores[gameType].insert(scoreIdx, [playerName, score, fourWays, tilesRemaining])
+			highScores[gameType].pop_back()
+			break
+		
 
 func debug(msg : String) -> void:
 	if (debug_enabled == true):
