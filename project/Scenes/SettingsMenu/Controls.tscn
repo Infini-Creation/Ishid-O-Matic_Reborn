@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://cj2ardh87k01v"]
+[gd_scene load_steps=12 format=3 uid="uid://ctdrgy6uwl05v"]
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_plfsj"]
 [ext_resource type="Script" path="res://Scripts/Menus/MainMenuButtons.gd" id="2_f2ex5"]
-[ext_resource type="PackedScene" uid="uid://ifrs2wp5p88" path="res://Scenes/Main Menu/OnePlayerItem.tscn" id="3_mqlwa"]
+[ext_resource type="PackedScene" uid="uid://b1y0ceoptlyy8" path="res://Scenes/SettingsMenu/settings_music_volume.tscn" id="3_o0fjc"]
+[ext_resource type="Texture2D" uid="uid://baynxgvxhhm4j" path="res://Arts/Gfx/Menu/settings-menu-tittle.png" id="3_tdvwc"]
+[ext_resource type="Script" path="res://Scripts/Menus/Settings-MenuButton.gd" id="4_ajwwx"]
+[ext_resource type="PackedScene" uid="uid://c8srptvs1yge6" path="res://Scenes/SettingsMenu/settings_sound_volume.tscn" id="4_m7c0a"]
+[ext_resource type="Texture2D" uid="uid://bhsmn0ahnp4ld" path="res://Arts/Gfx/Icons/settings-hints-icon.png" id="6_eubcd"]
+[ext_resource type="PackedScene" uid="uid://0l28e82ve3vg" path="res://Scenes/SettingsMenu/Accept.tscn" id="6_kdmng"]
+[ext_resource type="PackedScene" uid="uid://b40tjnd3f60qf" path="res://Scenes/SettingsMenu/Back.tscn" id="7_p5yps"]
+[ext_resource type="Script" path="res://Scripts/Menus/Settings-Accept.gd" id="7_v03cd"]
+[ext_resource type="Script" path="res://Scripts/Menus/Settings-Back.gd" id="9_o5jsf"]
 
 [node name="Control" type="Control"]
 layout_direction = 1
@@ -24,12 +32,99 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
 
-[node name="ButtonsRow1" type="HBoxContainer" parent="ButtonsGroup"]
+[node name="Settings Label" type="TextureRect" parent="ButtonsGroup"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("3_tdvwc")
+
+[node name="Music Row" type="HBoxContainer" parent="ButtonsGroup"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 theme_override_constants/separation = 128
 
-[node name="OnePlayerItem" parent="ButtonsGroup/ButtonsRow1" instance=ExtResource("3_mqlwa")]
+[node name="MusicVolume" parent="ButtonsGroup/Music Row" instance=ExtResource("3_o0fjc")]
 layout_mode = 2
 
-[connection signal="oneplayer_game_requested" from="ButtonsGroup/ButtonsRow1/OnePlayerItem" to="." method="_on_one_player_item_oneplayer_game_requested"]
+[node name="MenuButton" type="MenuButton" parent="ButtonsGroup/Music Row"]
+layout_mode = 2
+text = "Music"
+item_count = 2
+popup/item_0/text = "Music 1"
+popup/item_0/id = 0
+popup/item_1/text = "Music 2"
+popup/item_1/id = 1
+script = ExtResource("4_ajwwx")
+
+[node name="Sound Row" type="HBoxContainer" parent="ButtonsGroup"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 128
+
+[node name="SoundVolume" parent="ButtonsGroup/Sound Row" instance=ExtResource("4_m7c0a")]
+layout_mode = 2
+
+[node name="Hints-Language Row" type="HBoxContainer" parent="ButtonsGroup"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Hints Icon" type="TextureRect" parent="ButtonsGroup/Hints-Language Row"]
+visible = false
+layout_mode = 2
+texture = ExtResource("6_eubcd")
+expand_mode = 3
+
+[node name="Hints Type" type="MenuButton" parent="ButtonsGroup/Hints-Language Row"]
+visible = false
+layout_mode = 2
+text = "Hint"
+item_count = 4
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Random"
+popup/item_1/id = 1
+popup/item_2/text = "First available"
+popup/item_2/id = 2
+popup/item_3/text = "All available"
+popup/item_3/id = 3
+
+[node name="Hint-None" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+layout_mode = 2
+
+[node name="Hint-First" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+layout_mode = 2
+
+[node name="Hint-All" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+layout_mode = 2
+
+[node name="Hint-Random" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+layout_mode = 2
+
+[node name="Separator CR" type="ColorRect" parent="ButtonsGroup/Hints-Language Row"]
+custom_minimum_size = Vector2(128, 40)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="LanguageDefault" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+layout_mode = 2
+stretch_mode = 5
+
+[node name="Bottom Buttons Row" type="HBoxContainer" parent="ButtonsGroup"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 32
+
+[node name="AcceptItem" parent="ButtonsGroup/Bottom Buttons Row" instance=ExtResource("6_kdmng")]
+layout_mode = 2
+script = ExtResource("7_v03cd")
+
+[node name="BackItem" parent="ButtonsGroup/Bottom Buttons Row" instance=ExtResource("7_p5yps")]
+layout_mode = 2
+script = ExtResource("9_o5jsf")
+
+[connection signal="settings_save_requested" from="ButtonsGroup/Bottom Buttons Row/AcceptItem" to="." method="_on_accept_item_settings_save_requested"]
+[connection signal="settings_revert_requested" from="ButtonsGroup/Bottom Buttons Row/BackItem" to="." method="_on_back_item_settings_revert_requested"]

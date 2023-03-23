@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1y0ceoptlyy8"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/settings_music_volume.gd" id="1_1k4l1"]
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_qhv2s"]
+[ext_resource type="Texture2D" uid="uid://dmma2bje76kym" path="res://Arts/Gfx/Icons/settings-music-icon.png" id="3_77t1i"]
+[ext_resource type="Script" path="res://Scripts/Menus/Settings_volume.gd" id="4_2ufaq"]
+[ext_resource type="Texture2D" uid="uid://b5r7qirm0jrya" path="res://Arts/Gfx/Icons/ishido-settings-music-disabled-icon.png" id="4_a670l"]
+
+[sub_resource type="SystemFont" id="SystemFont_lxape"]
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_tuk2c"]
+subpixel_positioning = 0
+
+[node name="MusicVolume" type="Control"]
+custom_minimum_size = Vector2(350, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 350.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_1k4l1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme = ExtResource("1_qhv2s")
+color = Color(0.0941176, 0.207843, 1, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource("3_77t1i")
+texture_pressed = ExtResource("4_a670l")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Music Icon" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_77t1i")
+expand_mode = 3
+
+[node name="tmpIcon Music" type="Label" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_lxape")
+theme_override_font_sizes/font_size = 20
+text = " Mus"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(255, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_qhv2s")
+value = 23.0
+
+[node name="Volume Value" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_tuk2c")
+theme_override_font_sizes/font_size = 20
+text = "100"
+horizontal_alignment = 1
+script = ExtResource("4_2ufaq")
+
+[connection signal="toggled" from="HBoxContainer/TextureButton" to="." method="_on_texture_button_toggled"]
+[connection signal="value_changed" from="HBoxContainer/HSlider" to="HBoxContainer/Volume Value" method="_on_h_slider_value_changed"]
