@@ -1,6 +1,10 @@
 extends Control
 
 @onready var MainMenuButtons : PackedScene = preload("res://Scenes/Main Menu/Buttons.tscn")
+@onready var SettingsButtons : PackedScene = preload("res://Scenes/SettingsMenu/Controls.tscn")
+
+var mainMenuButtons
+var settingsMenu
 
 func _ready():
 	#Global.debug_enabled = true #tmp
@@ -44,14 +48,16 @@ func _ready():
 		StripeIdx += 1
 
 	$VBoxContainer/CenterContainer/DummyLabel.hide()
-	var mainMenuButtons = MainMenuButtons.instantiate()
+	mainMenuButtons = MainMenuButtons.instantiate()
 	$VBoxContainer/CenterContainer.add_child(mainMenuButtons)
 	# need to connect signal here by code !
 	mainMenuButtons.connect("button_clicked", _on_button_click_received)
-	
+
+
 func _on_button_click_received(buttonID : int):
 	Global.debug("id="+str(buttonID))
 	match buttonID:
+	# Main menu buttons
 		Global.ButtonIDs.BUTTON_1PGAME: 
 			pass
 		Global.ButtonIDs.BUTTON_2PGAME:
@@ -67,9 +73,28 @@ func _on_button_click_received(buttonID : int):
 			get_tree().quit()
 
 		Global.ButtonIDs.BUTTON_SETTINGS:
-			pass
+			if mainMenuButtons != null: #or is in tree
+				$VBoxContainer/CenterContainer.remove_child(mainMenuButtons)
+
+			settingsMenu = SettingsButtons.instantiate()
+			$VBoxContainer/CenterContainer.add_child(settingsMenu)
+			settingsMenu.connect("button_clicked", _on_button_click_received)
+			
 		Global.ButtonIDs.BUTTON_HIGHSCORES:
 			pass
+	# Settings Menu Buttons
+		Global.ButtonIDs.BUTTON_SETTINGS_BACK:
+			$VBoxContainer/CenterContainer.remove_child(settingsMenu)
+			$VBoxContainer/CenterContainer.add_child(mainMenuButtons)
+
+		Global.ButtonIDs.BUTTON_SETTINGS_SAVE:
+			Global.debug("call save settings HERE")
+			# gather settings (signal ?) or save in settings script directly
+			#  would be better no need to transfert data here, global is global !
+			# as above, go back to main menu ?
+			pass
+
+	# HighScores Menu Buttons
 		_: 
 			Global.debug("unhandled action")
 
