@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8srptvs1yge6"]
+[gd_scene load_steps=6 format=3 uid="uid://c8srptvs1yge6"]
 
 [ext_resource type="Texture2D" uid="uid://c7lkxtg5gnbvw" path="res://Arts/Gfx/Icons/settings-sounds-icon.png" id="1_scebq"]
 [ext_resource type="Script" path="res://Scripts/Menus/settings_sound_volume.gd" id="1_tp5td"]
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="2_ril1x"]
 [ext_resource type="Texture2D" uid="uid://8lufgt6u5dy0" path="res://Arts/Gfx/Icons/ishido-settings-sounds-disabled-icon.png" id="4_3peag"]
-[ext_resource type="Script" path="res://Scripts/Menus/Settings_volume.gd" id="4_ykm2y"]
 
 [sub_resource type="SystemFont" id="SystemFont_tuk2c"]
 subpixel_positioning = 0
@@ -64,7 +63,6 @@ theme_override_fonts/font = SubResource("SystemFont_tuk2c")
 theme_override_font_sizes/font_size = 20
 text = "100"
 horizontal_alignment = 1
-script = ExtResource("4_ykm2y")
 
 [connection signal="toggled" from="HBoxContainer/TextureButton" to="." method="_on_texture_button_toggled"]
-[connection signal="value_changed" from="HBoxContainer/HSlider" to="HBoxContainer/Volume Value" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
