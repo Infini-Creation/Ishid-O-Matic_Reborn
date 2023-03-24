@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://ctdrgy6uwl05v"]
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_plfsj"]
-[ext_resource type="Script" path="res://Scripts/Menus/MainMenuButtons.gd" id="2_f2ex5"]
+[ext_resource type="Script" path="res://Scripts/Menus/SettingsMenuButtons.gd" id="2_kgucl"]
 [ext_resource type="PackedScene" uid="uid://b1y0ceoptlyy8" path="res://Scenes/SettingsMenu/settings_music_volume.tscn" id="3_o0fjc"]
 [ext_resource type="Texture2D" uid="uid://baynxgvxhhm4j" path="res://Arts/Gfx/Menu/settings-menu-tittle.png" id="3_tdvwc"]
 [ext_resource type="Script" path="res://Scripts/Menus/Settings-MenuButton.gd" id="4_ajwwx"]
@@ -22,23 +22,31 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_plfsj")
-script = ExtResource("2_f2ex5")
+script = ExtResource("2_kgucl")
 
 [node name="ButtonsGroup" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_top = -130.0
+offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
-metadata/_edit_use_anchors_ = true
+alignment = 1
 
 [node name="Settings Label" type="TextureRect" parent="ButtonsGroup"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = ExtResource("3_tdvwc")
+
+[node name="DummySpacer" type="ColorRect" parent="ButtonsGroup"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+color = Color(0.588235, 0.294118, 0.286275, 0.0588235)
 
 [node name="Music Row" type="HBoxContainer" parent="ButtonsGroup"]
 layout_mode = 2
@@ -50,6 +58,7 @@ theme_override_constants/separation = 128
 layout_mode = 2
 
 [node name="MenuButton" type="MenuButton" parent="ButtonsGroup/Music Row"]
+visible = false
 layout_mode = 2
 text = "Music"
 item_count = 2
@@ -69,17 +78,16 @@ theme_override_constants/separation = 128
 layout_mode = 2
 
 [node name="Hints-Language Row" type="HBoxContainer" parent="ButtonsGroup"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="Hints Icon" type="TextureRect" parent="ButtonsGroup/Hints-Language Row"]
-visible = false
 layout_mode = 2
 texture = ExtResource("6_eubcd")
 expand_mode = 3
 
 [node name="Hints Type" type="MenuButton" parent="ButtonsGroup/Hints-Language Row"]
-visible = false
 layout_mode = 2
 text = "Hint"
 item_count = 4
@@ -113,6 +121,11 @@ color = Color(1, 1, 1, 0)
 layout_mode = 2
 stretch_mode = 5
 
+[node name="DummySpacer2" type="ColorRect" parent="ButtonsGroup"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+color = Color(0.588235, 0.294118, 0.286275, 0.0588235)
+
 [node name="Bottom Buttons Row" type="HBoxContainer" parent="ButtonsGroup"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -126,5 +139,7 @@ script = ExtResource("7_v03cd")
 layout_mode = 2
 script = ExtResource("9_o5jsf")
 
+[connection signal="settings_updated" from="ButtonsGroup/Music Row/MusicVolume" to="." method="_on_music_volume_settings_updated"]
+[connection signal="settings_updated" from="ButtonsGroup/Sound Row/SoundVolume" to="." method="_on_sound_volume_settings_updated"]
 [connection signal="settings_save_requested" from="ButtonsGroup/Bottom Buttons Row/AcceptItem" to="." method="_on_accept_item_settings_save_requested"]
 [connection signal="settings_revert_requested" from="ButtonsGroup/Bottom Buttons Row/BackItem" to="." method="_on_back_item_settings_revert_requested"]
