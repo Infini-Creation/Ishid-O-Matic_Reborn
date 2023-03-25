@@ -120,11 +120,12 @@ func load_config():
 					Global.debug("subItem=["+subItem+"]")
 					if config.has_section(item):
 						if config.has_section_key(item, subItem):
-							cfgval = config.get_value(item, subItem, settings[item][subItem])
-							Global.debug("cfgloaded ("+item+"/"+subItem+")=["+str(cfgval)+"]")
+							settings[item][subItem] = config.get_value(item, subItem, settings[item][subItem])
+							Global.debug("cfgloaded ("+item+"/"+subItem+")=["+str(settings[item][subItem])+"]")
 			else:
-				cfgval = config.get_value("misc", item, settings[item])
-				Global.debug("cfgloaded ("+item+")=["+str(cfgval)+"]")
+				settings[item] = config.get_value("misc", item, settings[item])
+				Global.debug("cfgloaded ("+item+")=["+str(settings[item])+"]")
+	Global.debug("LoadConf: settings="+str(settings))
 
 
 func initialize_high_scores():
