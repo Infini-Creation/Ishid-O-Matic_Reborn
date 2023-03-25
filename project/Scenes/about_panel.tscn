@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cod6gfhmkgr58"]
+[gd_scene load_steps=6 format=3 uid="uid://cod6gfhmkgr58"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/about_panel.gd" id="1_u2xw2"]
 [ext_resource type="Texture2D" uid="uid://dlloxxecitrn3" path="res://Arts/Gfx/Panels/help panel.png" id="2_lh42l"]
 
 [sub_resource type="Shortcut" id="Shortcut_mf6hy"]
+
+[sub_resource type="SystemFont" id="SystemFont_jgi8k"]
 
 [sub_resource type="SystemFont" id="SystemFont_4np4h"]
 subpixel_positioning = 0
@@ -42,7 +44,50 @@ shortcut_in_tooltip = false
 texture_normal = ExtResource("2_lh42l")
 stretch_mode = 5
 
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/VBoxContainer/TextureButton"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -419.0
+offset_top = -217.5
+offset_right = 419.0
+offset_bottom = 217.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.894118, 0.905882, 0.996078, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/normal_font = SubResource("SystemFont_jgi8k")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[center]About
+
+Game made with Godot 4 by Infini-Creation
+
+Based on the game [i]Ishid-O-Matic[/i] by [b]Robert Brandner[/b] on [i][color=lightblue]Amiga[/color][/i]
+(still available on [url=https://docs.godotengine.org/en/latest/tutorials/gui/bbcode_in_richtextlabel.html]Assassin Game #31 .[/url])
+Itself base on [i]Ishido - The way of stones[/i] designed by [b]Michael Feinberg[/b] and
+released on various computers in 1989
+
+Thanks:
+	 [rainbow]Michael Feinberg[/rainbow] &  [rainbow]Robert Brandner[/rainbow]
+	sounds effect & music by [wave]Eric Matyas[/wave], his website is [url=https://soundimage.org/l]Soundimage.org[/url]
+	gfx by [shake]XXX[/shake]
+	authors & contributors of [i]Godot Engine[/i]
+	[b]GDQuest[/b] for their great youtube videos & tutorials
+[/center]"
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+visible = false
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 8
@@ -83,3 +128,4 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="meta_clicked" from="CenterContainer/VBoxContainer/TextureButton/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
