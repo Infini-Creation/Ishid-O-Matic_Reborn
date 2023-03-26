@@ -33,9 +33,9 @@ var stats : Dictionary = {
 var settings : Dictionary = {
 	"Audio": { 
 		"soundEffects": true,
-		"soundVolume": 10,
+		"soundVolume": 100,
 		"music": true,
-		"musicVolume": 5,
+		"musicVolume": 75,
 		"musicToPlay": 0
 	},
 	"Display": {
@@ -43,8 +43,13 @@ var settings : Dictionary = {
 		"screenResolution": "TODO",
 		"fullScreen": false
 	},
+	"Players": {
+		"One": "Player1",
+		"Two": "Player2"
+	},
 	"hints": 0,
-	"language": "TODO"
+	"language": "TODO",
+	"tileSet": "default"
 }
 
 var highScores : Dictionary = {
@@ -111,7 +116,6 @@ func load_config():
 	if error != OK:
 		Global.debug("error=["+error+"]") #TODO: deal with eror
 	else:
-		var cfgval
 	
 		for item in settings:
 			Global.debug("item=["+item+"]")
