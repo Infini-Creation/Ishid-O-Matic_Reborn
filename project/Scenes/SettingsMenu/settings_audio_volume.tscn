@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://ll6lo1qpru7x"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/settings_audio_volume.gd" id="1_xjfki"]
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="2_p5362"]
+[ext_resource type="Texture2D" uid="uid://dmma2bje76kym" path="res://Arts/Gfx/Icons/settings-music-icon.png" id="3_mk44f"]
+[ext_resource type="Texture2D" uid="uid://b5r7qirm0jrya" path="res://Arts/Gfx/Icons/ishido-settings-music-disabled-icon.png" id="4_nyub7"]
+
+[sub_resource type="SystemFont" id="SystemFont_tuk2c"]
+subpixel_positioning = 0
+
+[node name="AudioVolume" type="Control"]
+custom_minimum_size = Vector2(350, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 350.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_xjfki")
+audio_enabled_icon = ExtResource("3_mk44f")
+audio_disabled_icon = ExtResource("4_nyub7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme = ExtResource("2_p5362")
+color = Color(0.0941176, 0.207843, 1, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+action_mode = 0
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(255, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_p5362")
+value = 23.0
+
+[node name="Volume Value" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_tuk2c")
+theme_override_font_sizes/font_size = 20
+text = "100"
+horizontal_alignment = 1
+
+[connection signal="toggled" from="HBoxContainer/TextureButton" to="." method="_on_texture_button_toggled"]
+[connection signal="value_changed" from="HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
