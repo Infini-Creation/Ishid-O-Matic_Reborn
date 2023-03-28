@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxnlyh1x8abf6"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/settings_player_name.gd" id="1_esyqn"]
+
+[node name="settings_player_name" type="Control"]
+custom_minimum_size = Vector2(212, 40)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 6
+script = ExtResource("1_esyqn")
+labelPlayerIdx = "Player One"
+defaultPlayerName = "Player1"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+text = "Player Name: "
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+alignment = 1
+max_length = 32
+context_menu_enabled = false
+clear_button_enabled = true
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[connection signal="text_submitted" from="PanelContainer/HBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

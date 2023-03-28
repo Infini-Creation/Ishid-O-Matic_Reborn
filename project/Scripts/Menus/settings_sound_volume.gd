@@ -24,12 +24,16 @@ func load_settings(updated_sound_volume : int, updated_sound_enabled : bool) -> 
 		sound_volume = updated_sound_volume
 	sound_enabled = updated_sound_enabled
 	
+	$HBoxContainer/HSlider.value = sound_volume
+	$HBoxContainer/TextureButton.button_pressed = !sound_enabled
 
 
 func _on_texture_button_toggled(button_pressed):
 	print("butt press="+str(button_pressed))
 	$HBoxContainer/HSlider.editable = !button_pressed
 	#bp=true = sound disabled, false = enabled !!=> depend on initial state !!
+	#==> fix this: if disabled => bp=pressed, if enabled=!pressed
+	# signal to adjust accordingly (it even used, to check too)
 	settings_updated.emit(sound_volume, !button_pressed)
 
 func _on_h_slider_value_changed(value):
