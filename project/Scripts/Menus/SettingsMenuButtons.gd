@@ -23,8 +23,8 @@ func _ready():
 	
 	#init settings
 	Global.debug("cmv="+str(music_volume)+" cme="+str(music_enabled))
-	$"ButtonsGroup/Music Row/MusicVolume".load_settings(music_volume, music_enabled)
-	$"ButtonsGroup/Sound Row/SoundVolume".load_settings(sound_volume, sound_enabled)
+	$"ButtonsGroup/Music Row/AudioVolume".load_settings(music_volume, music_enabled)
+	$"ButtonsGroup/Sound Row/AudioVolume".load_settings(sound_volume, sound_enabled)
 	$"ButtonsGroup/Music Row/settings_player1_name".load_settings(player1_name)
 	$"ButtonsGroup/Sound Row/settings_player2_name".load_settings(player2_name)
 
@@ -54,7 +54,7 @@ func _on_quit_item_quit_requested():
 	pass # Replace with function body.
 
 func _on_music_volume_settings_updated(new_music_volume, new_music_enabled):
-	#Global.debug("music settings: vol="+str(new_music_volume)+" on/off="+str(new_music_enabled))
+	Global.debug("music settings: vol="+str(new_music_volume)+" on/off="+str(new_music_enabled))
 	music_volume = new_music_volume
 	music_enabled = new_music_enabled
 
@@ -70,3 +70,26 @@ func _on_settings_player_1_name_settings_updated(new_player_name):
 func _on_settings_player_2_name_settings_updated(new_player_name):
 	Global.debug("new p2 name="+new_player_name)
 	player2_name = new_player_name
+
+
+func _on_settings_player_1_name_gui_input(event):
+	$"ButtonsGroup/Music Row/PlayerHint".show()
+
+func _on_settings_player_1_name_mouse_exited():
+	$"ButtonsGroup/Music Row/PlayerHint".hide()
+
+func _on_settings_player_2_name_gui_input(event):
+	$"ButtonsGroup/Sound Row/PlayerHint2".show()
+
+func _on_settings_player_2_name_mouse_exited():
+	$"ButtonsGroup/Sound Row/PlayerHint2".hide()
+
+
+func _on_audio_volume_settings_updated(audio_type, new_audio_volume, new_audio_enabled):
+	Global.debug("audio settings("+str(audio_type)+"): vol="+str(new_audio_volume)+" on/off="+str(new_audio_enabled))
+	if audio_type == Global.AUDIO_TYPE_MUSIC:
+		music_volume = new_audio_volume
+		music_enabled = new_audio_enabled
+	else:
+		sound_volume = new_audio_volume
+		sound_enabled = new_audio_enabled
