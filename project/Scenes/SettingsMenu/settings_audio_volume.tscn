@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ll6lo1qpru7x"]
+[gd_scene load_steps=4 format=3 uid="uid://ll6lo1qpru7x"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/settings_audio_volume.gd" id="1_xjfki"]
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="2_p5362"]
-[ext_resource type="Texture2D" uid="uid://dmma2bje76kym" path="res://Arts/Gfx/Icons/settings-music-icon.png" id="3_mk44f"]
-[ext_resource type="Texture2D" uid="uid://b5r7qirm0jrya" path="res://Arts/Gfx/Icons/ishido-settings-music-disabled-icon.png" id="4_nyub7"]
 
 [sub_resource type="SystemFont" id="SystemFont_tuk2c"]
 subpixel_positioning = 0
@@ -17,8 +15,6 @@ offset_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_xjfki")
-audio_enabled_icon = ExtResource("3_mk44f")
-audio_disabled_icon = ExtResource("4_nyub7")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -30,7 +26,7 @@ grow_vertical = 2
 auto_translate = false
 localize_numeral_system = false
 theme = ExtResource("2_p5362")
-color = Color(0.0941176, 0.207843, 1, 1)
+color = Color(0.627451, 0.494118, 0.290196, 0.568627)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

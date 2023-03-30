@@ -19,6 +19,9 @@ const HIGHSCORES_SCORE_IDX = 1
 const HIGHSCORES_FOURWAYS_IDX = 2
 const HIGHSCORES_TILESREMAINING_IDX = 3
 
+const AUDIO_TYPE_SOUNDEFFECT = 0
+const AUDIO_TYPE_MUSIC = 1
+
 var stats : Dictionary = {
 	"GamesPlayed": 0,
 	"GamesWon": 0,
@@ -97,24 +100,24 @@ func save_config():
 	var config = ConfigFile.new()
 	
 	for item in settings:
-		Global.debug("item=["+item+"]")
+		Global.debug("sav item=["+item+"]")
 		if settings[item] is Dictionary:
 			for subItem in settings[item]:
-				Global.debug("subItem=["+subItem+"]")
+				Global.debug("sav subItem=["+subItem+"]="+str(settings[item][subItem]))
 				config.set_value(item, subItem, settings[item][subItem])
 		else:
 			config.set_value("misc", item, settings[item])
 	
 	var error = config.save(SETTINGS_FILE_PATH)
 	if error != OK:
-		Global.debug("error=["+error+"]") #TODO: deal with eror
+		Global.debug("sav error=["+error+"]") #TODO: deal with eror
 
 
 func load_config():
 	var config = ConfigFile.new()
 	var error = config.load(SETTINGS_FILE_PATH)
 	if error != OK:
-		Global.debug("error=["+error+"]") #TODO: deal with eror
+		Global.debug("load error=["+error+"]") #TODO: deal with eror
 	else:
 	
 		for item in settings:
