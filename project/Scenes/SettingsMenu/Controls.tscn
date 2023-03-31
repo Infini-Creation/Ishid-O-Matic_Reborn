@@ -1,12 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://ctdrgy6uwl05v"]
+[gd_scene load_steps=17 format=3 uid="uid://ctdrgy6uwl05v"]
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_plfsj"]
 [ext_resource type="Script" path="res://Scripts/Menus/SettingsMenuButtons.gd" id="2_kgucl"]
-[ext_resource type="PackedScene" uid="uid://b1y0ceoptlyy8" path="res://Scenes/SettingsMenu/settings_music_volume.tscn" id="3_o0fjc"]
 [ext_resource type="Texture2D" uid="uid://baynxgvxhhm4j" path="res://Arts/Gfx/Menu/settings-menu-tittle.png" id="3_tdvwc"]
 [ext_resource type="Script" path="res://Scripts/Menus/Settings-MenuButton.gd" id="4_ajwwx"]
 [ext_resource type="PackedScene" uid="uid://ll6lo1qpru7x" path="res://Scenes/SettingsMenu/settings_audio_volume.tscn" id="4_iy873"]
-[ext_resource type="PackedScene" uid="uid://c8srptvs1yge6" path="res://Scenes/SettingsMenu/settings_sound_volume.tscn" id="4_m7c0a"]
 [ext_resource type="Texture2D" uid="uid://dmma2bje76kym" path="res://Arts/Gfx/Icons/settings-music-icon.png" id="5_rag66"]
 [ext_resource type="Texture2D" uid="uid://b5r7qirm0jrya" path="res://Arts/Gfx/Icons/ishido-settings-music-disabled-icon.png" id="6_8gc0w"]
 [ext_resource type="Texture2D" uid="uid://bhsmn0ahnp4ld" path="res://Arts/Gfx/Icons/settings-hints-icon.png" id="6_eubcd"]
@@ -69,10 +67,6 @@ audio_type = 1
 audio_enabled_icon = ExtResource("5_rag66")
 audio_disabled_icon = ExtResource("6_8gc0w")
 
-[node name="MusicVolume" parent="ButtonsGroup/Music Row" instance=ExtResource("3_o0fjc")]
-visible = false
-layout_mode = 2
-
 [node name="MenuButton" type="MenuButton" parent="ButtonsGroup/Music Row"]
 visible = false
 layout_mode = 2
@@ -113,10 +107,6 @@ theme_override_constants/separation = 24
 layout_mode = 2
 audio_enabled_icon = ExtResource("10_8cjac")
 audio_disabled_icon = ExtResource("11_wnhtc")
-
-[node name="SoundVolume" parent="ButtonsGroup/Sound Row" instance=ExtResource("4_m7c0a")]
-visible = false
-layout_mode = 2
 
 [node name="settings_player2_name" parent="ButtonsGroup/Sound Row" instance=ExtResource("6_i2aij")]
 layout_mode = 2
@@ -202,12 +192,10 @@ layout_mode = 2
 script = ExtResource("9_o5jsf")
 
 [connection signal="settings_updated" from="ButtonsGroup/Music Row/AudioVolume" to="." method="_on_audio_volume_settings_updated"]
-[connection signal="settings_updated" from="ButtonsGroup/Music Row/MusicVolume" to="." method="_on_music_volume_settings_updated"]
 [connection signal="gui_input" from="ButtonsGroup/Music Row/settings_player1_name" to="." method="_on_settings_player_1_name_gui_input"]
 [connection signal="mouse_exited" from="ButtonsGroup/Music Row/settings_player1_name" to="." method="_on_settings_player_1_name_mouse_exited"]
 [connection signal="settings_updated" from="ButtonsGroup/Music Row/settings_player1_name" to="." method="_on_settings_player_1_name_settings_updated"]
 [connection signal="settings_updated" from="ButtonsGroup/Sound Row/AudioVolume" to="." method="_on_audio_volume_settings_updated"]
-[connection signal="settings_updated" from="ButtonsGroup/Sound Row/SoundVolume" to="." method="_on_sound_volume_settings_updated"]
 [connection signal="gui_input" from="ButtonsGroup/Sound Row/settings_player2_name" to="." method="_on_settings_player_2_name_gui_input"]
 [connection signal="mouse_exited" from="ButtonsGroup/Sound Row/settings_player2_name" to="." method="_on_settings_player_2_name_mouse_exited"]
 [connection signal="settings_updated" from="ButtonsGroup/Sound Row/settings_player2_name" to="." method="_on_settings_player_2_name_settings_updated"]
