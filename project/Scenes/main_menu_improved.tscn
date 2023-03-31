@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://br48snne8lp04"]
+[gd_scene load_steps=7 format=3 uid="uid://br48snne8lp04"]
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_0j35d"]
 [ext_resource type="Script" path="res://Scripts/main_menu_improved.gd" id="1_ltboi"]
 [ext_resource type="Texture2D" uid="uid://bcjx22w3fqfry" path="res://Arts/Gfx/BaseColourTexture.png" id="2_uqssm"]
 [ext_resource type="PackedScene" uid="uid://lb3l2tsp01op" path="res://Scenes/help_panel.tscn" id="4_0m6b0"]
 [ext_resource type="PackedScene" uid="uid://cod6gfhmkgr58" path="res://Scenes/about_panel.tscn" id="5_hlvuh"]
+[ext_resource type="PackedScene" uid="uid://bvflowtivbxvn" path="res://Scenes/high_scores.tscn" id="6_5jscf"]
 
 [node name="MainMenu-Improved" type="Control"]
 layout_mode = 3
@@ -71,6 +72,10 @@ visible = false
 layout_mode = 1
 
 [node name="AboutPanel" parent="." instance=ExtResource("5_hlvuh")]
+visible = false
+layout_mode = 1
+
+[node name="HallOfFamePanel" parent="." instance=ExtResource("6_5jscf")]
 visible = false
 layout_mode = 1
 
