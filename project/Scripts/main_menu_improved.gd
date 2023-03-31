@@ -2,9 +2,11 @@ extends Control
 
 @onready var MainMenuButtons : PackedScene = preload("res://Scenes/Main Menu/Buttons.tscn")
 @onready var SettingsButtons : PackedScene = preload("res://Scenes/SettingsMenu/Controls.tscn")
+@onready var highScoresPage : PackedScene = preload("res://Scenes/high_scores.tscn")
 
 var mainMenuButtons
 var settingsMenu
+var highScores
 
 func _ready():
 	#Global.debug_enabled = true #tmp
@@ -58,12 +60,14 @@ func _on_button_click_received(buttonID : int):
 	Global.debug("id="+str(buttonID))
 	match buttonID:
 	# Main menu buttons
-		Global.ButtonIDs.BUTTON_1PGAME: 
+		Global.ButtonIDs.BUTTON_1PGAME:
+			#setup main game and run it
 			pass
 		Global.ButtonIDs.BUTTON_2PGAME:
 			pass
 		Global.ButtonIDs.BUTTON_TOURNAMENT:
 			pass #TODO
+			#display a special Coming Soon panel for this
 		Global.ButtonIDs.BUTTON_ABOUT:
 			$AboutPanel.show()
 		Global.ButtonIDs.BUTTON_HELP:
@@ -81,7 +85,13 @@ func _on_button_click_received(buttonID : int):
 			settingsMenu.connect("button_clicked", _on_button_click_received)
 			
 		Global.ButtonIDs.BUTTON_HIGHSCORES:
-			pass
+			$HallOfFamePanel.show()
+			#if mainMenuButtons != null: #or is in tree
+			#	$VBoxContainer/CenterContainer.remove_child(mainMenuButtons)
+			
+			#	highScores = highScoresPage.instantiate()
+			#	$VBoxContainer/CenterContainer.add_child(highScores)
+				#settingsMenu.connect("button_clicked", _on_button_click_received)
 	# Settings Menu Buttons
 		Global.ButtonIDs.BUTTON_SETTINGS_BACK:
 			$VBoxContainer/CenterContainer.remove_child(settingsMenu)
@@ -89,6 +99,8 @@ func _on_button_click_received(buttonID : int):
 
 		Global.ButtonIDs.BUTTON_SETTINGS_SAVE:
 			Global.debug("call save settings HERE")
+			# add feedback settings save successfully (small popup label)
+			
 			# gather settings (signal ?) or save in settings script directly
 			#  would be better no need to transfert data here, global is global !
 			# as above, go back to main menu ?
