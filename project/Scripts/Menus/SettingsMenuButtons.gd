@@ -72,13 +72,13 @@ func _on_settings_player_2_name_settings_updated(new_player_name):
 	player2_name = new_player_name
 
 
-func _on_settings_player_1_name_gui_input(event):
+func _on_settings_player_1_name_gui_input(_event):
 	$"ButtonsGroup/Music Row/PlayerHint".show()
 
 func _on_settings_player_1_name_mouse_exited():
 	$"ButtonsGroup/Music Row/PlayerHint".hide()
 
-func _on_settings_player_2_name_gui_input(event):
+func _on_settings_player_2_name_gui_input(_event):
 	$"ButtonsGroup/Sound Row/PlayerHint2".show()
 
 func _on_settings_player_2_name_mouse_exited():
