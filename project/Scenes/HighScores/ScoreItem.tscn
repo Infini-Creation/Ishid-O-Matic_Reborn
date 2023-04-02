@@ -1,8 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3nnw4t638j24"]
+[gd_scene load_steps=9 format=3 uid="uid://d3nnw4t638j24"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/Highscores-ScoreItem.gd" id="1_5a4bo"]
 [ext_resource type="Texture2D" uid="uid://coce3131s58m8" path="res://Arts/Gfx/Icons/4ways-icon.png" id="1_w5xnk"]
 [ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="2_i2tf0"]
+
+[sub_resource type="SystemFont" id="SystemFont_cux6y"]
+font_names = PackedStringArray("Lucida Console")
+
+[sub_resource type="SystemFont" id="SystemFont_bbk3b"]
+font_names = PackedStringArray("Lucida Console")
+
+[sub_resource type="SystemFont" id="SystemFont_geic3"]
+font_names = PackedStringArray("Lucida Console")
+
+[sub_resource type="SystemFont" id="SystemFont_ftfbp"]
+font_names = PackedStringArray("Lucida Console")
+
+[sub_resource type="SystemFont" id="SystemFont_dwyqk"]
+font_names = PackedStringArray("Lucida Console")
 
 [node name="Control" type="Control"]
 custom_minimum_size = Vector2(470, 30)
@@ -24,6 +39,7 @@ layout_mode = 2
 
 [node name="Rank" type="Label" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_cux6y")
 text = "1. "
 visible_characters = 3
 visible_characters_behavior = 1
@@ -31,11 +47,16 @@ visible_characters_behavior = 1
 [node name="Name" type="Label" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_bbk3b")
 text = "SomeName HERE...... (24 chars wide)"
 
 [node name="Score" type="Label" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_geic3")
 text = "100"
+max_lines_visible = 1
+visible_characters = 4
+visible_ratio = 1.33333
 
 [node name="FourWaysIcon" type="TextureRect" parent="PanelContainer/HBoxContainer"]
 texture_filter = 1
@@ -46,7 +67,11 @@ stretch_mode = 5
 
 [node name="FourWays" type="Label" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_ftfbp")
 text = "4"
+max_lines_visible = 1
+visible_characters = 2
+visible_ratio = 2.0
 
 [node name="TileIcon" type="TextureRect" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
@@ -55,7 +80,11 @@ expand_mode = 3
 
 [node name="TilesRemaining" type="Label" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_dwyqk")
 text = "8"
+max_lines_visible = 1
+visible_characters = 2
+visible_ratio = 2.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 visible = false
