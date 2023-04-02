@@ -97,6 +97,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
 
+[node name="DummySpacerOne" type="ColorRect" parent="ButtonsGroup/Music Row"]
+custom_minimum_size = Vector2(234, 0)
+layout_mode = 2
+color = Color(0.2, 0.2, 0.2, 0.0392157)
+
 [node name="Sound Row" type="HBoxContainer" parent="ButtonsGroup"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -128,6 +133,11 @@ text = "Press Enter to submit change !"
 horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
+
+[node name="DummySpacerTwo" type="ColorRect" parent="ButtonsGroup/Sound Row"]
+custom_minimum_size = Vector2(234, 0)
+layout_mode = 2
+color = Color(0.2, 0.2, 0.2, 0.0392157)
 
 [node name="Hints-Language Row" type="HBoxContainer" parent="ButtonsGroup"]
 visible = false

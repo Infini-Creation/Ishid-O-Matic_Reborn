@@ -73,16 +73,20 @@ func _on_settings_player_2_name_settings_updated(new_player_name):
 
 
 func _on_settings_player_1_name_gui_input(_event):
+	$"ButtonsGroup/Music Row/DummySpacerOne".hide()
 	$"ButtonsGroup/Music Row/PlayerHint".show()
 
 func _on_settings_player_1_name_mouse_exited():
 	$"ButtonsGroup/Music Row/PlayerHint".hide()
+	$"ButtonsGroup/Music Row/DummySpacerOne".show()
 
 func _on_settings_player_2_name_gui_input(_event):
+	$"ButtonsGroup/Sound Row/DummySpacerTwo".hide()
 	$"ButtonsGroup/Sound Row/PlayerHint2".show()
 
 func _on_settings_player_2_name_mouse_exited():
 	$"ButtonsGroup/Sound Row/PlayerHint2".hide()
+	$"ButtonsGroup/Sound Row/DummySpacerTwo".show()
 
 
 func _on_audio_volume_settings_updated(audio_type, new_audio_volume, new_audio_enabled):
