@@ -55,8 +55,6 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_geic3")
 text = "100"
 max_lines_visible = 1
-visible_characters = 4
-visible_ratio = 1.33333
 
 [node name="FourWaysIcon" type="TextureRect" parent="PanelContainer/HBoxContainer"]
 texture_filter = 1
