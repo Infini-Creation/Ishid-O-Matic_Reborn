@@ -92,12 +92,12 @@ var avail_tile_colors = {
 
 # maybe play one music per day of week ?
 var available_musics = [
-	"res://audio/musics/Alone-Again_Looping.mp3",
-	"res://audio/musics/Deep-Peace_Looping.mp3",
-	"res://audio/musics/Distant-Mountains_Looping.mp3",
-	"res://audio/musics/Hidden-Pond_Looping.mp3",
-	"res://audio/musics/Icicles_Looping.mp3",
-	"res://audio/musics/Valley-Sunrise_Looping.mp3"
+	preload("res://audio/musics/Alone-Again_Looping.mp3"),
+	preload("res://audio/musics/Deep-Peace_Looping.mp3"),
+	preload("res://audio/musics/Distant-Mountains_Looping.mp3"),
+	preload("res://audio/musics/Hidden-Pond_Looping.mp3"),
+	preload("res://audio/musics/Icicles_Looping.mp3"),
+	preload("res://audio/musics/Valley-Sunrise_Looping.mp3")
 ]
 
 enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }

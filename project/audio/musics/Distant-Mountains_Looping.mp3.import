@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Distant-Mountains_Looping.mp3-417a999957712f7
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
