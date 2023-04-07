@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2qs2uqdbi5um"]
+
+[ext_resource type="Script" path="res://Scripts/tile2.gd" id="1_f0q7c"]
+
+[node name="Tile2" type="Node2D"]
+script = ExtResource("1_f0q7c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+centered = false
