@@ -1,34 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3vfy43nyup2f"]
+[gd_scene load_steps=4 format=3 uid="uid://ddgwkp071dpud"]
 
 [ext_resource type="Script" path="res://Scripts/tile-modulate.gd" id="1_lb8rk"]
 [ext_resource type="PackedScene" uid="uid://dw8fhr4x4r4ev" path="res://Scenes/tests/modulate_color_component.tscn" id="2_icv8x"]
-[ext_resource type="PackedScene" uid="uid://xm6r1xdaov17" path="res://Scenes/tileA.tscn" id="2_osgsl"]
+[ext_resource type="PackedScene" uid="uid://c2qs2uqdbi5um" path="res://Scenes/tile2.tscn" id="3_doaqu"]
 
 [node name="TileModulate-test" type="Node2D"]
 script = ExtResource("1_lb8rk")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
-autostart = true
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Modulate-Color-Component R" parent="HSplitContainer/VBoxContainer" instance=ExtResource("2_icv8x")]
+[node name="Modulate-Color-Component R" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_icv8x")]
+custom_minimum_size = Vector2(350, 40)
+layout_mode = 2
+Component = "R"
+
+[node name="Modulate-Color-Component G" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_icv8x")]
+custom_minimum_size = Vector2(350, 40)
+layout_mode = 2
+Component = "G"
+
+[node name="Modulate-Color-Component B" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_icv8x")]
+custom_minimum_size = Vector2(350, 40)
+layout_mode = 2
+Component = "B"
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+text = "Use Timer"
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="Modulate-Color-Component G" parent="HSplitContainer/VBoxContainer" instance=ExtResource("2_icv8x")]
-layout_mode = 2
+[node name="TileTest" parent="HBoxContainer/Control" instance=ExtResource("3_doaqu")]
+position = Vector2(32, 32)
 
-[node name="Modulate-Color-Component B" parent="HSplitContainer/VBoxContainer" instance=ExtResource("2_icv8x")]
-layout_mode = 2
-
-[node name="Tile" parent="HSplitContainer" instance=ExtResource("2_osgsl")]
-position = Vector2(207, 50)
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="update_color" from="HBoxContainer/VBoxContainer/Modulate-Color-Component R" to="." method="_on_modulate_color_component_r_update_color"]
+[connection signal="update_color" from="HBoxContainer/VBoxContainer/Modulate-Color-Component G" to="." method="_on_modulate_color_component_g_update_color"]
+[connection signal="update_color" from="HBoxContainer/VBoxContainer/Modulate-Color-Component B" to="." method="_on_modulate_color_component_b_update_color"]
+[connection signal="toggled" from="HBoxContainer/Button" to="." method="_on_button_toggled"]
