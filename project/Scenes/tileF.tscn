@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cl3bcvuhwtwps"]
+[gd_scene load_steps=3 format=3 uid="uid://d7prdvc2cjgf"]
 
-[ext_resource type="PackedScene" path="res://Scenes/tile.tscn" id="1_rrq68"]
-[ext_resource type="Texture2D" uid="uid://cec27lldfhxon" path="res://Arts/Gfx/Tiles/dummy sets/tile-F1.png" id="2_npbbg"]
+[ext_resource type="PackedScene" uid="uid://c2qs2uqdbi5um" path="res://Scenes/tile2.tscn" id="1_us8m6"]
+[ext_resource type="Texture2D" uid="uid://cec27lldfhxon" path="res://Arts/Gfx/Tiles/dummy sets/tile-F1.png" id="2_rxwh1"]
 
-[node name="Tile" instance=ExtResource("1_rrq68")]
+[node name="Tile2" instance=ExtResource("1_us8m6")]
 shape = "F"
 
-[node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_npbbg")
+[node name="tile symbol" parent="." index="0"]
+texture = ExtResource("2_rxwh1")
+offset = Vector2(0, 0)
+
+[node name="tile border" parent="." index="1"]
+centered = false
