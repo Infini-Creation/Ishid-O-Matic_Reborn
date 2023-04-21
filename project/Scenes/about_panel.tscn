@@ -6,6 +6,7 @@
 [sub_resource type="Shortcut" id="Shortcut_mf6hy"]
 
 [sub_resource type="SystemFont" id="SystemFont_jgi8k"]
+subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_4np4h"]
 subpixel_positioning = 0
