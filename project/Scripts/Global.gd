@@ -72,16 +72,16 @@ var dummyNames : Array = [
 	"Steven Samorodin"
 ]
 
-var avail_tile_shapes = [
-	preload("res://Scenes/tileA.tscn"),
-	preload("res://Scenes/tileB.tscn"),
-	preload("res://Scenes/tileC.tscn"),
-	preload("res://Scenes/tileD.tscn"),
-	preload("res://Scenes/tileE.tscn"),
-	preload("res://Scenes/tileF.tscn")
-]
+const avail_tile_shapes = {
+	"A": preload("res://Scenes/tileA.tscn"),
+	"B": preload("res://Scenes/tileB.tscn"),
+	"C": preload("res://Scenes/tileC.tscn"),
+	"D": preload("res://Scenes/tileD.tscn"),
+	"E": preload("res://Scenes/tileE.tscn"),
+	"F": preload("res://Scenes/tileF.tscn")
+}
 
-var avail_tile_colors = {
+const avail_tile_colors = {
 	"color1" : Color(221,0,221,1),
 	"color2" : Color(0,204,204,1),
 	"color3" : Color(221,0,0,1),
@@ -107,6 +107,7 @@ enum GAME_EXIT_STATUS { GAME_WON, GAME_LOSS, USER_QUIT }
 var tile_colors : int = 6
 var tile_shapes : int = 6
 
+var previous_scene : String
 
 func save_config():
 	var config = ConfigFile.new()
