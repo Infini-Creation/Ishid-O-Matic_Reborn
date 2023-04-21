@@ -103,6 +103,5 @@ texture = ExtResource("8_e5rxw")
 
 [connection signal="deck_empty" from="." to="MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailDeckTiles" method="_on_deck_display_deck_empty"]
 [connection signal="some_tiles_removed" from="." to="MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailDeckTiles" method="_on_deck_display_some_tiles_removed"]
-[connection signal="tile_picked" from="." to="MarginContainer/VBoxContainer/NextTileDisplay_Background/NextTileDisplay" method="_on_deck_display_tile_picked"]
 [connection signal="tile_picked" from="." to="MarginContainer/VBoxContainer/NextTileDisplay_Background/NextTileDisplay2" method="_on_deck_display_tile_picked"]
 [connection signal="tile_picked" from="." to="MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailDeckTiles" method="_on_deck_display_tile_picked"]

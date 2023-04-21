@@ -7,27 +7,21 @@ signal deck_empty
 
 signal tile_picked
 signal some_tiles_removed
+#signal update_preview
 
 var deck : Array = []
 var next_tile : Node2D = null
 
+# not needed
+var base_tile_scene = preload("res://Scenes/tile2.tscn")
+@onready var previewNextTileDisplay = $MarginContainer/VBoxContainer/NextTileDisplay_Background/NextTileDisplay2
 
 func _ready():
 	Global.debug("DeckDisplay: _ready called")
 	init_deck()
 	
-	# deck MUST contains at least one tile there, so check not needed + done inside function
-	#$MarginContainer/VBoxContainer/NextTileDisplay.preview_tile(deck[0], Global.avail_tile_colors[deck[0].color])
-	
-	#signal => duplicate tile eventually
-	#tile should be picked from deck with pop here (?) NO => it would mean handle rem tiles with deck+1...
-	##below: tile_picked.emit(deck[0])
 	#abs path not very great, signal ?
 	$MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailDeckTiles.deck_initialized(deck.size())
-
-
-func deck_is_ready():
-	tile_picked.emit(deck[0])
 
 
 func init_deck():
@@ -38,7 +32,7 @@ func init_deck():
 		# hardcoded value to update (tile_repetition/dupe_in_deck)
 		for i in range(1,3):
 			for color in Global.avail_tile_colors:
-				tile = shape.instantiate()
+				tile = Global.avail_tile_shapes[shape].instantiate()
 				tile.get_node("tile symbol").modulate = Global.avail_tile_colors[color]
 				tile.color = color
 				deck.append(tile)
@@ -46,7 +40,49 @@ func init_deck():
 	#debug("Decktmp("+str(deck.size())+")=["+str(deck)+"]")
 	deck.shuffle()
 	Global.debug("ID DecktmpS("+str(deck.size())+")=["+str(deck)+"]")
+	#update_preview.emit(preview_next_tile())
+	previewNextTileDisplay.add_child(preview_next_tile())
 	##no deck_initialized.emit(deck)
+
+
+#useless, to remove
+func deck_is_ready():
+	pass
+	#tile_picked.emit(deck[0])
+
+
+#to be used with NTD
+func preview_next_tile() -> Node2D:
+	var tile : Node2D
+	
+	if deck.size() > 0:
+		tile = Global.avail_tile_shapes[deck[0].shape].instantiate()
+		tile.color = deck[0].color
+		tile.get_node("tile symbol").modulate = Global.avail_tile_colors[deck[0].color]
+
+	return tile
+
+
+func pick_next_tile() -> Node2D:
+	previewNextTileDisplay.add_child(preview_next_tile())
+	
+	var tile = deck.pop_front()
+	Global.debug("PiNT: (ds="+str(deck.size())+")  Tile=["+str(tile)+"]")
+
+	if (deck.size() > 0):
+		Global.debug("TP sig emitted")
+		tile_picked.emit(tile) #should be deck[0] ??
+		#tile_picked.emit(deck[0])
+	else:
+		deck_empty.emit()
+		
+	#update_preview.emit(preview_next_tile())
+	#old previewNextTileDisplay.add_child(preview_next_tile())
+	return tile
+
+
+func get_deck_count() -> int:
+	return deck.size()
 
 
 func get_unique_tiles_set() -> Array:
@@ -97,7 +133,7 @@ func get_unique_tiles_set() -> Array:
 	return unique_tiles_set
 
 
-func pick_next_tile(imemdiate_update_display : bool = true) -> Node2D:
+func _pick_next_tile(immediate_update_display : bool = true) -> Node2D:
 	var tile : Node2D = null
 	
 	Global.debug("PNT called")
@@ -107,7 +143,7 @@ func pick_next_tile(imemdiate_update_display : bool = true) -> Node2D:
 		
 		# ISSUE here? deck_empty not connected to main game !!
 		# Preview next tile in deck
-		if imemdiate_update_display == true:
+		if immediate_update_display == true:
 			if (deck.size() > 0):
 				##future tile => tile_picked.emit(deck[0])
 				Global.debug("TP sig emitted")
@@ -122,7 +158,7 @@ func pick_next_tile(imemdiate_update_display : bool = true) -> Node2D:
 	return tile
 
 
-func update() -> void:
+func _update() -> void:
 	if (deck.size() > 0):
 		Global.debug("TP sig emitted")
 		tile_picked.emit(deck[0])
@@ -130,7 +166,7 @@ func update() -> void:
 		deck_empty.emit()
 
 
-func preview_next_tile() -> Node2D:
+func _preview_next_tile() -> Node2D:
 	return deck[0].duplicate()
 
 #tmp, not here!

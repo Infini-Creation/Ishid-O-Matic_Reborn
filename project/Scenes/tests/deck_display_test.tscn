@@ -22,6 +22,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
@@ -29,13 +30,59 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 action_mode = 0
+text = "Preview tile"
+
+[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 12
+action_mode = 0
 text = "Pick a tile"
 
+[node name="Button3" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+action_mode = 0
+text = "update"
+
+[node name="Button4" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+action_mode = 0
+text = "deck size"
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Deck Count=XX"
+horizontal_alignment = 1
+autowrap_mode = 2
+max_lines_visible = 2
+
 [node name="TilePicked" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TilePicked2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
 [node name="DeckDisplay" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_sj6f7")]
-position = Vector2(68, -16)
+position = Vector2(80, -16)
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="deck_empty" from="MarginContainer/HBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_empty"]
 [connection signal="deck_initialized" from="MarginContainer/HBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_initialized"]
