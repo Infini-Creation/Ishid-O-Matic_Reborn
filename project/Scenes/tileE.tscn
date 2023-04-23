@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct4qiuchlljhu"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" uid="uid://c2qs2uqdbi5um" path="res://Scenes/tile2.tscn" id="1_bi62a"]
-[ext_resource type="Texture2D" uid="uid://bsbwr26mnfuj3" path="res://Arts/Gfx/Tiles/dummy sets/tile-E1.png" id="2_35t4l"]
+[ext_resource type="Texture2D" uid="uid://bsbwr26mnfuj3" path="res://Arts/Gfx/Tiles/dummy set/tile-E1.png" id="2_35t4l"]
 
 [node name="Tile2" instance=ExtResource("1_bi62a")]
 shape = "E"

@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://jo3oq724cigg"]
+[gd_scene load_steps=12 format=3 uid="uid://deac0ul1h72g8"]
 
 [ext_resource type="Script" path="res://Scripts/deck_display.gd" id="1_2v1u3"]
 [ext_resource type="Script" path="res://Scripts/DeckDisplay_NextTileDisplay.gd" id="2_jnur7"]
 [ext_resource type="Texture2D" uid="uid://csi57sic10a42" path="res://Arts/Gfx/Panels/DeckPanel.png" id="2_r6gxt"]
-[ext_resource type="Texture2D" uid="uid://bofaok261yf5a" path="res://Arts/Gfx/Tiles/dummy sets/tile-A1.png" id="3_q01ip"]
 [ext_resource type="Texture2D" uid="uid://cc5gbvrvqwv1u" path="res://Arts/Gfx/Panels/PreviewNextTile-Display-background.png" id="3_ti0vi"]
 [ext_resource type="Script" path="res://Scripts/DeckDisplay_TmpAvailDeckTiles.gd" id="4_mfjrp"]
+[ext_resource type="Texture2D" uid="uid://bofaok261yf5a" path="res://Arts/Gfx/Tiles/dummy set/tile-A1.png" id="4_s3sec"]
 [ext_resource type="Script" path="res://Scripts/DeckDisplay_NextTileDisplayC.gd" id="6_l6e24"]
 [ext_resource type="Texture2D" uid="uid://mgm1jfttmsj8" path="res://Arts/Gfx/Panels/MiniDeck-Display-Background.png" id="6_y17tg"]
 [ext_resource type="Texture2D" uid="uid://c400jrfnwotpr" path="res://Arts/Gfx/Panels/Copyright-Display-Background.png" id="8_e5rxw"]
@@ -49,7 +49,7 @@ offset_right = 147.0
 offset_bottom = 110.0
 size_flags_horizontal = 4
 size_flags_vertical = 0
-texture = ExtResource("3_q01ip")
+texture = ExtResource("4_s3sec")
 script = ExtResource("2_jnur7")
 
 [node name="NextTileDisplay2" type="Control" parent="MarginContainer/VBoxContainer/NextTileDisplay_Background"]

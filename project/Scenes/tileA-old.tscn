@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bs1j32mur753m"]
 
 [ext_resource type="PackedScene" uid="uid://05yhi80rhe6" path="res://Scenes/tile.tscn" id="1_yo0wc"]
-[ext_resource type="Texture2D" uid="uid://bofaok261yf5a" path="res://Arts/Gfx/Tiles/dummy sets/tile-A1.png" id="2_2sha6"]
+[ext_resource type="Texture2D" uid="uid://bofaok261yf5a" path="res://Arts/Gfx/Tiles/dummy set/tile-A1.png" id="2_fqqa4"]
 
 [node name="Tile" instance=ExtResource("1_yo0wc")]
 shape = "A"
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_2sha6")
+texture = ExtResource("2_fqqa4")

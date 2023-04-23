@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2qs2uqdbi5um"]
 
 [ext_resource type="Script" path="res://Scripts/tile2.gd" id="1_f0q7c"]
-[ext_resource type="Texture2D" uid="uid://bh56ww40s48xu" path="res://Arts/Gfx/Tiles/dummy sets/tile-border.png" id="2_1wywp"]
+[ext_resource type="Texture2D" uid="uid://bh56ww40s48xu" path="res://Arts/Gfx/Tiles/dummy set/tile-border.png" id="2_fsksl"]
 
 [node name="Tile2" type="Node2D"]
 script = ExtResource("1_f0q7c")
@@ -12,4 +12,4 @@ centered = false
 offset = Vector2(-32, -32)
 
 [node name="tile border" type="Sprite2D" parent="."]
-texture = ExtResource("2_1wywp")
+texture = ExtResource("2_fsksl")

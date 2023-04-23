@@ -2,23 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0ovu1xgw6r52"
-path="res://.godot/imported/tile-D1.png-84f68231e0d90f04a6c29ee232297830.ctex"
+uid="uid://ce5vujkffmuvi"
+path="res://.godot/imported/tile-B1.png-6ad1e644b89c4f7893fdb89edb5de92e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Arts/Gfx/Tiles/dummy sets/tile-D1.png"
-dest_files=["res://.godot/imported/tile-D1.png-84f68231e0d90f04a6c29ee232297830.ctex"]
+source_file="res://Arts/Gfx/Tiles/dummy set/tile-B1.png"
+dest_files=["res://.godot/imported/tile-B1.png-6ad1e644b89c4f7893fdb89edb5de92e.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
