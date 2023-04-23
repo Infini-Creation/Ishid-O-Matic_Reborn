@@ -49,13 +49,32 @@ func _on_game_launched(gameType : String):
 	remove_child(menu)
 	add_child(game)
 	game.connect("game_end", _on_game_is_over)
+	game.connect("tile_put_on_the_board", _on_game_play_tile_soundeffect)
+	game.connect("fourways", _on_game_fourways_soundeffect)
 	#add gametype, as param,  global or to game
 	#	current_session_data
+
 
 func _on_game_is_over(status : int):
 	if status == Global.GAME_EXIT_STATUS.GAME_WON:
 		Global.debug("Game won")
+		#soundEffectPlayer.stream = Global.sound_effects["win"]
+		#soundEffectPlayer.play()
 	elif status == Global.GAME_EXIT_STATUS.GAME_LOSS:
 		Global.debug("Game loss")
+		soundEffectPlayer.stream = Global.sound_effects["loss"] #A B variant = random
+		soundEffectPlayer.play()
 	elif status == Global.GAME_EXIT_STATUS.USER_QUIT:
 		Global.debug("quit")
+
+
+func _on_game_play_tile_soundeffect():
+	Global.debug("_on_game_play_tile_soundeffect called")
+	soundEffectPlayer.stream = Global.sound_effects["tile"]
+	soundEffectPlayer.play()
+
+
+func _on_game_fourways_soundeffect():
+	Global.debug("_on_game_fourways_soundeffect called")
+	soundEffectPlayer.stream = Global.sound_effects["fourways"]
+	soundEffectPlayer.play()
