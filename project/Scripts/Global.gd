@@ -91,7 +91,7 @@ const avail_tile_colors = {
 }
 
 # maybe play one music per day of week ?
-var available_musics = [
+const available_musics = [
 	preload("res://audio/musics/Alone-Again_Looping.mp3"),
 	preload("res://audio/musics/Deep-Peace_Looping.mp3"),
 	preload("res://audio/musics/Distant-Mountains_Looping.mp3"),
@@ -99,6 +99,15 @@ var available_musics = [
 	preload("res://audio/musics/Icicles_Looping.mp3"),
 	preload("res://audio/musics/Valley-Sunrise_Looping.mp3")
 ]
+
+const sound_effects = {
+	"tile": preload("res://audio/effects/Footstep_Tile_Left.mp3"),
+	"fourways": preload("res://audio/effects/SynthChime11.mp3"),
+	"loss": preload("res://audio/effects/DroneAlert3.mp3"),
+	"lossA": preload("res://audio/effects/DroneAlert4.mp3"),
+	"lossB": preload("res://audio/effects/DroneAlert5.mp3"),
+	#"win":
+}
 
 enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }
 enum HIGHLIGHT_MODE { HIGHLIGHT_NONE, FIRST_AVAIL_MOVE, ALL_AVAIL_MOVE, RANDOM_MOVE, HIGHER_SCORE_MOVE }
