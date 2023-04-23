@@ -4,6 +4,7 @@
 
 [node name="TheOrigin" type="Node"]
 script = ExtResource("1_xflr7")
+currentMusic = 1
 
 [node name="dummyNode" type="Node" parent="."]
 
