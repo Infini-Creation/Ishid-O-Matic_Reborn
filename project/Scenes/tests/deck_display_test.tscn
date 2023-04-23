@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://h6ua5l0kgym3"]
 
 [ext_resource type="Script" path="res://Scripts/DeckDisplay-Test.gd" id="1_8hol2"]
-[ext_resource type="PackedScene" uid="uid://jo3oq724cigg" path="res://Scenes/deck_display.tscn" id="2_sj6f7"]
+[ext_resource type="PackedScene" uid="uid://deac0ul1h72g8" path="res://Scenes/deck_display.tscn" id="2_sj6f7"]
 
 [node name="DeckDisplay-Test" type="Node2D"]
 script = ExtResource("1_8hol2")
