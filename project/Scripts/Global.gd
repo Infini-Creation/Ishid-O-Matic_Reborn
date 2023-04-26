@@ -51,7 +51,7 @@ var settings : Dictionary = {
 		"Two": "Player2"
 	},
 	"hints": 0,
-	"language": "TODO",
+	"language": 0,
 	"tileSet": "default"
 }
 
@@ -111,6 +111,7 @@ const sound_effects = {
 
 enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }
 enum HIGHLIGHT_MODE { HIGHLIGHT_NONE, FIRST_AVAIL_MOVE, ALL_AVAIL_MOVE, RANDOM_MOVE, HIGHER_SCORE_MOVE }
+enum LANGUAGE { ENGLISH, FRENCH, OTHER }
 enum GAME_EXIT_STATUS { GAME_WON, GAME_LOSS, USER_QUIT }
 
 var tile_colors : int = 6
@@ -128,6 +129,7 @@ func save_config():
 				Global.debug("sav subItem=["+subItem+"]="+str(settings[item][subItem]))
 				config.set_value(item, subItem, settings[item][subItem])
 		else:
+			Global.debug("misc val=["+str(settings[item])+"]")
 			config.set_value("misc", item, settings[item])
 	
 	var error = config.save(SETTINGS_FILE_PATH)
