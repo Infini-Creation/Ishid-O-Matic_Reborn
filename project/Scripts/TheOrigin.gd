@@ -19,6 +19,7 @@ func _ready():
 	Global.load_config()
 	Global.debug("settings="+str(Global.settings))
 	
+	currentMusic = randi_range(0, Global.available_musics.size()-1)
 	musicPlayer.stream = Global.available_musics[currentMusic]
 	
 	print("setting="+str( Global.settings["Audio"]["music"] ))
