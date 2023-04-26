@@ -1,23 +1,30 @@
-[gd_scene load_steps=17 format=3 uid="uid://ctdrgy6uwl05v"]
+[gd_scene load_steps=21 format=3 uid="uid://ctdrgy6uwl05v"]
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_plfsj"]
 [ext_resource type="Script" path="res://Scripts/Menus/SettingsMenuButtons.gd" id="2_kgucl"]
-[ext_resource type="Texture2D" uid="uid://baynxgvxhhm4j" path="res://Arts/Gfx/Menu/settings-menu-tittle.png" id="3_tdvwc"]
+[ext_resource type="Texture2D" uid="uid://pqoowgehv8ee" path="res://Arts/Gfx/Menu/settings.png" id="3_35yh1"]
 [ext_resource type="Script" path="res://Scripts/Menus/Settings-MenuButton.gd" id="4_ajwwx"]
 [ext_resource type="PackedScene" uid="uid://ll6lo1qpru7x" path="res://Scenes/SettingsMenu/settings_audio_volume.tscn" id="4_iy873"]
 [ext_resource type="Texture2D" uid="uid://dmma2bje76kym" path="res://Arts/Gfx/Icons/settings-music-icon.png" id="5_rag66"]
 [ext_resource type="Texture2D" uid="uid://b5r7qirm0jrya" path="res://Arts/Gfx/Icons/ishido-settings-music-disabled-icon.png" id="6_8gc0w"]
-[ext_resource type="Texture2D" uid="uid://bhsmn0ahnp4ld" path="res://Arts/Gfx/Icons/settings-hints-icon.png" id="6_eubcd"]
 [ext_resource type="PackedScene" uid="uid://cxnlyh1x8abf6" path="res://Scenes/SettingsMenu/settings_player_name.tscn" id="6_i2aij"]
 [ext_resource type="PackedScene" uid="uid://0l28e82ve3vg" path="res://Scenes/SettingsMenu/Accept.tscn" id="6_kdmng"]
 [ext_resource type="PackedScene" uid="uid://b40tjnd3f60qf" path="res://Scenes/SettingsMenu/Back.tscn" id="7_p5yps"]
 [ext_resource type="Script" path="res://Scripts/Menus/Settings-Accept.gd" id="7_v03cd"]
 [ext_resource type="Script" path="res://Scripts/Menus/Settings-Back.gd" id="9_o5jsf"]
 [ext_resource type="Texture2D" uid="uid://c7lkxtg5gnbvw" path="res://Arts/Gfx/Icons/settings-sounds-icon.png" id="10_8cjac"]
+[ext_resource type="PackedScene" uid="uid://biw2cwn4b8eih" path="res://Scenes/SettingsMenu/settings_highlight_mode.tscn" id="11_vvp8f"]
 [ext_resource type="Texture2D" uid="uid://8lufgt6u5dy0" path="res://Arts/Gfx/Icons/ishido-settings-sounds-disabled-icon.png" id="11_wnhtc"]
+[ext_resource type="Texture2D" uid="uid://8q50u4cijlal" path="res://Arts/Gfx/Icons/France.png" id="12_1orse"]
+[ext_resource type="Texture2D" uid="uid://h3xwxrpi206n" path="res://Arts/Gfx/Icons/uk.png" id="13_s1u1m"]
+[ext_resource type="Texture2D" uid="uid://vtmoayrlgk4u" path="res://Arts/Gfx/Icons/China.png" id="14_bwbhc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncd48"]
 bg_color = Color(0.666667, 0.533333, 0.329412, 0.313726)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_tsklp"]
+resource_local_to_scene = false
+resource_name = "Languages"
 
 [node name="Control" type="Control"]
 layout_direction = 1
@@ -48,7 +55,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-texture = ExtResource("3_tdvwc")
+texture = ExtResource("3_35yh1")
 
 [node name="DummySpacer" type="ColorRect" parent="ButtonsGroup"]
 custom_minimum_size = Vector2(0, 60)
@@ -140,48 +147,51 @@ layout_mode = 2
 color = Color(0.2, 0.2, 0.2, 0.0392157)
 
 [node name="Hints-Language Row" type="HBoxContainer" parent="ButtonsGroup"]
-visible = false
 layout_mode = 2
-size_flags_horizontal = 0
+theme_override_constants/separation = 8
+alignment = 1
 
-[node name="Hints Icon" type="TextureRect" parent="ButtonsGroup/Hints-Language Row"]
-layout_mode = 2
-texture = ExtResource("6_eubcd")
-expand_mode = 3
-
-[node name="Hints Type" type="MenuButton" parent="ButtonsGroup/Hints-Language Row"]
-layout_mode = 2
-text = "Hint"
-item_count = 4
-popup/item_0/text = "None"
-popup/item_0/id = 0
-popup/item_1/text = "Random"
-popup/item_1/id = 1
-popup/item_2/text = "First available"
-popup/item_2/id = 2
-popup/item_3/text = "All available"
-popup/item_3/id = 3
-
-[node name="Hint-None" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
-layout_mode = 2
-
-[node name="Hint-First" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
-layout_mode = 2
-
-[node name="Hint-All" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
-layout_mode = 2
-
-[node name="Hint-Random" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+[node name="HighlightMode" parent="ButtonsGroup/Hints-Language Row" instance=ExtResource("11_vvp8f")]
 layout_mode = 2
 
 [node name="Separator CR" type="ColorRect" parent="ButtonsGroup/Hints-Language Row"]
-custom_minimum_size = Vector2(128, 40)
+custom_minimum_size = Vector2(128, 30)
 layout_mode = 2
 color = Color(1, 1, 1, 0)
 
-[node name="LanguageDefault" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+[node name="Language-0" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+button_group = SubResource("ButtonGroup_tsklp")
+texture_normal = ExtResource("12_1orse")
+ignore_texture_size = true
 stretch_mode = 5
+
+[node name="Language-1" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_tsklp")
+texture_normal = ExtResource("13_s1u1m")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Language-2" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_tsklp")
+texture_normal = ExtResource("14_bwbhc")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="DummySpacerEnd" type="ColorRect" parent="ButtonsGroup/Hints-Language Row"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+color = Color(0.2, 0.2, 0.2, 0.0392157)
 
 [node name="DummySpacer2" type="ColorRect" parent="ButtonsGroup"]
 custom_minimum_size = Vector2(0, 60)
@@ -209,5 +219,9 @@ script = ExtResource("9_o5jsf")
 [connection signal="gui_input" from="ButtonsGroup/Sound Row/settings_player2_name" to="." method="_on_settings_player_2_name_gui_input"]
 [connection signal="mouse_exited" from="ButtonsGroup/Sound Row/settings_player2_name" to="." method="_on_settings_player_2_name_mouse_exited"]
 [connection signal="settings_updated" from="ButtonsGroup/Sound Row/settings_player2_name" to="." method="_on_settings_player_2_name_settings_updated"]
+[connection signal="settings_updated" from="ButtonsGroup/Hints-Language Row/HighlightMode" to="." method="_on_highlight_mode_settings_updated"]
+[connection signal="pressed" from="ButtonsGroup/Hints-Language Row/Language-0" to="." method="_on_language_0_pressed"]
+[connection signal="pressed" from="ButtonsGroup/Hints-Language Row/Language-1" to="." method="_on_language_1_pressed"]
+[connection signal="pressed" from="ButtonsGroup/Hints-Language Row/Language-2" to="." method="_on_language_2_pressed"]
 [connection signal="settings_save_requested" from="ButtonsGroup/Bottom Buttons Row/AcceptItem" to="." method="_on_accept_item_settings_save_requested"]
 [connection signal="settings_revert_requested" from="ButtonsGroup/Bottom Buttons Row/BackItem" to="." method="_on_back_item_settings_revert_requested"]
