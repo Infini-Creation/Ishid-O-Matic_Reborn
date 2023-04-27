@@ -14,13 +14,15 @@ subpixel_positioning = 0
 subpixel_positioning = 0
 
 [node name="Player1_subPanel" type="Control"]
+custom_minimum_size = Vector2(212, 128)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 212.0
-offset_bottom = 110.0
+offset_bottom = 128.0
 script = ExtResource("1_lpr6n")
 
 [node name="Background" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(212, 128)
 layout_mode = 0
 offset_right = 212.0
 offset_bottom = 128.0
@@ -56,6 +58,8 @@ theme_override_fonts/font = SubResource("SystemFont_kv4sg")
 theme_override_font_sizes/font_size = 24
 text = "-----"
 horizontal_alignment = 1
+max_lines_visible = 1
+visible_characters = 5
 visible_characters_behavior = 1
 
 [node name="FourWays Icon" type="Sprite2D" parent="."]
@@ -77,3 +81,5 @@ theme_override_fonts/font = SubResource("SystemFont_ap5rn")
 theme_override_font_sizes/font_size = 24
 text = "--"
 horizontal_alignment = 1
+max_lines_visible = 1
+visible_characters = 2
