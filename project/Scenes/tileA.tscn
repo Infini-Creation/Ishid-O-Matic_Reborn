@@ -8,7 +8,7 @@ shape = "A"
 
 [node name="tile symbol" parent="." index="0"]
 texture = ExtResource("2_ye6k0")
-offset = Vector2(0, 0)
 
 [node name="tile border" parent="." index="1"]
 centered = false
+offset = Vector2(-32, -32)

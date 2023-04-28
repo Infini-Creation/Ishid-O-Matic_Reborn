@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bhclif3shmdvs"]
 
 [ext_resource type="PackedScene" uid="uid://c2qs2uqdbi5um" path="res://Scenes/tile2.tscn" id="1_xbax3"]
 [ext_resource type="Texture2D" uid="uid://0ovu1xgw6r52" path="res://Arts/Gfx/Tiles/dummy set/tile-D1.png" id="2_2s4k4"]
@@ -8,7 +8,7 @@ shape = "D"
 
 [node name="tile symbol" parent="." index="0"]
 texture = ExtResource("2_2s4k4")
-offset = Vector2(0, 0)
 
 [node name="tile border" parent="." index="1"]
 centered = false
+offset = Vector2(-32, -32)
