@@ -69,3 +69,7 @@ func _on_button_4_pressed():
 
 func _on_deck_display_deck_empty():
 	$MarginContainer/HBoxContainer/VBoxContainer/Button2.disabled = true
+
+
+func _on_button_5_pressed():
+	DeckDisplay.update_available_moves_counter(randi_range(0,8))

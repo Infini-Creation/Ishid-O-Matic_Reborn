@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://deac0ul1h72g8"]
+[gd_scene load_steps=13 format=3 uid="uid://deac0ul1h72g8"]
 
 [ext_resource type="Script" path="res://Scripts/deck_display.gd" id="1_2v1u3"]
 [ext_resource type="Script" path="res://Scripts/DeckDisplay_NextTileDisplay.gd" id="2_jnur7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/DeckDisplay_NextTileDisplayC.gd" id="6_l6e24"]
 [ext_resource type="Texture2D" uid="uid://mgm1jfttmsj8" path="res://Arts/Gfx/Panels/MiniDeck-Display-Background.png" id="6_y17tg"]
 [ext_resource type="Texture2D" uid="uid://c400jrfnwotpr" path="res://Arts/Gfx/Panels/Copyright-Display-Background.png" id="8_e5rxw"]
+[ext_resource type="Script" path="res://Scripts/DeckDisplay-AvailMovesCounter.gd" id="9_en813"]
 
 [sub_resource type="SystemFont" id="SystemFont_b48kx"]
 subpixel_positioning = 0
@@ -66,13 +67,13 @@ layout_mode = 2
 size_flags_vertical = 6
 texture = ExtResource("6_y17tg")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/AvailDeckTiles_Background"]
+[node name="Label-TID" type="Label" parent="MarginContainer/VBoxContainer/AvailDeckTiles_Background"]
 layout_mode = 2
 offset_top = 16.0
 offset_right = 232.0
 offset_bottom = 64.0
 theme_override_colors/font_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
-theme_override_colors/font_outline_color = Color(0.968627, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.690196, 0.364706, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = SubResource("SystemFont_b48kx")
 theme_override_font_sizes/font_size = 32
@@ -96,6 +97,37 @@ text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("4_mfjrp")
+
+[node name="Label-AM" type="Label" parent="MarginContainer/VBoxContainer/AvailDeckTiles_Background"]
+layout_mode = 2
+offset_top = 110.0
+offset_right = 232.0
+offset_bottom = 158.0
+theme_override_colors/font_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+theme_override_colors/font_outline_color = Color(0.137255, 0.690196, 0.364706, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = SubResource("SystemFont_b48kx")
+theme_override_font_sizes/font_size = 24
+text = "Available moves:"
+horizontal_alignment = 1
+
+[node name="AvailMovesCounter" type="Label" parent="MarginContainer/VBoxContainer/AvailDeckTiles_Background"]
+layout_mode = 2
+offset_top = 140.0
+offset_right = 232.0
+offset_bottom = 177.0
+theme_override_colors/font_color = Color(0.533333, 0.686275, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.47451, 0.384314, 0.0666667, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = SubResource("SystemFont_rwndi")
+theme_override_font_sizes/font_size = 24
+text = "--"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_en813")
 
 [node name="Copyright_Background" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

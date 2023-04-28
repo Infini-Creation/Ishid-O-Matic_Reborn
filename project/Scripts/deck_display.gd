@@ -59,7 +59,7 @@ func preview_next_tile() -> Node2D:
 		tile = Global.avail_tile_shapes[deck[0].shape].instantiate()
 		tile.color = deck[0].color
 		tile.get_node("tile symbol").modulate = Global.avail_tile_colors[deck[0].color]
-
+		tile.position += Vector2(32,32)
 	return tile
 
 
@@ -67,6 +67,7 @@ func pick_next_tile() -> Node2D:
 	previewNextTileDisplay.add_child(preview_next_tile())
 	
 	var tile = deck.pop_front()
+	tile.position += Vector2(32,32)
 	Global.debug("PiNT: (ds="+str(deck.size())+")  Tile=["+str(tile)+"]")
 
 	if (deck.size() > 0):
@@ -83,6 +84,10 @@ func pick_next_tile() -> Node2D:
 
 func get_deck_count() -> int:
 	return deck.size()
+
+
+func update_available_moves_counter(count : int) -> void:
+	$MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailMovesCounter.update_counter(count)
 
 
 func get_unique_tiles_set() -> Array:
