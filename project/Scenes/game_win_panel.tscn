@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqqc553edp67k"]
+
+[ext_resource type="Script" path="res://Scripts/game_win_panel.gd" id="1_ynoy0"]
+[ext_resource type="Texture2D" uid="uid://bhtx7ng8r7s3o" path="res://Arts/Gfx/Panels/GameOverPanel-background.png" id="2_ojc4b"]
+[ext_resource type="Texture2D" uid="uid://crgkocvfytwc8" path="res://Arts/Gfx/Panels/GameOverPanel-background-old.png" id="3_0jnkr"]
+
+[sub_resource type="Shortcut" id="Shortcut_mf6hy"]
+
+[sub_resource type="SystemFont" id="SystemFont_4np4h"]
+subpixel_positioning = 0
+
+[node name="GameWinPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+script = ExtResource("1_ynoy0")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+
+[node name="TextureButton" type="TextureButton" parent="CenterContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_mf6hy")
+shortcut_in_tooltip = false
+texture_normal = ExtResource("2_ojc4b")
+
+[node name="Label" type="Label" parent="CenterContainer/TextureButton"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_4np4h")
+theme_override_font_sizes/font_size = 28
+text = "You WIN !
+CONGRATULATIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/TextureButton"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = -0.45625
+anchor_right = 0.5
+anchor_bottom = 1.45625
+offset_left = -271.0
+offset_top = 89.0
+offset_right = 271.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "[center][wave]You WIN ![/wave]
+[rainbow]CONGRATULATIONS[/rainbow][/center]"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_0jnkr")
+stretch_mode = 5
+
+[connection signal="pressed" from="CenterContainer/TextureButton" to="." method="_on_texture_button_pressed"]
