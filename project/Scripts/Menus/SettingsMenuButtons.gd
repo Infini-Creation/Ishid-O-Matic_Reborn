@@ -57,7 +57,10 @@ func _on_accept_item_settings_save_requested():
 	Global.settings["Players"]["Two"] = player2_name
 	Global.settings["hints"] = highlight_mode
 	Global.settings["language"] = language
-	Global.save_config()
+	if Global.save_config() == false: ##true:
+		$ButtonsGroup/DummySpacer2/SettingsSavedOKLabel.show()
+	else:
+		$ButtonsGroup/DummySpacer2/SettingsSavedKOLabel.show()
 	
 	button_clicked.emit(Global.ButtonIDs.BUTTON_SETTINGS_SAVE)
 
@@ -89,7 +92,6 @@ func _on_settings_player_2_name_mouse_exited():
 	$"ButtonsGroup/Sound Row/PlayerHint2".hide()
 	$"ButtonsGroup/Sound Row/DummySpacerTwo".show()
 
-
 func _on_highlight_mode_settings_updated(mode):
 	highlight_mode = mode
 	
@@ -101,7 +103,6 @@ func _on_audio_volume_settings_updated(audio_type, new_audio_volume, new_audio_e
 	else:
 		sound_volume = new_audio_volume
 		sound_enabled = new_audio_enabled
-
 
 func _on_language_0_pressed():
 	Global.debug("lang0 pressed-" +str($"ButtonsGroup/Hints-Language Row/Language-0".button_group))

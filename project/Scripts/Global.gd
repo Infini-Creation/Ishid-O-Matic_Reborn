@@ -106,7 +106,7 @@ const sound_effects = {
 	"loss": preload("res://audio/effects/DroneAlert3.mp3"),
 	"lossA": preload("res://audio/effects/DroneAlert4.mp3"),
 	"lossB": preload("res://audio/effects/DroneAlert5.mp3"),
-	#"win":
+	#"win": preload("res://audio/effects/")
 }
 
 enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }
@@ -119,9 +119,10 @@ var tile_shapes : int = 6
 
 var previous_scene : String
 
-func save_config():
+func save_config() -> bool:
 	var config = ConfigFile.new()
-	
+	var ok : bool = true
+
 	for item in settings:
 		Global.debug("sav item=["+item+"]")
 		if settings[item] is Dictionary:
@@ -135,6 +136,10 @@ func save_config():
 	var error = config.save(SETTINGS_FILE_PATH)
 	if error != OK:
 		Global.debug("sav error=["+error+"]") #TODO: deal with eror
+			#or log to file
+		ok = false
+
+	return ok
 
 
 func load_config():
