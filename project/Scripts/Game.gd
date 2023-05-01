@@ -426,32 +426,22 @@ func highlight_cell(cells : Array) -> void:
 
 
 func play_fourWays_effects(gridpos : Vector2):
-	Global.debug("4W effect on: "+str(gridpos))
+	#Global.debug("4W effect on: "+str(gridpos))
 
-	var tileSprite = game_board[gridpos.x][gridpos.y]
-
-	#position, rotation (-45, +45 or full circle), scale (0.75 then 1.25 eventually)
-	#for x/y and also x-1,y  x+1,y   x,y-1   x,y+1 tiles
-	
 	var tilesAnim = self.create_tween().set_parallel(true) #= no anim at all
 	tilesAnim.set_loops(2)
-	#var tilesAnimTwo = self.create_tween()
-	#tilesAnimTwo.set_loops(2)
-	
+
 	for neighbor in [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]:
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(0.75,0.75), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "rotation", PI, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 	tilesAnim.chain().tween_interval(0.25)
+
 	for neighbor in [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]:
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(1,1), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "rotation", 0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	#all parallel => no anim
-	# 2 first par => all tiles animated then one after another
-	# => split anim in two, play one after another
-	# or use chain !
+
 	tilesAnim.play()
-	##tilesAnimTwo.play()
-	# change size & rotation (maybe 45° left then 45° right or full circle)
 
 # ~game_end signal => call this to do some work and ~display game over screen => fill name => highscore
 func game_over(status : int):
