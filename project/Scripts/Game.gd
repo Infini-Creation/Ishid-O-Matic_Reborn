@@ -130,6 +130,7 @@ func _process(_delta):
 		if avail_move == -1:
 			avail_move = check_available_move(highlight_mode)
 			Global.debug("_process: AM="+str(avail_move))
+			DeckDisplay.update_available_moves_counter(avail_move)
 		
 		if (avail_move == 0):
 			Global.debug("_process: no more move available, GAME OVER")
@@ -141,7 +142,7 @@ func _process(_delta):
 				Global.debug("position ok, proceed nt="+str(next_tile))
 				
 				var potential_tile_score = check_adjacent_tiles(next_tile, mpos)
-				if potential_tile_score > 0:
+				if potential_tile_score > 0: ## true: ##tmp test 
 					add_tile(mpos, next_tile)
 					tile_put_on_the_board.emit()
 					if potential_tile_score == 4 or fakeFourWays == true:
@@ -404,14 +405,22 @@ func highlight_cell(cells : Array) -> void:
 	# draw lines around cell then animate with colors cycle (tweens ?)
 	var coordinates_array = []
 	for cell in cells:
-		var Apoint = grid_to_pixel(cell.x, cell.y)
+#		var Apoint = grid_to_pixel(cell.x, cell.y) - Vector2(TileOffset, TileOffset)
+#		var Bpoint = Vector2(Apoint.x + 64 - TileOffset, Apoint.y - TileOffset)
+#		var Cpoint = Vector2(Apoint.x + 64 - TileOffset, Apoint.y + 64 - TileOffset)
+#		var Dpoint = Vector2(Apoint.x - TileOffset, Apoint.y + 64 - TileOffset)
+#		var Epoint = Vector2(Apoint.x - TileOffset, Apoint.y - TileOffset)
+		
+		var Apoint = grid_to_pixel(cell.x, cell.y) - Vector2(TileOffset, TileOffset)
 		var Bpoint = Vector2(Apoint.x + 64, Apoint.y)
 		var Cpoint = Vector2(Apoint.x + 64, Apoint.y + 64)
 		var Dpoint = Vector2(Apoint.x, Apoint.y + 64)
 		var Epoint = Vector2(Apoint.x, Apoint.y)
+		
 		coordinates_array.append([Apoint, Bpoint, Cpoint, Dpoint, Epoint])
+		#add offset: nothing displayed
 	#var Color ?
-	#anim/cycle
+	#anim/cycle => tween
 	
 	highlight_board_cell.emit(coordinates_array)
 
@@ -424,17 +433,24 @@ func play_fourWays_effects(gridpos : Vector2):
 	#position, rotation (-45, +45 or full circle), scale (0.75 then 1.25 eventually)
 	#for x/y and also x-1,y  x+1,y   x,y-1   x,y+1 tiles
 	
-	var tilesAnim = self.create_tween()
+	var tilesAnim = self.create_tween().set_parallel(true) #= no anim at all
 	tilesAnim.set_loops(2)
+	#var tilesAnimTwo = self.create_tween()
+	#tilesAnimTwo.set_loops(2)
 	
 	for neighbor in [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]:
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(0.75,0.75), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "rotation", PI, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tilesAnim.chain().tween_interval(0.25)
 	for neighbor in [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]:
-		tilesAnim.tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(1,1), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-		tilesAnim.tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "rotation", 0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-
+		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(1,1), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "rotation", 0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	#all parallel => no anim
+	# 2 first par => all tiles animated then one after another
+	# => split anim in two, play one after another
+	# or use chain !
 	tilesAnim.play()
+	##tilesAnimTwo.play()
 	# change size & rotation (maybe 45° left then 45° right or full circle)
 
 # ~game_end signal => call this to do some work and ~display game over screen => fill name => highscore
