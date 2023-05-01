@@ -22,8 +22,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 4
+size_flags_vertical = 4
 auto_translate = false
 localize_numeral_system = false
 mouse_filter = 1
@@ -31,7 +31,7 @@ theme = ExtResource("6_uthlc")
 script = ExtResource("1_w46dk")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-visible = false
+clip_contents = true
 custom_minimum_size = Vector2(1024, 768)
 layout_mode = 1
 anchors_preset = 15
@@ -44,16 +44,14 @@ localize_numeral_system = false
 theme = ExtResource("6_uthlc")
 texture = ExtResource("3_b1wht")
 region_rect = Rect2(1024, 768, 0, 0)
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(1024, 768)
-layout_direction = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 778.0
 theme_override_constants/separation = 0
 alignment = 1
 
@@ -68,24 +66,23 @@ localize_numeral_system = false
 custom_minimum_size = Vector2(1024, 162)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(1024, 232)
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 128
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="MainMenuContainer" type="GridContainer" parent="VBoxContainer/MarginContainer"]
+[node name="MainMenuContainer" type="GridContainer" parent="VBoxContainer/CenterContainer2"]
 layout_mode = 2
-theme_override_constants/h_separation = 446
-theme_override_constants/v_separation = 54
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 128
+theme_override_constants/v_separation = 40
 columns = 2
 
-[node name="OnePlayerItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("2_2tcqm")]
+[node name="OnePlayerItem" parent="VBoxContainer/CenterContainer2/MainMenuContainer" instance=ExtResource("2_2tcqm")]
 layout_mode = 2
 
-[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem"]
+[node name="New 1P Game tb" type="TextureButton" parent="VBoxContainer/CenterContainer2/MainMenuContainer/OnePlayerItem"]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -94,39 +91,58 @@ grow_vertical = 2
 action_mode = 0
 ignore_texture_size = true
 
-[node name="SettingsItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("3_md58w")]
+[node name="SettingsItem" parent="VBoxContainer/CenterContainer2/MainMenuContainer" instance=ExtResource("3_md58w")]
 layout_mode = 2
 
-[node name="TwoPlayersItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("3_brh50")]
+[node name="TwoPlayersItem" parent="VBoxContainer/CenterContainer2/MainMenuContainer" instance=ExtResource("3_brh50")]
 layout_mode = 2
 
-[node name="HighScoresItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("5_yx7jl")]
+[node name="HighScoresItem" parent="VBoxContainer/CenterContainer2/MainMenuContainer" instance=ExtResource("5_yx7jl")]
 layout_mode = 2
 theme = ExtResource("6_uthlc")
 
-[node name="TournamentItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("4_gcfoq")]
+[node name="TournamentItem" parent="VBoxContainer/CenterContainer2/MainMenuContainer" instance=ExtResource("4_gcfoq")]
 visible = false
 layout_mode = 2
 
-[node name="HelpItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("8_q5rkr")]
+[node name="HelpItem" parent="VBoxContainer/CenterContainer2/MainMenuContainer" instance=ExtResource("8_q5rkr")]
 layout_mode = 2
 theme = ExtResource("6_uthlc")
 
-[node name="AboutItem" parent="VBoxContainer/MarginContainer/MainMenuContainer" instance=ExtResource("9_6ukg7")]
+[node name="AboutItem" parent="VBoxContainer/CenterContainer2/MainMenuContainer" instance=ExtResource("9_6ukg7")]
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(1024, 128)
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(1024, 232)
 layout_mode = 2
-theme_override_constants/margin_right = 316
-theme_override_constants/margin_bottom = 44
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
-[node name="QuitItem" parent="VBoxContainer/MarginContainer2" instance=ExtResource("10_uyp60")]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="QuitItem" parent="VBoxContainer/CenterContainer" instance=ExtResource("10_uyp60")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 auto_translate = false
 localize_numeral_system = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(1024, 128)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 44
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1024, 100)
@@ -146,11 +162,11 @@ layout_mode = 2
 anchors_preset = 0
 mouse_force_pass_scroll_events = false
 
-[connection signal="oneplayer_game_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/OnePlayerItem" to="." method="_on_one_player_item_oneplayer_game_requested"]
-[connection signal="settings_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/SettingsItem" to="." method="_on_settings_item_settings_requested"]
-[connection signal="twoplayers_game_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/TwoPlayersItem" to="." method="_on_two_players_item_twoplayers_game_requested"]
-[connection signal="highscores_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/HighScoresItem" to="." method="_on_high_scores_item_highscores_requested"]
-[connection signal="help_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/HelpItem" to="." method="_on_help_item_help_requested"]
-[connection signal="about_requested" from="VBoxContainer/MarginContainer/MainMenuContainer/AboutItem" to="." method="_on_about_item_about_requested"]
-[connection signal="quit_requested" from="VBoxContainer/MarginContainer2/QuitItem" to="." method="_on_quit_item_quit_requested"]
+[connection signal="oneplayer_game_requested" from="VBoxContainer/CenterContainer2/MainMenuContainer/OnePlayerItem" to="." method="_on_one_player_item_oneplayer_game_requested"]
+[connection signal="settings_requested" from="VBoxContainer/CenterContainer2/MainMenuContainer/SettingsItem" to="." method="_on_settings_item_settings_requested"]
+[connection signal="twoplayers_game_requested" from="VBoxContainer/CenterContainer2/MainMenuContainer/TwoPlayersItem" to="." method="_on_two_players_item_twoplayers_game_requested"]
+[connection signal="highscores_requested" from="VBoxContainer/CenterContainer2/MainMenuContainer/HighScoresItem" to="." method="_on_high_scores_item_highscores_requested"]
+[connection signal="help_requested" from="VBoxContainer/CenterContainer2/MainMenuContainer/HelpItem" to="." method="_on_help_item_help_requested"]
+[connection signal="about_requested" from="VBoxContainer/CenterContainer2/MainMenuContainer/AboutItem" to="." method="_on_about_item_about_requested"]
+[connection signal="quit_requested" from="VBoxContainer/CenterContainer/QuitItem" to="." method="_on_quit_item_quit_requested"]
 [connection signal="help_panel_closed" from="HelpPanel" to="." method="_on_help_panel_help_panel_closed"]
