@@ -93,6 +93,10 @@ func _ready():
 	init_board()
 	DeckDisplay.deck_is_ready() #not even needed! (process pnt)
 
+	highlight_mode = Global.settings["hints"]
+	if highlight_mode < 0 or highlight_mode > Global.HIGHLIGHT_MODE.size():
+		highlight_mode = 0
+
 
 func _input(event):
 	if event.is_action_pressed("Quit"):
