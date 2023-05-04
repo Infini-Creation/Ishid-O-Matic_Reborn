@@ -193,29 +193,30 @@ func initialize_high_scores():
 
 
 func load_high_scores():
-	var highscores = FileAccess.open(HIGHSCORES_FILE_PATH, FileAccess.READ)
-	var error = FileAccess.get_open_error()
-	if error != OK:
-		Global.debug("load_high_scores: error=["+str(error)+"]") #TODO: deal with eror
-		#deal with filenotfound => init hs
-	else:
-		var gameType : String
-		
-		for gtidx in range(0,3):
-			gameType = highscores.get_pascal_string()
-			highScores[gameType] = []
-			highScores[gameType].resize(10)
+	if highScores[GAMETYPE_ONEPLAYER].size() == 0:
+		var highscores = FileAccess.open(HIGHSCORES_FILE_PATH, FileAccess.READ)
+		var error = FileAccess.get_open_error()
+		if error != OK:
+			Global.debug("load_high_scores: error=["+str(error)+"]") #TODO: deal with eror
+			#deal with filenotfound => init hs
+		else:
+			var gameType : String
 			
-			for idx in range(0, 10):
-				highScores[gameType][idx] = []
-				highScores[gameType][idx].resize(4)
+			for gtidx in range(0,3):
+				gameType = highscores.get_pascal_string()
+				highScores[gameType] = []
+				highScores[gameType].resize(10)
 				
-				highScores[gameType][idx][HIGHSCORES_NAME_IDX] = highscores.get_pascal_string()
-				highScores[gameType][idx][HIGHSCORES_SCORE_IDX] = highscores.get_16()
-				highScores[gameType][idx][HIGHSCORES_FOURWAYS_IDX] = highscores.get_8()
-				highScores[gameType][idx][HIGHSCORES_TILESREMAINING_IDX] = highscores.get_8()
-				#highscores.get_error()
-	highscores.close()
+				for idx in range(0, 10):
+					highScores[gameType][idx] = []
+					highScores[gameType][idx].resize(4)
+					
+					highScores[gameType][idx][HIGHSCORES_NAME_IDX] = highscores.get_pascal_string()
+					highScores[gameType][idx][HIGHSCORES_SCORE_IDX] = highscores.get_16()
+					highScores[gameType][idx][HIGHSCORES_FOURWAYS_IDX] = highscores.get_8()
+					highScores[gameType][idx][HIGHSCORES_TILESREMAINING_IDX] = highscores.get_8()
+					#highscores.get_error()
+		highscores.close()
 
 
 func save_high_scores():
