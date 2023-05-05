@@ -27,6 +27,7 @@ offset_bottom = 768.0
 
 [node name="TextureButton" type="TextureButton" parent="CenterContainer"]
 layout_mode = 2
+action_mode = 0
 shortcut = SubResource("Shortcut_mf6hy")
 shortcut_in_tooltip = false
 texture_normal = ExtResource("2_ojc4b")
@@ -68,6 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 auto_translate = false
 localize_numeral_system = false
+mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
