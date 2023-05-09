@@ -62,7 +62,7 @@ anchor_bottom = 0.864
 offset_left = 2.0
 offset_top = 40.0
 offset_right = -1.0
-offset_bottom = -0.112
+offset_bottom = 54.888
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -79,7 +79,7 @@ text = "[center]About
 Game made with Godot 4 by Infini-Creation
 
 Based on the game [i]Ishid-O-Matic[/i] by [b]Robert Brandner[/b] on [i][color=lightblue]Amiga[/color][/i]
-(still available on [url=https://docs.godotengine.org/en/latest/tutorials/gui/bbcode_in_richtextlabel.html]Assassin Game #31 .[/url])
+(still available on [url=https://www.amigapd.com/uploads/5/5/0/1/5501110/asi031.dms]Assassin Game #31 .[/url])
 Itself base on [i]Ishido - The way of stones[/i] designed by [b]Michael Feinberg[/b] and
 released on various computers in 1989
 
@@ -89,7 +89,10 @@ Thanks:
 	gfx by [shake]XXX[/shake]
 	authors & contributors of [i]Godot Engine[/i]
 	[b]GDQuest[/b] for their great youtube videos & tutorials
-[/center]"
+[/center]
+
+
+[center](click near the border to close the panel)[/center]"
 shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
 
