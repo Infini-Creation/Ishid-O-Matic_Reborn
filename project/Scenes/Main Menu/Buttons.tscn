@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://beh4qhgc0wdyr"]
+[gd_scene load_steps=13 format=3 uid="uid://beh4qhgc0wdyr"]
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_ciodk"]
 [ext_resource type="PackedScene" uid="uid://ifrs2wp5p88" path="res://Scenes/Main Menu/OnePlayerItem.tscn" id="1_kvt8s"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dr7t8qonp8t07" path="res://Scenes/Main Menu/Tournament.tscn" id="5_1tqno"]
 [ext_resource type="PackedScene" uid="uid://xm41ksbromya" path="res://Scenes/Main Menu/Help.tscn" id="5_mqfjs"]
 [ext_resource type="PackedScene" uid="uid://ciqalhvr0fm8j" path="res://Scenes/Main Menu/About.tscn" id="6_cpitu"]
+[ext_resource type="PackedScene" uid="uid://d0sj64j2yqt7s" path="res://Scenes/Main Menu/Enhanced.tscn" id="6_lsfmp"]
 [ext_resource type="PackedScene" uid="uid://bfuadn5q4xyxq" path="res://Scenes/Main Menu/Spacer.tscn" id="8_go3ci"]
 [ext_resource type="PackedScene" uid="uid://rb4dmx2qlncg" path="res://Scenes/Main Menu/Quit.tscn" id="9_xwwb7"]
 
@@ -40,51 +41,57 @@ theme_override_constants/separation = 128
 [node name="OnePlayerItem" parent="ButtonsGroup/ButtonsRow1" instance=ExtResource("1_kvt8s")]
 layout_mode = 2
 
-[node name="SettingsItem" parent="ButtonsGroup/ButtonsRow1" instance=ExtResource("2_oxaio")]
+[node name="TwoPlayersItem" parent="ButtonsGroup/ButtonsRow1" instance=ExtResource("3_ecrxp")]
 layout_mode = 2
 
 [node name="ButtonsRow2" type="HBoxContainer" parent="ButtonsGroup"]
 layout_mode = 2
 theme_override_constants/separation = 128
 
-[node name="TwoPlayersItem" parent="ButtonsGroup/ButtonsRow2" instance=ExtResource("3_ecrxp")]
+[node name="TournamentItem" parent="ButtonsGroup/ButtonsRow2" instance=ExtResource("5_1tqno")]
 layout_mode = 2
 
-[node name="HighScoresItem" parent="ButtonsGroup/ButtonsRow2" instance=ExtResource("4_64so4")]
+[node name="EnhancedItem" parent="ButtonsGroup/ButtonsRow2" instance=ExtResource("6_lsfmp")]
 layout_mode = 2
 
 [node name="ButtonsRow3" type="HBoxContainer" parent="ButtonsGroup"]
 layout_mode = 2
 theme_override_constants/separation = 128
 
-[node name="HelpItem" parent="ButtonsGroup/ButtonsRow3" instance=ExtResource("5_mqfjs")]
+[node name="SettingsItem" parent="ButtonsGroup/ButtonsRow3" instance=ExtResource("2_oxaio")]
 layout_mode = 2
 
-[node name="TournamentItem" parent="ButtonsGroup/ButtonsRow3" instance=ExtResource("5_1tqno")]
-visible = false
-layout_mode = 2
-
-[node name="AboutItem" parent="ButtonsGroup/ButtonsRow3" instance=ExtResource("6_cpitu")]
+[node name="HighScoresItem" parent="ButtonsGroup/ButtonsRow3" instance=ExtResource("4_64so4")]
 layout_mode = 2
 
 [node name="ButtonsRow4" type="HBoxContainer" parent="ButtonsGroup"]
+layout_mode = 2
+theme_override_constants/separation = 128
+
+[node name="HelpItem" parent="ButtonsGroup/ButtonsRow4" instance=ExtResource("5_mqfjs")]
+layout_mode = 2
+
+[node name="AboutItem" parent="ButtonsGroup/ButtonsRow4" instance=ExtResource("6_cpitu")]
+layout_mode = 2
+
+[node name="ButtonsRow5" type="HBoxContainer" parent="ButtonsGroup"]
 custom_minimum_size = Vector2(326, 0)
 layout_mode = 2
 theme_override_constants/separation = 64
 
-[node name="SpacerItem" parent="ButtonsGroup/ButtonsRow4" instance=ExtResource("8_go3ci")]
+[node name="SpacerItem" parent="ButtonsGroup/ButtonsRow5" instance=ExtResource("8_go3ci")]
 layout_mode = 2
 
-[node name="QuitItem" parent="ButtonsGroup/ButtonsRow4" instance=ExtResource("9_xwwb7")]
+[node name="QuitItem" parent="ButtonsGroup/ButtonsRow5" instance=ExtResource("9_xwwb7")]
 layout_mode = 2
 
-[node name="SpacerItem2" parent="ButtonsGroup/ButtonsRow4" instance=ExtResource("8_go3ci")]
+[node name="SpacerItem2" parent="ButtonsGroup/ButtonsRow5" instance=ExtResource("8_go3ci")]
 layout_mode = 2
 
 [connection signal="oneplayer_game_requested" from="ButtonsGroup/ButtonsRow1/OnePlayerItem" to="." method="_on_one_player_item_oneplayer_game_requested"]
-[connection signal="settings_requested" from="ButtonsGroup/ButtonsRow1/SettingsItem" to="." method="_on_settings_item_settings_requested"]
-[connection signal="twoplayers_game_requested" from="ButtonsGroup/ButtonsRow2/TwoPlayersItem" to="." method="_on_two_players_item_twoplayers_game_requested"]
-[connection signal="highscores_requested" from="ButtonsGroup/ButtonsRow2/HighScoresItem" to="." method="_on_high_scores_item_highscores_requested"]
-[connection signal="help_requested" from="ButtonsGroup/ButtonsRow3/HelpItem" to="." method="_on_help_item_help_requested"]
-[connection signal="about_requested" from="ButtonsGroup/ButtonsRow3/AboutItem" to="." method="_on_about_item_about_requested"]
-[connection signal="quit_requested" from="ButtonsGroup/ButtonsRow4/QuitItem" to="." method="_on_quit_item_quit_requested"]
+[connection signal="twoplayers_game_requested" from="ButtonsGroup/ButtonsRow1/TwoPlayersItem" to="." method="_on_two_players_item_twoplayers_game_requested"]
+[connection signal="settings_requested" from="ButtonsGroup/ButtonsRow3/SettingsItem" to="." method="_on_settings_item_settings_requested"]
+[connection signal="highscores_requested" from="ButtonsGroup/ButtonsRow3/HighScoresItem" to="." method="_on_high_scores_item_highscores_requested"]
+[connection signal="help_requested" from="ButtonsGroup/ButtonsRow4/HelpItem" to="." method="_on_help_item_help_requested"]
+[connection signal="about_requested" from="ButtonsGroup/ButtonsRow4/AboutItem" to="." method="_on_about_item_about_requested"]
+[connection signal="quit_requested" from="ButtonsGroup/ButtonsRow5/QuitItem" to="." method="_on_quit_item_quit_requested"]
