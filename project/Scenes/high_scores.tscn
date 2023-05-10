@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Menus/high_scores_panel.gd" id="1_dtgif"]
 [ext_resource type="Texture2D" uid="uid://dlloxxecitrn3" path="res://Arts/Gfx/Panels/help panel.png" id="2_gkn1x"]
+[ext_resource type="Texture2D" uid="uid://bma6ve7yy3mn6" path="res://Arts/Gfx/Menu/hall-of-fame.png" id="3_lmixh"]
 [ext_resource type="Texture2D" uid="uid://d256gllpwthid" path="res://Arts/Gfx/Menu/ishido-help-previous-arrow.png" id="3_ol3yw"]
-[ext_resource type="Texture2D" uid="uid://d3j5u7pyd82pe" path="res://Arts/Gfx/Menu/highscores-menu-tittle.png" id="3_oy80h"]
 [ext_resource type="Texture2D" uid="uid://csfojlg23jsah" path="res://Arts/Gfx/Menu/ishido-help-next-arrow.png" id="5_yyf8v"]
 
 [sub_resource type="Shortcut" id="Shortcut_mf6hy"]
@@ -48,7 +48,7 @@ alignment = 1
 [node name="HallOfFame-Logo" type="TextureRect" parent="CenterContainer/VBoxContainer"]
 layout_direction = 1
 layout_mode = 2
-texture = ExtResource("3_oy80h")
+texture = ExtResource("3_lmixh")
 expand_mode = 5
 stretch_mode = 4
 

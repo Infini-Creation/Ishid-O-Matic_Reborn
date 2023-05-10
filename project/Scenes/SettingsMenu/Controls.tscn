@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_plfsj"]
 [ext_resource type="Script" path="res://Scripts/Menus/SettingsMenuButtons.gd" id="2_kgucl"]
-[ext_resource type="Texture2D" uid="uid://pqoowgehv8ee" path="res://Arts/Gfx/Menu/settings.png" id="3_35yh1"]
+[ext_resource type="Texture2D" uid="uid://d0k4fawrq62vx" path="res://Arts/Gfx/Menu/settings.png" id="3_35yh1"]
 [ext_resource type="Script" path="res://Scripts/Menus/Settings-MenuButton.gd" id="4_ajwwx"]
 [ext_resource type="PackedScene" uid="uid://ll6lo1qpru7x" path="res://Scenes/SettingsMenu/settings_audio_volume.tscn" id="4_iy873"]
 [ext_resource type="Texture2D" uid="uid://dmma2bje76kym" path="res://Arts/Gfx/Icons/settings-music-icon.png" id="5_rag66"]
@@ -56,6 +56,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = ExtResource("3_35yh1")
+expand_mode = 1
+stretch_mode = 3
 
 [node name="DummySpacer" type="ColorRect" parent="ButtonsGroup"]
 custom_minimum_size = Vector2(0, 60)
