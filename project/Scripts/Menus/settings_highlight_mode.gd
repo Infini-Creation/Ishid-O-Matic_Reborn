@@ -15,8 +15,6 @@ var highlight_text_mode : Dictionary = {
 signal settings_updated(highlight_mode)
 
 func _ready():
-	Global.debug_enabled = true #tmp
-
 	$HBoxContainer/HSlider.value = highlight_mode
 	
 	VolumeValue.text = "%10s" % highlight_text_mode[highlight_mode]

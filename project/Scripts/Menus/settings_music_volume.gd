@@ -9,11 +9,6 @@ var music_enabled : bool
 signal settings_updated(int, bool)
 
 func _ready():
-	Global.debug_enabled = true #tmp
-	#init from settings, here fake sample data for testing
-	#music_volume = 60
-	#music_enabled = true
-	
 	$HBoxContainer/HSlider.value = music_volume
 	$HBoxContainer/TextureButton.button_pressed = !music_enabled
 	

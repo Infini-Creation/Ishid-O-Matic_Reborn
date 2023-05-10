@@ -4,9 +4,6 @@ extends Node2D
 
 func _init():
 	print("DDT: _init called")
-	print("g.dbe="+str(Global.debug_enabled))
-	Global.debug_enabled = true
-	print("g.dbe="+str(Global.debug_enabled))
 
 
 func _ready():

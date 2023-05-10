@@ -9,10 +9,6 @@ var sound_enabled : bool
 signal settings_updated(int, bool)
 
 func _ready():
-	#init from settings, here fake sample data for testing
-	#sound_volume = 12
-	#sound_enabled = false
-	
 	$HBoxContainer/HSlider.value = sound_volume
 	$HBoxContainer/TextureButton.button_pressed = !sound_enabled
 	

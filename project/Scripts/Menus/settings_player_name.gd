@@ -6,7 +6,6 @@ extends Control
 signal settings_updated(String)
 
 func _ready():
-	Global.debug_enabled = true #tmp
 	$PanelContainer/HBoxContainer/Label.text = labelPlayerIdx
 	$PanelContainer/HBoxContainer/LineEdit.placeholder_text = defaultPlayerName
 

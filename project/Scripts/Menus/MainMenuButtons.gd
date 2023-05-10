@@ -3,7 +3,7 @@ extends Control
 signal button_clicked(buttonID : int)
 
 func _ready():
-	Global.debug_enabled = true #tmp
+	pass
 
 func _on_one_player_item_oneplayer_game_requested():
 	Global.debug("1P game button clicked")

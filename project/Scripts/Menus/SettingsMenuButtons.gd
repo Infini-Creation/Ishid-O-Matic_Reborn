@@ -18,8 +18,6 @@ var language : int
 
 
 func _ready():
-	Global.debug_enabled = true #tmp
-
 	#TODO in main code NOT here
 	Global.load_config()
 	Global.debug("settings="+str(Global.settings))

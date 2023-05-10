@@ -16,7 +16,6 @@ var previous_page : int = 0
 var max_pages : int = 0
 
 func _ready():
-	Global.debug_enabled = true #tmp
 	Global.debug("HelpPanel: _ready call")
 	max_pages = PagesHolder.size() - 1
 
@@ -28,7 +27,7 @@ func update_page(prevPage : int, nextPage : int) -> void:
 # to remove eventually
 func _on_texture_button_pressed():
 	Global.debug("HelpPanel: button pressed, close it")
-	help_panel_closed.emit()
+	help_panel_closed.emit()	#is this useful ?
 	hide()
 	#queue_free()
 

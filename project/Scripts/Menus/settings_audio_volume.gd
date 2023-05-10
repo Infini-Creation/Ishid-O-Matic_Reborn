@@ -14,8 +14,6 @@ var audio_enabled : bool
 signal settings_updated(audio_type, audio_volume, audio_enabled)
 
 func _ready():
-	Global.debug_enabled = true #tmp
-
 	$HBoxContainer/TextureButton.texture_normal = audio_enabled_icon
 	$HBoxContainer/TextureButton.texture_pressed = audio_disabled_icon
 	
