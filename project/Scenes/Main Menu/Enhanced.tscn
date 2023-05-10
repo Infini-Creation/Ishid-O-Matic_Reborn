@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0sj64j2yqt7s"]
+
+[ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="1_5ys8c"]
+
+[sub_resource type="SystemFont" id="SystemFont_v2spc"]
+subpixel_positioning = 0
+
+[node name="EnhancedItem" type="Control"]
+custom_minimum_size = Vector2(188, 40)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 188.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Button"]
+layout_mode = 0
+offset_right = 188.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Button/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_5ys8c")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Button/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.427451, 0.313726, 0.466667, 0.580392)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.580392)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = SubResource("SystemFont_v2spc")
+theme_override_font_sizes/font_size = 24
+text = "Enhanced"
+horizontal_alignment = 1
+vertical_alignment = 1
