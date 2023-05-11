@@ -55,7 +55,7 @@ func _on_accept_item_settings_save_requested():
 	Global.settings["Players"]["Two"] = player2_name
 	Global.settings["hints"] = highlight_mode
 	Global.settings["language"] = language
-	if Global.save_config() == false: ##true:
+	if Global.save_config() == true:
 		$ButtonsGroup/DummySpacer2/SettingsSavedOKLabel.show()
 	else:
 		$ButtonsGroup/DummySpacer2/SettingsSavedKOLabel.show()
