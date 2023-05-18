@@ -14,7 +14,6 @@ var mainMenuSave : Node
 signal launch_game(game_type : String)
 
 func _ready():
-	#Global.debug_enabled = true #tmp
 	Global.debug("MainMenu: generate tile stripe")
 	
 	var tile : Node2D = null
@@ -27,6 +26,7 @@ func _ready():
 	tilesStripe.resize(16)
 	tilesDeck.resize(36)
 
+	#later: to update/modify
 	for shape in Global.avail_tile_shapes:
 		for color in Global.avail_tile_colors:
 			tile = Global.avail_tile_shapes[shape].instantiate()
@@ -90,6 +90,8 @@ func _on_button_click_received(buttonID : int):
 			#game.setup(?, Global.GAMETYPE_TOURNAMENT)
 			#pass #TODO
 			#display a special Coming Soon panel for this
+		Global.ButtonIDs.BUTTON_ENHANCED:
+			launch_game.emit(Global.GAMETYPE_ENHANCED)
 		Global.ButtonIDs.BUTTON_ABOUT:
 			$AboutPanel.show()
 		Global.ButtonIDs.BUTTON_HELP:
@@ -121,9 +123,8 @@ func _on_button_click_received(buttonID : int):
 
 		Global.ButtonIDs.BUTTON_SETTINGS_SAVE:
 			Global.debug("call save settings HERE")
-			# add feedback settings save successfully (small popup label)
 			
-			# + update sound volume and on/off status
+			# ==> + update sound volume and on/off status
 			# gather settings (signal ?) or save in settings script directly
 			#  would be better no need to transfert data here, global is global !
 			# as above, go back to main menu ?
