@@ -13,6 +13,7 @@ const HIGHSCORES_TILES_REMAINING_STEP = 4
 const GAMETYPE_ONEPLAYER : String = "OnePlayer"
 const GAMETYPE_TWOPLAYERS : String = "TwoPlayers"
 const GAMETYPE_TOURNAMENT : String = "Tournament"
+const GAMETYPE_ENHANCED : String = "Enhanced"
 
 const HIGHSCORES_NAME_IDX = 0
 const HIGHSCORES_SCORE_IDX = 1
@@ -58,7 +59,8 @@ var settings : Dictionary = {
 var highScores : Dictionary = {
 	"OnePlayer" : [],
 	"TwoPlayers" : [],
-	"Tournament": []
+	"Tournament": [],
+	"Enhanced": []
 }
 
 var dummyNames : Array = [
@@ -109,7 +111,7 @@ const sound_effects = {
 	#"win": preload("res://audio/effects/")
 }
 
-enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }
+enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_ENHANCED, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }
 enum HIGHLIGHT_MODE { HIGHLIGHT_NONE, FIRST_AVAIL_MOVE, ALL_AVAIL_MOVE, RANDOM_MOVE, HIGHER_SCORE_MOVE }
 enum LANGUAGE { ENGLISH, FRENCH, OTHER }
 enum GAME_EXIT_STATUS { GAME_WON, GAME_LOSS, USER_QUIT }
@@ -118,6 +120,8 @@ var tile_colors : int = 6
 var tile_shapes : int = 6
 
 var previous_scene : String
+var configLoaded : bool = false
+
 
 func save_config() -> bool:
 	var config = ConfigFile.new()
@@ -143,10 +147,14 @@ func save_config() -> bool:
 
 
 func load_config():
+	if configLoaded == true:
+		Global.debug("cfg already loaded, skip")
+		return
+
 	var config = ConfigFile.new()
 	var error = config.load(SETTINGS_FILE_PATH)
 	if error != OK:
-		Global.debug("load error=["+error+"]") #TODO: deal with eror
+		Global.debug("load error=["+str(error)+"]") #TODO: deal with eror
 	else:
 	
 		for item in settings:
@@ -162,6 +170,7 @@ func load_config():
 				settings[item] = config.get_value("misc", item, settings[item])
 				Global.debug("cfgloaded ("+item+")=["+str(settings[item])+"]")
 	Global.debug("LoadConf: settings="+str(settings))
+	configLoaded = true
 
 
 func initialize_high_scores():
@@ -196,27 +205,35 @@ func load_high_scores():
 	if highScores[GAMETYPE_ONEPLAYER].size() == 0:
 		var highscores = FileAccess.open(HIGHSCORES_FILE_PATH, FileAccess.READ)
 		var error = FileAccess.get_open_error()
-		if error != OK:
+		if error == ERR_FILE_NOT_FOUND:
+			Global.debug("HS file does not exists, initialize HS")
+			initialize_high_scores()
+			save_high_scores()
+		elif error != OK:
 			Global.debug("load_high_scores: error=["+str(error)+"]") #TODO: deal with eror
 			#deal with filenotfound => init hs
 		else:
 			var gameType : String
-			
-			for gtidx in range(0,3):
+
+			for gtidx in range(0, highScores.size()):
 				gameType = highscores.get_pascal_string()
 				highScores[gameType] = []
 				highScores[gameType].resize(10)
-				
+				Global.debug("lHS gt="+gameType)
+
 				for idx in range(0, 10):
+					Global.debug("gt["+gameType+"] file array idx="+str(idx))
 					highScores[gameType][idx] = []
 					highScores[gameType][idx].resize(4)
+					Global.debug("gt["+gameType+"] array ="+str(highScores[gameType][idx]))
 					
 					highScores[gameType][idx][HIGHSCORES_NAME_IDX] = highscores.get_pascal_string()
 					highScores[gameType][idx][HIGHSCORES_SCORE_IDX] = highscores.get_16()
 					highScores[gameType][idx][HIGHSCORES_FOURWAYS_IDX] = highscores.get_8()
 					highScores[gameType][idx][HIGHSCORES_TILESREMAINING_IDX] = highscores.get_8()
+					Global.debug("gt["+gameType+"] loaded array ="+str(highScores[gameType][idx]))
 					#highscores.get_error()
-		highscores.close()
+			highscores.close()
 
 
 func save_high_scores():
@@ -226,6 +243,7 @@ func save_high_scores():
 		Global.debug("save_high_scores: error=["+error+"]") #TODO: deal with eror
 
 	for gameType in highScores:
+		Global.debug("sHS gt="+gameType)
 		highscores.store_pascal_string(gameType)
 
 		for idx in range(0, 10):
