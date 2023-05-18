@@ -12,8 +12,6 @@ signal some_tiles_removed
 var deck : Array = []
 var next_tile : Node2D = null
 
-# not needed
-var base_tile_scene = preload("res://Scenes/tile2.tscn")
 @onready var previewNextTileDisplay = $MarginContainer/VBoxContainer/NextTileDisplay_Background/NextTileDisplay2
 
 func _ready():
@@ -36,6 +34,7 @@ func init_deck():
 				tile.get_node("tile symbol").modulate = Global.avail_tile_colors[color]
 				tile.color = color
 				deck.append(tile)
+				#for game win test: break loop after deck filled with 12 tiles or so
 			
 	#debug("Decktmp("+str(deck.size())+")=["+str(deck)+"]")
 	deck.shuffle()
@@ -64,14 +63,16 @@ func preview_next_tile() -> Node2D:
 
 
 func pick_next_tile() -> Node2D:
-	previewNextTileDisplay.add_child(preview_next_tile())
+	var tile = preview_next_tile()
+	if tile != null:
+		previewNextTileDisplay.add_child(tile)
 	
-	var tile = deck.pop_front()
-	tile.position += Vector2(32,32)
+	tile = deck.pop_front()
 	Global.debug("PiNT: (ds="+str(deck.size())+")  Tile=["+str(tile)+"]")
 
 	if (deck.size() > 0):
 		Global.debug("TP sig emitted")
+		tile.position += Vector2(32,32)
 		tile_picked.emit(tile) #should be deck[0] ??
 		#tile_picked.emit(deck[0])
 	else:
