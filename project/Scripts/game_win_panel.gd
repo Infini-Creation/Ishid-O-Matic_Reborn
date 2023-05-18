@@ -3,11 +3,11 @@ extends Control
 signal is_closed
 
 #func _ready():
-	#print("GameOverPanel: _ready call")
+	#Global.debug("GameOverPanel: _ready call")
 
-
+#useless/not use
 func _on_game_game_is_over():
-	print("GameWinPanel: game over signal received")
+	Global.debug("GameWinPanel: game over signal received")
 	show()
 
 	# maybe display a game win panel and/or some festive animations
@@ -15,6 +15,6 @@ func _on_game_game_is_over():
 
 
 func _on_texture_button_pressed():
-	print("GameWinPanel: button pressed, go back to main menu")
+	Global.debug("GameWinPanel: button pressed, go back to main menu")
 	#signal back game to exit ?
 	is_closed.emit()

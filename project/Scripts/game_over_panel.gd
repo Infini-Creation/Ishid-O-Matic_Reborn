@@ -6,8 +6,9 @@ func _ready():
 	Global.debug("GameOverPanel: _ready call")
 
 
+#useless/not use
 func _on_game_game_is_over():
-	print("GameOverPanel: game over signal received")
+	Global.debug("GameOverPanel: game over signal received")
 	
 	show()
 	#get_tree().paused = true
@@ -17,7 +18,7 @@ func _on_game_game_is_over():
 
 
 func _on_texture_button_pressed():
-	print("GameOverPanel: button pressed, go back to main menu (not here)")
+	Global.debug("GameOverPanel: button pressed, go back to main menu (not here)")
 	#hide()
 	#signal back game to exit ?
 	is_closed.emit()
