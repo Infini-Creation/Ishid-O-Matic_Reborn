@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://deac0ul1h72g8"]
+[gd_scene load_steps=15 format=3 uid="uid://deac0ul1h72g8"]
 
 [ext_resource type="Script" path="res://Scripts/deck_display.gd" id="1_2v1u3"]
 [ext_resource type="Script" path="res://Scripts/DeckDisplay_NextTileDisplay.gd" id="2_jnur7"]
@@ -16,6 +16,12 @@ subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_rwndi"]
 subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_0yv0r"]
+font_names = PackedStringArray("Estrangelo Edessa")
+
+[sub_resource type="FontVariation" id="FontVariation_rr01s"]
+base_font = SubResource("SystemFont_0yv0r")
 
 [node name="DeckDisplay" type="Node2D"]
 script = ExtResource("1_2v1u3")
@@ -132,6 +138,29 @@ script = ExtResource("9_en813")
 [node name="Copyright_Background" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("8_e5rxw")
+
+[node name="CompanyName" type="Label" parent="MarginContainer/VBoxContainer/Copyright_Background"]
+layout_mode = 0
+offset_right = 232.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.196078, 0.262745, 0.0156863, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = SubResource("FontVariation_rr01s")
+theme_override_font_sizes/font_size = 24
+text = "Infini-Creation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameVersion" type="Label" parent="MarginContainer/VBoxContainer/Copyright_Background"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 232.0
+offset_bottom = 58.0
+text = "version 0.98"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="deck_empty" from="." to="MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailDeckTiles" method="_on_deck_display_deck_empty"]
 [connection signal="some_tiles_removed" from="." to="MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailDeckTiles" method="_on_deck_display_some_tiles_removed"]
