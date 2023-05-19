@@ -7,20 +7,16 @@ extends Node2D
 @export var y_start : int
 @export var tile_size : int
 
-# last maybe not used at all
-#enum HIGHLIGHT_MODE { HIGHLIGHT_NONE, FIRST_AVAIL_MOVE, ALL_AVAIL_MOVE, RANDOM_MOVE, HIGHER_SCORE_MOVE }
-#var highlighted_cells : PackedVector2Array = []
+@export var gameType : String
+@export var numberOfPlayers : int
+
 var highlight_mode : int = Global.HIGHLIGHT_MODE.HIGHLIGHT_NONE
 
-#enum GAME_EXIT_STATUS { GAME_WON, GAME_LOSS, USER_QUIT }
-
-#signal tile_placed
-signal game_end(status : int)
-signal game_is_over
+signal game_end(status : int, playerIdx: int, score: Array, fourways : Array, tilesRem : int)
+#signal game_is_over
 #signal user_quit
 signal highlight_board_cell
-signal fourways()
-signal tile_put_on_the_board
+signal playsound(String)
 
 var tiles = []
 var game_board : Array = []
@@ -34,11 +30,15 @@ var quit : bool = false	#replace by end/use game_end back (more generic for all 
 
 const TilesScore = [1, 2, 4, 8]
 const FourWaysBonus = [25, 50, 100, 200, 400, 600, 800, 1000, 5000, 10000, 25000, 50000]
+const TilesRemainingBonus = {2: 100, 1: 500, 0: 1000}
+const ScoreMultiplier = 2
+
 const TileOffset = 32
 
 var current_player : int = 0
 var playersScores : Array = [0, 0]
 var fourWaysCounts : Array = [0, 0]
+var currentScoreMultiplier = 1
 
 #tmpdebug
 var fakeFourWays : bool = false
@@ -52,13 +52,19 @@ var fakeFourWays : bool = false
 @onready var DeckDisplay = null
 var deck : Array  #unused, to remove
 
+@onready var gameLossPanel = $GameOverPanel
+@onready var gameWinPanel = $GameWinPanel
+
+var game_end_status : int = -1
+
 #TODO: add 2nd player (move turn + score upd)
 #TODO: add tournament mode (LATER)
 
 func _init():
-	print("main game: _init called")
-	Global.debug_enabled = true
-
+	Global.debug("main game: _init called")
+	quit = false
+	# other vars ?
+	
 
 func _ready():
 	OS.set_low_processor_usage_mode(true)
@@ -66,30 +72,12 @@ func _ready():
 
 	Global.debug("main game: _ready")
 	
-	#not needed
+	#not needed ?
 	DeckDisplay = find_child("DeckDisplay", true)
 	Global.debug("main game: deck="+str(DeckDisplay))
 	
 	game_board = make_2d_array()
-	
-	#to do in global
-#	if FileAccess.file_exists(Global.HIGHSCORES_FILE_PATH):
-#		Global.debug("load HS file")
-#		Global.load_high_scores()
-#	else:
-#		Global.debug("init HS file")
-#		Global.initialize_high_scores()
-	#Global.load_config() #test
 
-#	for key in Global.highScores:
-#		Global.debug("HS1P("+key+")="+str(Global.highScores[key]))
-#	#todo when HS is achieved (easy when starting games)
-#	Global.save_high_scores()
-#
-#	Global.add_high_score(Global.GAMETYPE_ONEPLAYER, "testplayer", 526, 4, 2)
-#	Global.debug("HS1P="+str(Global.highScores[Global.GAMETYPE_ONEPLAYER]))
-#	Global.add_high_score(Global.GAMETYPE_ONEPLAYER, "player2", 56, 0, 30)
-#	Global.debug("HS1P="+str(Global.highScores[Global.GAMETYPE_ONEPLAYER]))
 	init_board()
 	DeckDisplay.deck_is_ready() #not even needed! (process pnt)
 
@@ -114,6 +102,12 @@ func _input(event):
 	elif event.is_action_pressed("FourWaysDebug"):
 		Global.debug("fake four ways event")
 		fakeFourWays = true
+	elif event.is_action_pressed("gameoverlossDebug"):
+		Global.debug("fake game over LOSS")
+		game_over(Global.GAME_EXIT_STATUS.GAME_LOSS)
+	elif event.is_action_pressed("gameoverwinDebug"):
+		Global.debug("fake game over WIN")
+		game_over(Global.GAME_EXIT_STATUS.GAME_WON)
 
 
 func _process(_delta):
@@ -121,16 +115,21 @@ func _process(_delta):
 		game_over(Global.GAME_EXIT_STATUS.USER_QUIT) # add another param win/loss/exit
 		return
 
+	if game_end_status >= 0:
+		Global.debug("_p GES="+str(game_end_status))
+		return
+
 	if next_tile == null:
 		next_tile = DeckDisplay.pick_next_tile()
 			#here is the pb (maybe), game just init already pick next tile whereas one has already been picked
 			# in deck
-		Global.debug("next tile="+str(next_tile)+"  s="+next_tile.shape+"  c="+next_tile.color)
+		Global.debug("next tile="+str(next_tile))
 	
 	if next_tile == null:
 		Global.debug("No more tile, you Win !")
 		game_over(Global.GAME_EXIT_STATUS.GAME_WON)
 	else:
+		#Global.debug("next tile s="+next_tile.shape+"  c="+next_tile.color)
 		if avail_move == -1:
 			avail_move = check_available_move(highlight_mode)
 			Global.debug("_process: AM="+str(avail_move))
@@ -148,15 +147,24 @@ func _process(_delta):
 				var potential_tile_score = check_adjacent_tiles(next_tile, mpos)
 				if potential_tile_score > 0: ## true: ##tmp test 
 					add_tile(mpos, next_tile)
-					tile_put_on_the_board.emit()
+					playsound.emit("tile")
 					if potential_tile_score == 4 or fakeFourWays == true:
-						fourways.emit()
 						play_fourWays_effects(mpos)
+						playsound.emit("fourways")
 						fakeFourWays = false
 					##DeckDisplay.update()
 					update_score(potential_tile_score)
 					next_tile = null
 					avail_move = -1
+
+					if gameType == Global.GAMETYPE_ONEPLAYER:
+						pass
+					elif gameType == Global.GAMETYPE_TWOPLAYERS:
+						current_player = (current_player + 1) % 2
+					elif gameType == Global.GAMETYPE_TOURNAMENT:
+						pass
+					elif gameType == Global.GAMETYPE_ENHANCED:
+						pass
 				else:
 					Global.debug("_process: invalid move")
 			else:
@@ -165,8 +173,10 @@ func _process(_delta):
 
 
 # gameType: enum later
-func setup(number_of_players : int, gameType: String) -> void:
-	Global.debug("setup called gt => " + gameType + "nbp="+str(number_of_players))
+func setup(number_of_players : int, game_type: String) -> void:
+	Global.debug("setup called gt => " + game_type + "  nbp="+str(number_of_players))
+	gameType = game_type
+	numberOfPlayers = number_of_players
 
 
 func make_2d_array():
@@ -262,7 +272,9 @@ func check_available_move(selected_highlight_mode : Global.HIGHLIGHT_MODE) -> in
 		#select n cells in array
 		highlight_cell(cells)
 	elif (selected_highlight_mode == Global.HIGHLIGHT_MODE.HIGHLIGHT_NONE):
-		pass
+		#need to clear overlay one time
+		highlight_cell([])
+		#pass
 
 	possible_moves = cells.size()
 	Global.debug("CAM: availmoves=" + str(possible_moves))
@@ -394,9 +406,10 @@ func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> int:
 
 
 func update_score(score : int) -> void:
-	playersScores[current_player] += TilesScore[score - 1]
+	playersScores[current_player] += TilesScore[score - 1] * currentScoreMultiplier
 	if (score == 4):
 		playersScores[current_player] += FourWaysBonus[fourWaysCounts[current_player]]
+		currentScoreMultiplier *= ScoreMultiplier
 		fourWaysCounts[current_player] += 1
 		#update_p1_fourways.emit(fourWaysCounts[current_player])
 		Players_Panels[current_player].update_player_fways_counter(fourWaysCounts[current_player])
@@ -406,15 +419,8 @@ func update_score(score : int) -> void:
 
 
 func highlight_cell(cells : Array) -> void:
-	# draw lines around cell then animate with colors cycle (tweens ?)
 	var coordinates_array = []
 	for cell in cells:
-#		var Apoint = grid_to_pixel(cell.x, cell.y) - Vector2(TileOffset, TileOffset)
-#		var Bpoint = Vector2(Apoint.x + 64 - TileOffset, Apoint.y - TileOffset)
-#		var Cpoint = Vector2(Apoint.x + 64 - TileOffset, Apoint.y + 64 - TileOffset)
-#		var Dpoint = Vector2(Apoint.x - TileOffset, Apoint.y + 64 - TileOffset)
-#		var Epoint = Vector2(Apoint.x - TileOffset, Apoint.y - TileOffset)
-		
 		var Apoint = grid_to_pixel(cell.x, cell.y) - Vector2(TileOffset, TileOffset)
 		var Bpoint = Vector2(Apoint.x + 64, Apoint.y)
 		var Cpoint = Vector2(Apoint.x + 64, Apoint.y + 64)
@@ -422,10 +428,7 @@ func highlight_cell(cells : Array) -> void:
 		var Epoint = Vector2(Apoint.x, Apoint.y)
 		
 		coordinates_array.append([Apoint, Bpoint, Cpoint, Dpoint, Epoint])
-		#add offset: nothing displayed
-	#var Color ?
-	#anim/cycle => tween
-	
+
 	highlight_board_cell.emit(coordinates_array)
 
 
@@ -443,6 +446,9 @@ func play_fourWays_effects(gridpos : Vector2):
 
 	for neighbor in [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]:
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(1,1), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "rotation", -PI, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	for neighbor in [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]:
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "rotation", 0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 	tilesAnim.play()
@@ -452,29 +458,63 @@ func game_over(status : int):
 	# for all panel (so many ? just this one yet), fade background/blurr using overlay
 	#=> load game over panel
 	##get_tree().get_child("GameOverPanel").visible = true #doesn't work (~func not called at all!)
-	quit = true #no longer needed
+	##quit = true #no longer needed
+	game_end_status = status
 	#var win : bool = false
-
+	Global.debug("ges="+str(game_end_status))
 	#better to let status to signal receiver to deal with it directly, useless here
 #	if status == GAME_EXIT_STATUS.GAME_WON:
 #		Global.debug("Game won")
 #		win = true
+	var tilesRemaining = DeckDisplay.get_deck_count()
+	Global.debug("remtiles="+str(tilesRemaining)+"  ps="+str(playersScores[current_player]))
+	if tilesRemaining <= TilesRemainingBonus.size() and TilesRemainingBonus.has(tilesRemaining):
+		playersScores[current_player] += TilesRemainingBonus[tilesRemaining]
+	Global.debug("finalscore="+str(playersScores[current_player]))
+	
 	if status == Global.GAME_EXIT_STATUS.GAME_LOSS:
-		Global.debug("Game loss")
-		game_is_over.emit()
+		Global.debug("game:Game loss")
+		playsound.emit("loss")
+		#emit sig game loss to origin
+		# or gameend(loss)
+		
+		#game_is_over.emit()
+		gameLossPanel.show()
+			#or use signal to panel directly (benefit?)
+	elif status == Global.GAME_EXIT_STATUS.GAME_WON:
+		Global.debug("game:Game Won")
+		playsound.emit("win")
+		#as loss, emit sig to origin on win
+		
+		#add final bonus(es)
+		gameWinPanel.show()
+	elif status == Global.GAME_EXIT_STATUS.USER_QUIT:
+		Global.debug("game quit")
+		# go back to main menu or just exit
+		Global.debug("emit game_end signal")
+		game_end.emit(game_end_status, current_player, [], [], 0)
+	#show panel => signal => action (return to origin scene) see below
+	##game_end.emit(status, current_player, playersScores[current_player], fourWaysCounts[current_player], DeckDisplay.get_deck_count())
 
-#	elif status == GAME_EXIT_STATUS.USER_QUIT:
-#		Global.debug("quit")
 
-	game_end.emit(status)
-
-
+# do the same for game win panel
+func _on_game_over_panel_is_closed():
+	Global.debug("GOP closed, emit game_end signal")
+	game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
+	
 ## bad way to get it
 func _on_deck_display_deck_initialized(deck_initialized : Array) -> void:
 	deck = deck_initialized
 	Global.debug("Signal deck initialized received")
 
 
+# may be useless now
 func _on_deck_display_deck_empty():
-	Global.debug("Deck empty sig received")
-	game_over(true)
+	Global.debug("Deck empty sig received, win")
+	##game_over(true) #should be STATUS_WIN but here may be redundant, 
+	#check _process for already managed case
+
+
+func _on_game_win_panel_is_closed():
+	Global.debug("GOPw closed, emit game_end signal")
+	game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
