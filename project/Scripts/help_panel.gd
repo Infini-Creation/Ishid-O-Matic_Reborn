@@ -1,12 +1,12 @@
 extends Control
 
 @onready var PagesHolder : Array = [
-	$CenterContainer/VBoxContainer/TextureButton/Page1,
-	$CenterContainer/VBoxContainer/TextureButton/Page2,
-	$CenterContainer/VBoxContainer/TextureButton/Page3,
-	$CenterContainer/VBoxContainer/TextureButton/Page4,
-	$CenterContainer/VBoxContainer/TextureButton/Page5,
-	$CenterContainer/VBoxContainer/TextureButton/Page6
+	$CenterContainer/VBoxContainer/CenterContainer/Page1,
+	$CenterContainer/VBoxContainer/CenterContainer/Page2,
+	$CenterContainer/VBoxContainer/CenterContainer/Page3,
+	$CenterContainer/VBoxContainer/CenterContainer/Page4,
+	$CenterContainer/VBoxContainer/CenterContainer/Page5,
+	$CenterContainer/VBoxContainer/CenterContainer/Page6
 ]
 
 signal help_panel_closed
@@ -44,3 +44,9 @@ func _on_next_page_pressed():
 		previous_page = current_page
 		current_page += 1
 		update_page(previous_page, current_page)
+
+
+func _on_close_button_pressed():
+	Global.debug("HelpPanel: button pressed, close it")
+	help_panel_closed.emit()	#is this useful ?
+	hide()
