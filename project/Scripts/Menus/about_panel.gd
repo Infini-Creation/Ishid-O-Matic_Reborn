@@ -24,3 +24,8 @@ func _on_action_button_pressed():
 	if !linkOpened:
 		Global.debug("hide panel")
 		hide()
+
+
+func _on_close_button_pressed():
+	Global.debug("close button pressed")
+	hide()
