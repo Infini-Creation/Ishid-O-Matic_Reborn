@@ -2,13 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/Menus/about_panel.gd" id="1_u2xw2"]
 [ext_resource type="Texture2D" uid="uid://dlloxxecitrn3" path="res://Arts/Gfx/Panels/help panel.png" id="2_lh42l"]
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="3_l7ic4"]
 
 [sub_resource type="Shortcut" id="Shortcut_mf6hy"]
 
 [sub_resource type="SystemFont" id="SystemFont_jgi8k"]
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_4np4h"]
 subpixel_positioning = 0
 
 [node name="AboutPanel" type="Control"]
@@ -46,6 +44,7 @@ texture_normal = ExtResource("2_lh42l")
 stretch_mode = 5
 
 [node name="actionButton" type="TextureButton" parent="CenterContainer/VBoxContainer/TextureButton"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,7 +61,7 @@ anchor_bottom = 0.864
 offset_left = 2.0
 offset_top = 40.0
 offset_right = -1.0
-offset_bottom = 54.888
+offset_bottom = -39.112
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -89,53 +88,26 @@ Thanks:
 	gfx by [shake]XXX[/shake]
 	authors & contributors of [i]Godot Engine[/i]
 	[b]GDQuest[/b] for their great youtube videos & tutorials
-[/center]
-
-
-[center](click near the border to close the panel)[/center]"
+[/center]"
 shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
-visible = false
-layout_direction = 1
+[node name="CloseButton" type="Button" parent="CenterContainer/VBoxContainer/TextureButton"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -419.0
-offset_top = -217.5
-offset_right = 419.0
-offset_bottom = 217.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -48.0
+offset_right = 25.0
+offset_bottom = -17.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/shadow_outline_size = 5
-theme_override_fonts/font = SubResource("SystemFont_4np4h")
-theme_override_font_sizes/font_size = 18
-text = "About
-
-Game made with Godot 4 by Infini-Creation
-
-Based on the game Ishid-O-Matic by Robert Brandner on Amiga
-(still available on Assassin Game #31)
-Itself base on Ishido - The way of stones designed by Michael Feinberg and
-released on various computers in 1989
-
-Thanks:
-	Michael Feinberg & Robert Brandner
-	sounds effect & music by XXX
-	gfx by XXX
-	authors & contributors of Godot Engine
-	GDQuest for their great youtube videos"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
+grow_vertical = 0
+theme = ExtResource("3_l7ic4")
+text = "Close"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/TextureButton/actionButton" to="." method="_on_action_button_pressed"]
 [connection signal="meta_clicked" from="CenterContainer/VBoxContainer/TextureButton/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/TextureButton/CloseButton" to="." method="_on_close_button_pressed"]
