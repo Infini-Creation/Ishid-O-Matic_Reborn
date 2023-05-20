@@ -16,7 +16,7 @@ var game
 var current_game_type : String = ""
 
 func _ready():
-	Global.debug_enabled = false #true #tmp
+	Global.debug_enabled = true #true #tmp
 	Global.load_config()
 	Global.debug("settings="+str(Global.settings))
 	
@@ -119,7 +119,8 @@ func _on_game_is_over(status : int, playerIdx : int, score : Array, fourWays : A
 
 	elif status == Global.GAME_EXIT_STATUS.USER_QUIT:
 		Global.debug("origin/_ogio: quit")
-		get_tree().quit()
+		#return to main menu instead, display an intermediate panel first to confirm
+		##get_tree().quit()
 	
 	# that should be done only after GOP button clicked (as well as add menu below)
 	Global.debug("game child will be removed")
