@@ -1,14 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://lb3l2tsp01op"]
+[gd_scene load_steps=8 format=3 uid="uid://lb3l2tsp01op"]
 
 [ext_resource type="Script" path="res://Scripts/help_panel.gd" id="1_r0ddy"]
 [ext_resource type="Texture2D" uid="uid://dlloxxecitrn3" path="res://Arts/Gfx/Panels/help panel.png" id="2_fpbrh"]
 [ext_resource type="Texture2D" uid="uid://d256gllpwthid" path="res://Arts/Gfx/Menu/ishido-help-previous-arrow.png" id="3_4xwqk"]
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="4_i8pjo"]
 [ext_resource type="Texture2D" uid="uid://csfojlg23jsah" path="res://Arts/Gfx/Menu/ishido-help-next-arrow.png" id="4_s4qct"]
-
-[sub_resource type="Shortcut" id="Shortcut_mf6hy"]
 
 [sub_resource type="SystemFont" id="SystemFont_4np4h"]
 subpixel_positioning = 0
+
+[sub_resource type="Shortcut" id="Shortcut_mf6hy"]
 
 [node name="HelpPanel" type="Control"]
 layout_mode = 3
@@ -22,36 +23,33 @@ localize_numeral_system = false
 script = ExtResource("1_r0ddy")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_right = 1024.0
-offset_bottom = 768.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(838, 610)
+layout_mode = 2
+texture = ExtResource("2_fpbrh")
+expand_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = -76
+theme_override_constants/separation = 12
 
-[node name="TextureButton" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(879, 510)
 layout_mode = 2
-action_mode = 0
-shortcut = SubResource("Shortcut_mf6hy")
-shortcut_in_tooltip = false
-texture_normal = ExtResource("2_fpbrh")
-stretch_mode = 5
+size_flags_vertical = 3
 
-[node name="Page1" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+[node name="Page1" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(870, 0)
 layout_direction = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -404.0
-offset_top = -279.0
-offset_right = 405.0
-offset_bottom = 279.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
@@ -73,21 +71,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Page2" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+[node name="Page2" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer"]
 visible = false
+custom_minimum_size = Vector2(870, 0)
 layout_direction = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -419.0
-offset_top = -279.0
-offset_right = 419.0
-offset_bottom = 279.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
@@ -110,21 +98,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Page3" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+[node name="Page3" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer"]
 visible = false
+custom_minimum_size = Vector2(870, 0)
 layout_direction = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -419.0
-offset_top = -279.0
-offset_right = 419.0
-offset_bottom = 279.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
@@ -152,15 +130,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Page4" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+[node name="Page4" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer"]
 visible = false
+custom_minimum_size = Vector2(870, 0)
 layout_direction = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
@@ -186,15 +160,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Page5" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+[node name="Page5" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer"]
 visible = false
+custom_minimum_size = Vector2(870, 0)
 layout_direction = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
@@ -214,15 +184,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="Page6" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+[node name="Page6" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer"]
 visible = false
+custom_minimum_size = Vector2(870, 0)
 layout_direction = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 theme_override_colors/font_color = Color(0.894118, 0.905882, 0.996078, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 1
@@ -234,15 +200,28 @@ text = "Controls
 
 Put a tile on the board using left mouse button
 
-H - highlight mode, cycling trough: None, first move available, all possible moves, a random move and the move giving you the best score (not yet implemented)."
+H - highlight mode, cycling trough: None, first move available, all possible moves, a random move and the move giving you the best score (not yet implemented).
+
+ESC - quit game, return to main menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 610)
+layout_mode = 2
+size_flags_vertical = 3
+action_mode = 0
+shortcut = SubResource("Shortcut_mf6hy")
+shortcut_in_tooltip = false
+texture_normal = ExtResource("2_fpbrh")
+stretch_mode = 5
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
-theme_override_constants/separation = 678
+size_flags_vertical = 8
+theme_override_constants/separation = 346
 alignment = 1
 
 [node name="PreviousPage" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
@@ -253,6 +232,12 @@ size_flags_horizontal = 0
 texture_normal = ExtResource("3_4xwqk")
 ignore_texture_size = true
 stretch_mode = 4
+
+[node name="CloseButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_i8pjo")
+text = "  Close  "
 
 [node name="NextPage" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 z_index = 1
@@ -266,4 +251,5 @@ stretch_mode = 4
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/PreviousPage" to="." method="_on_previous_page_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/NextPage" to="." method="_on_next_page_pressed"]
