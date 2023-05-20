@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2ahme0nrumhy"]
+[gd_scene load_steps=10 format=3 uid="uid://d2ahme0nrumhy"]
 
 [ext_resource type="Script" path="res://Scripts/BoardOverlay.gd" id="1_4a5n6"]
 [ext_resource type="Texture2D" uid="uid://ty2ekqkwt1mb" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b3ps20yf6g8vx" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
 [ext_resource type="Texture2D" uid="uid://771h0pty250w" path="res://Arts/Gfx/Menu/ishid-o-matic-title.png" id="5_g0j1r"]
 [ext_resource type="PackedScene" uid="uid://dqqc553edp67k" path="res://Scenes/game_win_panel.tscn" id="8_fy08i"]
+[ext_resource type="PackedScene" uid="uid://cwmeqnmocd8lr" path="res://Scenes/game_quitconfirm_panel.tscn" id="9_akd7t"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_f3kqo")
@@ -110,8 +111,13 @@ z_index = 4
 visible = false
 z_index = 4
 
+[node name="GameQuitPanel" parent="." instance=ExtResource("9_akd7t")]
+visible = false
+z_index = 4
+
 [connection signal="highlight_board_cell" from="." to="BoardOverlay" method="_on_game_highlight_board_cell"]
 [connection signal="deck_empty" from="UI/VBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_empty"]
 [connection signal="deck_initialized" from="UI/VBoxContainer/DeckDisplay" to="grid" method="_on_deck_display_deck_initialized"]
 [connection signal="is_closed" from="GameOverPanel" to="." method="_on_game_over_panel_is_closed"]
 [connection signal="is_closed" from="GameWinPanel" to="." method="_on_game_win_panel_is_closed"]
+[connection signal="quit" from="GameQuitPanel" to="." method="_on_game_quit_panel_quit"]

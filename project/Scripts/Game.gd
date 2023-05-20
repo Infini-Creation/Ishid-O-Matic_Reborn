@@ -54,6 +54,7 @@ var deck : Array  #unused, to remove
 
 @onready var gameLossPanel = $GameOverPanel
 @onready var gameWinPanel = $GameWinPanel
+@onready var gameQuitPanel = $GameQuitPanel
 
 var game_end_status : int = -1
 
@@ -490,9 +491,11 @@ func game_over(status : int):
 		gameWinPanel.show()
 	elif status == Global.GAME_EXIT_STATUS.USER_QUIT:
 		Global.debug("game quit")
+		
+		gameQuitPanel.show()
 		# go back to main menu or just exit
-		Global.debug("emit game_end signal")
-		game_end.emit(game_end_status, current_player, [], [], 0)
+		#Global.debug("emit game_end signal")
+		#game_end.emit(game_end_status, current_player, [], [], 0)
 	#show panel => signal => action (return to origin scene) see below
 	##game_end.emit(status, current_player, playersScores[current_player], fourWaysCounts[current_player], DeckDisplay.get_deck_count())
 
@@ -518,3 +521,18 @@ func _on_deck_display_deck_empty():
 func _on_game_win_panel_is_closed():
 	Global.debug("GOPw closed, emit game_end signal")
 	game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
+
+
+func _on_game_quit_panel_quit(confirm : bool):
+	Global.debug("Quit Confirm panel closed: "+str(confirm))
+	if confirm == true:
+		Global.debug("Quit to main menu")
+		game_end.emit(Global.GAME_EXIT_STATUS.USER_QUIT, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
+		gameQuitPanel.hide()
+	else:
+		Global.debug("keep playing")
+		gameQuitPanel.hide()
+		
+		# reset game quit setting
+		quit = false
+		game_end_status = -1
