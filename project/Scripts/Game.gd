@@ -86,6 +86,9 @@ func _ready():
 	if highlight_mode < 0 or highlight_mode > Global.HIGHLIGHT_MODE.size():
 		highlight_mode = 0
 
+	if gameType == Global.GAMETYPE_TWOPLAYERS:
+		Players_Panels[current_player].highlight_current_player(1.0)
+
 
 func _input(event):
 	if event.is_action_pressed("Quit"):
@@ -161,7 +164,9 @@ func _process(_delta):
 					if gameType == Global.GAMETYPE_ONEPLAYER:
 						pass
 					elif gameType == Global.GAMETYPE_TWOPLAYERS:
+						Players_Panels[current_player].stop_highlight_current_player()
 						current_player = (current_player + 1) % 2
+						Players_Panels[current_player].highlight_current_player(1.0)
 					elif gameType == Global.GAMETYPE_TOURNAMENT:
 						pass
 					elif gameType == Global.GAMETYPE_ENHANCED:
