@@ -16,20 +16,9 @@ var game
 var current_game_type : String = ""
 
 func _ready():
-	Global.debug_enabled = true #true #tmp
+	Global.debug_enabled = true #tmp
 	Global.load_config()
 	Global.debug("settings="+str(Global.settings))
-	
-#	Global.debug_enabled = true
-#	print("init HS")
-#	Global.initialize_high_scores()
-#	print("save HS")
-#	Global.save_high_scores()
-#	print("load HS")
-#	Global.load_high_scores()
-	
-#	print("quit")
-#	get_tree().quit()
 	
 	if FileAccess.file_exists(Global.HIGHSCORES_FILE_PATH):
 		Global.debug("load HS file")
@@ -61,12 +50,15 @@ func _ready():
 	add_child(menu)
 	#get_tree().get_root().print_tree()
 	menu.connect("launch_game", _on_game_launched)
+	menu.connect("audio_volume_updated", _on_audio_settings_updated)
 
 
-# not connected for now ?
-func _on_audio_settings_updated(new_music_volume : int, new_sound_volume: int) -> void:
-	musicPlayer.volume_db = linear_to_db(new_music_volume / 100.0)
-	soundEffectPlayer.volume_db = linear_to_db(new_sound_volume / 100.0)
+func _on_audio_settings_updated(audio_type : int, new_volume: int) -> void:
+	Global.debug("audio change T="+str(audio_type)+" vol="+str(new_volume))
+	if audio_type == Global.AUDIO_TYPE_MUSIC:
+		musicPlayer.volume_db = linear_to_db(new_volume / 100.0)
+	elif audio_type == Global.AUDIO_TYPE_SOUNDEFFECT:
+		soundEffectPlayer.volume_db = linear_to_db(new_volume / 100.0)
 
 
 func _on_game_launched(gameType : String):
