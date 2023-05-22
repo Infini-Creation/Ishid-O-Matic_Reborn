@@ -12,6 +12,7 @@ var game
 var mainMenuSave : Node
 
 signal launch_game(game_type : String)
+signal audio_volume_updated(type: int, volume: int)
 
 func _ready():
 	Global.debug("MainMenu: generate tile stripe")
@@ -107,7 +108,8 @@ func _on_button_click_received(buttonID : int):
 			settingsMenu = SettingsButtons.instantiate()
 			$VBoxContainer/CenterContainer.add_child(settingsMenu)
 			settingsMenu.connect("button_clicked", _on_button_click_received)
-			
+			settingsMenu.connect("sound_volume_updated", _on_sound_volume_updated)
+
 		Global.ButtonIDs.BUTTON_HIGHSCORES:
 			$HallOfFamePanel.show()
 			#if mainMenuButtons != null: #or is in tree
@@ -135,5 +137,17 @@ func _on_button_click_received(buttonID : int):
 			Global.debug("unhandled action")
 
 
+#used?
 func _on_help_panel_help_panel_closed():
 	pass # Replace with function body.
+
+
+func _on_sound_volume_updated(type: int, volume: int):
+	if type == Global.AUDIO_TYPE_MUSIC:
+		Global.debug("new music vol="+str(volume))
+		audio_volume_updated.emit(type, volume)
+	elif type == Global.AUDIO_TYPE_SOUNDEFFECT:
+		Global.debug("new sndfx vol="+str(volume))
+		audio_volume_updated.emit(type, volume)
+	else:
+		Global.debug("unhandled audio type: "+str(type))
