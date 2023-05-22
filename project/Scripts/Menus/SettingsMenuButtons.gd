@@ -1,6 +1,8 @@
 extends Control
 
 signal button_clicked(buttonID : int)
+signal sound_volume_updated(type: int, volume: int)
+
 var music_volume : int
 var sound_volume : int
 var music_enabled : bool
@@ -98,9 +100,22 @@ func _on_audio_volume_settings_updated(audio_type, new_audio_volume, new_audio_e
 	if audio_type == Global.AUDIO_TYPE_MUSIC:
 		music_volume = new_audio_volume
 		music_enabled = new_audio_enabled
+
+		if music_enabled == true:
+			sound_volume_updated.emit(Global.AUDIO_TYPE_MUSIC, music_volume)
+		else:
+			sound_volume_updated.emit(Global.AUDIO_TYPE_MUSIC, 0)
 	else:
 		sound_volume = new_audio_volume
 		sound_enabled = new_audio_enabled
+
+		if sound_enabled == true:
+			sound_volume_updated.emit(Global.AUDIO_TYPE_SOUNDEFFECT, sound_volume)
+		else:
+			sound_volume_updated.emit(Global.AUDIO_TYPE_SOUNDEFFECT, 0)
+
+	#TODO: update volume for music + add sound effect test when updating volume of SE
+	#HERE: signal back with volume value
 
 func _on_language_0_pressed():
 	Global.debug("lang0 pressed-" +str($"ButtonsGroup/Hints-Language Row/Language-0".button_group))
