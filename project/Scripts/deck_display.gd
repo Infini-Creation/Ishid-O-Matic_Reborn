@@ -25,6 +25,7 @@ func _ready():
 func init_deck():
 	var tile : Node2D
 
+	deck.clear()
 	for shape in Global.avail_tile_shapes:
 		# there are two of the same tiles in the deck, range (1,3) to loop twice
 		# hardcoded value to update (tile_repetition/dupe_in_deck)
