@@ -23,6 +23,7 @@ var game_board : Array = []
 var next_tile : Node2D = null
 #var tile_score : int = 0
 var avail_move : int = -1
+var tournamentSeed : int
 
 # to remove soon
 #var game_end : bool = false
@@ -69,7 +70,7 @@ func _init():
 
 func _ready():
 	OS.set_low_processor_usage_mode(true)
-	randomize() #~no longer needed
+	#randomize() #~no longer needed, "automatically called when the project is run"
 
 	Global.debug("main game: _ready")
 	
@@ -78,6 +79,26 @@ func _ready():
 	Global.debug("main game: deck="+str(DeckDisplay))
 	
 	game_board = make_2d_array()
+
+	if gameType == Global.GAMETYPE_TOURNAMENT:
+		#too early here, signal from panel handled AFTER !!
+		
+		if Global.continue_tournament == true:
+			tournamentSeed = Global.load_seed()
+			Global.debug("conttour: saved seed= "+str(tournamentSeed))
+		else:
+			tournamentSeed = int(Time.get_unix_time_from_system ())
+			Global.debug("newtour: saved seed= "+str(tournamentSeed))
+			Global.save_seed(tournamentSeed)
+
+		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text = "Tournament seed="+str(tournamentSeed)
+		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".show()
+		
+		# display tournament pop-up : start a new one or continue current
+		# 1=gen new seed & save, 2=load seed
+		seed(tournamentSeed)
+		DeckDisplay.init_deck()
+		#display tournament label (later texture maybe)
 
 	init_board()
 	DeckDisplay.deck_is_ready() #not even needed! (process pnt)
