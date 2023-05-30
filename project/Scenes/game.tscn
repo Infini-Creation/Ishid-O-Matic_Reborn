@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2ahme0nrumhy"]
+[gd_scene load_steps=11 format=3 uid="uid://d2ahme0nrumhy"]
 
 [ext_resource type="Script" path="res://Scripts/BoardOverlay.gd" id="1_4a5n6"]
 [ext_resource type="Texture2D" uid="uid://ty2ekqkwt1mb" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://p31d8x3u5qus" path="res://Scenes/player_score_panel.tscn" id="4_3x01f"]
 [ext_resource type="PackedScene" uid="uid://b3ps20yf6g8vx" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
 [ext_resource type="Texture2D" uid="uid://771h0pty250w" path="res://Arts/Gfx/Menu/ishid-o-matic-title.png" id="5_g0j1r"]
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_uawno"]
 [ext_resource type="PackedScene" uid="uid://dqqc553edp67k" path="res://Scenes/game_win_panel.tscn" id="8_fy08i"]
 [ext_resource type="PackedScene" uid="uid://cwmeqnmocd8lr" path="res://Scenes/game_quitconfirm_panel.tscn" id="9_akd7t"]
 
@@ -61,19 +62,28 @@ playerLabel = "Player One"
 [node name="MiddleContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
 custom_minimum_size = Vector2(460, 232)
 layout_mode = 2
+theme_override_constants/separation = -32
 
 [node name="LogoMargin" type="MarginContainer" parent="UI/HBoxContainer/MiddleContainer"]
-custom_minimum_size = Vector2(460, 232)
+custom_minimum_size = Vector2(460, 220)
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
 [node name="LogoTexture" type="TextureRect" parent="UI/HBoxContainer/MiddleContainer/LogoMargin"]
-custom_minimum_size = Vector2(460, 232)
+custom_minimum_size = Vector2(460, 200)
 layout_mode = 2
 texture = ExtResource("5_g0j1r")
 expand_mode = 5
 stretch_mode = 5
+
+[node name="Tournament-Label" type="Label" parent="UI/HBoxContainer/MiddleContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("6_uawno")
+text = "Tournament"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HelpersIcons" type="HBoxContainer" parent="UI/HBoxContainer/MiddleContainer"]
 custom_minimum_size = Vector2(512, 32)
