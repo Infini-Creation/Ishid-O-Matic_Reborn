@@ -4,6 +4,7 @@ extends Node
 
 const SETTINGS_FILE_PATH = "user://settings.ini"
 const HIGHSCORES_FILE_PATH = "user://highscores.dat"
+const SEED_FILE_PATH = "user://tournament.seed"
 
 const HIGHSCORES_SCORE_START = 100
 const HIGHSCORES_SCORE_STEP = 10
@@ -121,7 +122,7 @@ var tile_shapes : int = 6
 
 var previous_scene : String
 var configLoaded : bool = false
-
+var continue_tournament : bool = true
 
 func save_config() -> bool:
 	var config = ConfigFile.new()
@@ -263,7 +264,42 @@ func add_high_score(gameType, playerName : String, score : int, fourWays : int, 
 			highScores[gameType].insert(scoreIdx, [playerName, score, fourWays, tilesRemaining])
 			highScores[gameType].pop_back()
 			break
-		
+
+
+func load_seed() -> int:
+	var saved_seed : int = 0
+
+	var seedfile = FileAccess.open(SEED_FILE_PATH, FileAccess.READ)
+	var error = FileAccess.get_open_error()
+
+	if error == ERR_FILE_NOT_FOUND:
+		Global.debug("seed file does not exists")
+		saved_seed = Time.get_ticks_usec()
+		save_seed(saved_seed)
+	elif error != OK:
+		Global.debug("load_seed: error=["+str(error)+"]") #TODO: deal with eror
+	else:
+		saved_seed = seedfile.get_16()
+		seedfile.close()
+
+	return saved_seed
+
+
+func save_seed(tournament_seed: int) -> bool:
+	var save_ok : bool = false
+	
+	var seedfile = FileAccess.open(SEED_FILE_PATH, FileAccess.WRITE)
+	var error = FileAccess.get_open_error()
+
+	if error != Error.OK:
+		Global.debug("save_seed: error=["+error+"]") #TODO: deal with eror
+	else:
+		seedfile.store_16(tournament_seed)
+		seedfile.close()
+		save_ok = true
+
+	return save_ok
+
 
 func debug(msg : String) -> void:
 	if (debug_enabled == true):
