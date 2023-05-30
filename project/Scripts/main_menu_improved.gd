@@ -4,6 +4,7 @@ extends Control
 @onready var SettingsButtons : PackedScene = preload("res://Scenes/SettingsMenu/Controls.tscn")
 @onready var highScoresPage : PackedScene = preload("res://Scenes/high_scores.tscn")
 @onready var gameScene : PackedScene = preload("res://Scenes/game.tscn")
+@onready var gameTournamentPanel = $GameTournamentPanel
 
 var mainMenuButtons
 var settingsMenu
@@ -61,7 +62,6 @@ func _ready():
 	$VBoxContainer/CenterContainer/DummyLabel.hide()
 	mainMenuButtons = MainMenuButtons.instantiate()
 	$VBoxContainer/CenterContainer.add_child(mainMenuButtons)
-	# need to connect signal here by code !
 	mainMenuButtons.connect("button_clicked", _on_button_click_received)
 
 
@@ -70,27 +70,14 @@ func _on_button_click_received(buttonID : int):
 	match buttonID:
 	# Main menu buttons
 		Global.ButtonIDs.BUTTON_1PGAME:
-			#setup main game and run it
-			#get_tree().get_root().print_tree()
-			#game.print_tree()
-			#get_node("MainMenu").hide()
-			# maybe add a dummy root node to main menu & game scene
-			# remove/add child of this node
-			#mainMenuSave = get_node(".")
-			##get_tree().get_root().remove_child(get_node("."))
-			#self.print_tree()
-			##get_tree().get_root().add_child(game)
 			launch_game.emit(Global.GAMETYPE_ONEPLAYER)
-			
-			#game.setup(1, Global.GAMETYPE_ONEPLAYER)
+
 		Global.ButtonIDs.BUTTON_2PGAME:
 			launch_game.emit(Global.GAMETYPE_TWOPLAYERS)
-			#game.setup(2, Global.GAMETYPE_TWOPLAYERS)
+
 		Global.ButtonIDs.BUTTON_TOURNAMENT:
-			launch_game.emit(Global.GAMETYPE_TOURNAMENT)
-			#game.setup(?, Global.GAMETYPE_TOURNAMENT)
-			#pass #TODO
-			#display a special Coming Soon panel for this
+			gameTournamentPanel.show()
+
 		Global.ButtonIDs.BUTTON_ENHANCED:
 			launch_game.emit(Global.GAMETYPE_ENHANCED)
 		Global.ButtonIDs.BUTTON_ABOUT:
@@ -112,13 +99,7 @@ func _on_button_click_received(buttonID : int):
 
 		Global.ButtonIDs.BUTTON_HIGHSCORES:
 			$HallOfFamePanel.show()
-			#if mainMenuButtons != null: #or is in tree
-			#	$VBoxContainer/CenterContainer.remove_child(mainMenuButtons)
-			
-			#	highScores = highScoresPage.instantiate()
-			#	$VBoxContainer/CenterContainer.add_child(highScores)
-				#settingsMenu.connect("button_clicked", _on_button_click_received)
-	# Settings Menu Buttons
+
 		Global.ButtonIDs.BUTTON_SETTINGS_BACK:
 			$VBoxContainer/CenterContainer.remove_child(settingsMenu)
 			$VBoxContainer/CenterContainer.add_child(mainMenuButtons)
@@ -130,9 +111,7 @@ func _on_button_click_received(buttonID : int):
 			# gather settings (signal ?) or save in settings script directly
 			#  would be better no need to transfert data here, global is global !
 			# as above, go back to main menu ?
-			pass
 
-	# HighScores Menu Buttons
 		_: 
 			Global.debug("unhandled action")
 
@@ -151,3 +130,14 @@ func _on_sound_volume_updated(type: int, volume: int):
 		audio_volume_updated.emit(type, volume)
 	else:
 		Global.debug("unhandled audio type: "+str(type))
+
+
+func _on_game_tournament_panel_continue_tournament(cont : bool):
+	Global.debug("tournament cont: "+str(cont))
+	Global.continue_tournament = cont
+	Global.debug("launch game now")
+	launch_game.emit(Global.GAMETYPE_TOURNAMENT)
+
+
+func _on_game_tournament_panel_back_to_menu():
+	Global.debug("tournament cancelled")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://br48snne8lp04"]
+[gd_scene load_steps=8 format=3 uid="uid://br48snne8lp04"]
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_0j35d"]
 [ext_resource type="Script" path="res://Scripts/main_menu_improved.gd" id="1_ltboi"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://lb3l2tsp01op" path="res://Scenes/help_panel.tscn" id="4_0m6b0"]
 [ext_resource type="PackedScene" uid="uid://cod6gfhmkgr58" path="res://Scenes/about_panel.tscn" id="5_hlvuh"]
 [ext_resource type="PackedScene" uid="uid://bvflowtivbxvn" path="res://Scenes/high_scores.tscn" id="6_5jscf"]
+[ext_resource type="PackedScene" uid="uid://cli4cany8byfo" path="res://Scenes/game_tournament_panel.tscn" id="7_kd0kb"]
 
 [node name="MainMenu-Improved" type="Control"]
 layout_mode = 3
@@ -79,4 +80,10 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="GameTournamentPanel" parent="." instance=ExtResource("7_kd0kb")]
+visible = false
+layout_mode = 1
+
 [connection signal="help_panel_closed" from="HelpPanel" to="." method="_on_help_panel_help_panel_closed"]
+[connection signal="back_to_menu" from="GameTournamentPanel" to="." method="_on_game_tournament_panel_back_to_menu"]
+[connection signal="continue_tournament" from="GameTournamentPanel" to="." method="_on_game_tournament_panel_continue_tournament"]
