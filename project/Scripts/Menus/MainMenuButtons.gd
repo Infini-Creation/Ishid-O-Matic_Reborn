@@ -21,6 +21,10 @@ func _on_high_scores_item_highscores_requested():
 	Global.debug("HighSCores button clicked")
 	button_clicked.emit(Global.ButtonIDs.BUTTON_HIGHSCORES)
 
+func _on_tournament_item_tournament_game_requested():
+	Global.debug("Tournament game button clicked")
+	button_clicked.emit(Global.ButtonIDs.BUTTON_TOURNAMENT)
+	
 func _on_help_item_help_requested():
 	Global.debug("help button clicked")
 	button_clicked.emit(Global.ButtonIDs.BUTTON_HELP)
