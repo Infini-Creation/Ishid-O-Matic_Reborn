@@ -81,8 +81,6 @@ func _ready():
 	game_board = make_2d_array()
 
 	if gameType == Global.GAMETYPE_TOURNAMENT:
-		#too early here, signal from panel handled AFTER !!
-		
 		if Global.continue_tournament == true:
 			tournamentSeed = Global.load_seed()
 			Global.debug("conttour: saved seed= "+str(tournamentSeed))
@@ -91,14 +89,11 @@ func _ready():
 			Global.debug("newtour: saved seed= "+str(tournamentSeed))
 			Global.save_seed(tournamentSeed)
 
-		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text = "Tournament seed="+str(tournamentSeed)
+		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text %= tournamentSeed
 		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".show()
-		
-		# display tournament pop-up : start a new one or continue current
-		# 1=gen new seed & save, 2=load seed
+
 		seed(tournamentSeed)
 		DeckDisplay.init_deck()
-		#display tournament label (later texture maybe)
 
 	init_board()
 	DeckDisplay.deck_is_ready() #not even needed! (process pnt)
