@@ -90,6 +90,7 @@ layout_mode = 2
 
 [connection signal="oneplayer_game_requested" from="ButtonsGroup/ButtonsRow1/OnePlayerItem" to="." method="_on_one_player_item_oneplayer_game_requested"]
 [connection signal="twoplayers_game_requested" from="ButtonsGroup/ButtonsRow1/TwoPlayersItem" to="." method="_on_two_players_item_twoplayers_game_requested"]
+[connection signal="tournament_game_requested" from="ButtonsGroup/ButtonsRow2/TournamentItem" to="." method="_on_tournament_item_tournament_game_requested"]
 [connection signal="settings_requested" from="ButtonsGroup/ButtonsRow3/SettingsItem" to="." method="_on_settings_item_settings_requested"]
 [connection signal="highscores_requested" from="ButtonsGroup/ButtonsRow3/HighScoresItem" to="." method="_on_high_scores_item_highscores_requested"]
 [connection signal="help_requested" from="ButtonsGroup/ButtonsRow4/HelpItem" to="." method="_on_help_item_help_requested"]
