@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://cli4cany8byfo"]
+
+[ext_resource type="Script" path="res://Scripts/game_tournament_panel.gd" id="1_c7av0"]
+[ext_resource type="Texture2D" uid="uid://bhtx7ng8r7s3o" path="res://Arts/Gfx/Panels/GameOverPanel-background.png" id="2_jxoat"]
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="3_a40pq"]
+
+[sub_resource type="SystemFont" id="SystemFont_4np4h"]
+subpixel_positioning = 0
+
+[node name="GameTournamentPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_translate = false
+localize_numeral_system = false
+script = ExtResource("1_c7av0")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 768.0
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+texture = ExtResource("2_jxoat")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/TextureRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/TextureRect2/VBoxContainer"]
+layout_direction = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.188235, 0.12549, 0.188235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.305882, 0, 0.141176)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_4np4h")
+theme_override_font_sizes/font_size = 20
+text = "Default label - you see this ? Please report the issue, thanks."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/TextureRect2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 70
+
+[node name="YesButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_a40pq")
+theme_override_font_sizes/font_size = 28
+text = "Continue "
+
+[node name="NoButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("3_a40pq")
+theme_override_font_sizes/font_size = 28
+text = " New "
+
+[node name="CancelButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("3_a40pq")
+theme_override_font_sizes/font_size = 28
+text = " Cancel "
+
+[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
+[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
