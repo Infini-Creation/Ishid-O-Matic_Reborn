@@ -28,6 +28,10 @@ func _ready():
 		Global.initialize_high_scores()
 		Global.save_high_scores()
 
+#	var tseed = Global.load_seed()
+#	Global.debug("gen seed = "+str(tseed))
+#	Global.save_seed(tseed)
+	
 	currentMusic = randi_range(0, Global.available_musics.size()-1)
 	musicPlayer.stream = Global.available_musics[currentMusic]
 	
@@ -142,8 +146,8 @@ func update_highscores(gameType : String, playerIdx: int, score: Array, fourWays
 		Global.add_high_score(gameType, Global.settings["Players"]["One"], score[0], fourWays[0], tilesRemainning)
 		Global.add_high_score(gameType, Global.settings["Players"]["Two"], score[1], fourWays[1], tilesRemainning)
 	elif gameType == Global.GAMETYPE_TOURNAMENT:
-		pass #TODO
+		Global.add_high_score(gameType, Global.settings["Players"]["One"], score[playerIdx], fourWays[playerIdx], tilesRemainning)
 	elif gameType == Global.GAMETYPE_ENHANCED:
-		pass #TODO
+		Global.add_high_score(gameType, Global.settings["Players"]["One"], score[playerIdx], fourWays[playerIdx], tilesRemainning)
 
 	Global.save_high_scores()
