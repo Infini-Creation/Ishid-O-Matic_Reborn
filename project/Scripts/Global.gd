@@ -123,6 +123,7 @@ var tile_shapes : int = 6
 var previous_scene : String
 var configLoaded : bool = false
 var continue_tournament : bool = true
+var tournamentSeed : int
 
 func save_config() -> bool:
 	var config = ConfigFile.new()

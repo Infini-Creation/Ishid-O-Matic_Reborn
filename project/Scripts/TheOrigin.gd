@@ -146,7 +146,7 @@ func update_highscores(gameType : String, playerIdx: int, score: Array, fourWays
 		Global.add_high_score(gameType, Global.settings["Players"]["One"], score[0], fourWays[0], tilesRemainning)
 		Global.add_high_score(gameType, Global.settings["Players"]["Two"], score[1], fourWays[1], tilesRemainning)
 	elif gameType == Global.GAMETYPE_TOURNAMENT:
-		Global.add_high_score(gameType, Global.settings["Players"]["One"], score[playerIdx], fourWays[playerIdx], tilesRemainning)
+		Global.add_high_score(gameType, Global.settings["Players"]["One"] + " ("+str(Global.tournamentSeed)+")", score[playerIdx], fourWays[playerIdx], tilesRemainning)
 	elif gameType == Global.GAMETYPE_ENHANCED:
 		Global.add_high_score(gameType, Global.settings["Players"]["One"], score[playerIdx], fourWays[playerIdx], tilesRemainning)
 

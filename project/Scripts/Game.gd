@@ -23,7 +23,6 @@ var game_board : Array = []
 var next_tile : Node2D = null
 #var tile_score : int = 0
 var avail_move : int = -1
-var tournamentSeed : int
 
 # to remove soon
 #var game_end : bool = false
@@ -82,21 +81,21 @@ func _ready():
 
 	if gameType == Global.GAMETYPE_TOURNAMENT:
 		if Global.continue_tournament == true:
-			tournamentSeed = Global.load_seed()
-			Global.debug("conttour: saved seed= "+str(tournamentSeed))
+			Global.tournamentSeed = Global.load_seed()
+			Global.debug("conttour: saved seed= "+str(Global.tournamentSeed))
 		else:
-			tournamentSeed = int(Time.get_unix_time_from_system ())
-			Global.debug("newtour: saved seed= "+str(tournamentSeed))
-			Global.save_seed(tournamentSeed)
+			Global.tournamentSeed = int(Time.get_unix_time_from_system ())
+			Global.debug("newtour: saved seed= "+str(Global.tournamentSeed))
+			Global.save_seed(Global.tournamentSeed)
 
-		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text %= tournamentSeed
+		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text %= Global.tournamentSeed
 		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".show()
 
-		seed(tournamentSeed)
+		seed(Global.tournamentSeed)
 		DeckDisplay.init_deck()
 
 	init_board()
-	DeckDisplay.deck_is_ready() #not even needed! (process pnt)
+	##DeckDisplay.deck_is_ready() #not even needed! (process pnt)
 
 	highlight_mode = Global.settings["hints"]
 	if highlight_mode < 0 or highlight_mode > Global.HIGHLIGHT_MODE.size():
