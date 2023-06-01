@@ -16,7 +16,7 @@ var game
 var current_game_type : String = ""
 
 func _ready():
-	Global.debug_enabled = true #tmp
+	Global.debug_enabled = false #tmp
 	Global.load_config()
 	Global.debug("settings="+str(Global.settings))
 	
@@ -28,13 +28,9 @@ func _ready():
 		Global.initialize_high_scores()
 		Global.save_high_scores()
 
-#	var tseed = Global.load_seed()
-#	Global.debug("gen seed = "+str(tseed))
-#	Global.save_seed(tseed)
-	
 	currentMusic = randi_range(0, Global.available_musics.size()-1)
 	musicPlayer.stream = Global.available_musics[currentMusic]
-	
+
 	Global.debug("setting="+str( Global.settings["Audio"]["music"] ))
 
 	if Global.settings["Audio"]["music"] == true:
@@ -52,7 +48,7 @@ func _ready():
 	game = gameScene.instantiate()
 
 	add_child(menu)
-	#get_tree().get_root().print_tree()
+
 	menu.connect("launch_game", _on_game_launched)
 	menu.connect("audio_volume_updated", _on_audio_settings_updated)
 
@@ -76,12 +72,10 @@ func _on_game_launched(gameType : String):
 	remove_child(menu)
 	add_child(game)
 
-	game.connect("game_end", _on_game_is_over) #may not work ??
+	game.connect("game_end", _on_game_is_over)
 
 	if Global.settings["Audio"]["soundEffects"] == true:
 		game.connect("playsound", _on_game_play_soundeffect)
-		#game.connect("tile_put_on_the_board", _on_game_play_tile_soundeffect)
-		#game.connect("fourways", _on_game_fourways_soundeffect)
 		
 	#add gametype, as param,  global or to game
 	#	current_session_data
@@ -98,10 +92,6 @@ func _on_game_play_soundeffect(effect : String):
 			Global.debug("unkown sound effect: "+effect)
 
 
-# instead of a function that play game win/over sound
-# better to add a func that play sound with effect as param
-# (gameover, gamewon, tileplaced, 4ways, ...)
-# event in game => signal(param) to here
 func _on_game_is_over(status : int, playerIdx : int, score : Array, fourWays : Array, tilesRemaining : int):
 	var update_hs : bool = false
 	Global.debug("_on_game_is_over called, status =" + str(status))
@@ -115,8 +105,6 @@ func _on_game_is_over(status : int, playerIdx : int, score : Array, fourWays : A
 
 	elif status == Global.GAME_EXIT_STATUS.USER_QUIT:
 		Global.debug("origin/_ogio: quit")
-		#return to main menu instead, display an intermediate panel first to confirm
-		##get_tree().quit()
 	
 	# that should be done only after GOP button clicked (as well as add menu below)
 	Global.debug("game child will be removed")
@@ -124,7 +112,6 @@ func _on_game_is_over(status : int, playerIdx : int, score : Array, fourWays : A
 	
 	if update_hs == true:
 		Global.debug("update HS")
-		#game needs to pass values to here
 		update_highscores(current_game_type, playerIdx, score, fourWays, tilesRemaining)
 		
 	current_game_type = ""
