@@ -3,7 +3,7 @@ extends Node2D
 @onready var DeckDisplay = $MarginContainer/HBoxContainer/DeckDisplay
 
 func _init():
-	print("DDT: _init called")
+	Global.debug("DDT: _init called")
 
 
 func _ready():
