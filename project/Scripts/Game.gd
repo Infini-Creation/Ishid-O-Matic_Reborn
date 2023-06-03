@@ -121,12 +121,6 @@ func _input(event):
 	elif event.is_action_pressed("FourWaysDebug"):
 		Global.debug("fake four ways event")
 		fakeFourWays = true
-	elif event.is_action_pressed("gameoverlossDebug"):
-		Global.debug("fake game over LOSS")
-		game_over(Global.GAME_EXIT_STATUS.GAME_LOSS)
-	elif event.is_action_pressed("gameoverwinDebug"):
-		Global.debug("fake game over WIN")
-		game_over(Global.GAME_EXIT_STATUS.GAME_WON)
 
 
 func _process(_delta):
