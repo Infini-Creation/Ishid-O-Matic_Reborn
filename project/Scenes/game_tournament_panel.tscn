@@ -27,7 +27,7 @@ offset_bottom = 768.0
 layout_mode = 2
 texture = ExtResource("2_jxoat")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/TextureRect2"]
+[node name="VBoxContainerA" type="VBoxContainer" parent="CenterContainer/TextureRect2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +37,7 @@ grow_vertical = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/TextureRect2/VBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/TextureRect2/VBoxContainerA"]
 layout_direction = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.188235, 0.12549, 0.188235, 1)
@@ -47,38 +47,103 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
 theme_override_font_sizes/font_size = 20
-text = "Default label - you see this ? Please report the issue, thanks."
+text = "Do you want to continue the current tournament or to start a new one ?"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/TextureRect2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/TextureRect2/VBoxContainerA"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 70
 
-[node name="YesButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer"]
+[node name="YesButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
 text = "Continue "
 
-[node name="NoButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer"]
+[node name="NoButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
 text = " New "
 
-[node name="CancelButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer"]
+[node name="CancelButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
 text = " Cancel "
 
-[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
-[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
-[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[node name="VBoxContainerB" type="VBoxContainer" parent="CenterContainer/TextureRect2"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/TextureRect2/VBoxContainerB"]
+layout_direction = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.188235, 0.12549, 0.188235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.305882, 0, 0.141176)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("SystemFont_4np4h")
+theme_override_font_sizes/font_size = 20
+text = "Enter a custom seed or go back to use a random one."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SeedInput" type="LineEdit" parent="CenterContainer/TextureRect2/VBoxContainerB"]
+visible = false
+layout_mode = 2
+placeholder_text = "Enter a new seed"
+alignment = 1
+max_length = 24
+virtual_keyboard_type = 2
+clear_button_enabled = true
+caret_blink = true
+
+[node name="SeedInput2" type="SpinBox" parent="CenterContainer/TextureRect2/VBoxContainerB"]
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 1e+08
+alignment = 1
+update_on_text_changed = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/TextureRect2/VBoxContainerB"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 70
+
+[node name="bOKButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_a40pq")
+theme_override_font_sizes/font_size = 28
+text = " Use mine "
+
+[node name="bCancelButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("3_a40pq")
+theme_override_font_sizes/font_size = 28
+text = " Random "
+
+[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
+[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
+[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer/bOKButton" to="." method="_on_b_ok_button_pressed"]
+[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer/bCancelButton" to="." method="_on_b_cancel_button_pressed"]
