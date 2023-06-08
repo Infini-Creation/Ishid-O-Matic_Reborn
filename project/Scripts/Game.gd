@@ -112,14 +112,27 @@ func _input(event):
 		quit = true
 	elif event.is_action_pressed("Return_To_Menu"):
 		quit = true
-		#emit signal when added
 	elif event.is_action_pressed("Highlight_Mode"):
-		Global.debug("previous enum value=" + str(highlight_mode))
-		highlight_mode += 1
-		highlight_mode %= Global.HIGHLIGHT_MODE.size()
-		Global.debug("previous enum value=" + str(highlight_mode))
-		# update highlighted cells (just reemit signal ?? => not redo check avail move call)
-		check_available_move(highlight_mode)
+		if gameType == Global.GAMETYPE_TOURNAMENT:
+			Global.debug("Help disabled in tournament mode")
+		else:
+			Global.debug("previous enum value=" + str(highlight_mode))
+			highlight_mode += 1
+			highlight_mode %= Global.HIGHLIGHT_MODE.size()
+			Global.debug("previous enum value=" + str(highlight_mode))
+			# update highlighted cells (just reemit signal ?? => not redo check avail move call)
+			check_available_move(highlight_mode)
+	elif event.is_action_pressed("Undo"):
+		if gameType == Global.GAMETYPE_TOURNAMENT:
+			Global.debug("Undo disabled in tournament mode")
+		else:
+			pass
+	elif event.is_action_pressed("Redo"):
+		if gameType == Global.GAMETYPE_TOURNAMENT:
+			Global.debug("Redo disabled in tournament mode")
+		else:
+			pass
+	# to remove before release
 	elif event.is_action_pressed("FourWaysDebug"):
 		Global.debug("fake four ways event")
 		fakeFourWays = true
