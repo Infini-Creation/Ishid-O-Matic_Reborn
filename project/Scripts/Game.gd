@@ -84,7 +84,9 @@ func _ready():
 			Global.tournamentSeed = Global.load_seed()
 			Global.debug("conttour: saved seed= "+str(Global.tournamentSeed))
 		else:
-			Global.tournamentSeed = int(Time.get_unix_time_from_system ())
+			#get seed provided by user if any
+			if Global.tournamentSeed == null:
+				Global.tournamentSeed = int(Time.get_unix_time_from_system ())
 			Global.debug("newtour: saved seed= "+str(Global.tournamentSeed))
 			Global.save_seed(Global.tournamentSeed)
 
