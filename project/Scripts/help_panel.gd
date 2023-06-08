@@ -6,7 +6,8 @@ extends Control
 	$CenterContainer/VBoxContainer/CenterContainer/Page3,
 	$CenterContainer/VBoxContainer/CenterContainer/Page4,
 	$CenterContainer/VBoxContainer/CenterContainer/Page5,
-	$CenterContainer/VBoxContainer/CenterContainer/Page6
+	$CenterContainer/VBoxContainer/CenterContainer/Page6,
+	$CenterContainer/VBoxContainer/CenterContainer/Page7
 ]
 
 signal help_panel_closed
