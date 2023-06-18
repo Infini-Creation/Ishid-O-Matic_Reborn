@@ -229,7 +229,11 @@ text = "Controls
 
 Put a tile on the board using left mouse button
 
-H - highlight mode, cycling trough: None, first move available, all possible moves, a random move and the move giving you the best score (not yet implemented).
+H - highlight mode, cycling trough: None, first move available, all possible moves, a random move and the move giving you the best score.
+U - undo move (TODO)
+R - redo move (TODO)
+
+All these help are disabled in tournament mode.
 
 ESC - quit game, return to main menu"
 horizontal_alignment = 1
