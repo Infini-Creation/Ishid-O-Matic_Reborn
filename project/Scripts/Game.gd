@@ -23,6 +23,7 @@ var game_board : Array = []
 var next_tile : Node2D = null
 #var tile_score : int = 0
 var avail_move : int = -1
+var lastMove : Vector2
 
 # to remove soon
 #var game_end : bool = false
@@ -55,6 +56,7 @@ var deck : Array  #unused, to remove
 @onready var gameLossPanel = $GameOverPanel
 @onready var gameWinPanel = $GameWinPanel
 @onready var gameQuitPanel = $GameQuitPanel
+@onready var overlay = $BoardOverlay
 
 var game_end_status : int = -1
 
@@ -126,11 +128,13 @@ func _input(event):
 		if gameType == Global.GAMETYPE_TOURNAMENT:
 			Global.debug("Undo disabled in tournament mode")
 		else:
+			#TODO prevent move to be done while undoing previous one !
 			pass
 	elif event.is_action_pressed("Redo"):
 		if gameType == Global.GAMETYPE_TOURNAMENT:
 			Global.debug("Redo disabled in tournament mode")
 		else:
+			#TODO prevent move to be done while redoing previous one !
 			pass
 	# to remove before release
 	elif event.is_action_pressed("FourWaysDebug"):
@@ -140,11 +144,13 @@ func _input(event):
 
 func _process(_delta):
 	if quit:
+		overlay.hide()
 		game_over(Global.GAME_EXIT_STATUS.USER_QUIT) # add another param win/loss/exit
 		return
 
 	if game_end_status >= 0:
 		Global.debug("_p GES="+str(game_end_status))
+		overlay.hide()
 		return
 
 	if next_tile == null:
@@ -171,7 +177,8 @@ func _process(_delta):
 
 			if (check_position_ok(mpos)):
 				Global.debug("position ok, proceed nt="+str(next_tile))
-				
+				lastMove = mpos
+
 				var potential_tile_score = check_adjacent_tiles(next_tile, mpos)
 				if potential_tile_score > 0: ## true: ##tmp test 
 					add_tile(mpos, next_tile)
@@ -561,6 +568,8 @@ func _on_game_quit_panel_quit(confirm : bool):
 	else:
 		Global.debug("keep playing")
 		gameQuitPanel.hide()
+		#if overlay.visible == false: #check useless maybe
+		overlay.show()
 		
 		# reset game quit setting
 		quit = false
