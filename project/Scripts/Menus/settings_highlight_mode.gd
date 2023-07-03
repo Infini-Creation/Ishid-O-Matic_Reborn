@@ -30,7 +30,7 @@ func load_settings(updated_highlight_mode : int) -> void:
 		##"%10s" % highlight_text_mode[highlight_mode]
 
 func _on_h_slider_value_changed(value : int):
-	print(highlight_text_mode[0])
-	print(highlight_text_mode[value])
+	Global.debug(highlight_text_mode[0])
+	Global.debug(highlight_text_mode[value])
 	VolumeValue.text = "%10s" % highlight_text_mode[value]
 	settings_updated.emit(value)
