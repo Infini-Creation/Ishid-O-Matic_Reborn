@@ -63,6 +63,10 @@ func _ready():
 	mainMenuButtons = MainMenuButtons.instantiate()
 	$VBoxContainer/CenterContainer.add_child(mainMenuButtons)
 	mainMenuButtons.connect("button_clicked", _on_button_click_received)
+	
+	# Quit button is useless for Web export (does nothing) so hide it in such case
+	if OS.get_name() == "Web":
+		MainMenuButtons.hide_quit_button()
 
 
 func _on_button_click_received(buttonID : int):

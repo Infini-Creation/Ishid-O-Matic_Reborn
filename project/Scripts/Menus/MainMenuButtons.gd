@@ -5,6 +5,9 @@ signal button_clicked(buttonID : int)
 func _ready():
 	pass
 
+func hide_quit_button():
+	$ButtonsGroup/ButtonsRow5/QuitItem.hide()
+
 func _on_one_player_item_oneplayer_game_requested():
 	Global.debug("1P game button clicked")
 	button_clicked.emit(Global.ButtonIDs.BUTTON_1PGAME)
