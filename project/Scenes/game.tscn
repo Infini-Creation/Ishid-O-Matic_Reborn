@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2ahme0nrumhy"]
+[gd_scene load_steps=12 format=3 uid="uid://d2ahme0nrumhy"]
 
 [ext_resource type="Script" path="res://Scripts/BoardOverlay.gd" id="1_4a5n6"]
 [ext_resource type="Texture2D" uid="uid://ty2ekqkwt1mb" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_uawno"]
 [ext_resource type="PackedScene" uid="uid://dqqc553edp67k" path="res://Scenes/game_win_panel.tscn" id="8_fy08i"]
 [ext_resource type="PackedScene" uid="uid://cwmeqnmocd8lr" path="res://Scenes/game_quitconfirm_panel.tscn" id="9_akd7t"]
+[ext_resource type="PackedScene" uid="uid://cwfcdv52iraox" path="res://Scenes/final_score_panel.tscn" id="11_vro1l"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_f3kqo")
@@ -125,9 +126,14 @@ z_index = 4
 visible = false
 z_index = 4
 
+[node name="FinalScorePanel" parent="." instance=ExtResource("11_vro1l")]
+visible = false
+z_index = 4
+
 [connection signal="highlight_board_cell" from="." to="BoardOverlay" method="_on_game_highlight_board_cell"]
 [connection signal="deck_empty" from="UI/VBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_empty"]
 [connection signal="deck_initialized" from="UI/VBoxContainer/DeckDisplay" to="grid" method="_on_deck_display_deck_initialized"]
 [connection signal="is_closed" from="GameOverPanel" to="." method="_on_game_over_panel_is_closed"]
 [connection signal="is_closed" from="GameWinPanel" to="." method="_on_game_win_panel_is_closed"]
 [connection signal="quit" from="GameQuitPanel" to="." method="_on_game_quit_panel_quit"]
+[connection signal="is_closed" from="FinalScorePanel" to="." method="_on_final_score_panel_is_closed"]
