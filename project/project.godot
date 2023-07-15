@@ -65,6 +65,11 @@ Redo={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Internationalization/translations.en.translation", "res://Internationalization/translations.fr.translation")
+locale/test="fr"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
