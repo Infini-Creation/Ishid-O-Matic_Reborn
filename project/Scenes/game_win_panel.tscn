@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqqc553edp67k"]
+[gd_scene load_steps=5 format=3 uid="uid://dqqc553edp67k"]
 
 [ext_resource type="Script" path="res://Scripts/game_win_panel.gd" id="1_ynoy0"]
 [ext_resource type="Texture2D" uid="uid://bhtx7ng8r7s3o" path="res://Arts/Gfx/Panels/GameOverPanel-background.png" id="2_ojc4b"]
-[ext_resource type="Texture2D" uid="uid://crgkocvfytwc8" path="res://Arts/Gfx/Panels/GameOverPanel-background-old.png" id="3_0jnkr"]
 
 [sub_resource type="Shortcut" id="Shortcut_mf6hy"]
 
@@ -67,7 +66,6 @@ offset_right = 271.0
 offset_bottom = -89.0
 grow_horizontal = 2
 grow_vertical = 2
-auto_translate = false
 localize_numeral_system = false
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -75,8 +73,8 @@ theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/normal_font_size = 42
 bbcode_enabled = true
-text = "[center][wave]You WIN ![/wave]
-[rainbow]CONGRATULATIONS[/rainbow][/center]"
+text = "[center][wave]GAMEWINTITLE[/wave]
+[rainbow]GAMEWINTEXT[/rainbow][/center]"
 scroll_active = false
 shortcut_keys_enabled = false
 
@@ -85,7 +83,6 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("3_0jnkr")
 stretch_mode = 5
 
 [connection signal="pressed" from="CenterContainer/TextureButton" to="." method="_on_texture_button_pressed"]
