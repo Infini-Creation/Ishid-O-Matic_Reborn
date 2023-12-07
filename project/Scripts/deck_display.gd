@@ -2,8 +2,6 @@ extends Node2D
 
 # tile: 24x24, spaces: h=4 v=4
 
-@export var gameType : String
-
 signal deck_initialized
 signal deck_empty
 
@@ -14,7 +12,7 @@ signal some_tiles_removed
 var deck : Array = []
 var next_tile : Node2D = null
 
-@onready var previewNextTileDisplay = $MarginContainer/VBoxContainer/NextTileDisplay_Background/NextTileDisplay
+@onready var previewNextTileDisplay = $MarginContainer/VBoxContainer/NextTileDisplay_Background/NextTileDisplay2
 
 func _ready():
 	Global.debug("DeckDisplay: _ready called")
@@ -28,27 +26,20 @@ func init_deck():
 	var tile : Node2D
 
 	deck.clear()
-	if gameType == null or (gameType!= null and gameType != Global.GAMETYPE_ENHANCED):
-		for shape in Global.avail_tile_shapes:
-			# there are two of the same tiles in the deck, range (1,3) to loop twice
-			# hardcoded value to update (tile_repetition/dupe_in_deck)
+	for shape in Global.avail_tile_shapes:
+		# there are two of the same tiles in the deck, range (1,3) to loop twice
+		# hardcoded value to update (tile_repetition/dupe_in_deck)
+		for i in range(1,3):
+			for color in Global.avail_tile_colors:
+				tile = Global.avail_tile_shapes[shape].instantiate()
+				tile.get_node("tile symbol").modulate = Global.avail_tile_colors[color]
+				tile.color = color
+				deck.append(tile)
+				#for game win test: break loop after deck filled with 12 tiles or so
 			
-			#HERE new tile => dup array to get the right count
-			#	no modulate, set color according to tile name Ax, x=color to pick/set
-			for i in range(1,3):
-				for color in Global.avail_tile_colors:
-					tile = Global.avail_tile_shapes[shape].instantiate()
-					tile.get_node("tile symbol").modulate = Global.avail_tile_colors[color]
-					tile.color = color
-					deck.append(tile)
-					#for game win test: break loop after deck filled with 12 tiles or so
-				
-		#debug("Decktmp("+str(deck.size())+")=["+str(deck)+"]")
-		deck.shuffle()
-		Global.debug("ID DecktmpS("+str(deck.size())+")=["+str(deck)+"]")
-	else:
-		deck.resize(2)
-	
+	#debug("Decktmp("+str(deck.size())+")=["+str(deck)+"]")
+	deck.shuffle()
+	Global.debug("ID DecktmpS("+str(deck.size())+")=["+str(deck)+"]")
 	#update_preview.emit(preview_next_tile())
 	previewNextTileDisplay.add_child(preview_next_tile())
 	##no deck_initialized.emit(deck)
@@ -68,7 +59,7 @@ func preview_next_tile() -> Node2D:
 		tile = Global.avail_tile_shapes[deck[0].shape].instantiate()
 		tile.color = deck[0].color
 		tile.get_node("tile symbol").modulate = Global.avail_tile_colors[deck[0].color]
-		tile.position += Vector2(32,32)		#beware!
+		tile.position += Vector2(32,32)
 	return tile
 
 
@@ -77,20 +68,17 @@ func pick_next_tile() -> Node2D:
 	if tile != null:
 		previewNextTileDisplay.add_child(tile)
 	
-	if gameType == null or (gameType!= null and gameType != Global.GAMETYPE_ENHANCED):
-		tile = deck.pop_front()
-		Global.debug("PiNT: (ds="+str(deck.size())+")  Tile=["+str(tile)+"]")
+	tile = deck.pop_front()
+	Global.debug("PiNT: (ds="+str(deck.size())+")  Tile=["+str(tile)+"]")
 
-		if (deck.size() > 0):
-			Global.debug("TP sig emitted")
-			tile.position += Vector2(32,32)
-			tile_picked.emit(tile) #should be deck[0] ??
-			#tile_picked.emit(deck[0])
-		else:
-			deck_empty.emit()
+	if (deck.size() > 0):
+		Global.debug("TP sig emitted")
+		tile.position += Vector2(32,32)
+		tile_picked.emit(tile) #should be deck[0] ??
+		#tile_picked.emit(deck[0])
 	else:
-		#generate a random tile
-		pass
+		deck_empty.emit()
+		
 	#update_preview.emit(preview_next_tile())
 	#old previewNextTileDisplay.add_child(preview_next_tile())
 	return tile
