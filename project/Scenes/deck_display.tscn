@@ -1,12 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://deac0ul1h72g8"]
+[gd_scene load_steps=12 format=3 uid="uid://deac0ul1h72g8"]
 
 [ext_resource type="Script" path="res://Scripts/deck_display.gd" id="1_2v1u3"]
-[ext_resource type="Script" path="res://Scripts/DeckDisplay_NextTileDisplay.gd" id="2_jnur7"]
 [ext_resource type="Texture2D" uid="uid://csi57sic10a42" path="res://Arts/Gfx/Panels/DeckPanel.png" id="2_r6gxt"]
 [ext_resource type="Texture2D" uid="uid://cc5gbvrvqwv1u" path="res://Arts/Gfx/Panels/PreviewNextTile-Display-background.png" id="3_ti0vi"]
-[ext_resource type="Script" path="res://Scripts/DeckDisplay_TmpAvailDeckTiles.gd" id="4_mfjrp"]
-[ext_resource type="Texture2D" uid="uid://bofaok261yf5a" path="res://Arts/Gfx/Tiles/dummy set/tile-A1.png" id="4_s3sec"]
-[ext_resource type="Script" path="res://Scripts/DeckDisplay_NextTileDisplayC.gd" id="6_l6e24"]
+[ext_resource type="Script" path="res://Scripts/DeckDisplay_AvailDeckTiles.gd" id="6_fmiiv"]
 [ext_resource type="Texture2D" uid="uid://mgm1jfttmsj8" path="res://Arts/Gfx/Panels/MiniDeck-Display-Background.png" id="6_y17tg"]
 [ext_resource type="Texture2D" uid="uid://c400jrfnwotpr" path="res://Arts/Gfx/Panels/Copyright-Display-Background.png" id="8_e5rxw"]
 [ext_resource type="Script" path="res://Scripts/DeckDisplay-AvailMovesCounter.gd" id="9_en813"]
@@ -47,26 +44,13 @@ alignment = 1
 layout_mode = 2
 texture = ExtResource("3_ti0vi")
 
-[node name="NextTileDisplay" type="TextureRect" parent="MarginContainer/VBoxContainer/NextTileDisplay_Background"]
-visible = false
-layout_mode = 2
-offset_left = 83.0
-offset_top = 46.0
-offset_right = 147.0
-offset_bottom = 110.0
-size_flags_horizontal = 4
-size_flags_vertical = 0
-texture = ExtResource("4_s3sec")
-script = ExtResource("2_jnur7")
-
-[node name="NextTileDisplay2" type="Control" parent="MarginContainer/VBoxContainer/NextTileDisplay_Background"]
+[node name="NextTileDisplay" type="Control" parent="MarginContainer/VBoxContainer/NextTileDisplay_Background"]
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 0
 offset_left = 84.0
 offset_top = 46.0
 offset_right = 148.0
 offset_bottom = 110.0
-script = ExtResource("6_l6e24")
 
 [node name="AvailDeckTiles_Background" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -102,7 +86,7 @@ theme_override_font_sizes/font_size = 24
 text = "--"
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("4_mfjrp")
+script = ExtResource("6_fmiiv")
 
 [node name="Label-AM" type="Label" parent="MarginContainer/VBoxContainer/AvailDeckTiles_Background"]
 layout_mode = 2
@@ -164,5 +148,4 @@ vertical_alignment = 1
 
 [connection signal="deck_empty" from="." to="MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailDeckTiles" method="_on_deck_display_deck_empty"]
 [connection signal="some_tiles_removed" from="." to="MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailDeckTiles" method="_on_deck_display_some_tiles_removed"]
-[connection signal="tile_picked" from="." to="MarginContainer/VBoxContainer/NextTileDisplay_Background/NextTileDisplay2" method="_on_deck_display_tile_picked"]
 [connection signal="tile_picked" from="." to="MarginContainer/VBoxContainer/AvailDeckTiles_Background/AvailDeckTiles" method="_on_deck_display_tile_picked"]
