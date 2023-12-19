@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Ishi-go D Ot-matic"
+config/name="Ishid-O-Matic Reborn"
 run/main_scene="res://Scenes/the_origin.tscn"
-config/features=PackedStringArray("4.1", "GL Compatibility")
+config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/image="res://Arts/Gfx/ishid-o-matic-splashscreen-idea.png"
 config/icon="res://icon.svg"
 
@@ -26,6 +26,11 @@ window/size/viewport_width=1024
 window/size/viewport_height=768
 window/size/resizable=false
 window/stretch/mode="canvas_items"
+
+[filesystem]
+
+import/blender/enabled=false
+import/fbx/enabled=false
 
 [input]
 
