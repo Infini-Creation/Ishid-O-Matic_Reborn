@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://0js83h3tu5ft"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://0js83h3tu5ft"]
+
+[sub_resource type="SystemFont" id="SystemFont_u2fjc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lo8e6"]
 bg_color = Color(0.286275, 0.219608, 0.113725, 1)
@@ -93,6 +95,7 @@ shadow_offset = Vector2(4, 4)
 
 [resource]
 Button/colors/testc = Color(0, 0, 0, 1)
+Button/fonts/font = SubResource("SystemFont_u2fjc")
 Button/styles/focus = SubResource("StyleBoxFlat_lo8e6")
 Button/styles/hover = SubResource("StyleBoxFlat_po5tk")
 Button/styles/normal = SubResource("StyleBoxFlat_iaieh")
