@@ -18,7 +18,8 @@ signal audio_volume_updated(type: int, volume: int)
 func _ready():
 	Global.debug("MainMenu: generate tile stripe")
 	
-	var tile : Node2D = null
+	var raw_stone : PackedScene = preload("res://Scenes/tile.tscn")
+	var tile : Tile = null
 	var tilesStripe : Array = []
 	var tilesDeck : Array = []
 	var StripeIdx : int = 0
@@ -28,14 +29,13 @@ func _ready():
 	tilesStripe.resize(16)
 	tilesDeck.resize(36)
 
-	#later: to update/modify
-	for shape in Global.avail_tile_shapes:
-		for color in Global.avail_tile_colors:
-			tile = Global.avail_tile_shapes[shape].instantiate()
-			tile.get_node("tile symbol").modulate = Global.avail_tile_colors[color]
-			tile.color = color
-			tilesDeck[deckIdx] = tile
-			deckIdx += 1
+	# to replace, find some way to NOT deal with this directly using DeckDisplay or other
+	for stone in Global.Stones.values():
+		tile = raw_stone.instantiate()
+		tile.get_node("Symbol").texture = stone
+		
+		tilesDeck[deckIdx] = tile
+		deckIdx += 1
 
 	tilesDeck.shuffle()
 	Global.debug("td="+str(tilesDeck.size()))
@@ -46,15 +46,14 @@ func _ready():
 	while idx <= 32:
 		Global.debug("idx="+str(idx))
 		tile = tilesDeck[idx]
-		tile.position.x += 64 * StripeIdx + 32
-		tile.position.y += 32
+		tile.position.x += 64 * StripeIdx
 		$VBoxContainer/TopTilesStripe.add_child(tile)
 		idx += 1
 		
 		tile = null
 		tile = tilesDeck[idx]
-		tile.position.x += 64 * StripeIdx +32
-		tile.position.y = $VBoxContainer/BottomTilesStripe.position.y + 32
+		tile.position.x += 64 * StripeIdx
+		tile.position.y = $VBoxContainer/BottomTilesStripe.position.y
 		$VBoxContainer/BottomTilesStripe.add_child(tile)
 		idx += 1
 		StripeIdx += 1
