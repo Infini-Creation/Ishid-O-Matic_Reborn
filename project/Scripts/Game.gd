@@ -34,7 +34,7 @@ const FourWaysBonus = [25, 50, 100, 200, 400, 600, 800, 1000, 5000, 10000, 25000
 const TilesRemainingBonus = {2: 100, 1: 500, 0: 1000}
 const ScoreMultiplier = 2
 
-const TileOffset = 32
+const TileOffset = 0
 
 var current_player : int = 0
 var playersScores : Array = [0, 0]
@@ -99,7 +99,6 @@ func _ready():
 		DeckDisplay.init_deck()
 
 	init_board()
-	##DeckDisplay.deck_is_ready() #not even needed! (process pnt)
 
 	highlight_mode = Global.settings["hints"]
 	if highlight_mode < 0 or highlight_mode > Global.HIGHLIGHT_MODE.size():
@@ -136,7 +135,7 @@ func _input(event):
 		else:
 			#TODO prevent move to be done while redoing previous one !
 			pass
-	# to remove before release
+	# to remove before release (action as well)
 	elif event.is_action_pressed("FourWaysDebug"):
 		Global.debug("fake four ways event")
 		fakeFourWays = true
@@ -311,7 +310,6 @@ func check_available_move(selected_highlight_mode : Global.HIGHLIGHT_MODE) -> in
 	elif (selected_highlight_mode == Global.HIGHLIGHT_MODE.HIGHLIGHT_NONE):
 		#need to clear overlay one time
 		highlight_cell([])
-		#pass
 
 	possible_moves = cells.size()
 	Global.debug("CAM: availmoves=" + str(possible_moves))
@@ -339,11 +337,11 @@ func add_tile(grid_position : Vector2, tile : Node2D) -> void:
 	Global.debug("AT: addtile called: pos=["+str(grid_position)+"] t=["+str(tile)+"]")
 	tile.position = grid_to_pixel(grid_position.x, grid_position.y)
 	game_board[grid_position.x][grid_position.y] = tile
+	#reparent tile ?
 	add_child(tile)
 	#update_score(tile_score)
 
 
-#replace : bool => int (score) 0 or -1 as previous false
 func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> int:
 	
 	# 2D array where second level hold same color (idx 0) and same shape (idx 1) properties
