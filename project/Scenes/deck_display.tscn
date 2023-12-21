@@ -52,6 +52,12 @@ offset_top = 46.0
 offset_right = 148.0
 offset_bottom = 110.0
 
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/NextTileDisplay_Background/NextTileDisplay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+stretch_mode = 5
+
 [node name="AvailDeckTiles_Background" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
