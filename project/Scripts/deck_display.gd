@@ -3,13 +3,13 @@ extends Node2D
 # tile: 24x24, spaces: h=4 v=4
 
 @export var gameType : String
+var raw_stone : PackedScene = preload("res://Scenes/tile.tscn")
 
 signal deck_initialized
 signal deck_empty
 
 signal tile_picked
 signal some_tiles_removed
-#signal update_preview
 
 var deck : Array = []
 var next_tile : Node2D = null
@@ -25,33 +25,28 @@ func _ready():
 
 
 func init_deck():
-	var tile : Node2D
-
+	var tile : Tile = null
+	
 	deck.clear()
 	if gameType == null or (gameType!= null and gameType != Global.GAMETYPE_ENHANCED):
-		for shape in Global.avail_tile_shapes:
-			# there are two of the same tiles in the deck, range (1,3) to loop twice
-			# hardcoded value to update (tile_repetition/dupe_in_deck)
-			
-			#HERE new tile => dup array to get the right count
-			#	no modulate, set color according to tile name Ax, x=color to pick/set
-			for i in range(1,3):
-				for color in Global.avail_tile_colors:
-					tile = Global.avail_tile_shapes[shape].instantiate()
-					tile.get_node("tile symbol").modulate = Global.avail_tile_colors[color]
-					tile.color = color
-					deck.append(tile)
-					#for game win test: break loop after deck filled with 12 tiles or so
-				
+		for stone : String in Global.Stones:	#need to be done twice!
+			tile = raw_stone.instantiate()
+			tile.get_node("Symbol").texture = Global.Stones[stone]
+			tile.color = "color" + stone.right(1)
+			tile.shape = "shape" + stone.left(1)
+			print("tcolor=" + tile.color + "  tshape=" + tile.shape)
+			deck.append(tile)
+			deck.append(tile.duplicate())
+
 		#debug("Decktmp("+str(deck.size())+")=["+str(deck)+"]")
 		deck.shuffle()
 		Global.debug("ID DecktmpS("+str(deck.size())+")=["+str(deck)+"]")
 	else:
 		deck.resize(2)
-	
-	#update_preview.emit(preview_next_tile())
-	previewNextTileDisplay.add_child(preview_next_tile())
-	##no deck_initialized.emit(deck)
+
+	#This is init deck so no check are required, it is safe to assume everything is set as it should be
+	previewNextTileDisplay.get_node("TextureRect").texture = deck[0].get_node("Symbol").texture
+
 
 
 #useless, to remove
@@ -62,20 +57,19 @@ func deck_is_ready():
 
 #to be used with NTD
 func preview_next_tile() -> Node2D:
-	var tile : Node2D
+	var tile : Tile
 	
 	if deck.size() > 0:
-		tile = Global.avail_tile_shapes[deck[0].shape].instantiate()
-		tile.color = deck[0].color
-		tile.get_node("tile symbol").modulate = Global.avail_tile_colors[deck[0].color]
-		tile.position += Vector2(32,32)		#beware!
+		# to change here too
+		tile = deck[0]
+
 	return tile
 
 
 func pick_next_tile() -> Node2D:
 	var tile = preview_next_tile()
 	if tile != null:
-		previewNextTileDisplay.add_child(tile)
+		previewNextTileDisplay.get_node("TextureRect").texture = tile.get_node("Symbol").texture  #.add_child(tile)
 	
 	if gameType == null or (gameType!= null and gameType != Global.GAMETYPE_ENHANCED):
 		tile = deck.pop_front()
@@ -83,7 +77,6 @@ func pick_next_tile() -> Node2D:
 
 		if (deck.size() > 0):
 			Global.debug("TP sig emitted")
-			tile.position += Vector2(32,32)
 			tile_picked.emit(tile) #should be deck[0] ??
 			#tile_picked.emit(deck[0])
 		else:
@@ -91,8 +84,7 @@ func pick_next_tile() -> Node2D:
 	else:
 		#generate a random tile
 		pass
-	#update_preview.emit(preview_next_tile())
-	#old previewNextTileDisplay.add_child(preview_next_tile())
+
 	return tile
 
 
@@ -164,9 +156,7 @@ func _pick_next_tile(immediate_update_display : bool = true) -> Node2D:
 		# Preview next tile in deck
 		if immediate_update_display == true:
 			if (deck.size() > 0):
-				##future tile => tile_picked.emit(deck[0])
 				Global.debug("TP sig emitted")
-				#tile_picked.emit(tile) #should be deck[0]
 				tile_picked.emit(deck[0])
 			else:
 				deck_empty.emit() #need to update deck display count !!
@@ -186,24 +176,4 @@ func _update() -> void:
 
 
 func _preview_next_tile() -> Node2D:
-	return deck[0].duplicate()
-
-#tmp, not here!
-func old_preview_next_tile() -> Node2D:
-	var tile : Node2D
-	
-	#if (following_tile != null):
-	#	preview_tile.emit(following_tile, avail_tile_colors[following_tile.color])
-	#	tile = following_tile
-	if (deck.size() > 0):
-		tile = deck[0]
-
-		if (tile != null):
-			##preview_tile.emit(tile, avail_tile_colors[tile.color])
-			return tile
-		else:
-			return null
-	else:
-		#print("No more tile") +~emit signal nomoretile
-		return null  
-		# reset tile text or add an empty deck icon
+	return deck[0].duplicate(DUPLICATE_SIGNALS|DUPLICATE_GROUPS|DUPLICATE_SCRIPTS)
