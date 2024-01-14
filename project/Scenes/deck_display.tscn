@@ -16,6 +16,7 @@ subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_0yv0r"]
 font_names = PackedStringArray("Estrangelo Edessa")
+subpixel_positioning = 0
 
 [sub_resource type="FontVariation" id="FontVariation_rr01s"]
 base_font = SubResource("SystemFont_0yv0r")
