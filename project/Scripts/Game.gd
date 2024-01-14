@@ -104,8 +104,12 @@ func _ready():
 	if highlight_mode < 0 or highlight_mode > Global.HIGHLIGHT_MODE.size():
 		highlight_mode = 0
 
+	# default is one player game
+	$CenterContainer/FinalScorePanel.numberOfPlayers = 1
+
 	if gameType == Global.GAMETYPE_TWOPLAYERS:
 		Players_Panels[current_player].highlight_current_player(1.0)
+		$CenterContainer/FinalScorePanel.numberOfPlayers = 2
 
 
 func _input(event):
@@ -212,7 +216,11 @@ func _process(_delta):
 func setup(number_of_players : int, game_type: String) -> void:
 	Global.debug("setup called gt => " + game_type + "  nbp="+str(number_of_players))
 	gameType = game_type
-	numberOfPlayers = number_of_players
+	numberOfPlayers = number_of_players #not used !
+	if gameType == Global.GAMETYPE_TWOPLAYERS:
+		numberOfPlayers = 2
+	else:
+		numberOfPlayers = 1
 
 
 func make_2d_array():
@@ -536,6 +544,14 @@ func game_over(status : int):
 
 # do the same for game win panel
 func _on_game_over_panel_is_closed():
+	#HERE: hide game over panel !!
+	$GameOverPanel.hide()
+	$CenterContainer/FinalScorePanel.show()
+	$CenterContainer/FinalScorePanel.setup(playersScores[current_player], fourWaysCounts[current_player], DeckDisplay.get_deck_count())
+	
+	#current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count()
+	# ?? $CenterContainer/FinalScorePanel.set_score(playersScores, numberOfPlayers)
+
 	Global.debug("GOP closed, emit game_end signal")
 	game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 	
@@ -553,14 +569,20 @@ func _on_deck_display_deck_empty():
 
 
 func _on_game_win_panel_is_closed():
+	$CenterContainer/FinalScorePanel.show()
+	
+	#current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count()
+	$CenterContainer/FinalScorePanel.setup(playersScores[current_player], fourWaysCounts[current_player], DeckDisplay.get_deck_count())
+	#$CenterContainer/FinalScorePanel.set_score(playersScores, numberOfPlayers)
 	Global.debug("GOPw closed, emit game_end signal")
-	game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
+	##game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 
 
 func _on_game_quit_panel_quit(confirm : bool):
 	Global.debug("Quit Confirm panel closed: "+str(confirm))
 	if confirm == true:
 		Global.debug("Quit to main menu")
+		# here: can display score anim or after sig emit
 		game_end.emit(Global.GAME_EXIT_STATUS.USER_QUIT, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 		gameQuitPanel.hide()
 	else:
@@ -572,3 +594,10 @@ func _on_game_quit_panel_quit(confirm : bool):
 		# reset game quit setting
 		quit = false
 		game_end_status = -1
+
+#TODO when game over/win panel is closed, display score panel
+
+
+func _on_final_score_panel_is_closed():
+	Global.debug("final score panel signal close")
+	game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
