@@ -46,14 +46,15 @@ func _ready():
 	while idx <= 32:
 		Global.debug("idx="+str(idx))
 		tile = tilesDeck[idx]
-		tile.position.x += 64 * StripeIdx
+		tile.position.x += 64 * StripeIdx + Global.TileOffset
+		tile.position.y += Global.TileOffset
 		$VBoxContainer/TopTilesStripe.add_child(tile)
 		idx += 1
 		
 		tile = null
 		tile = tilesDeck[idx]
-		tile.position.x += 64 * StripeIdx
-		tile.position.y = $VBoxContainer/BottomTilesStripe.position.y
+		tile.position.x += 64 * StripeIdx + Global.TileOffset
+		tile.position.y = $VBoxContainer/BottomTilesStripe.position.y + Global.TileOffset
 		$VBoxContainer/BottomTilesStripe.add_child(tile)
 		idx += 1
 		StripeIdx += 1

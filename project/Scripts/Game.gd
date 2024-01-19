@@ -34,8 +34,6 @@ const FourWaysBonus = [25, 50, 100, 200, 400, 600, 800, 1000, 5000, 10000, 25000
 const TilesRemainingBonus = {2: 100, 1: 500, 0: 1000}
 const ScoreMultiplier = 2
 
-const TileOffset = 0
-
 var current_player : int = 0
 var playersScores : Array = [0, 0]
 var fourWaysCounts : Array = [0, 0]
@@ -233,8 +231,8 @@ func make_2d_array():
 
 
 func grid_to_pixel(column, row):
-	var new_x = x_start + TileOffset + column * tile_size
-	var new_y = y_start + TileOffset + row * tile_size
+	var new_x = x_start + Global.TileOffset + column * tile_size
+	var new_y = y_start + Global.TileOffset + row * tile_size
 	return Vector2(new_x, new_y)
 
 
@@ -464,7 +462,7 @@ func update_score(score : int) -> void:
 func highlight_cell(cells : Array) -> void:
 	var coordinates_array = []
 	for cell in cells:
-		var Apoint = grid_to_pixel(cell.x, cell.y) - Vector2(TileOffset, TileOffset)
+		var Apoint = grid_to_pixel(cell.x, cell.y) - Vector2(Global.TileOffset, Global.TileOffset)
 		var Bpoint = Vector2(Apoint.x + 64, Apoint.y)
 		var Cpoint = Vector2(Apoint.x + 64, Apoint.y + 64)
 		var Dpoint = Vector2(Apoint.x, Apoint.y + 64)

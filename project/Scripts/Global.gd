@@ -100,6 +100,7 @@ const avail_tile_colors = {
 # put data in their own scene
 # even doesn't store them, reload each time they're changed
 const Stones : Dictionary = {
+		#~here add set key (default, set1, set2...) => prefs item
 		"A1": preload("res://Arts/Gfx/Tiles/default/A1.png"),
 		"A2": preload("res://Arts/Gfx/Tiles/default/A2.png"),
 		"A3": preload("res://Arts/Gfx/Tiles/default/A3.png"),
@@ -156,6 +157,8 @@ const sound_effects = {
 	"lossB": preload("res://audio/effects/DroneAlert5.mp3"),
 	#"win": preload("res://audio/effects/")
 }
+
+const TileOffset = 32
 
 enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_ENHANCED, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }
 enum HIGHLIGHT_MODE { HIGHLIGHT_NONE, FIRST_AVAIL_MOVE, ALL_AVAIL_MOVE, RANDOM_MOVE, HIGHER_SCORE_MOVE }
