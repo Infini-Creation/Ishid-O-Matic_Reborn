@@ -17,8 +17,9 @@ func _on_game_game_is_over():
 
 
 func _on_texture_button_pressed():
-	Global.debug("GameOverPanel: button pressed, go back to main menu (not here)")
+	Global.debug("GameOverPanel: button pressed, close it, emit signal")
 	#hide()
 	#signal back game to exit ?
 	is_closed.emit()
+	hide()
 	# maybe: scene transition
