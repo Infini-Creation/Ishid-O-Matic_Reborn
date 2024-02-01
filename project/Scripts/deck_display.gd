@@ -34,7 +34,7 @@ func init_deck():
 			tile.get_node("Symbol").texture = Global.Stones[stone]
 			tile.color = "color" + stone.right(1)
 			tile.shape = "shape" + stone.left(1)
-			print("tcolor=" + tile.color + "  tshape=" + tile.shape)
+			Global.debug("tcolor=" + tile.color + "  tshape=" + tile.shape)
 			deck.append(tile)
 			deck.append(tile.duplicate())
 
