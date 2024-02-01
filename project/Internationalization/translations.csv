@@ -19,8 +19,8 @@ SETHLRANDOM,Random,Aléatoire
 SETHLBEST,Best Score,Meilleur Score
 GAMEOVERTITLE,NO MORE MOVES!,AUCUN MOUVEMENT POSSIBLE !
 GAMEOVERTEXTB,"Sorry, but there are no more moves possible","Désolé, il n'y a plus de coup possible"
-GAMEWINTITLE,You WIN!,Vous avez gagné !
-GAMEWINTEXT,CONGRATULATIONS,FELICITATIONS
+GAMEWINTITLE,[center][wave]You WIN![/wave][/center],[center][wave]Vous avez gagné ![/wave][/center]
+GAMEWINTEXT,[center][rainbow]CONGRATULATIONS[/rainbow][/center],[center][rainbow]FELICITATIONS[/rainbow][/center]
 FINALSCORETEXT,Your final score is:,Votre score final est :
 FINALSCOREOK,  Ok  ,  Ok  
 FSPPALYERONEKEY, Player One: , Joueur 1 : 

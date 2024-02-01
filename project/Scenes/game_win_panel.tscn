@@ -52,20 +52,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/TextureButton"]
-custom_minimum_size = Vector2(100, 60)
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/TextureButton"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = -0.45625
-anchor_right = 0.5
-anchor_bottom = 1.45625
-offset_left = -271.0
-offset_top = 89.0
-offset_right = 271.0
-offset_bottom = -89.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/TextureButton/VBoxContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
 localize_numeral_system = false
 mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -73,8 +74,21 @@ theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/normal_font_size = 42
 bbcode_enabled = true
-text = "[center][wave]GAMEWINTITLE[/wave]
-[rainbow]GAMEWINTEXT[/rainbow][/center]"
+text = "GAMEWINTITLE"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CenterContainer/TextureButton/VBoxContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+localize_numeral_system = false
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "GAMEWINTEXT"
 scroll_active = false
 shortcut_keys_enabled = false
 
