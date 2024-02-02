@@ -2,6 +2,13 @@ extends Control
 
 @export var scoreItemScene : PackedScene = preload("res://Scenes/HighScores/ScoreItem.tscn")
 
+const GameTypeTranslationKeys : Dictionary = {
+	"OnePlayer" : "HIGHSCORES1P",
+	"TwoPlayers" : "HIGHSCORES2P",
+	"Tournament": "HIGHSCORESTOUR",
+	"Enhanced": "HIGHSCORESENH"
+}
+
 var currentPageIdx : int = 0
 var allPages : Array = []
 var NodesStore : Array = []
@@ -30,7 +37,8 @@ func update_page(pageIdx : int) -> void:
 	var currentPage : String
 
 	currentPage = allPages[pageIdx]
-	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/GameType.text = allPages[pageIdx]
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/GameType.text = GameTypeTranslationKeys[allPages[pageIdx]]
+			#here TR key
 
 	#keep track of node to free them/cache them, not always instantiate new nodes !
 	for idx in range(0,10):
