@@ -8,15 +8,15 @@ HIGHSCORES,High Scores,Top Scores
 HELP, Help, Aide
 ABOUT, About, A propos
 QUIT, Quit, Quitter
-SETPLAYERNAME,Player Name,Nom Joueur
-SETACCEPT,Accept,Valider
-SETBACK,Back,Retour
-SETSUBMITCHANGES,Press Enter to submit change,Utilisez Enter pour valider
-SETHLNONE,None,Aucun
-SETHLFIRST,First,Premier
-SETHLALL,All,Tous
-SETHLRANDOM,Random,Aléatoire
-SETHLBEST,Best Score,Meilleur Score
+SETTINGSPLAYERNAME,Player Name,Nom Joueur
+SETTINGSACCEPT,Accept,Valider
+SETTINGSBACK,Back,Retour
+SETTINGSSUBMITCHANGES,Press Enter to submit change,Utilisez Enter pour valider
+SETTINGSHLNONE,None,Aucun
+SETTINGSHLFIRST,First,Premier
+SETTINGSHLALL,All,Tous
+SETTINGSHLRANDOM,Random,Aléatoire
+SETTINGSHLBEST,Best Score,Meilleur Score
 GAMEOVERTITLE,NO MORE MOVES!,AUCUN MOUVEMENT POSSIBLE !
 GAMEOVERTEXTB,"Sorry, but there are no more moves possible","Désolé, il n'y a plus de coup possible"
 GAMEWINTITLE,[center][wave]You WIN![/wave][/center],[center][wave]Vous avez gagné ![/wave][/center]
