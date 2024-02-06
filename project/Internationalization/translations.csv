@@ -1,17 +1,18 @@
 KEYS,en,fr
-SINGLEPLAYER,Single Player,Un Joueur
-TWOPLAYERS,Two Players,Deux Joueurs
-TOURNAMENT,Tournament,Tournoi
-ENHANCED,Enhanced,Etendu
-SETTINGS,Settings,Réglages
-HIGHSCORES,High Scores,Top Scores
-HELP, Help, Aide
-ABOUT, About, A propos
-QUIT, Quit, Quitter
-SETTINGSPLAYERNAME,Player Name,Nom Joueur
+MMSINGLEPLAYER,Single Player,Un Joueur
+MMTWOPLAYERS,Two Players,Deux Joueurs
+MMTOURNAMENT,Tournament,Tournoi
+MMENHANCED,Enhanced,Etendu
+MMSETTINGS,Settings,Réglages
+MMHIGHSCORES,High Scores,Top Scores
+MMHELP, Help, Aide
+MMABOUT, About, A propos
+MMQUIT, Quit, Quitter
+SETTINGSPLAYERNAME1,Player 1 Name,Nom Joueur 2
+SETTINGSPLAYERNAME2,Player 2 Name,Nom Joueur 2
 SETTINGSACCEPT,Accept,Valider
 SETTINGSBACK,Back,Retour
-SETTINGSSUBMITCHANGES,Press Enter to submit change,Utilisez Enter pour valider
+SETTINGSSUBMITCHANGES,Press Enter to submit change,Utilisez Entrée pour valider
 SETTINGSHLNONE,None,Aucun
 SETTINGSHLFIRST,First,Premier
 SETTINGSHLALL,All,Tous
