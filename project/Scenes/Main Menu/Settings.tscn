@@ -34,7 +34,7 @@ theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = SubResource("SystemFont_v2spc")
 theme_override_font_sizes/font_size = 24
-text = "SETTINGS"
+text = "MMSETTINGS"
 vertical_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
