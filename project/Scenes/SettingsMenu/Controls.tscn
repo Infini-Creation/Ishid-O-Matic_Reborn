@@ -89,11 +89,13 @@ script = ExtResource("4_ajwwx")
 
 [node name="settings_player1_name" parent="ButtonsGroup/Music Row" instance=ExtResource("6_i2aij")]
 layout_mode = 2
+labelPlayerIdx = "SETTINGSPLAYERNAME1"
 
 [node name="PlayerHint" type="PanelContainer" parent="ButtonsGroup/Music Row"]
 visible = false
 custom_minimum_size = Vector2(234, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_ncd48")
 
 [node name="Label" type="Label" parent="ButtonsGroup/Music Row/PlayerHint"]
@@ -101,7 +103,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_plfsj")
 theme_override_colors/font_color = Color(1, 1, 1, 0.392157)
-text = "Press Enter to submit change !"
+text = "SETTINGSSUBMITCHANGES"
 horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
@@ -124,7 +126,7 @@ audio_disabled_icon = ExtResource("11_wnhtc")
 
 [node name="settings_player2_name" parent="ButtonsGroup/Sound Row" instance=ExtResource("6_i2aij")]
 layout_mode = 2
-labelPlayerIdx = "Player Two"
+labelPlayerIdx = "SETTINGSPLAYERNAME2"
 defaultPlayerName = "Player2"
 
 [node name="PlayerHint2" type="PanelContainer" parent="ButtonsGroup/Sound Row"]
@@ -138,7 +140,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_plfsj")
 theme_override_colors/font_color = Color(1, 1, 1, 0.392157)
-text = "Press Enter to submit change !"
+text = "SETTINGSSUBMITCHANGES"
 horizontal_alignment = 1
 vertical_alignment = 1
 max_lines_visible = 1
@@ -157,7 +159,7 @@ alignment = 1
 layout_mode = 2
 
 [node name="Separator CR" type="ColorRect" parent="ButtonsGroup/Hints-Language Row"]
-custom_minimum_size = Vector2(128, 30)
+custom_minimum_size = Vector2(110, 30)
 layout_mode = 2
 color = Color(1, 1, 1, 0)
 

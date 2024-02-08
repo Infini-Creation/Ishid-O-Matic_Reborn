@@ -74,7 +74,7 @@ theme_override_colors/font_outline_color = Color(0.137255, 0.690196, 0.364706, 1
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = SubResource("SystemFont_b48kx")
 theme_override_font_sizes/font_size = 32
-text = "Tiles in deck:"
+text = "DDTILESINDECK"
 horizontal_alignment = 1
 
 [node name="AvailDeckTiles" type="Label" parent="MarginContainer/VBoxContainer/AvailDeckTiles_Background"]
@@ -105,7 +105,7 @@ theme_override_colors/font_outline_color = Color(0.137255, 0.690196, 0.364706, 1
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = SubResource("SystemFont_b48kx")
 theme_override_font_sizes/font_size = 24
-text = "Available moves:"
+text = "DDAVAILMOVES"
 horizontal_alignment = 1
 
 [node name="AvailMovesCounter" type="Label" parent="MarginContainer/VBoxContainer/AvailDeckTiles_Background"]

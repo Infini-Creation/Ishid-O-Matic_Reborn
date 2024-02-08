@@ -24,7 +24,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
-text = "SETTINGSPLAYERNAME"
+text = "DUMMYPNAME"
 
 [node name="LineEdit" type="LineEdit" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 40)

@@ -56,9 +56,11 @@ value = 4.0
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_tuk2c")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "---------"
 horizontal_alignment = 1
+clip_text = true
+text_overrun_behavior = 1
 max_lines_visible = 1
 
 [connection signal="value_changed" from="HBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]
