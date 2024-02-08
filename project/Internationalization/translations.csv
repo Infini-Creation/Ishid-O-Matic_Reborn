@@ -1,33 +1,36 @@
-KEYS,en,fr
-MMSINGLEPLAYER,Single Player,Un Joueur
-MMTWOPLAYERS,Two Players,Deux Joueurs
-MMTOURNAMENT,Tournament,Tournoi
-MMENHANCED,Enhanced,Etendu
-MMSETTINGS,Settings,Réglages
-MMHIGHSCORES,High Scores,Top Scores
-MMHELP, Help, Aide
-MMABOUT, About, A propos
-MMQUIT, Quit, Quitter
-SETTINGSPLAYERNAME1,Player 1 Name,Nom Joueur 2
-SETTINGSPLAYERNAME2,Player 2 Name,Nom Joueur 2
-SETTINGSACCEPT,Accept,Valider
-SETTINGSBACK,Back,Retour
-SETTINGSSUBMITCHANGES,Press Enter to submit change,Utilisez Entrée pour valider
-SETTINGSHLNONE,None,Aucun
-SETTINGSHLFIRST,First,Premier
-SETTINGSHLALL,All,Tous
-SETTINGSHLRANDOM,Random,Aléatoire
-SETTINGSHLBEST,Best Score,Meilleur Score
-GAMEOVERTITLE,NO MORE MOVES!,AUCUN MOUVEMENT POSSIBLE !
-GAMEOVERTEXTB,"Sorry, but there are no more moves possible","Désolé, il n'y a plus de coup possible"
-GAMEWINTITLE,[center][wave]You WIN![/wave][/center],[center][wave]Vous avez gagné ![/wave][/center]
-GAMEWINTEXT,[center][rainbow]CONGRATULATIONS[/rainbow][/center],[center][rainbow]FELICITATIONS[/rainbow][/center]
-FINALSCORETEXT,Your final score is:,Votre score final est :
-FINALSCOREOK,  Ok  ,  Ok  
-FSPPALYERONEKEY, Player One: , Joueur 1 : 
-FSPPALYERTWOKEY, Player Two: , Joueur 2 : 
-ABOUTCLOSE,Close,Fermer
-HIGHSCORES1P,OnePlayer,Un joueur
-HIGHSCORES2P,TwoPlayers,Deux joueurs
-HIGHSCORESTOUR,Tournament,Tournoi
-HIGHSCORESENH,Enhanced,étendu
+KEYS,en,fr,cn
+MMSINGLEPLAYER,Single Player,Un Joueur,SP NYT
+MMTWOPLAYERS,Two Players,Deux Joueurs,2P NYT
+MMTOURNAMENT,Tournament,Tournoi,Tour NYT
+MMENHANCED,Enhanced,Etendu,Enh NYT
+MMSETTINGS,Settings,Réglages,Sett NYT
+MMHIGHSCORES,High Scores,Top Scores,HS NYT
+MMHELP, Help, Aide,Help NYT
+MMABOUT, About, A propos, Abo NYT
+MMQUIT, Quit, Quitter, Quit NYT
+SETTINGSPLAYERNAME1,Player 1 Name,Nom Joueur 2,P1N NYT
+SETTINGSPLAYERNAME2,Player 2 Name,Nom Joueur 2,P2N NYT
+SETTINGSACCEPT,Accept,Valider,ACC NYT
+SETTINGSBACK,Back,Retour,BACK NYT
+SETTINGSSUBMITCHANGES,Press Enter to submit change,Utilisez Entrée pour valider,PETSC NYT
+SETTINGSHLNONE,None,Aucun,N NYT
+SETTINGSHLFIRST,First,Premier,1 NYT
+SETTINGSHLALL,All,Tous,A NYT
+SETTINGSHLRANDOM,Random,Aléatoire,R NYT
+SETTINGSHLBEST,Best Score,Meilleur Score,BS NYT
+GAMEOVERTITLE,NO MORE MOVES!,AUCUN MOUVEMENT POSSIBLE !,NMO NYT
+GAMEOVERTEXTB,"Sorry, but there are no more moves possible","Désolé, il n'y a plus de coup possible","SORRY NMMA NYT"
+GAMEWINTITLE,[center][wave]You WIN![/wave][/center],[center][wave]Vous avez gagné ![/wave][/center],GWT WIN NYT
+GAMEWINTEXT,[center][rainbow]CONGRATULATIONS[/rainbow][/center],[center][rainbow]FELICITATIONS[/rainbow][/center],GWTE CONG NYT
+FINALSCORETEXT,Your final score is:,Votre score final est :,FST NYT 
+FINALSCOREOK,  Ok  ,  Ok  , OK NYT 
+FSPPALYERONEKEY, Player One: , Joueur 1 : , P1: NYT
+FSPPALYERTWOKEY, Player Two: , Joueur 2 : , P2: NYT
+ABOUTCLOSE,Close,Fermer,AC NYT
+HIGHSCORES1P,OnePlayer,Un joueur,HS1P NYT
+HIGHSCORES2P,TwoPlayers,Deux joueurs,HS2P NYT
+HIGHSCORESTOUR,Tournament,Tournoi,HSTO NYT
+HIGHSCORESENH,Enhanced,étendu,HTEN NYT
+DDTILESINDECK,Tiles in deck: ,Pièces restantes : ,DDTID NYT 
+DDAVAILMOVES,Available moves:,Coups possibles : ,DDAM NYT
+GAMEPANELPLAYER,Player ---,Joueur ---,GPP NYT ---
