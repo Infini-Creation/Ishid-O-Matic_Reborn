@@ -33,4 +33,16 @@ HIGHSCORESTOUR,Tournament,Tournoi,HSTO NYT
 HIGHSCORESENH,Enhanced,étendu,HTEN NYT
 DDTILESINDECK,Tiles in deck: ,Pièces restantes : ,DDTID NYT 
 DDAVAILMOVES,Available moves:,Coups possibles : ,DDAM NYT
+GAMETOURLABEL,Tournoi (%d),Tournament (%d),GTL NYT
 GAMEPANELPLAYER,Player ---,Joueur ---,GPP NYT ---
+GAMEQUITPTEXT,Voulez-vous vraiment quitter ?,Do you really want to quit ?,DYRWTQ NYT
+GAMEQUITPYES, Oui , Yes ,GQPY NYT
+GAMEQUITPNO, Non , No ,GQPN NYT
+TOURPANELTEXT, todo,Do you want to continue the current tournament or to start a new one ?,TOUPTEXT NYT
+TOURPANELYBUTTON,Continuer,Continue,TOUPYB NYT
+TOURPANELNBUTTON, Nouveau , New ,TOUPNB NYT
+TOURPANELCBUTTON, Annuler , Cancel ,TOUPCB NYT
+TOURSEEDPTEXT,Entrez une valeur définie ou retour pour utiliser une source aléatoire.,Enter a custom seed or go back to use a random one.,TST NYT
+TOURSEEDPINPUT,Entrez une nouvelle valeur,Enter a new seed,TSI NYT
+TOURSEEDPOKB, Définir , Use mine , TSOK NYT
+TOURSEEDPCANB, Aléatoire , Random , TSCAN NYT
