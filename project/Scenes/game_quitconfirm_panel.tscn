@@ -46,7 +46,7 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
 theme_override_font_sizes/font_size = 28
-text = "Do you really want to quit ?"
+text = "GAMEQUITPTEXT"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -62,14 +62,14 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_b1v8i")
 theme_override_font_sizes/font_size = 28
-text = " Yes "
+text = "GAMEQUITPYES"
 
 [node name="NoButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("2_b1v8i")
 theme_override_font_sizes/font_size = 28
-text = " No "
+text = "GAMEQUITPNO"
 
 [connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
 [connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainer/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]

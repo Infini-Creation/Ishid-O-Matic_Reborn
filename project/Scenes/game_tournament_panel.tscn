@@ -47,7 +47,7 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
 theme_override_font_sizes/font_size = 20
-text = "Do you want to continue the current tournament or to start a new one ?"
+text = "TOURPANELTEXT"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -63,21 +63,21 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
-text = "Continue "
+text = "TOURPANELYBUTTON"
 
 [node name="NoButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
-text = " New "
+text = "TOURPANELNBUTTON"
 
 [node name="CancelButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
-text = " Cancel "
+text = "TOURPANELCBUTTON"
 
 [node name="VBoxContainerB" type="VBoxContainer" parent="CenterContainer/TextureRect2"]
 visible = false
@@ -100,7 +100,7 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
 theme_override_font_sizes/font_size = 20
-text = "Enter a custom seed or go back to use a random one."
+text = "TOURSEEDPTEXT"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -108,7 +108,7 @@ autowrap_mode = 3
 [node name="SeedInput" type="LineEdit" parent="CenterContainer/TextureRect2/VBoxContainerB"]
 visible = false
 layout_mode = 2
-placeholder_text = "Enter a new seed"
+placeholder_text = "TOURSEEDPINPUT"
 alignment = 1
 max_length = 24
 virtual_keyboard_type = 2
@@ -133,14 +133,14 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
-text = " Use mine "
+text = "TOURSEEDPOKB"
 
 [node name="bCancelButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
-text = " Random "
+text = "TOURSEEDPCANB"
 
 [connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer/YesButton" to="." method="_on_yes_button_pressed"]
 [connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
