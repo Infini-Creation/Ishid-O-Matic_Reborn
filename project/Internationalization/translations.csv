@@ -8,7 +8,7 @@ MMHIGHSCORES,High Scores,Top Scores,HS NYT
 MMHELP, Help, Aide,Help NYT
 MMABOUT, About, A propos, Abo NYT
 MMQUIT, Quit, Quitter, Quit NYT
-SETTINGSPLAYERNAME1,Player 1 Name,Nom Joueur 2,P1N NYT
+SETTINGSPLAYERNAME1,Player 1 Name,Nom Joueur 1,P1N NYT
 SETTINGSPLAYERNAME2,Player 2 Name,Nom Joueur 2,P2N NYT
 SETTINGSACCEPT,Accept,Valider,ACC NYT
 SETTINGSBACK,Back,Retour,BACK NYT
@@ -31,14 +31,15 @@ HIGHSCORES1P,OnePlayer,Un joueur,HS1P NYT
 HIGHSCORES2P,TwoPlayers,Deux joueurs,HS2P NYT
 HIGHSCORESTOUR,Tournament,Tournoi,HSTO NYT
 HIGHSCORESENH,Enhanced,étendu,HTEN NYT
+HELPCLOSEB,  Close  ,  Fermer  ,HPCBT NYT
 DDTILESINDECK,Tiles in deck: ,Pièces restantes : ,DDTID NYT 
 DDAVAILMOVES,Available moves:,Coups possibles : ,DDAM NYT
-GAMETOURLABEL,Tournoi (%d),Tournament (%d),GTL NYT
+GAMETOURLABEL,Tournoi (%d),Tournament (%d),GTL NYT (%d)
 GAMEPANELPLAYER,Player ---,Joueur ---,GPP NYT ---
 GAMEQUITPTEXT,Voulez-vous vraiment quitter ?,Do you really want to quit ?,DYRWTQ NYT
 GAMEQUITPYES, Oui , Yes ,GQPY NYT
 GAMEQUITPNO, Non , No ,GQPN NYT
-TOURPANELTEXT, todo,Do you want to continue the current tournament or to start a new one ?,TOUPTEXT NYT
+TOURPANELTEXT,Voulez-vous continuer le tournoi en cours ou en démarrer un nouveau ?,Do you want to continue the current tournament or to start a new one ?,TOUPTEXT NYT
 TOURPANELYBUTTON,Continuer,Continue,TOUPYB NYT
 TOURPANELNBUTTON, Nouveau , New ,TOUPNB NYT
 TOURPANELCBUTTON, Annuler , Cancel ,TOUPCB NYT
