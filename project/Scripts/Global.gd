@@ -24,6 +24,13 @@ const HIGHSCORES_TILESREMAINING_IDX = 3
 const AUDIO_TYPE_SOUNDEFFECT = 0
 const AUDIO_TYPE_MUSIC = 1
 
+# Here put all supported locale using the same value as defined for TranslationServer 
+const LANGUAGE_SETTING : Dictionary = {
+	LANGUAGE.FRENCH : "fr",
+	LANGUAGE.ENGLISH : "en",
+	LANGUAGE.OTHER : "cn"
+}
+
 var stats : Dictionary = {
 	"GamesPlayed": 0,
 	"GamesWon": 0,
@@ -58,6 +65,7 @@ var settings : Dictionary = {
 }
 
 var highScores : Dictionary = {
+	#to "translate" better to leave htem as before, add new array/dic gt=key
 	"OnePlayer" : [],
 	"TwoPlayers" : [],
 	"Tournament": [],
@@ -162,7 +170,7 @@ const TileOffset = 32
 
 enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_ENHANCED, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }
 enum HIGHLIGHT_MODE { HIGHLIGHT_NONE, FIRST_AVAIL_MOVE, ALL_AVAIL_MOVE, RANDOM_MOVE, HIGHER_SCORE_MOVE }
-enum LANGUAGE { ENGLISH, FRENCH, OTHER }
+enum LANGUAGE { FRENCH, ENGLISH, OTHER }
 enum GAME_EXIT_STATUS { GAME_WON, GAME_LOSS, USER_QUIT }
 
 var tile_colors : int = 6
@@ -220,6 +228,13 @@ func load_config():
 				settings[item] = config.get_value("misc", item, settings[item])
 				Global.debug("cfgloaded ("+item+")=["+str(settings[item])+"]")
 	Global.debug("LoadConf: settings="+str(settings))
+	
+	if LANGUAGE_SETTING.has(settings["language"]):
+		Global.debug("set locale to: " + LANGUAGE_SETTING[settings["language"]])
+		TranslationServer.set_locale(LANGUAGE_SETTING[settings["language"]])
+	else:
+		Global.debug("locale not supported, fall back to default (en)")
+		TranslationServer.set_locale(LANGUAGE_SETTING[LANGUAGE.ENGLISH])
 	configLoaded = true
 
 
