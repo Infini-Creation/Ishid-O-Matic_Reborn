@@ -90,7 +90,14 @@ func _ready():
 			Global.debug("newtour: saved seed= "+str(Global.tournamentSeed))
 			Global.save_seed(Global.tournamentSeed)
 
-		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text %= Global.tournamentSeed
+		Global.debug("TourLabTxt="+$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text)
+		var tmpLabel : String = tr($"UI/HBoxContainer/MiddleContainer/Tournament-Label".text)
+		Global.debug("TourLabTxt1="+tmpLabel)
+		tmpLabel %= Global.tournamentSeed
+		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text = tmpLabel
+		Global.debug("TourLabTxt2="+$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text)
+		
+		#$"UI/HBoxContainer/MiddleContainer/Tournament-Label".text %= Global.tournamentSeed
 		$"UI/HBoxContainer/MiddleContainer/Tournament-Label".show()
 
 		seed(Global.tournamentSeed)
@@ -107,8 +114,9 @@ func _ready():
 
 	if gameType == Global.GAMETYPE_TWOPLAYERS:
 		Players_Panels[current_player].highlight_current_player(1.0)
-		$CenterContainer/FinalScorePanel.numberOfPlayers = 2
-
+		$CenterContainer/FinalScorePanel.numberOfPlayers = 2	#~useless, doesn't work
+	#call as func inside FSP to check if value is well set => it is ! (for 1P game)
+	#$CenterContainer/FinalScorePanel.debug_players()
 
 func _input(event):
 	if event.is_action_pressed("Quit"):
@@ -141,6 +149,10 @@ func _input(event):
 	elif event.is_action_pressed("FourWaysDebug"):
 		Global.debug("fake four ways event")
 		fakeFourWays = true
+	elif event.is_action_pressed("debug_win"):
+		game_over(Global.GAME_EXIT_STATUS.GAME_WON)
+	elif event.is_action_pressed("debug_loss"):
+		game_over(Global.GAME_EXIT_STATUS.GAME_LOSS)
 
 
 func _process(_delta):
@@ -513,6 +525,9 @@ func game_over(status : int):
 		playersScores[current_player] += TilesRemainingBonus[tilesRemaining]
 	Global.debug("finalscore="+str(playersScores[current_player]))
 	
+	#tmp #~add two keys: win/loss  demand
+	##status = Global.GAME_EXIT_STATUS.GAME_WON
+	
 	if status == Global.GAME_EXIT_STATUS.GAME_LOSS:
 		Global.debug("game:Game loss")
 		playsound.emit("loss")
@@ -543,15 +558,16 @@ func game_over(status : int):
 # do the same for game win panel
 func _on_game_over_panel_is_closed():
 	#HERE: hide game over panel !!
-	$GameOverPanel.hide()
+	#$GameOverPanel.hide()
 	$CenterContainer/FinalScorePanel.show()
-	$CenterContainer/FinalScorePanel.setup(playersScores[current_player], fourWaysCounts[current_player], DeckDisplay.get_deck_count())
-	
+	$CenterContainer/FinalScorePanel.setup(playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
+		#[current_player]
 	#current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count()
 	# ?? $CenterContainer/FinalScorePanel.set_score(playersScores, numberOfPlayers)
 
-	Global.debug("GOP closed, emit game_end signal")
-	game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
+	# ==> do this ONLY when FSP is closed!
+	##Global.debug("GOP closed, emit game_end signal")
+	##game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 	
 ## bad way to get it
 func _on_deck_display_deck_initialized(deck_initialized : Array) -> void:
@@ -570,7 +586,7 @@ func _on_game_win_panel_is_closed():
 	$CenterContainer/FinalScorePanel.show()
 	
 	#current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count()
-	$CenterContainer/FinalScorePanel.setup(playersScores[current_player], fourWaysCounts[current_player], DeckDisplay.get_deck_count())
+	$CenterContainer/FinalScorePanel.setup(playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 	#$CenterContainer/FinalScorePanel.set_score(playersScores, numberOfPlayers)
 	Global.debug("GOPw closed, emit game_end signal")
 	##game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
