@@ -16,6 +16,11 @@ signal launch_game(game_type : String)
 signal audio_volume_updated(type: int, volume: int)
 
 func _ready():
+	#Global.debug_enabled = true #tmp
+	#Global.load_config()
+	#Global.debug("settings="+str(Global.settings))
+	#
+	
 	Global.debug("MainMenu: generate tile stripe")
 	
 	var raw_stone : PackedScene = preload("res://Scenes/tile.tscn")
@@ -61,6 +66,7 @@ func _ready():
 
 	$VBoxContainer/CenterContainer/DummyLabel.hide()
 	mainMenuButtons = MainMenuButtons.instantiate()
+	Global.debug("add MM buttons")
 	$VBoxContainer/CenterContainer.add_child(mainMenuButtons)
 	mainMenuButtons.connect("button_clicked", _on_button_click_received)
 	
@@ -94,18 +100,23 @@ func _on_button_click_received(buttonID : int):
 
 		Global.ButtonIDs.BUTTON_SETTINGS:
 			if mainMenuButtons != null: #or is in tree
+				Global.debug("remove MM buttons")
 				$VBoxContainer/CenterContainer.remove_child(mainMenuButtons)
+				##mainMenuButtons.queue_free() #may cause issue
 
 			settingsMenu = SettingsButtons.instantiate()
 			$VBoxContainer/CenterContainer.add_child(settingsMenu)
 			settingsMenu.connect("button_clicked", _on_button_click_received)
 			settingsMenu.connect("sound_volume_updated", _on_sound_volume_updated)
+			settingsMenu.connect("language_updated", _on_language_updated)
 
 		Global.ButtonIDs.BUTTON_HIGHSCORES:
 			$HallOfFamePanel.show()
 
 		Global.ButtonIDs.BUTTON_SETTINGS_BACK:
 			$VBoxContainer/CenterContainer.remove_child(settingsMenu)
+			##settingsMenu.queue_free()
+			Global.debug("settings back to MM, add MM buttons")
 			$VBoxContainer/CenterContainer.add_child(mainMenuButtons)
 
 		Global.ButtonIDs.BUTTON_SETTINGS_SAVE:
@@ -134,6 +145,17 @@ func _on_sound_volume_updated(type: int, volume: int):
 		audio_volume_updated.emit(type, volume)
 	else:
 		Global.debug("unhandled audio type: "+str(type))
+
+
+func _on_language_updated(language : int):
+	Global.debug("new lang set: "+str(language))
+	Global.settings["language"] = language #tmp
+	TranslationServer.set_locale(Global.LANGUAGE_SETTING[language])
+	
+	Global.debug("reload mainMenuButtons scene")
+	mainMenuButtons.queue_free()
+	mainMenuButtons = MainMenuButtons.instantiate()
+	mainMenuButtons.connect("button_clicked", _on_button_click_received)
 
 
 func _on_game_tournament_panel_continue_tournament(cont : bool):

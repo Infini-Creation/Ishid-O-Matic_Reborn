@@ -2,6 +2,7 @@ extends Control
 
 signal button_clicked(buttonID : int)
 signal sound_volume_updated(type: int, volume: int)
+signal language_updated(lang: int)
 
 var music_volume : int
 var sound_volume : int
@@ -39,7 +40,7 @@ func _ready():
 	$"ButtonsGroup/Music Row/settings_player1_name".load_settings(player1_name)
 	$"ButtonsGroup/Sound Row/settings_player2_name".load_settings(player2_name)
 	$"ButtonsGroup/Hints-Language Row/HighlightMode".load_settings(highlight_mode)
-	Global.debug("hlm="+str(highlight_mode)+" lang="+str(language))
+	#Global.debug("hlm="+str(highlight_mode)+" lang="+str(language))
 	#init language button (selected = pressed)
 
 func _on_accept_item_settings_save_requested():
@@ -57,6 +58,7 @@ func _on_accept_item_settings_save_requested():
 	Global.settings["Players"]["Two"] = player2_name
 	Global.settings["hints"] = highlight_mode
 	Global.settings["language"] = language
+
 	if Global.save_config() == true:
 		$ButtonsGroup/DummySpacer2/SettingsSavedOKLabel.show()
 	else:
@@ -117,17 +119,30 @@ func _on_audio_volume_settings_updated(audio_type, new_audio_volume, new_audio_e
 	#TODO: update volume for music + add sound effect test when updating volume of SE
 	#HERE: signal back with volume value
 
+	#TODO: update language settings when selected + ~display notification of the choice
 func _on_language_0_pressed():
 	Global.debug("lang0 pressed-" +str($"ButtonsGroup/Hints-Language Row/Language-0".button_group))
 	Global.debug("b1 p="+str($"ButtonsGroup/Hints-Language Row/Language-1".button_pressed))
 	Global.debug("b2 p="+str($"ButtonsGroup/Hints-Language Row/Language-2".button_pressed))
+	#Global.settings["language"] = 0
+	language = 0
+	#TranslationServer.set_locale("fr")
+	language_updated.emit(0)
 
 func _on_language_1_pressed():
 	Global.debug("lang1 pressed-" +str($"ButtonsGroup/Hints-Language Row/Language-1".button_group))
 	Global.debug("b0 p="+str($"ButtonsGroup/Hints-Language Row/Language-0".button_pressed))
 	Global.debug("b2 p="+str($"ButtonsGroup/Hints-Language Row/Language-2".button_pressed))
+	#Global.settings["language"] = 1
+	language = 1
+	#TranslationServer.set_locale("en")
+	language_updated.emit(1)
 
 func _on_language_2_pressed():
 	Global.debug("lang2 pressed-" +str($"ButtonsGroup/Hints-Language Row/Language-2".button_group))
 	Global.debug("b0 p="+str($"ButtonsGroup/Hints-Language Row/Language-0".button_pressed))
 	Global.debug("b1 p="+str($"ButtonsGroup/Hints-Language Row/Language-1".button_pressed))
+	#Global.settings["language"] = 2
+	language = 2
+	#TranslationServer.set_locale("cn")
+	language_updated.emit(2)
