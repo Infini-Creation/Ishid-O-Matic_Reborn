@@ -18,6 +18,8 @@ SETTINGSHLFIRST,First,Premier,1 NYT
 SETTINGSHLALL,All,Tous,A NYT
 SETTINGSHLRANDOM,Random,Aléatoire,R NYT
 SETTINGSHLBEST,Best Score,Meilleur Score,BS NYT
+SETTINGSSAVEOK,Settings saved successfully,fr todo,SETOK NYT
+SETTINGSSAVEKO,An error occured when saving preferences !,fr todo, SETKO NYT
 GAMEOVERTITLE,NO MORE MOVES!,AUCUN MOUVEMENT POSSIBLE !,NMO NYT
 GAMEOVERTEXTB,"Sorry, but there are no more moves possible","Désolé, il n'y a plus de coup possible","SORRY NMMA NYT"
 GAMEWINTITLE,[center][wave]You WIN![/wave][/center],[center][wave]Vous avez gagné ![/wave][/center],GWT WIN NYT
@@ -34,16 +36,16 @@ HIGHSCORESENH,Enhanced,étendu,HTEN NYT
 HELPCLOSEB,  Close  ,  Fermer  ,HPCBT NYT
 DDTILESINDECK,Tiles in deck: ,Pièces restantes : ,DDTID NYT 
 DDAVAILMOVES,Available moves:,Coups possibles : ,DDAM NYT
-GAMETOURLABEL,Tournoi (%d),Tournament (%d),GTL NYT (%d)
+GAMETOURLABEL,Tournament (%d),Tournoi (%d),GTL NYT (%d)
 GAMEPANELPLAYER,Player ---,Joueur ---,GPP NYT ---
-GAMEQUITPTEXT,Voulez-vous vraiment quitter ?,Do you really want to quit ?,DYRWTQ NYT
-GAMEQUITPYES, Oui , Yes ,GQPY NYT
-GAMEQUITPNO, Non , No ,GQPN NYT
-TOURPANELTEXT,Voulez-vous continuer le tournoi en cours ou en démarrer un nouveau ?,Do you want to continue the current tournament or to start a new one ?,TOUPTEXT NYT
-TOURPANELYBUTTON,Continuer,Continue,TOUPYB NYT
-TOURPANELNBUTTON, Nouveau , New ,TOUPNB NYT
-TOURPANELCBUTTON, Annuler , Cancel ,TOUPCB NYT
-TOURSEEDPTEXT,Entrez une valeur définie ou retour pour utiliser une source aléatoire.,Enter a custom seed or go back to use a random one.,TST NYT
-TOURSEEDPINPUT,Entrez une nouvelle valeur,Enter a new seed,TSI NYT
-TOURSEEDPOKB, Définir , Use mine , TSOK NYT
-TOURSEEDPCANB, Aléatoire , Random , TSCAN NYT
+GAMEQUITPTEXT,Do you really want to quit ?,Voulez-vous vraiment quitter ?,DYRWTQ NYT
+GAMEQUITPYES, Yes , Oui ,GQPY NYT
+GAMEQUITPNO, No , Non ,GQPN NYT
+TOURPANELTEXT,Do you want to continue the current tournament or to start a new one ?,Voulez-vous continuer le tournoi en cours ou en démarrer un nouveau ?,TOUPTEXT NYT
+TOURPANELYBUTTON,Continue,Continuer,TOUPYB NYT
+TOURPANELNBUTTON, New , Nouveau ,TOUPNB NYT
+TOURPANELCBUTTON, Cancel , Annuler ,TOUPCB NYT
+TOURSEEDPTEXT,Enter a custom seed or go back to use a random one.,Entrez une valeur définie ou retour pour utiliser une source aléatoire.,TST NYT
+TOURSEEDPINPUT,Enter a new seed,Entrez une nouvelle valeur,TSI NYT
+TOURSEEDPOKB, Use mine , Définir , TSOK NYT
+TOURSEEDPCANB, Random , Aléatoire , TSCAN NYT
