@@ -60,7 +60,7 @@ var settings : Dictionary = {
 		"Two": "Player2"
 	},
 	"hints": 0,
-	"language": 0,
+	"language": LANGUAGE.ENGLISH,
 	"tileSet": "default"
 }
 
