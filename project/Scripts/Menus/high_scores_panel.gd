@@ -58,10 +58,6 @@ func update_page(pageIdx : int) -> void:
 		NodesStore[pageIdx][idx] = node
 
 
-func _on_texture_button_pressed():
-	hide()
-
-
 func _on_previous_button_pressed():
 	if currentPageIdx > 0:
 		currentPageIdx -= 1
@@ -94,3 +90,7 @@ func _on_next_button_pressed():
 	# with help of tween
 	# put below row one row down
 	# add new row
+
+
+func _on_close_pressed():
+	hide()

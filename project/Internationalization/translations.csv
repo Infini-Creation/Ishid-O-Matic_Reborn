@@ -33,6 +33,7 @@ HIGHSCORES1P,OnePlayer,Un joueur,HS1P NYT
 HIGHSCORES2P,TwoPlayers,Deux joueurs,HS2P NYT
 HIGHSCORESTOUR,Tournament,Tournoi,HSTO NYT
 HIGHSCORESENH,Enhanced,étendu,HTEN NYT
+HIGHSCORESCLOSEB, Close , Fermer ,HSCB NYT
 HELPCLOSEB,  Close  ,  Fermer  ,HPCBT NYT
 DDTILESINDECK,Tiles in deck: ,Pièces restantes : ,DDTID NYT 
 DDAVAILMOVES,Available moves:,Coups possibles : ,DDAM NYT

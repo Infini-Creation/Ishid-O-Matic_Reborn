@@ -5,8 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bma6ve7yy3mn6" path="res://Arts/Gfx/Menu/hall-of-fame.png" id="3_lmixh"]
 [ext_resource type="Texture2D" uid="uid://d256gllpwthid" path="res://Arts/Gfx/Menu/ishido-help-previous-arrow.png" id="3_ol3yw"]
 [ext_resource type="Texture2D" uid="uid://csfojlg23jsah" path="res://Arts/Gfx/Menu/ishido-help-next-arrow.png" id="5_yyf8v"]
-
-[sub_resource type="Shortcut" id="Shortcut_mf6hy"]
+[ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_q2v1t"]
 
 [node name="HallOfFamePanel" type="Control"]
 layout_mode = 3
@@ -29,14 +28,11 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureButton" type="TextureButton" parent="CenterContainer"]
+[node name="Texture" type="TextureRect" parent="CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-action_mode = 0
-shortcut = SubResource("Shortcut_mf6hy")
-shortcut_in_tooltip = false
-texture_normal = ExtResource("2_gkn1x")
+texture = ExtResource("2_gkn1x")
 stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
@@ -84,6 +80,13 @@ stretch_mode = 5
 layout_mode = 2
 alignment = 1
 
-[connection signal="pressed" from="CenterContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[node name="close" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("6_q2v1t")
+text = "HIGHSCORESCLOSEB"
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/close" to="." method="_on_close_pressed"]
