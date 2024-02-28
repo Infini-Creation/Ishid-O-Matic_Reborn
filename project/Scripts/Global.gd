@@ -5,6 +5,7 @@ extends Node
 const SETTINGS_FILE_PATH = "user://settings.ini"
 const HIGHSCORES_FILE_PATH = "user://highscores.dat"
 const SEED_FILE_PATH = "user://tournament.seed"
+const REPLAY_PATH = "user://replay/"
 
 const HIGHSCORES_SCORE_START = 100
 const HIGHSCORES_SCORE_STEP = 10
@@ -23,6 +24,10 @@ const HIGHSCORES_TILESREMAINING_IDX = 3
 
 const AUDIO_TYPE_SOUNDEFFECT = 0
 const AUDIO_TYPE_MUSIC = 1
+
+const TRLP_PAGE_SEPARATOR = "==PS=="
+const TRLP_TEXT_SEPARATOR = "==EOT=="
+const TRLP_FILE_NAME = "res://Internationalization/long-texts.txt"
 
 # Here put all supported locale using the same value as defined for TranslationServer 
 const LANGUAGE_SETTING : Dictionary = {
@@ -61,7 +66,8 @@ var settings : Dictionary = {
 	},
 	"hints": 0,
 	"language": LANGUAGE.ENGLISH,
-	"tileSet": "default"
+	"tileSet": "default",
+	"saveReplay" : true    #tmp for test
 }
 
 var highScores : Dictionary = {
@@ -180,6 +186,19 @@ var previous_scene : String
 var configLoaded : bool = false
 var continue_tournament : bool = true
 var tournamentSeed : int
+
+var lp_translations : Dictionary = {
+	"HELP" : {
+		LANGUAGE_SETTING[LANGUAGE.ENGLISH] : [],
+		LANGUAGE_SETTING[LANGUAGE.FRENCH] : [],
+		LANGUAGE_SETTING[LANGUAGE.OTHER] : []
+	},
+	"ABOUT" : {
+		LANGUAGE_SETTING[LANGUAGE.ENGLISH] : [],
+		LANGUAGE_SETTING[LANGUAGE.FRENCH] : [],
+		LANGUAGE_SETTING[LANGUAGE.OTHER] : []
+	}
+}
 
 func save_config() -> bool:
 	var config = ConfigFile.new()
@@ -364,6 +383,187 @@ func save_seed(tournament_seed: int) -> bool:
 
 	return save_ok
 
+
+#load only language in settings + default
+func load_long_texts_old() -> bool:
+	var status : bool = false
+	##var lang_regex = RegEx.new()
+	
+	var translationFile = FileAccess.open(TRLP_FILE_NAME, FileAccess.READ)
+	var error = FileAccess.get_open_error()
+
+	if error == ERR_FILE_NOT_FOUND:
+		Global.debug("load_long_texts: translation file does not exists !")
+	elif error != OK:
+		Global.debug("load_long_texts: error=["+str(error)+"]") #TODO: deal with eror
+	else:
+		var data : String
+		var totalpages : int = -1
+		var page : String = ""
+		var pageCount : int = 0
+		#var pageIdx : int = 0
+		var currLang : String = ""
+
+
+		while (translationFile.get_position() < translationFile.get_length()):
+			data = translationFile.get_line()
+			Global.debug("TrFile data="+data)
+			Global.debug("l="+str(data.length()))
+			
+			if (totalpages == -1 and page == ""):
+				# check format 1st
+				totalpages = data.right(1).to_int()
+				page = data.erase(data.length()-2, 2)
+				pageCount += 1
+				Global.debug("tp="+str(totalpages)+" page="+page)
+				
+				if lp_translations.has(page):
+					Global.debug("page["+page+"] exists in dic")
+				else:
+					Global.debug("(warn?)page["+page+"] DOES NOT exist in dic")
+			else:
+			#if lp_translations.has("data"):
+				if data == TRLP_PAGE_SEPARATOR:
+					Global.debug("==> new page")
+					pageCount += 1 #~not here, below
+
+				elif data == TRLP_TEXT_SEPARATOR:
+					Global.debug("==> new language")
+					Global.debug("pC="+ str(pageCount) +"  tp="+ str(totalpages))
+
+					if pageCount != totalpages:
+						Global.debug("WARNING: get "+ str(pageCount) +" pages over "+ str(totalpages) +" expected !")
+					else:
+						Global.debug("all pages read")
+						pageCount = 0
+						totalpages = -1
+						#pageIdx = 0
+						page = ""
+						currLang = ""
+
+					pageCount += 1	#increase counter ONLY if there is more data
+
+				elif data.length() == 2 and !data.is_valid_int():
+
+					Global.debug("lang?="+data)
+					if lp_translations[page].has(data):
+						Global.debug("lang is expected")
+						currLang = data
+						if lp_translations[page][currLang].size() == 0:
+							Global.debug("nothing stored in array yet")
+							lp_translations[page][currLang].append("")
+						else:
+							Global.debug("array already contains data")
+							#what to do here ?
+					else:
+						Global.debug("WARN: lang is NOT expected p=["+page+"] l=["+data+"]")
+						pass
+
+	#beware here: do like an automata, store where we are, check prev state
+	# like if state=2 and cond=true: state=0 => 1 read page name; 2=lang, 3=currpage, 4=nblines
+				elif data.length() == 1 and data.is_valid_int():
+					Global.debug("page="+data+" / tp="+str(totalpages))
+					#==> not here, resize array once when 1st total is read
+					#then fill string with data
+					##lp_translations[page][currLang].resize(data.to_int())
+					#HERE: 1st level of array = pages
+
+				#elif data.length() >= 1 and data.is_valid_int():
+					#Global.debug("lines="+data)
+					##HERE: 2nd level of array, no string = lines
+					#lp_translations[page][currLang][pageCount] = ""
+
+				else:
+					Global.debug("store data")
+					##error here lp_translations[page][currLang][pageCount] += data
+					#pageIdx += 1
+			
+		translationFile.close()		#breakpoint here
+
+	return status
+
+
+func load_long_texts() -> bool:
+	var status : bool = false
+	
+	var translationFile = FileAccess.open(TRLP_FILE_NAME, FileAccess.READ)
+	var error = FileAccess.get_open_error()
+
+	if error == ERR_FILE_NOT_FOUND:
+		Global.debug("load_long_texts: translation file does not exists !")
+	elif error != OK:
+		Global.debug("load_long_texts: error=["+str(error)+"]") #TODO: deal with eror
+	else:
+		var data : String
+		var totalpages : int = -1
+		var page : String = ""
+		var pageCount : int = 0
+		var currLang : String = ""
+		var currPage : int = 0
+
+
+		while (translationFile.get_position() < translationFile.get_length()):
+			data = translationFile.get_line()
+			Global.debug("TrFile data=["+data+"]")
+			Global.debug("l="+str(data.length()))
+
+			if (totalpages == -1 and page == ""):
+				# check format 1st
+				totalpages = data.right(1).to_int()
+				page = data.erase(data.length()-2, 2)
+				pageCount += 1
+				Global.debug("tp="+str(totalpages)+" page="+page)
+				
+				if lp_translations.has(page):
+					Global.debug("page["+page+"] exists in dic")
+				else:
+					Global.debug("(warn?)page["+page+"] DOES NOT exist in dic")
+			else:
+				
+				#kind of automata could be done using accumulator var step=1, 2, 3
+				#then if ... and step=[expected step]
+				# 		else: error break, report file is wrong
+				# does this even matter ? file are not made by users anyway !!
+				
+				
+				if data == TRLP_PAGE_SEPARATOR:
+					pageCount += 1
+					Global.debug("==> new page pC="+ str(pageCount))
+				elif data == TRLP_TEXT_SEPARATOR:
+					Global.debug("==> new language")
+					Global.debug("pC="+ str(pageCount) +"  tp="+ str(totalpages))
+					
+					if pageCount != totalpages:
+						Global.debug("WARNING: get "+ str(pageCount) +" pages over "+ str(totalpages) +" expected !")
+						#error ? status=false
+					else:
+						Global.debug("all pages read")
+						pageCount = 0
+						totalpages = -1
+						page = ""
+						currLang = ""
+
+				elif data.length() == 2 and !data.is_valid_int() and currLang.is_empty():
+					Global.debug("lang?="+data)
+					currLang = data
+					#here allocate array for tp size
+					#set array size here
+					lp_translations[page][currLang].resize(totalpages)
+					
+				elif data.length() == 1 and data.is_valid_int():
+					currPage = data.to_int()
+					Global.debug("page="+data+" / tp="+str(totalpages))
+				else:
+					Global.debug("store data")
+					if lp_translations[page][currLang][currPage - 1] == null:
+						lp_translations[page][currLang][currPage - 1] = ""
+					lp_translations[page][currLang][currPage - 1] += data + "\n"
+
+
+
+	translationFile.close()		#breakpoint here
+
+	return status
 
 func debug(msg : String) -> void:
 	if (debug_enabled == true):
