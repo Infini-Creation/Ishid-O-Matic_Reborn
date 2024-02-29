@@ -125,7 +125,7 @@ func _on_language_0_pressed():
 	Global.debug("b1 p="+str($"ButtonsGroup/Hints-Language Row/Language-1".button_pressed))
 	Global.debug("b2 p="+str($"ButtonsGroup/Hints-Language Row/Language-2".button_pressed))
 	#Global.settings["language"] = 0
-	language = Global.LANGUAGE.FRENCH
+	language = Global.LANGUAGE.ENGLISH
 	#TranslationServer.set_locale("fr")
 	language_updated.emit(0)
 
@@ -134,7 +134,7 @@ func _on_language_1_pressed():
 	Global.debug("b0 p="+str($"ButtonsGroup/Hints-Language Row/Language-0".button_pressed))
 	Global.debug("b2 p="+str($"ButtonsGroup/Hints-Language Row/Language-2".button_pressed))
 	#Global.settings["language"] = 1
-	language = Global.LANGUAGE.ENGLISH
+	language = Global.LANGUAGE.FRENCH
 	#TranslationServer.set_locale("en")
 	language_updated.emit(1)
 
