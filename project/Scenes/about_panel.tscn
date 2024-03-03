@@ -61,7 +61,7 @@ anchor_bottom = 0.864
 offset_left = 2.0
 offset_top = 40.0
 offset_right = -1.0
-offset_bottom = -39.112
+offset_bottom = -1.112
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -73,22 +73,8 @@ theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/normal_font = SubResource("SystemFont_jgi8k")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "[center]About
-
-Game made with Godot 4 by Infini-Creation
-
-Based on the game [i]Ishid-O-Matic[/i] by [b]Robert Brandner[/b] on [i][color=lightblue]Amiga[/color][/i]
-(still available on [url=https://www.amigapd.com/uploads/5/5/0/1/5501110/asi031.dms]Assassin Game #31 .[/url])
-Itself base on [i]Ishido - The way of stones[/i] designed by [b]Michael Feinberg[/b] and
-released on various platforms in 1989
-
-Thanks:
-	 [rainbow]Michael Feinberg[/rainbow] &  [rainbow]Robert Brandner[/rainbow]
-	sounds effect & music by [wave]Eric Matyas[/wave], his website is [url=https://soundimage.org/l]Soundimage.org[/url]
-	gfx by [shake]XXX[/shake]
-	authors & contributors of [i]Godot Engine[/i]
-	[b]GDQuest[/b] for their great youtube videos & tutorials
-[/center]"
+text = "[center]No translation loaded ![/center]"
+scroll_active = false
 shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
 
@@ -108,6 +94,8 @@ grow_vertical = 0
 theme = ExtResource("3_l7ic4")
 text = "ABOUTCLOSE"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/TextureButton/actionButton" to="." method="_on_action_button_pressed"]
 [connection signal="meta_clicked" from="CenterContainer/VBoxContainer/TextureButton/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="visibility_changed" from="CenterContainer/VBoxContainer/TextureButton/RichTextLabel" to="." method="_on_rich_text_label_visibility_changed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/TextureButton/CloseButton" to="." method="_on_close_button_pressed"]
