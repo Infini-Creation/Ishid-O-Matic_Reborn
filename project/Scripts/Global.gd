@@ -28,6 +28,10 @@ const AUDIO_TYPE_MUSIC = 1
 const TRLP_PAGE_SEPARATOR = "==PS=="
 const TRLP_TEXT_SEPARATOR = "==EOT=="
 const TRLP_FILE_NAME = "res://Internationalization/long-texts.txt"
+const TRANSLATION_ERROR_MESSAGE = "[center]Translation Error ![/center]"
+const TRANSLATION_ABOUT_PAGE = "ABOUT"
+const TRANSLATION_HELP_PAGE = "HELP"
+
 
 # Here put all supported locale using the same value as defined for TranslationServer 
 const LANGUAGE_SETTING : Dictionary = {
