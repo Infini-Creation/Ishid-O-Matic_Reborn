@@ -14,7 +14,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-auto_translate = false
 localize_numeral_system = false
 script = ExtResource("1_dtgif")
 

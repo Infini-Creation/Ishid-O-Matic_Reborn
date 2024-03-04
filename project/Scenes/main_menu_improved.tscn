@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cli4cany8byfo" path="res://Scenes/game_tournament_panel.tscn" id="7_kd0kb"]
 
 [node name="MainMenu-Improved" type="Control"]
+auto_translate_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,6 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_ltboi")
 
 [node name="BackgroundTexture" type="NinePatchRect" parent="."]
+auto_translate_mode = 2
 custom_minimum_size = Vector2(1024, 768)
 layout_mode = 1
 anchors_preset = 15
@@ -25,8 +27,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-auto_translate = false
 localize_numeral_system = false
+auto_translate = false
 theme = ExtResource("1_0j35d")
 texture = ExtResource("2_uqssm")
 region_rect = Rect2(1024, 768, 0, 0)
@@ -44,11 +46,12 @@ theme_override_constants/separation = 0
 alignment = 1
 
 [node name="TopTilesStripe" type="HBoxContainer" parent="VBoxContainer"]
+auto_translate_mode = 2
 custom_minimum_size = Vector2(1024, 64)
 layout_mode = 2
 size_flags_vertical = 0
-auto_translate = false
 localize_numeral_system = false
+auto_translate = false
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1024, 640)
@@ -69,20 +72,27 @@ layout_mode = 2
 alignment = 2
 
 [node name="HelpPanel" parent="." instance=ExtResource("4_0m6b0")]
+auto_translate_mode = 0
 visible = false
 layout_mode = 1
 
 [node name="AboutPanel" parent="." instance=ExtResource("5_hlvuh")]
+auto_translate_mode = 0
 visible = false
 layout_mode = 1
+auto_translate = true
 
 [node name="HallOfFamePanel" parent="." instance=ExtResource("6_5jscf")]
+auto_translate_mode = 0
 visible = false
 layout_mode = 1
+auto_translate = true
 
 [node name="GameTournamentPanel" parent="." instance=ExtResource("7_kd0kb")]
+auto_translate_mode = 0
 visible = false
 layout_mode = 1
+auto_translate = true
 
 [connection signal="help_panel_closed" from="HelpPanel" to="." method="_on_help_panel_help_panel_closed"]
 [connection signal="back_to_menu" from="GameTournamentPanel" to="." method="_on_game_tournament_panel_back_to_menu"]

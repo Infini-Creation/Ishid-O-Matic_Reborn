@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/TheOrigin.gd" id="1_xflr7"]
 
 [node name="TheOrigin" type="Node"]
+auto_translate_mode = 1
 script = ExtResource("1_xflr7")
 currentMusic = 1
 
