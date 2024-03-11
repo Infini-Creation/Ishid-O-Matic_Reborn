@@ -72,27 +72,23 @@ layout_mode = 2
 alignment = 2
 
 [node name="HelpPanel" parent="." instance=ExtResource("4_0m6b0")]
-auto_translate_mode = 0
 visible = false
 layout_mode = 1
 
 [node name="AboutPanel" parent="." instance=ExtResource("5_hlvuh")]
-auto_translate_mode = 0
+auto_translate_mode = 1
 visible = false
 layout_mode = 1
-auto_translate = true
 
 [node name="HallOfFamePanel" parent="." instance=ExtResource("6_5jscf")]
-auto_translate_mode = 0
+auto_translate_mode = 1
 visible = false
 layout_mode = 1
-auto_translate = true
 
 [node name="GameTournamentPanel" parent="." instance=ExtResource("7_kd0kb")]
-auto_translate_mode = 0
+auto_translate_mode = 1
 visible = false
 layout_mode = 1
-auto_translate = true
 
 [connection signal="help_panel_closed" from="HelpPanel" to="." method="_on_help_panel_help_panel_closed"]
 [connection signal="back_to_menu" from="GameTournamentPanel" to="." method="_on_game_tournament_panel_back_to_menu"]
