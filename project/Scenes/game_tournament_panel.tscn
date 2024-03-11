@@ -134,9 +134,15 @@ theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
 text = "TOURSEEDPOKB"
 
-[node name="bCancelButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer"]
+[node name="bRandomButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+theme = ExtResource("3_a40pq")
+theme_override_font_sizes/font_size = 28
+text = "TOURSEEDPRANDB"
+
+[node name="bCancelButton" type="Button" parent="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer"]
+layout_mode = 2
 theme = ExtResource("3_a40pq")
 theme_override_font_sizes/font_size = 28
 text = "TOURSEEDPCANB"
@@ -145,4 +151,5 @@ text = "TOURSEEDPCANB"
 [connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer/NoButton" to="." method="_on_no_button_pressed"]
 [connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerA/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer/bOKButton" to="." method="_on_b_ok_button_pressed"]
+[connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer/bRandomButton" to="." method="_on_b_random_button_pressed"]
 [connection signal="pressed" from="CenterContainer/TextureRect2/VBoxContainerB/HBoxContainer/bCancelButton" to="." method="_on_b_cancel_button_pressed"]
