@@ -63,6 +63,8 @@ func _on_accept_item_settings_save_requested():
 		$ButtonsGroup/DummySpacer2/SettingsSavedOKLabel.show()
 	else:
 		$ButtonsGroup/DummySpacer2/SettingsSavedKOLabel.show()
+	#start timer here then hide when timeout
+	$OkKoMsgTimer.start()
 	
 	button_clicked.emit(Global.ButtonIDs.BUTTON_SETTINGS_SAVE)
 
@@ -146,3 +148,8 @@ func _on_language_2_pressed():
 	language = Global.LANGUAGE.OTHER
 	#TranslationServer.set_locale("cn")
 	language_updated.emit(2)
+
+
+func _on_ok_ko_msg_timer_timeout() -> void:
+	$ButtonsGroup/DummySpacer2/SettingsSavedOKLabel.hide()
+	$ButtonsGroup/DummySpacer2/SettingsSavedKOLabel.hide()
