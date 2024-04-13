@@ -108,14 +108,33 @@ Game made with Godot 4 by Infini-Creation
 Based on the game [i]Ishid-O-Matic[/i] by [b]Robert Brandner[/b] on [i][color=lightblue]Amiga[/color][/i]
 (still available on [url=https://www.amigapd.com/uploads/5/5/0/1/5501110/asi031.dms]Assassin Game #31 .[/url])
 Itself base on [i]Ishido - The way of stones[/i] designed by [b]Michael Feinberg[/b] and
-released on various platforms in 1989
+released on various platforms in 1989.
 
 Thanks:
-	 [rainbow]Michael Feinberg[/rainbow] &  [rainbow]Robert Brandner[/rainbow]
+	[rainbow]Michael Feinberg[/rainbow] & [rainbow]Robert Brandner[/rainbow]
 	sounds effect & music by [wave]Eric Matyas[/wave], his website is [url=https://soundimage.org/l]Soundimage.org[/url]
-	flag icons by XXX
 	gfx by [shake]XXX[/shake]
 	authors & contributors of [i]Godot Engine[/i]
 	[b]GDQuest[/b] for their great youtube videos & tutorials
+[/center]
+==EOT==
+ABOUT-1
+fr
+1
+[center]A propos
+
+Un jeu créer avec Godot 4 par Infini-Creation
+
+Basé sur le jeu [i]Ishid-O-Matic[/i] de [b]Robert Brandner[/b] sur [i][color=lightblue]Amiga[/color][/i]
+(toujours disponible sur [url=https://www.amigapd.com/uploads/5/5/0/1/5501110/asi031.dms]Assassin Game #31 .[/url])
+Lui même basé sur [i]Ishido - The way of stones[/i] conçu par [b]Michael Feinberg[/b] et
+distribué sur plusieurs ordinateurs en 1989.
+
+Remerciements :
+	[rainbow]Michael Feinberg[/rainbow] &  [rainbow]Robert Brandner[/rainbow]
+	effets sonores & musiques par [wave]Eric Matyas[/wave], site : [url=https://soundimage.org/l]Soundimage.org[/url]
+	graphisme par [shake]XXX[/shake]
+	auteurs & contributeurs de [i]Godot[/i]
+	[b]GDQuest[/b] pour leurs superbes vidéos youtube & tutoriels
 [/center]
 ==EOT==
