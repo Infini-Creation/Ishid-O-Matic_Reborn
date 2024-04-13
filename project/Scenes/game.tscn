@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2ahme0nrumhy"]
+[gd_scene load_steps=14 format=3 uid="uid://d2ahme0nrumhy"]
 
 [ext_resource type="Script" path="res://Scripts/BoardOverlay.gd" id="1_4a5n6"]
 [ext_resource type="Texture2D" uid="uid://ty2ekqkwt1mb" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
@@ -10,9 +10,12 @@
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_uawno"]
 [ext_resource type="PackedScene" uid="uid://dqqc553edp67k" path="res://Scenes/game_win_panel.tscn" id="8_fy08i"]
 [ext_resource type="PackedScene" uid="uid://cwmeqnmocd8lr" path="res://Scenes/game_quitconfirm_panel.tscn" id="9_akd7t"]
+[ext_resource type="PackedScene" uid="uid://bxlrwdfth54dw" path="res://Scenes/test_panel.tscn" id="11_s4t3q"]
 [ext_resource type="PackedScene" uid="uid://cwfcdv52iraox" path="res://Scenes/final_score_panel.tscn" id="11_vro1l"]
+[ext_resource type="PackedScene" uid="uid://bv1go035hdja2" path="res://Scenes/final_score_panel_2.tscn" id="12_kdsd7"]
 
 [node name="Game" type="Node2D"]
+auto_translate_mode = 1
 script = ExtResource("1_f3kqo")
 base_board = PackedVector2Array(0, 0, 11, 0, 0, 7, 11, 7, 5, 3, 6, 4)
 board_width = 12
@@ -26,11 +29,12 @@ z_index = 5
 script = ExtResource("1_4a5n6")
 
 [node name="Board" type="TextureRect" parent="."]
+auto_translate_mode = 2
 z_index = -1
 offset_right = 40.0
 offset_bottom = 40.0
-auto_translate = false
 localize_numeral_system = false
+auto_translate = false
 texture = ExtResource("1_ah41p")
 
 [node name="UI" type="Control" parent="."]
@@ -82,7 +86,7 @@ stretch_mode = 5
 visible = false
 layout_mode = 2
 theme = ExtResource("6_uawno")
-text = "Tournament (%d)"
+text = "GAMETOURLABEL"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -126,14 +130,30 @@ z_index = 4
 visible = false
 z_index = 4
 
-[node name="FinalScorePanel" parent="." instance=ExtResource("11_vro1l")]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(1024, 768)
+offset_right = 1024.0
+offset_bottom = 768.0
+mouse_filter = 2
+
+[node name="FinalScore Panel 2" parent="CenterContainer" instance=ExtResource("12_kdsd7")]
+visible = false
+layout_mode = 2
+
+[node name="FinalScorePanel" parent="CenterContainer" instance=ExtResource("11_vro1l")]
+auto_translate_mode = 1
 visible = false
 z_index = 4
+layout_mode = 2
+auto_translate = true
+
+[node name="Test Panel" parent="CenterContainer" instance=ExtResource("11_s4t3q")]
+visible = false
+layout_mode = 2
 
 [connection signal="highlight_board_cell" from="." to="BoardOverlay" method="_on_game_highlight_board_cell"]
 [connection signal="deck_empty" from="UI/VBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_empty"]
-[connection signal="deck_initialized" from="UI/VBoxContainer/DeckDisplay" to="grid" method="_on_deck_display_deck_initialized"]
 [connection signal="is_closed" from="GameOverPanel" to="." method="_on_game_over_panel_is_closed"]
 [connection signal="is_closed" from="GameWinPanel" to="." method="_on_game_win_panel_is_closed"]
 [connection signal="quit" from="GameQuitPanel" to="." method="_on_game_quit_panel_quit"]
-[connection signal="is_closed" from="FinalScorePanel" to="." method="_on_final_score_panel_is_closed"]
+[connection signal="is_closed" from="CenterContainer/FinalScorePanel" to="." method="_on_final_score_panel_is_closed"]
