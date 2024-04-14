@@ -15,19 +15,39 @@ var menu
 var game
 var current_game_type : String = ""
 
-func _ready():
-	Global.debug_enabled = false #tmp
-	Global.load_config()
-	Global.debug("settings="+str(Global.settings))
-	
-	if FileAccess.file_exists(Global.HIGHSCORES_FILE_PATH):
-		Global.debug("load HS file")
-		Global.load_high_scores()
-	else:
-		Global.debug("init HS file")
-		Global.initialize_high_scores()
-		Global.save_high_scores()
 
+func _notification(what: int) -> void:
+	Global.debug("origin: _notification called, what="+str(what))
+
+func _init():
+	Global.debug_enabled = true #tmp
+	
+	Global.debug("origin: init called")
+	#
+	#also called again after qitting a game !
+	
+	if !Global.initialised:
+		Global.debug("origin: init config & stuff")
+		Global.load_config()
+		Global.debug("settings="+str(Global.settings))
+		
+		if FileAccess.file_exists(Global.HIGHSCORES_FILE_PATH):
+			Global.debug("load HS file")
+			Global.load_high_scores()
+		else:
+			Global.debug("init HS file")
+			Global.initialize_high_scores()
+			Global.save_high_scores()
+			
+		var load_tr_status = Global.load_long_texts()
+		Global.debug("load translation file="+str(load_tr_status))
+		
+		Global.initialised = true
+
+
+#this may be in _init func, this one is called every time player quit and play again !
+func _ready():
+	Global.debug("origin: ready")
 	currentMusic = randi_range(0, Global.available_musics.size()-1)
 	musicPlayer.stream = Global.available_musics[currentMusic]
 
@@ -44,9 +64,11 @@ func _ready():
 	else:
 		soundEffectPlayer.stop()
 
+	Global.debug("origin: inst. game & menu")
 	menu = mainMenuScene.instantiate()
 	game = gameScene.instantiate()
 
+	Global.debug("origin: add menu")
 	add_child(menu)
 
 	menu.connect("launch_game", _on_game_launched)
@@ -62,16 +84,19 @@ func _on_audio_settings_updated(audio_type : int, new_volume: int) -> void:
 
 
 func _on_game_launched(gameType : String):
-	Global.debug("launch game="+gameType)
+	Global.debug("origin: launch game="+gameType)
 	current_game_type = gameType
 	Global.previous_scene = get_tree().current_scene.scene_file_path
-	Global.debug("prev scene=" + Global.previous_scene)
+	Global.debug("origin: prev scene=" + Global.previous_scene)
 
+	# here maybe check GT 1P/2P, set nb players accordingly
 	game.setup(0, gameType)
 
+	Global.debug("origin: remove menu & add game")
 	remove_child(menu)
 	add_child(game)
-
+	Global.debug("origin: game added to tree")
+	
 	game.connect("game_end", _on_game_is_over)
 
 	if Global.settings["Audio"]["soundEffects"] == true:
@@ -94,7 +119,7 @@ func _on_game_play_soundeffect(effect : String):
 
 func _on_game_is_over(status : int, playerIdx : int, score : Array, fourWays : Array, tilesRemaining : int):
 	var update_hs : bool = false
-	Global.debug("_on_game_is_over called, status =" + str(status))
+	Global.debug("origin: _on_game_is_over called, status =" + str(status))
 	if status == Global.GAME_EXIT_STATUS.GAME_WON:
 		Global.debug("origin/_ogio: Game won")
 		update_hs = true
@@ -107,7 +132,7 @@ func _on_game_is_over(status : int, playerIdx : int, score : Array, fourWays : A
 		Global.debug("origin/_ogio: quit")
 	
 	# that should be done only after GOP button clicked (as well as add menu below)
-	Global.debug("game child will be removed")
+	Global.debug("origin: game child will be removed")
 	remove_child(game)
 	
 	if update_hs == true:
