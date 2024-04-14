@@ -151,6 +151,11 @@ func _on_language_updated(language : int):
 	Global.debug("new lang set: "+str(language))
 	Global.settings["language"] = language #tmp
 	TranslationServer.set_locale(Global.LANGUAGE_SETTING[language])
+	Global.translation_setting_updated[Global.TRANSLATION_ABOUT_PAGE] = true
+	Global.translation_setting_updated[Global.TRANSLATION_HELP_PAGE] = true
+	#add a global flag to "signal" any lang dependant panel to update 1st (help especially)
+	# when to reset it ? when a game start ? or turn it into an array so all page can ack they get it ?
+	
 	
 	Global.debug("reload mainMenuButtons scene")
 	mainMenuButtons.queue_free()
