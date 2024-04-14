@@ -13,17 +13,12 @@ var player2_name : String
 var highlight_mode : int
 var language : int
 
-@onready var languageButton = [
-	"ButtonsGroup/Hints-Language Row/Language-0",
-	"ButtonsGroup/Hints-Language Row/Language-1",
-	"ButtonsGroup/Hints-Language Row/Language-2"
-]
-
 
 func _ready():
 	#TODO in main code NOT here
 	Global.load_config()
 	Global.debug("settings="+str(Global.settings))
+
 	music_enabled = Global.settings["Audio"]["music"]
 	music_volume = Global.settings["Audio"]["musicVolume"]
 	sound_enabled = Global.settings["Audio"]["soundEffects"]
@@ -32,6 +27,12 @@ func _ready():
 	player2_name = Global.settings["Players"]["Two"]
 	highlight_mode = Global.settings["hints"]
 	language = Global.settings["language"]
+	
+	# set it to "test" for lg=2 (tatar)
+	var displayedLangText : String = TranslationServer.get_language_name(Global.AVAILABLE_LANGUAGES[language])
+	if language == 2:
+		displayedLangText = "test"
+	$"ButtonsGroup/Hints-Language Row/LanguageSelector".text = displayedLangText
 
 	#init settings
 	Global.debug("cmv="+str(music_volume)+" cme="+str(music_enabled))
@@ -121,35 +122,27 @@ func _on_audio_volume_settings_updated(audio_type, new_audio_volume, new_audio_e
 	#TODO: update volume for music + add sound effect test when updating volume of SE
 	#HERE: signal back with volume value
 
-	#TODO: update language settings when selected + ~display notification of the choice
-func _on_language_0_pressed():
-	Global.debug("lang0 pressed-" +str($"ButtonsGroup/Hints-Language Row/Language-0".button_group))
-	Global.debug("b1 p="+str($"ButtonsGroup/Hints-Language Row/Language-1".button_pressed))
-	Global.debug("b2 p="+str($"ButtonsGroup/Hints-Language Row/Language-2".button_pressed))
-	#Global.settings["language"] = 0
-	language = Global.LANGUAGE.ENGLISH
-	#TranslationServer.set_locale("fr")
-	language_updated.emit(0)
-
-func _on_language_1_pressed():
-	Global.debug("lang1 pressed-" +str($"ButtonsGroup/Hints-Language Row/Language-1".button_group))
-	Global.debug("b0 p="+str($"ButtonsGroup/Hints-Language Row/Language-0".button_pressed))
-	Global.debug("b2 p="+str($"ButtonsGroup/Hints-Language Row/Language-2".button_pressed))
-	#Global.settings["language"] = 1
-	language = Global.LANGUAGE.FRENCH
-	#TranslationServer.set_locale("en")
-	language_updated.emit(1)
-
-func _on_language_2_pressed():
-	Global.debug("lang2 pressed-" +str($"ButtonsGroup/Hints-Language Row/Language-2".button_group))
-	Global.debug("b0 p="+str($"ButtonsGroup/Hints-Language Row/Language-0".button_pressed))
-	Global.debug("b1 p="+str($"ButtonsGroup/Hints-Language Row/Language-1".button_pressed))
-	#Global.settings["language"] = 2
-	language = Global.LANGUAGE.OTHER
-	#TranslationServer.set_locale("cn")
-	language_updated.emit(2)
-
 
 func _on_ok_ko_msg_timer_timeout() -> void:
 	$ButtonsGroup/DummySpacer2/SettingsSavedOKLabel.hide()
 	$ButtonsGroup/DummySpacer2/SettingsSavedKOLabel.hide()
+
+
+func _on_label_gui_input(event: InputEvent) -> void:
+	var displayedLangText = TranslationServer.get_language_name(Global.AVAILABLE_LANGUAGES[Global.settings["language"]])
+
+	#Global.debug("label InEv="+str(event))
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == 1:
+			language += 1
+			language %= Global.AVAILABLE_LANGUAGES.size()
+			var labtext = Global.AVAILABLE_LANGUAGES[language]
+
+			Global.debug("text = "+labtext+"  langn="+TranslationServer.get_language_name(labtext))
+			displayedLangText = TranslationServer.get_language_name(labtext)
+			language_updated.emit(language)
+
+			if labtext == "tt":
+				displayedLangText = "test"
+
+			$"ButtonsGroup/Hints-Language Row/LanguageSelector".text = displayedLangText
