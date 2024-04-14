@@ -28,16 +28,23 @@ const AUDIO_TYPE_MUSIC = 1
 const TRLP_PAGE_SEPARATOR = "==PS=="
 const TRLP_TEXT_SEPARATOR = "==EOT=="
 const TRLP_FILE_NAME = "res://Internationalization/long-texts.txt"
-const TRANSLATION_ERROR_MESSAGE = "[center]Translation Error ![/center]"
+const TRANSLATION_ERROR_MESSAGE_BBCODE = "[center]Translation Error ![/center]"
+const TRANSLATION_ERROR_MESSAGE_RAW = "Translation Error !"
 const TRANSLATION_ABOUT_PAGE = "ABOUT"
+const TRANSLATION_ABOUT_PAGECOUNT : int = 1
 const TRANSLATION_HELP_PAGE = "HELP"
-
+const TRANSLATION_HELP_PAGECOUNT : int = 7
+const AVAILABLE_LANGUAGES : Array = [ "en", "fr", "tt" ]
+const TRANSLATION_PANELS_PAGECOUNT : Dictionary = {
+	TRANSLATION_ABOUT_PAGE: 1,
+	TRANSLATION_HELP_PAGE : 7
+}
 
 # Here put all supported locale using the same value as defined for TranslationServer 
 const LANGUAGE_SETTING : Dictionary = {
 	LANGUAGE.FRENCH : "fr",
 	LANGUAGE.ENGLISH : "en",
-	LANGUAGE.OTHER : "cn"
+	LANGUAGE.OTHER : "tt"
 }
 
 var stats : Dictionary = {
@@ -186,10 +193,16 @@ enum GAME_EXIT_STATUS { GAME_WON, GAME_LOSS, USER_QUIT }
 var tile_colors : int = 6
 var tile_shapes : int = 6
 
+var initialised : bool = false
 var previous_scene : String
 var configLoaded : bool = false
+
 var continue_tournament : bool = true
 var tournamentSeed : int
+var translation_setting_updated : Dictionary = {
+	TRANSLATION_ABOUT_PAGE : true,
+	TRANSLATION_HELP_PAGE : true
+		}
 
 var lp_translations : Dictionary = {
 	"HELP" : {
@@ -220,7 +233,7 @@ func save_config() -> bool:
 	
 	var error = config.save(SETTINGS_FILE_PATH)
 	if error != OK:
-		Global.debug("sav error=["+error+"]") #TODO: deal with eror
+		Global.debug("sav error=["+str(error)+"]") #TODO: deal with eror
 			#or log to file
 		ok = false
 
@@ -391,6 +404,8 @@ func save_seed(tournament_seed: int) -> bool:
 func load_long_texts() -> bool:
 	var status : bool = false
 	
+	#~be sure all pages & langs are filled here so no check needed in about/help/other
+	# add always "trans error" for missing page/lang
 	var translationFile = FileAccess.open(TRLP_FILE_NAME, FileAccess.READ)
 	var error = FileAccess.get_open_error()
 
@@ -464,6 +479,25 @@ func load_long_texts() -> bool:
 					lp_translations[page][currLang][currPage - 1] += data + "\n"
 
 	translationFile.close()
+	
+	#check all loaded trans, if all supported lang there + all pages
+	#no need to check maybe, when filling, no lang... tr error def msg
+	# BUT missing tr won't be known when reading the file
+	for page in [TRANSLATION_ABOUT_PAGE, TRANSLATION_HELP_PAGE]:
+		for language in AVAILABLE_LANGUAGES:
+			Global.debug("check pg[" + page + "] lang[" + language + "]")
+			if lp_translations[page].has(language) and lp_translations[page][language].size() > 0:
+				Global.debug("LPT="+str(lp_translations[page][language].size()))
+			else:
+				Global.debug("add default error into pg[" + page + "] lg[" + language + "]")
+				lp_translations[page][language].resize(TRANSLATION_PANELS_PAGECOUNT[page])
+				for count in range(0,TRANSLATION_PANELS_PAGECOUNT[page]):
+					if page == "HELP":
+						lp_translations[page][language][count] = TRANSLATION_ERROR_MESSAGE_RAW
+					else:
+						lp_translations[page][language][count] = TRANSLATION_ERROR_MESSAGE_BBCODE
+		
+	#status = true
 
 	return status
 
