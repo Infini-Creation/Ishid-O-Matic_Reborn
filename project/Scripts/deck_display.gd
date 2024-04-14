@@ -5,7 +5,7 @@ extends Node2D
 @export var gameType : String
 var raw_stone : PackedScene = preload("res://Scenes/tile.tscn")
 
-signal deck_initialized
+#signal deck_initialized
 signal deck_empty
 
 signal tile_picked
