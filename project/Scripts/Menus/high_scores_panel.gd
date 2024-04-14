@@ -13,7 +13,7 @@ var currentPageIdx : int = 0
 var allPages : Array = []
 var NodesStore : Array = []
 
-signal button_clicked(buttonID : int) #?
+#signal button_clicked(buttonID : int) #?
 
 func _ready():
 	# not on ready but when panel is set to visible
