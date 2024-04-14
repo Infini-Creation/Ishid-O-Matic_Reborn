@@ -138,3 +138,103 @@ Remerciements :
 	[b]GDQuest[/b] pour leurs superbes vidéos youtube & tutoriels
 [/center]
 ==EOT==
+HELP-7
+fr
+1
+AIDE
+
+Ishido est un jeux de plateau consistant en un ensemble de 72 pierres et un plateau de 96 cases.
+
+Chaque pierre a deux atttributs : une couleur et un symbol. Il y a six couleurs et six symboles pour l'ensemble des pierres, et donc 36 pierres uniques. Comme chaque pierre est en double, il y a 72 pierres au total.
+
+L'objectif premier d'Ishido est de placer toutes les 72 pierres sur le plateau de 96 cases. La difficulté s'accroit car les pierres doivent être placées vis à vis des autres en correspondance soit de la couleur soit du symbole de chacune. Quand le plateau commence à se remplirt, ce but n'est pas facile à atteindre.
+
+A valuable move is the 4-way, in which a stone is placed in the midst of four others, two of which are matched by color, and two which are matched by symbol.
+(source: wikipedia article)
+==PS==
+2
+There are 72 tiles, two of each combination of six colors and six shapes.
+
+At the start of the game, there are six tiles on the board representing
+each shape and color.  To place an additional tile on the board, you
+must match at least one adjacent tile according to the following rules:
+
+  - To match a single tile, you must match either the color or shape.
+  - To match two tiles, you must match one shape and one color.
+  - To match three tiles, you must match two colors and one shape OR two
+    shapes and one color.
+  - To match four tiles, you must match two colors and two shapes.
+
+==PS==
+3
+Players receive points by legally placing stones next to other stones in
+the light, interior potion of the board (The Within).  The greater the
+number of sides legally matched, the greater the number of points earned.
+  
+Points earned for legal matches are:  
+  
+      Single-sided match            1 point  
+      Two-sided match               2 points  
+      Three-sided match             4 points  
+      Four-sided match (4-Way)      8 points
+
+Each 4-Way match earns bonus points and doubles the points awarded for  
+subsequent matches.  For example, after the first 4-Way, a single-sided
+match earns two points, a two-sided match earns four points, a three-sided
+match earns eight points, and a 4-Way earns 16 points.  The next 4-Way
+doubles the point scheme again, and so on.
+==PS==
+4
+Bonuses awarded after each 4-Way match are:  
+  
+      First 4-Way                   25 points
+      Second 4-Way                  50 points
+      Third 4-Way                  100 points
+      Fourth 4-Way                 200 points
+      Fifth 4-Way                  400 points
+      Sixth 4-Way                  600 points
+      Seventh 4-Way                800 points
+      Eighth 4-Way               1,000 points
+      Ninth 4-Way                5,000 points
+      Tenth 4-Way               10,000 points
+      Eleventh 4-Way            25,000 points
+      Twelfth 4-Way             50,000 points
+==PS==
+5
+At the end of the game, bonuses are awarded when fewer than three stones
+remain in the pouch.  Bonuses awarded are:  
+  
+     Two stones left in pouch      100 points
+     One stone left in pouch       500 points
+     Empty pouch                  1000 points
+
+(source: page 3 to 5 from Amiga game manual available at www.lemonamiga.com)
+==PS==
+6
+Tournament Mode
+
+In  this mode, you can play the same sequence of stones many times, so that
+you can make a tournament with friends, or something like this. Except of
+that, it works almost the same like the one-player-mode.
+
+At  the  beginning  you're  asked,  wether you want to continue the current
+tournament (CONTINUE) or to start a new one (NEW).  CANCEL gets you back to
+the  main menu.
+
+(In this mode, no help is allowed, what is also told you if you try.)  And of
+course  there  is  a  special  page  in  the  hall of fame, for the current
+tournament.
+==PS==
+7
+Controls
+
+Put a tile on the board using left mouse button
+
+H - highlight mode, cycling through: None, first move available, all possible moves, a random move and the move giving you the best score.
+U - undo move (TODO)
+R - redo move (TODO)
+
+All these help are disabled in tournament mode.
+
+ESC - quit game, return to main menu
+==EOT==
