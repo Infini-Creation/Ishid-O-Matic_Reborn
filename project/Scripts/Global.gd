@@ -47,6 +47,8 @@ const LANGUAGE_SETTING : Dictionary = {
 	LANGUAGE.OTHER : "tt"
 }
 
+const LANGUAGE_NAME_TRANSLATION : Array = [ "English", "Français", "test" ]
+
 var stats : Dictionary = {
 	"GamesPlayed": 0,
 	"GamesWon": 0,

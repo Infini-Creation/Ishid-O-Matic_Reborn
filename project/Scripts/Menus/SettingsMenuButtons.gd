@@ -136,13 +136,15 @@ func _on_label_gui_input(event: InputEvent) -> void:
 		if event.pressed and event.button_index == 1:
 			language += 1
 			language %= Global.AVAILABLE_LANGUAGES.size()
-			var labtext = Global.AVAILABLE_LANGUAGES[language]
+			#var labtext = Global.AVAILABLE_LANGUAGES[language]
 
-			Global.debug("text = "+labtext+"  langn="+TranslationServer.get_language_name(labtext))
-			displayedLangText = TranslationServer.get_language_name(labtext)
+			#Global.debug("text = "+labtext+"  langn="+TranslationServer.get_language_name(labtext))
+			#displayedLangText = TranslationServer.get_language_name(labtext)
+			displayedLangText = Global.LANGUAGE_NAME_TRANSLATION[language]
+				#here : translate language name natively if possible
 			language_updated.emit(language)
 
-			if labtext == "tt":
-				displayedLangText = "test"
+			##if labtext == "tt":
+			##	displayedLangText = "test"
 
 			$"ButtonsGroup/Hints-Language Row/LanguageSelector".text = displayedLangText
