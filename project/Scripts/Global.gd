@@ -48,6 +48,8 @@ const LANGUAGE_SETTING : Dictionary = {
 }
 
 const LANGUAGE_NAME_TRANSLATION : Array = [ "English", "Français", "test" ]
+const HIGHLIGHT_MODE_LABELS : Array = [ "None", "First", "All", "Random", "Best score" ]
+# may add language as first level later
 
 var stats : Dictionary = {
 	"GamesPlayed": 0,
