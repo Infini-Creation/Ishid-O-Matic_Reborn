@@ -133,6 +133,7 @@ func _input(event):
 			Global.debug("previous enum value=" + str(highlight_mode))
 			# update highlighted cells (just reemit signal ?? => not redo check avail move call)
 			check_available_move(highlight_mode)
+			$UI/HBoxContainer/MiddleContainer/DataDisplay.text = Global.HIGHLIGHT_MODE_LABELS[highlight_mode]
 	elif event.is_action_pressed("Undo"):
 		if gameType == Global.GAMETYPE_TOURNAMENT:
 			Global.debug("Undo disabled in tournament mode")
@@ -327,6 +328,9 @@ func check_available_move(selected_highlight_mode : Global.HIGHLIGHT_MODE) -> in
 		highlight_cell(cells)
 	elif (selected_highlight_mode == Global.HIGHLIGHT_MODE.HIGHLIGHT_NONE):
 		#need to clear overlay one time
+		highlight_cell([])
+	elif (selected_highlight_mode == Global.HIGHLIGHT_MODE.HIGHER_SCORE_MOVE):
+		Global.debug("TODO: not yet implemented")
 		highlight_cell([])
 
 	possible_moves = cells.size()
