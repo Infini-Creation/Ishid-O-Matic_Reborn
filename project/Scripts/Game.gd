@@ -23,7 +23,8 @@ var game_board : Array = []
 var next_tile : Node2D = null
 #var tile_score : int = 0
 var avail_move : int = -1
-var lastMove : Vector2
+##var lastMove : Vector2  #unused, ~to remove
+var score_data : Array = []	#score, 4w count, bool updated
 
 # to remove soon
 #var game_end : bool = false
@@ -64,6 +65,8 @@ var game_end_status : int = -1
 func _init():
 	Global.debug("main game: _init called")
 	quit = false
+
+	score_data.resize(3)
 	# other vars ?
 	
 
@@ -191,7 +194,7 @@ func _process(_delta):
 
 			if (check_position_ok(mpos)):
 				Global.debug("position ok, proceed nt="+str(next_tile))
-				lastMove = mpos
+				##lastMove = mpos
 
 				var potential_tile_score = check_adjacent_tiles(next_tile, mpos)
 				if potential_tile_score > 0: ## true: ##tmp test 
@@ -473,6 +476,11 @@ func update_score(score : int) -> void:
 	#update_p1_score.emit(playersScores[current_player])
 	Players_Panels[current_player].update_player_score(playersScores[current_player])
 	Global.debug("US: Player1 score=" + str(playersScores[current_player]) + "(4wc="+str(fourWaysCounts[current_player])+")")
+	
+	# ~do not store total, but just the move's score => easier to undo/redo
+	score_data[0] = playersScores[current_player]
+	score_data[1] = fourWaysCounts[current_player]
+	score_data[2] = true
 
 
 func highlight_cell(cells : Array) -> void:
