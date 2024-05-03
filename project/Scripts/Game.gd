@@ -25,6 +25,17 @@ var next_tile : Node2D = null
 var avail_move : int = -1
 ##var lastMove : Vector2  #unused, ~to remove
 var score_data : Array = []	#score, 4w count, bool updated
+var history : Array = []
+var historyIdx : int = 0
+	#for undo/redo, store move, tile, score, 4w matches
+	#store dic item { tile, coord, score, 4wcount } can be used also for storing replay
+	#could be a class with its own methods to hide what it is actually
+var lastMove : Dictionary = {
+	"tile": "",
+	"coords": null,
+	"score" : 0,
+	"4w" : 0
+}
 
 # to remove soon
 #var game_end : bool = false
@@ -67,6 +78,7 @@ func _init():
 	quit = false
 
 	score_data.resize(3)
+	history.resize(66)
 	# other vars ?
 	
 
@@ -206,6 +218,8 @@ func _process(_delta):
 						fakeFourWays = false
 					##DeckDisplay.update()
 					update_score(potential_tile_score)
+					create_move_for_replay(mpos, next_tile)
+					
 					next_tile = null
 					avail_move = -1
 
@@ -565,6 +579,21 @@ func game_over(status : int):
 		#game_end.emit(game_end_status, current_player, [], [], 0)
 	#show panel => signal => action (return to origin scene) see below
 	##game_end.emit(status, current_player, playersScores[current_player], fourWaysCounts[current_player], DeckDisplay.get_deck_count())
+
+
+func create_move_for_replay(pos: Vector2, tilePlayed: Node2D) -> void:
+	lastMove["tile"] = tilePlayed
+	lastMove["coords"] = pos
+	lastMove["score"] = score_data[0]
+	lastMove["4w"] = score_data[1]
+	
+	Global.debug("H["+str(historyIdx)+"] lm=  "+str(lastMove)+"  tile c="+tilePlayed.color+" s="+tilePlayed.shape)
+	
+	score_data[2] = false
+	history[historyIdx] = lastMove.duplicate()
+
+	Global.debug("H["+str(historyIdx)+"]:  "+str(history[historyIdx]))
+	historyIdx += 1
 
 
 # do the same for game win panel
