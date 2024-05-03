@@ -99,9 +99,16 @@ func _ready():
 			Global.tournamentSeed = Global.load_seed()
 			Global.debug("conttour: saved seed= "+str(Global.tournamentSeed))
 		else:
-			#get seed provided by user if any
-			if Global.tournamentSeed == null:
-				Global.tournamentSeed = int(Time.get_unix_time_from_system ())
+			if Global.tournamentSeed == null or Global.tournamentSeed == 0:
+				#Global.debug("newtour: gen new seed")
+				var drandom = RandomNumberGenerator.new()
+				var dummySeed = int(Time.get_unix_time_from_system ())
+				drandom.seed = dummySeed
+				drandom.randomize()
+				Global.tournamentSeed = randi_range(99, dummySeed)
+					#int(Time.get_unix_time_from_system ())
+			#else:	#tmp
+			#	Global.debug("newtour: seed="+str(Global.tournamentSeed))
 			Global.debug("newtour: saved seed= "+str(Global.tournamentSeed))
 			Global.save_seed(Global.tournamentSeed)
 
