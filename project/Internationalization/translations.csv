@@ -18,6 +18,7 @@ SETTINGSHLFIRST,First,Premier,1 NYT
 SETTINGSHLALL,All,Tous,A NYT
 SETTINGSHLRANDOM,Random,Aléatoire,R NYT
 SETTINGSHLBEST,Best Score,Meilleur Score,BS NYT
+SETTINGSLANGUAGE,Language,Langage,LANG NYT
 SETTINGSSAVEOK,Settings saved successfully,préférences sauvegardées,SETOK NYT
 SETTINGSSAVEKO,An error occured when saving preferences !,une erreur s'est produite lors de la sauvegarde des réglages !, SETKO NYT
 GAMEOVERTITLE,NO MORE MOVES!,AUCUN MOUVEMENT POSSIBLE !,NMO NYT
