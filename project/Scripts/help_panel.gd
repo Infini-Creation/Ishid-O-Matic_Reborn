@@ -23,33 +23,18 @@ func _ready():
 	Global.debug("HelpPanel: _ready call")
 	max_pages = PagesHolder.size() - 1
 	
-	#fill the array as it should be in global/origin, no tests here
-	if Global.lp_translations.has(Global.TRANSLATION_HELP_PAGE):
-		if Global.lp_translations[Global.TRANSLATION_HELP_PAGE].has(TranslationServer.get_locale()):
-			Global.debug("lang is avail: " +TranslationServer.get_locale())
-			Global.debug("nb page: "+str(Global.lp_translations[Global.TRANSLATION_HELP_PAGE][TranslationServer.get_locale()].size()))
-			
-			if Global.lp_translations[Global.TRANSLATION_HELP_PAGE][TranslationServer.get_locale()].size() > 0:
-				for pageIdx in range(0, 7):
-					helpText = Global.lp_translations[Global.TRANSLATION_HELP_PAGE][TranslationServer.get_locale()][pageIdx]
-					Global.debug("pidx=["+str(pageIdx)+"] t=["+helpText+"]")
-					PagesHolder[pageIdx].text = helpText
-			else:
-				pass
-		else:
-			pass
-	else:
-		pass
+	for pageIdx in range(0, 7):
+		helpText = Global.lp_translations[Global.TRANSLATION_HELP_PAGE][TranslationServer.get_locale()][pageIdx]
+		Global.debug("pidx=["+str(pageIdx)+"] t=["+helpText+"]")
+		PagesHolder[pageIdx].text = helpText
+
 
 func update_page(prevPage : int, nextPage : int) -> void:
 	Global.debug("HelpPanel: update page= " + str(prevPage) + " -> " + str(nextPage))
 	PagesHolder[prevPage].hide()
 	#bad this way, need to init translation somewhere, fill misisng data with non fatal stuff
-	if Global.lp_translations["HELP"][TranslationServer.get_locale()].size() > 0:
-		# also check page count idx
-		PagesHolder[nextPage].text = Global.lp_translations["HELP"][TranslationServer.get_locale()][nextPage]
-	else:
-		PagesHolder[nextPage].text = Global.TRANSLATION_ERROR_MESSAGE
+	PagesHolder[nextPage].text = Global.lp_translations[Global.TRANSLATION_HELP_PAGE][TranslationServer.get_locale()][nextPage]
+
 	PagesHolder[nextPage].show()
 
 # to remove eventually
@@ -98,26 +83,19 @@ func _on_visibility_changed():
 	#var pageIdx : int = 1
 	#var nodePath : String = "CenterContainer/VBoxContainer/CenterContainer/Page"
 #
-	Global.debug("help: upd tr ??") #YES!! IF settings has changed !
-	#if Global.lp_translations.has("HELP"):
-		#if Global.lp_translations["HELP"].has(TranslationServer.get_locale()):
-			#Global.debug("lang is avail: " +TranslationServer.get_locale())
-			#Global.debug("nb page: "+str(Global.lp_translations["HELP"][TranslationServer.get_locale()].size()))
-			#
-			##or here only tr currentp age but issue, panel need to be closed/opened
-			## or in page browsing, using sub func
-			#if Global.lp_translations["HELP"][TranslationServer.get_locale()].size() > 0:
-				#for pageIdx in range(1, 8):
-					#helpText = Global.lp_translations["HELP"][TranslationServer.get_locale()][pageIdx - 1]
-					#nodePath += str(pageIdx) #+ ".text"
-					#Global.debug("nodep=["+nodePath+"] t=["+helpText+"]")
-					#PagesHolder[pageIdx].text = helpText
-					##$CenterContainer/VBoxContainer/CenterContainer/Page+str(pageIdx).text = helpText
-			#else:
-				#pass
-		#else:
-			#pass
-	#else:
-		#pass
-
-	pass
+	Global.debug("help: upd tr ??   curpg="+str(current_page)) #YES!! IF settings has changed !
+	#PH array not yet initialized here ?? => called BEFORE _ready !!
+	# need to wiat ready has been called/called after or call this in ready instead
+	if max_pages > 0 :
+		PagesHolder[current_page].text = Global.lp_translations[Global.TRANSLATION_HELP_PAGE][TranslationServer.get_locale()][current_page]
+		Global.debug("currpg len="+str(PagesHolder[current_page].text.length()))
+		
+		# little hack to make error message looks consistent with other as the text on first
+		# help page is longer than others, font size has been set to 18 on this one only.
+		if current_page == 0 and PagesHolder[current_page].text.length() < 100:
+			##PagesHolder[current_page].font_size = 20
+			Global.debug("set size to 20")
+			$CenterContainer/VBoxContainer/CenterContainer/Page1.set("theme_override_font_sizes/font_size", 20)
+		else:
+			Global.debug("set size to 18")
+			$CenterContainer/VBoxContainer/CenterContainer/Page1.set("theme_override_font_sizes/font_size", 18)
