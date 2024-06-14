@@ -31,6 +31,7 @@ offset_right = 190.0
 offset_bottom = 53.0
 theme_override_colors/font_color = Color(0.584314, 0.403922, 0.937255, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0.352941, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 4
