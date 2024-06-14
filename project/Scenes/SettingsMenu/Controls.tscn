@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ctdrgy6uwl05v"]
+[gd_scene load_steps=17 format=3 uid="uid://ctdrgy6uwl05v"]
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_plfsj"]
 [ext_resource type="Script" path="res://Scripts/Menus/SettingsMenuButtons.gd" id="2_kgucl"]
@@ -15,16 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://c7lkxtg5gnbvw" path="res://Arts/Gfx/Icons/settings-sounds-icon.png" id="10_8cjac"]
 [ext_resource type="PackedScene" uid="uid://biw2cwn4b8eih" path="res://Scenes/SettingsMenu/settings_highlight_mode.tscn" id="11_vvp8f"]
 [ext_resource type="Texture2D" uid="uid://8lufgt6u5dy0" path="res://Arts/Gfx/Icons/ishido-settings-sounds-disabled-icon.png" id="11_wnhtc"]
-[ext_resource type="Texture2D" uid="uid://8q50u4cijlal" path="res://Arts/Gfx/Icons/France.png" id="12_1orse"]
-[ext_resource type="Texture2D" uid="uid://h3xwxrpi206n" path="res://Arts/Gfx/Icons/uk.png" id="13_s1u1m"]
-[ext_resource type="Texture2D" uid="uid://vtmoayrlgk4u" path="res://Arts/Gfx/Icons/China.png" id="14_bwbhc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncd48"]
 bg_color = Color(0.666667, 0.533333, 0.329412, 0.313726)
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_tsklp"]
-resource_local_to_scene = false
-resource_name = "Languages"
 
 [node name="Control" type="Control"]
 layout_direction = 1
@@ -82,7 +75,6 @@ layout_mode = 2
 text = "Music"
 item_count = 2
 popup/item_0/text = "Music 1"
-popup/item_0/id = 0
 popup/item_1/text = "Music 2"
 popup/item_1/id = 1
 script = ExtResource("4_ajwwx")
@@ -163,34 +155,19 @@ custom_minimum_size = Vector2(110, 30)
 layout_mode = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Language-0" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
-custom_minimum_size = Vector2(64, 64)
+[node name="LanguageLabel" type="Label" parent="ButtonsGroup/Hints-Language Row"]
+auto_translate_mode = 1
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-toggle_mode = true
-button_group = SubResource("ButtonGroup_tsklp")
-texture_normal = ExtResource("13_s1u1m")
-ignore_texture_size = true
-stretch_mode = 5
+text = "SETTINGSLANGUAGE"
 
-[node name="Language-1" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
-custom_minimum_size = Vector2(64, 64)
+[node name="LanguageSelector" type="Label" parent="ButtonsGroup/Hints-Language Row"]
 layout_mode = 2
-toggle_mode = true
-button_group = SubResource("ButtonGroup_tsklp")
-texture_normal = ExtResource("12_1orse")
-ignore_texture_size = true
-stretch_mode = 5
-
-[node name="Language-2" type="TextureButton" parent="ButtonsGroup/Hints-Language Row"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-toggle_mode = true
-button_group = SubResource("ButtonGroup_tsklp")
-texture_normal = ExtResource("14_bwbhc")
-ignore_texture_size = true
-stretch_mode = 5
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+theme = ExtResource("1_plfsj")
+text = "language"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DummySpacerEnd" type="ColorRect" parent="ButtonsGroup/Hints-Language Row"]
 custom_minimum_size = Vector2(200, 0)
@@ -264,9 +241,7 @@ auto_translate_mode = 2
 [connection signal="mouse_exited" from="ButtonsGroup/Sound Row/settings_player2_name" to="." method="_on_settings_player_2_name_mouse_exited"]
 [connection signal="settings_updated" from="ButtonsGroup/Sound Row/settings_player2_name" to="." method="_on_settings_player_2_name_settings_updated"]
 [connection signal="settings_updated" from="ButtonsGroup/Hints-Language Row/HighlightMode" to="." method="_on_highlight_mode_settings_updated"]
-[connection signal="pressed" from="ButtonsGroup/Hints-Language Row/Language-0" to="." method="_on_language_0_pressed"]
-[connection signal="pressed" from="ButtonsGroup/Hints-Language Row/Language-1" to="." method="_on_language_1_pressed"]
-[connection signal="pressed" from="ButtonsGroup/Hints-Language Row/Language-2" to="." method="_on_language_2_pressed"]
+[connection signal="gui_input" from="ButtonsGroup/Hints-Language Row/LanguageSelector" to="." method="_on_label_gui_input"]
 [connection signal="settings_save_requested" from="ButtonsGroup/Bottom Buttons Row/AcceptItem" to="." method="_on_accept_item_settings_save_requested"]
 [connection signal="settings_revert_requested" from="ButtonsGroup/Bottom Buttons Row/BackItem" to="." method="_on_back_item_settings_revert_requested"]
 [connection signal="timeout" from="OkKoMsgTimer" to="." method="_on_ok_ko_msg_timer_timeout"]
