@@ -28,7 +28,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 localize_numeral_system = false
-auto_translate = false
 theme = ExtResource("1_0j35d")
 texture = ExtResource("2_uqssm")
 region_rect = Rect2(1024, 768, 0, 0)
@@ -51,7 +50,6 @@ custom_minimum_size = Vector2(1024, 64)
 layout_mode = 2
 size_flags_vertical = 0
 localize_numeral_system = false
-auto_translate = false
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(1024, 640)
