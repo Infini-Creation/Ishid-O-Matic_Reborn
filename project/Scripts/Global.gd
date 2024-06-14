@@ -482,7 +482,7 @@ func load_long_texts() -> bool:
 						lp_translations[page][currLang][currPage - 1] = ""
 					lp_translations[page][currLang][currPage - 1] += data + "\n"
 
-	translationFile.close()
+		translationFile.close()
 	
 	#check all loaded trans, if all supported lang there + all pages
 	#no need to check maybe, when filling, no lang... tr error def msg
