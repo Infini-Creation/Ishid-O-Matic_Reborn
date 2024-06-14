@@ -91,7 +91,6 @@ offset_bottom = -89.0
 grow_horizontal = 2
 grow_vertical = 2
 localize_numeral_system = false
-auto_translate = false
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 3
 theme_override_constants/shadow_offset_x = 3
