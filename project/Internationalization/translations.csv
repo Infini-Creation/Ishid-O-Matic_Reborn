@@ -21,6 +21,8 @@ SETTINGSHLBEST,Best Score,Meilleur Score,BS NYT
 SETTINGSLANGUAGE,Language,Langage,LANG NYT
 SETTINGSSAVEOK,Settings saved successfully,préférences sauvegardées,SETOK NYT
 SETTINGSSAVEKO,An error occured when saving preferences !,une erreur s'est produite lors de la sauvegarde des réglages !, SETKO NYT
+GAMEPLAYERONE,Player One,Joueur Un,PL1 NYT
+GAMEPLAYERTWO,Player Two,Joueur Deux,PL2 NYT
 GAMEOVERTITLE,NO MORE MOVES!,AUCUN MOUVEMENT POSSIBLE !,NMO NYT
 GAMEOVERTEXTB,"Sorry, but there are no more moves possible","Désolé, il n'y a plus de coup possible","SORRY NMMA NYT"
 GAMEWINTITLE,[center][wave]You WIN![/wave][/center],[center][wave]Vous avez gagné ![/wave][/center],GWT WIN NYT
