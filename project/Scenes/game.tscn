@@ -34,7 +34,6 @@ z_index = -1
 offset_right = 40.0
 offset_bottom = 40.0
 localize_numeral_system = false
-auto_translate = false
 texture = ExtResource("1_ah41p")
 
 [node name="UI" type="Control" parent="."]
@@ -62,21 +61,21 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Player_subPanel" parent="UI/HBoxContainer/Player1ScoreMargin" instance=ExtResource("4_3x01f")]
 layout_mode = 2
-playerLabel = "Player One"
+playerLabel = "GAMEPLAYERONE"
 
 [node name="MiddleContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
-custom_minimum_size = Vector2(460, 232)
+custom_minimum_size = Vector2(380, 232)
 layout_mode = 2
-theme_override_constants/separation = -32
 
 [node name="LogoMargin" type="MarginContainer" parent="UI/HBoxContainer/MiddleContainer"]
-custom_minimum_size = Vector2(460, 220)
+custom_minimum_size = Vector2(460, 140)
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = -32
 
 [node name="LogoTexture" type="TextureRect" parent="UI/HBoxContainer/MiddleContainer/LogoMargin"]
-custom_minimum_size = Vector2(460, 200)
+custom_minimum_size = Vector2(460, 160)
 layout_mode = 2
 texture = ExtResource("5_g0j1r")
 expand_mode = 5
@@ -90,10 +89,13 @@ text = "GAMETOURLABEL"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HelpersIcons" type="HBoxContainer" parent="UI/HBoxContainer/MiddleContainer"]
-custom_minimum_size = Vector2(512, 32)
+[node name="DataDisplay" type="Label" parent="UI/HBoxContainer/MiddleContainer"]
+auto_translate_mode = 1
 layout_mode = 2
-alignment = 1
+theme = ExtResource("6_uawno")
+text = "Highlight Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Player2ScoreMargin" type="MarginContainer" parent="UI/HBoxContainer"]
 layout_mode = 2
@@ -105,7 +107,7 @@ theme_override_constants/margin_bottom = 8
 [node name="Player_subPanel" parent="UI/HBoxContainer/Player2ScoreMargin" instance=ExtResource("4_3x01f")]
 layout_mode = 2
 playerIdx = 2
-playerLabel = "Player Two"
+playerLabel = "GAMEPLAYERTWO"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI"]
 layout_mode = 0
@@ -145,7 +147,6 @@ auto_translate_mode = 1
 visible = false
 z_index = 4
 layout_mode = 2
-auto_translate = true
 
 [node name="Test Panel" parent="CenterContainer" instance=ExtResource("11_s4t3q")]
 visible = false
