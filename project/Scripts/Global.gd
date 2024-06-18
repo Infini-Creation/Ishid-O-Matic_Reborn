@@ -2,6 +2,8 @@ extends Node
 
 @export var debug_enabled : bool
 
+const GAME_VERSION = "0.99.1"
+
 const SETTINGS_FILE_PATH = "user://settings.ini"
 const HIGHSCORES_FILE_PATH = "user://highscores.dat"
 const SEED_FILE_PATH = "user://tournament.seed"

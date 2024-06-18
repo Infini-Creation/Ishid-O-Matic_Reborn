@@ -18,6 +18,7 @@ var next_tile : Node2D = null
 
 func _ready():
 	Global.debug("DeckDisplay: _ready called")
+	$MarginContainer/VBoxContainer/Copyright_Background/GameVersion.text = Global.GAME_VERSION
 	init_deck()
 	
 	#abs path not very great, signal ?
