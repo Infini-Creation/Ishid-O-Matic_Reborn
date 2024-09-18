@@ -126,7 +126,7 @@ fr
 Un jeu créer avec Godot 4 par Infini-Creation
 
 Basé sur le jeu [i]Ishid-O-Matic[/i] de [b]Robert Brandner[/b] sur [i][color=lightblue]Amiga[/color][/i]
-(toujours disponible sur [url=https://www.amigapd.com/uploads/5/5/0/1/5501110/asi031.dms]Assassin Game #31 .[/url])
+(toujours disponible ici [url=https://www.amigapd.com/uploads/5/5/0/1/5501110/asi031.dms]Assassin Game #31 .[/url])
 Lui même basé sur [i]Ishido - The way of stones[/i] conçu par [b]Michael Feinberg[/b] et
 distribué sur plusieurs ordinateurs en 1989.
 
@@ -145,96 +145,96 @@ AIDE
 
 Ishido est un jeux de plateau consistant en un ensemble de 72 pierres et un plateau de 96 cases.
 
-Chaque pierre a deux atttributs : une couleur et un symbol. Il y a six couleurs et six symboles pour l'ensemble des pierres, et donc 36 pierres uniques. Comme chaque pierre est en double, il y a 72 pierres au total.
+Chaque pierre a deux atttributs : une couleur et un symbole. Il y a six couleurs et six symboles pour l'ensemble des pierres, et donc 36 pierres uniques. Comme chaque pierre est en double, il y a 72 pierres au total.
 
-L'objectif premier d'Ishido est de placer toutes les 72 pierres sur le plateau de 96 cases. La difficulté s'accroit car les pierres doivent être placées vis à vis des autres en correspondance soit de la couleur soit du symbole de chacune. Quand le plateau commence à se remplirt, ce but n'est pas facile à atteindre.
+L'objectif premier du jeu d'Ishido est de placer les 72 pierres sur le plateau de 96 cases. La difficulté s'accroit car les pierres doivent être placées vis à vis des autres en correspondance soit de la couleur soit du symbole de chacune. Quand le plateau commence à se remplir, le but n'est pas facile à atteindre.
 
-A valuable move is the 4-way, in which a stone is placed in the midst of four others, two of which are matched by color, and two which are matched by symbol.
-(source: wikipedia article)
+Un coup important est la correspondance sur 4 côtés, pour lequel une pierre est placée au milieu de quatre autres, dont deux correspondent à la couleur et deux autres au symbole.
+(source: wikipedia)
 ==PS==
 2
-There are 72 tiles, two of each combination of six colors and six shapes.
+Il y a 72 pierres : deux de chaque combinaison de six couleurs et de six symboles.
 
-At the start of the game, there are six tiles on the board representing
-each shape and color.  To place an additional tile on the board, you
-must match at least one adjacent tile according to the following rules:
+Au début du jeu, six pierres sont placées sur le plateau une de chaque couleur et symbole.
+Pour placer d'autres pierres, vous devez faire correspondre une pierre adjacente selon les règles suivantes :
 
-  - To match a single tile, you must match either the color or shape.
-  - To match two tiles, you must match one shape and one color.
-  - To match three tiles, you must match two colors and one shape OR two
-    shapes and one color.
-  - To match four tiles, you must match two colors and two shapes.
-
+	- pour une simple pierre, la couleur ou le symbole doivent être identique,
+	- pour deux pierres, la couleur de l'une et le symbole de l'autre doivent être identiques,
+	- pour trois pierres, deux couleurs et un symbole ou une couleur et deux symboles doivent être identiques,
+	- pour quatre pierres, deux couleurs et deux symboles doivent être identiques.
+	
 ==PS==
 3
-Players receive points by legally placing stones next to other stones in
-the light, interior potion of the board (The Within).  The greater the
-number of sides legally matched, the greater the number of points earned.
-  
-Points earned for legal matches are:  
-  
-      Single-sided match            1 point  
-      Two-sided match               2 points  
-      Three-sided match             4 points  
-      Four-sided match (4-Way)      8 points
+Les joueurs marquent des points en plaçant les pierres en respectant les règles du jeu dans la partie claire, interne,
+du plateau. Plus il y a de correspondances entre les pierres et plus la quantité de points accordée est élevée.
 
-Each 4-Way match earns bonus points and doubles the points awarded for  
-subsequent matches.  For example, after the first 4-Way, a single-sided
-match earns two points, a two-sided match earns four points, a three-sided
-match earns eight points, and a 4-Way earns 16 points.  The next 4-Way
-doubles the point scheme again, and so on.
+Les points pour des coups <legal> sont :
+
+	correspondance simple			1 point
+	double correspondance			2 points
+	triple correspondance			4 points
+	quadruple correspondance		8 points
+	
+
+Chaque quadruple correspondance (4C) donne des points bonus et double les points accordés pour les
+prochaines correspondances. Par exemple, après la première 4C, une simple 
+correspondance donne deux points, une double quatre, une triple huit et une quadruple seize.
+La prochaine quadruple correspondance double les points et ainsi de suite.
+
 ==PS==
 4
-Bonuses awarded after each 4-Way match are:  
+Les bonus attribués après chaque quadruple correspondance sont :
   
-      First 4-Way                   25 points
-      Second 4-Way                  50 points
-      Third 4-Way                  100 points
-      Fourth 4-Way                 200 points
-      Fifth 4-Way                  400 points
-      Sixth 4-Way                  600 points
-      Seventh 4-Way                800 points
-      Eighth 4-Way               1,000 points
-      Ninth 4-Way                5,000 points
-      Tenth 4-Way               10,000 points
-      Eleventh 4-Way            25,000 points
-      Twelfth 4-Way             50,000 points
+      Première 4C                  25 points
+      Seconde 4C                   50 points
+      Troisième 4C                100 points
+      Quatrième 4C                200 points
+      Cinquième 4C                400 points
+      Sixième 4C                  600 points
+      Septième 4C                 800 points
+      Huitième 4C               1,000 points
+      Neuvième 4C               5,000 points
+      Dixième 4C               10,000 points
+      Onzième 4C               25,000 points
+      Douzième 4C              50,000 points
 ==PS==
 5
-At the end of the game, bonuses are awarded when fewer than three stones
-remain in the pouch.  Bonuses awarded are:  
-  
-     Two stones left in pouch      100 points
-     One stone left in pouch       500 points
-     Empty pouch                  1000 points
+A la fin de partie, les bonus sont attribués quand moins de trois pierres reste
+ à placer. Ces bonus sont :
 
-(source: page 3 to 5 from Amiga game manual available at www.lemonamiga.com)
+	deux pierres restantes			100 points
+	une pierre						500 points
+	aucune						   1000 points
+	
+(source : page 3 à 5 du manuel du jeu version Amiga disponible sur www.lemonamiga.com)
+
 ==PS==
 6
-Tournament Mode
+Mode Tournoi
 
-In  this mode, you can play the same sequence of stones many times, so that
-you can make a tournament with friends, or something like this. Except of
-that, it works almost the same like the one-player-mode.
+Dans ce mode, vous pouvez jouer la même série de pierres plusieurs fois, ainsi vous avez l'opportunité
+de faire des duels avec vos amis ou quelque chose du même genre. Excepté cela, il fonctionne
+de la même manière que le jeu à un joueur.
 
-At  the  beginning  you're  asked,  wether you want to continue the current
-tournament (CONTINUE) or to start a new one (NEW).  CANCEL gets you back to
-the  main menu.
+Au début, un panneau vous demande si vous voulez continuer le tournoi en cours ou commencer un nouveau.
+Annuler retourne au menu principal.
 
-(In this mode, no help is allowed, what is also told you if you try.)  And of
-course  there  is  a  special  page  in  the  hall of fame, for the current
-tournament.
+Pour ce mode, les aides ne sont pas autorisées et il y a un tableau des scores dédiés.
+
 ==PS==
 7
-Controls
+Contrôles
 
-Put a tile on the board using left mouse button
+Une pierre est placée sur le plateau avec le bouton gauche de la souris.
 
-H - highlight mode, cycling through: None, first move available, all possible moves, a random move and the move giving you the best score.
-U - undo move (TODO)
-R - redo move (TODO)
+Les touches utiles sont :
 
-All these help are disabled in tournament mode.
+H - indication des coups possibles, dans l'ordre : aucun, le premier possible, tout les coups possibles, un coup aléatoire et le coup donnant le meilleur score.
+U - annuler (bientôt disponible)
+R - refaire (bientôt disponible)
 
-ESC - quit game, return to main menu
+Toutes ces aides sont désactivées en mode tournoi.
+
+ESC - quitter le jeu et retour au menu principal
+
 ==EOT==
