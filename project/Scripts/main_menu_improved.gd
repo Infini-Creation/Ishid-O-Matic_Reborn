@@ -29,15 +29,23 @@ func _ready():
 	var tilesDeck : Array = []
 	var StripeIdx : int = 0
 	var deckIdx : int = 0
+	var stone_size_factor : float = 1.0
 
 	#how many tile in stripes ? Which size ? => 16 full size
 	tilesStripe.resize(16)
 	tilesDeck.resize(36)
 
 	# to replace, find some way to NOT deal with this directly using DeckDisplay or other
-	for stone in Global.Stones.values():
+	for stone in Global.Stones["ushoe"].values():
+		##print("MM==> stone size="+str(stone.get_size()))
 		tile = raw_stone.instantiate()
 		tile.get_node("Symbol").texture = stone
+		
+		# tmp need to know scale factor from size to 64 (size/64)
+		if stone.get_size().x > 64.0:
+			stone_size_factor = 64.0 / stone.get_size().x
+			##print("Stone resize factor="+str(stone_size_factor))
+			tile.get_node("Symbol").apply_scale(Vector2(stone_size_factor, stone_size_factor))
 		
 		tilesDeck[deckIdx] = tile
 		deckIdx += 1

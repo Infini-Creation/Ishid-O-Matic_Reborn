@@ -27,12 +27,19 @@ func _ready():
 
 func init_deck():
 	var tile : Tile = null
-	
+	var stone_size_factor : float = 1.0
+
 	deck.clear()
 	if gameType == null or (gameType!= null and gameType != Global.GAMETYPE_ENHANCED):
-		for stone : String in Global.Stones:	#need to be done twice!
+		for stone : String in Global.Stones["ushoe"]:	#need to be done twice!
 			tile = raw_stone.instantiate()
-			tile.get_node("Symbol").texture = Global.Stones[stone]
+			tile.get_node("Symbol").texture = Global.Stones["ushoe"][stone]
+			
+			if tile.get_node("Symbol").texture.get_size().x > 64.0:
+				stone_size_factor = 64.0 / tile.get_node("Symbol").texture.get_size().x
+				##print("Stone resize factor="+str(stone_size_factor))
+				tile.get_node("Symbol").apply_scale(Vector2(stone_size_factor, stone_size_factor))
+
 			tile.color = "color" + stone.right(1)
 			tile.shape = "shape" + stone.left(1)
 			Global.debug("tcolor=" + tile.color + "  tshape=" + tile.shape)
@@ -47,6 +54,7 @@ func init_deck():
 
 	#This is init deck so no check are required, it is safe to assume everything is set as it should be
 	previewNextTileDisplay.get_node("TextureRect").texture = deck[0].get_node("Symbol").texture
+	#previewNextTileDisplay.get_node("TextureRect").apply_scale(Vector2(stone_size_factor, stone_size_factor))
 
 
 
