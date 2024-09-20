@@ -2,7 +2,7 @@ extends Node
 
 @export var debug_enabled : bool
 
-const GAME_VERSION = "0.99.1"
+const GAME_VERSION = "0.99.2"
 
 const SETTINGS_FILE_PATH = "user://settings.ini"
 const HIGHSCORES_FILE_PATH = "user://highscores.dat"
@@ -131,43 +131,83 @@ const avail_tile_colors = {
 # put data in their own scene
 # even doesn't store them, reload each time they're changed
 const Stones : Dictionary = {
+		"Default": {
 		#~here add set key (default, set1, set2...) => prefs item
-		"A1": preload("res://Arts/Gfx/Tiles/default/A1.png"),
-		"A2": preload("res://Arts/Gfx/Tiles/default/A2.png"),
-		"A3": preload("res://Arts/Gfx/Tiles/default/A3.png"),
-		"A4": preload("res://Arts/Gfx/Tiles/default/A4.png"),
-		"A5": preload("res://Arts/Gfx/Tiles/default/A5.png"),
-		"A6": preload("res://Arts/Gfx/Tiles/default/A6.png"),
-		"B1": preload("res://Arts/Gfx/Tiles/default/B1.png"),
-		"B2": preload("res://Arts/Gfx/Tiles/default/B2.png"),
-		"B3": preload("res://Arts/Gfx/Tiles/default/B3.png"),
-		"B4": preload("res://Arts/Gfx/Tiles/default/B4.png"),
-		"B5": preload("res://Arts/Gfx/Tiles/default/B5.png"),
-		"B6": preload("res://Arts/Gfx/Tiles/default/B6.png"),
-		"C1": preload("res://Arts/Gfx/Tiles/default/C1.png"),
-		"C2": preload("res://Arts/Gfx/Tiles/default/C2.png"),
-		"C3": preload("res://Arts/Gfx/Tiles/default/C3.png"),
-		"C4": preload("res://Arts/Gfx/Tiles/default/C4.png"),
-		"C5": preload("res://Arts/Gfx/Tiles/default/C5.png"),
-		"C6": preload("res://Arts/Gfx/Tiles/default/C6.png"),
-		"D1": preload("res://Arts/Gfx/Tiles/default/D1.png"),
-		"D2": preload("res://Arts/Gfx/Tiles/default/D2.png"),
-		"D3": preload("res://Arts/Gfx/Tiles/default/D3.png"),
-		"D4": preload("res://Arts/Gfx/Tiles/default/D4.png"),
-		"D5": preload("res://Arts/Gfx/Tiles/default/D5.png"),
-		"D6": preload("res://Arts/Gfx/Tiles/default/D6.png"),
-		"E1": preload("res://Arts/Gfx/Tiles/default/E1.png"),
-		"E2": preload("res://Arts/Gfx/Tiles/default/E2.png"),
-		"E3": preload("res://Arts/Gfx/Tiles/default/E3.png"),
-		"E4": preload("res://Arts/Gfx/Tiles/default/E4.png"),
-		"E5": preload("res://Arts/Gfx/Tiles/default/E5.png"),
-		"E6": preload("res://Arts/Gfx/Tiles/default/E6.png"),
-		"F1": preload("res://Arts/Gfx/Tiles/default/F1.png"),
-		"F2": preload("res://Arts/Gfx/Tiles/default/F2.png"),
-		"F3": preload("res://Arts/Gfx/Tiles/default/F3.png"),
-		"F4": preload("res://Arts/Gfx/Tiles/default/F4.png"),
-		"F5": preload("res://Arts/Gfx/Tiles/default/F5.png"),
-		"F6": preload("res://Arts/Gfx/Tiles/default/F6.png")
+			"A1": preload("res://Arts/Gfx/Tiles/default/A1.png"),
+			"A2": preload("res://Arts/Gfx/Tiles/default/A2.png"),
+			"A3": preload("res://Arts/Gfx/Tiles/default/A3.png"),
+			"A4": preload("res://Arts/Gfx/Tiles/default/A4.png"),
+			"A5": preload("res://Arts/Gfx/Tiles/default/A5.png"),
+			"A6": preload("res://Arts/Gfx/Tiles/default/A6.png"),
+			"B1": preload("res://Arts/Gfx/Tiles/default/B1.png"),
+			"B2": preload("res://Arts/Gfx/Tiles/default/B2.png"),
+			"B3": preload("res://Arts/Gfx/Tiles/default/B3.png"),
+			"B4": preload("res://Arts/Gfx/Tiles/default/B4.png"),
+			"B5": preload("res://Arts/Gfx/Tiles/default/B5.png"),
+			"B6": preload("res://Arts/Gfx/Tiles/default/B6.png"),
+			"C1": preload("res://Arts/Gfx/Tiles/default/C1.png"),
+			"C2": preload("res://Arts/Gfx/Tiles/default/C2.png"),
+			"C3": preload("res://Arts/Gfx/Tiles/default/C3.png"),
+			"C4": preload("res://Arts/Gfx/Tiles/default/C4.png"),
+			"C5": preload("res://Arts/Gfx/Tiles/default/C5.png"),
+			"C6": preload("res://Arts/Gfx/Tiles/default/C6.png"),
+			"D1": preload("res://Arts/Gfx/Tiles/default/D1.png"),
+			"D2": preload("res://Arts/Gfx/Tiles/default/D2.png"),
+			"D3": preload("res://Arts/Gfx/Tiles/default/D3.png"),
+			"D4": preload("res://Arts/Gfx/Tiles/default/D4.png"),
+			"D5": preload("res://Arts/Gfx/Tiles/default/D5.png"),
+			"D6": preload("res://Arts/Gfx/Tiles/default/D6.png"),
+			"E1": preload("res://Arts/Gfx/Tiles/default/E1.png"),
+			"E2": preload("res://Arts/Gfx/Tiles/default/E2.png"),
+			"E3": preload("res://Arts/Gfx/Tiles/default/E3.png"),
+			"E4": preload("res://Arts/Gfx/Tiles/default/E4.png"),
+			"E5": preload("res://Arts/Gfx/Tiles/default/E5.png"),
+			"E6": preload("res://Arts/Gfx/Tiles/default/E6.png"),
+			"F1": preload("res://Arts/Gfx/Tiles/default/F1.png"),
+			"F2": preload("res://Arts/Gfx/Tiles/default/F2.png"),
+			"F3": preload("res://Arts/Gfx/Tiles/default/F3.png"),
+			"F4": preload("res://Arts/Gfx/Tiles/default/F4.png"),
+			"F5": preload("res://Arts/Gfx/Tiles/default/F5.png"),
+			"F6": preload("res://Arts/Gfx/Tiles/default/F6.png")
+		},
+		"ushoe": {
+			"A1": preload("res://Arts/Gfx/Tiles/ushoe/losange-blanc-256px.png"),
+			"A2": preload("res://Arts/Gfx/Tiles/ushoe/losange-bleu-256px.png"),
+			"A3": preload("res://Arts/Gfx/Tiles/ushoe/losange-jaune-256px.png"),
+			"A4": preload("res://Arts/Gfx/Tiles/ushoe/losange-rouge-256px.png"),
+			"A5": preload("res://Arts/Gfx/Tiles/ushoe/losange-vert-256px.png"),
+			"A6": preload("res://Arts/Gfx/Tiles/ushoe/losange-violet-256px.png"),
+			"B1": preload("res://Arts/Gfx/Tiles/ushoe/triangle-blanc-256px.png"),
+			"B2": preload("res://Arts/Gfx/Tiles/ushoe/triangle-bleu-256px.png"),
+			"B3": preload("res://Arts/Gfx/Tiles/ushoe/triangle-jaune-256px.png"),
+			"B4": preload("res://Arts/Gfx/Tiles/ushoe/triangle-rouge-256px.png"),
+			"B5": preload("res://Arts/Gfx/Tiles/ushoe/triangle-vert-256px.png"),
+			"B6": preload("res://Arts/Gfx/Tiles/ushoe/triangle-violet-256px.png"),
+			"C1": preload("res://Arts/Gfx/Tiles/ushoe/rond-blanc-256px.png"),
+			"C2": preload("res://Arts/Gfx/Tiles/ushoe/rond-bleu-256px.png"),
+			"C3": preload("res://Arts/Gfx/Tiles/ushoe/rond-jaune-256px.png"),
+			"C4": preload("res://Arts/Gfx/Tiles/ushoe/rond-rouge-256px.png"),
+			"C5": preload("res://Arts/Gfx/Tiles/ushoe/rond-vert-256px.png"),
+			"C6": preload("res://Arts/Gfx/Tiles/ushoe/rond-violet-256px.png"),
+			"D1": preload("res://Arts/Gfx/Tiles/ushoe/trefle-blanc-256px.png"),
+			"D2": preload("res://Arts/Gfx/Tiles/ushoe/trefle-bleu-256px.png"),
+			"D3": preload("res://Arts/Gfx/Tiles/ushoe/trefle-jaune-256px.png"),
+			"D4": preload("res://Arts/Gfx/Tiles/ushoe/trefle-rouge-256px.png"),
+			"D5": preload("res://Arts/Gfx/Tiles/ushoe/trefle-vert-256px.png"),
+			"D6": preload("res://Arts/Gfx/Tiles/ushoe/trefle-violet-256px.png"),
+			"E1": preload("res://Arts/Gfx/Tiles/ushoe/croix-blanc-256px.png"),
+			"E2": preload("res://Arts/Gfx/Tiles/ushoe/croix-bleu-256px.png"),
+			"E3": preload("res://Arts/Gfx/Tiles/ushoe/croix-jaune-256px.png"),
+			"E4": preload("res://Arts/Gfx/Tiles/ushoe/croix-rouge-256px.png"),
+			"E5": preload("res://Arts/Gfx/Tiles/ushoe/croix-verte-256px.png"),
+			"E6": preload("res://Arts/Gfx/Tiles/ushoe/croix-violette-256px.png"),
+			"F1": preload("res://Arts/Gfx/Tiles/ushoe/etoile-blanc-256px.png"),
+			"F2": preload("res://Arts/Gfx/Tiles/ushoe/etoile-bleu-256px.png"),
+			"F3": preload("res://Arts/Gfx/Tiles/ushoe/etoile-jaune-256px.png"),
+			"F4": preload("res://Arts/Gfx/Tiles/ushoe/etoile-rouge-256px.png"),
+			"F5": preload("res://Arts/Gfx/Tiles/ushoe/etoile-vert-256px.png"),
+			"F6": preload("res://Arts/Gfx/Tiles/ushoe/etoile-violette-256px.png")
+		}
 }
 
 # maybe play one music per day of week ?
@@ -193,7 +233,7 @@ const TileOffset = 32
 
 enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_ENHANCED, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }
 enum HIGHLIGHT_MODE { HIGHLIGHT_NONE, FIRST_AVAIL_MOVE, ALL_AVAIL_MOVE, RANDOM_MOVE, HIGHER_SCORE_MOVE }
-enum LANGUAGE { ENGLISH, FRENCH, OTHER }
+enum LANGUAGE { ENGLISH, FRENCH, OTHER }	#remove the last for export ?
 enum GAME_EXIT_STATUS { GAME_WON, GAME_LOSS, USER_QUIT }
 
 var tile_colors : int = 6
