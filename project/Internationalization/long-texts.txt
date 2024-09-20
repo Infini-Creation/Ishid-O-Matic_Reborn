@@ -112,7 +112,7 @@ released on various platforms in 1989.
 
 Thanks:
 	[rainbow]Michael Feinberg[/rainbow] & [rainbow]Robert Brandner[/rainbow]
-	sounds effect & music by [wave]Eric Matyas[/wave], his website is [url=https://soundimage.org/l]Soundimage.org[/url]
+	sound effects & musics by [wave]Eric Matyas[/wave], get more on [url=https://soundimage.org/l]Soundimage.org[/url]
 	gfx by [shake]XXX[/shake]
 	authors & contributors of [i]Godot Engine[/i]
 	[b]GDQuest[/b] for their great youtube videos & tutorials
