@@ -55,8 +55,9 @@ offset_bottom = 110.0
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/NextTileDisplay_Background/NextTileDisplay"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 64.0
+offset_bottom = 64.0
+expand_mode = 5
 stretch_mode = 5
 
 [node name="AvailDeckTiles_Background" type="TextureRect" parent="MarginContainer/VBoxContainer"]
@@ -136,8 +137,8 @@ offset_right = 232.0
 offset_bottom = 26.0
 theme_override_colors/font_color = Color(0.196078, 0.262745, 0.0156863, 1)
 theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
-theme_override_constants/outline_size = 5
 theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = SubResource("FontVariation_rr01s")
 theme_override_font_sizes/font_size = 24
 text = "Infini-Creation"
@@ -149,7 +150,7 @@ layout_mode = 0
 offset_top = 32.0
 offset_right = 232.0
 offset_bottom = 58.0
-text = "version 0.99b"
+text = "GAMEVERSION"
 horizontal_alignment = 1
 vertical_alignment = 1
 
