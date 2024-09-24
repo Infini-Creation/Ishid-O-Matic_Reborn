@@ -41,7 +41,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(879, 510)
+custom_minimum_size = Vector2(874, 510)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -74,7 +74,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "HELP PAGE2
 
 translation is missing !"
@@ -93,7 +93,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "HELP PAGE3
 
 translation is missing !"
@@ -112,7 +112,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "HELP PAGE4
 
 translation is missing !"
@@ -131,7 +131,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "HELP PAGE5
 
 translation is missing !"
@@ -150,7 +150,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "HELP PAGE6
 
 translation is missing !"
@@ -169,7 +169,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_fonts/font = SubResource("SystemFont_4np4h")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 18
 text = "HELP PAGE7
 
 translation is missing !"
