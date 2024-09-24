@@ -32,6 +32,7 @@ FINALSCOREOK,  Ok  ,  Ok  , OK NYT
 FSPPALYERONEKEY, Player One: , Joueur 1 : , P1: NYT
 FSPPALYERTWOKEY, Player Two: , Joueur 2 : , P2: NYT
 ABOUTCLOSE,Close,Fermer,AC NYT
+GETARTISTCREDITS,???,???,AGAC NYT
 HIGHSCORES1P,OnePlayer,Un joueur,HS1P NYT
 HIGHSCORES2P,TwoPlayers,Deux joueurs,HS2P NYT
 HIGHSCORESTOUR,Tournament,Tournoi,HSTO NYT
