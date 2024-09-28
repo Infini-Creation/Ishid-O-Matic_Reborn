@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_0j35d"]
 [ext_resource type="Script" path="res://Scripts/main_menu_improved.gd" id="1_ltboi"]
-[ext_resource type="Texture2D" uid="uid://bcjx22w3fqfry" path="res://Arts/Gfx/BaseColourTexture.png" id="2_uqssm"]
+[ext_resource type="Texture2D" uid="uid://4o4xcbdqlob7" path="res://Arts/Gfx/Menu/torii.jpg" id="3_g2nch"]
 [ext_resource type="PackedScene" uid="uid://lb3l2tsp01op" path="res://Scenes/help_panel.tscn" id="4_0m6b0"]
 [ext_resource type="PackedScene" uid="uid://cod6gfhmkgr58" path="res://Scenes/about_panel.tscn" id="5_hlvuh"]
 [ext_resource type="PackedScene" uid="uid://bvflowtivbxvn" path="res://Scenes/high_scores.tscn" id="6_5jscf"]
@@ -29,8 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 localize_numeral_system = false
 theme = ExtResource("1_0j35d")
-texture = ExtResource("2_uqssm")
-region_rect = Rect2(1024, 768, 0, 0)
+texture = ExtResource("3_g2nch")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(1024, 768)
