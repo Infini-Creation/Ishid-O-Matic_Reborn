@@ -202,9 +202,9 @@ Les bonus attribués après chaque quadruple correspondance sont :
 A la fin de partie, les bonus sont attribués quand moins de trois pierres reste
  à placer. Ces bonus sont :
 
-	deux pierres restantes			100 points
-	une pierre						500 points
-	aucune						   1000 points
+	deux pierres restantes          100 points
+	une pierre                      500 points
+	aucune                         1000 points
 	
 (source : page 3 à 5 du manuel du jeu version Amiga disponible sur www.lemonamiga.com)
 
