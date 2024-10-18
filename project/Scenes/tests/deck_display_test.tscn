@@ -95,4 +95,3 @@ position = Vector2(80, -16)
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button5" to="." method="_on_button_5_pressed"]
 [connection signal="deck_empty" from="MarginContainer/HBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_empty"]
-[connection signal="deck_initialized" from="MarginContainer/HBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_initialized"]
