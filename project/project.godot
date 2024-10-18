@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Ishid-O-Matic Reborn"
 run/main_scene="res://Scenes/the_origin.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/image="res://Arts/Gfx/ishid-o-matic-splashscreen-idea.png"
 config/icon="res://icon.svg"
 
