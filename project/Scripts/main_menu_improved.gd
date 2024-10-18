@@ -20,7 +20,8 @@ func _ready():
 	#Global.load_config()
 	#Global.debug("settings="+str(Global.settings))
 	#
-	
+	$BackgroundTexture.texture = Global.main_menu_background[Global.season]
+		#preload("res://Arts/Gfx/Menu/torii-spring.png")
 	Global.debug("MainMenu: generate tile stripe")
 	
 	var raw_stone : PackedScene = preload("res://Scenes/tile.tscn")

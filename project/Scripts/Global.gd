@@ -2,7 +2,7 @@ extends Node
 
 @export var debug_enabled : bool
 
-const GAME_VERSION = "0.99.2"
+const GAME_VERSION = "0.99.3"
 
 const SETTINGS_FILE_PATH = "user://settings.ini"
 const HIGHSCORES_FILE_PATH = "user://highscores.dat"
@@ -106,6 +106,7 @@ var dummyNames : Array = [
 	"Steven Samorodin"
 ]
 
+# can be removed
 const avail_tile_shapes = {
 	"A": preload("res://Scenes/tileA.tscn"),
 	"B": preload("res://Scenes/tileB.tscn"),
@@ -229,6 +230,16 @@ const sound_effects = {
 	#"win": preload("res://audio/effects/")
 }
 
+enum Seasons { WINTER, SPRING, SUMMER, AUTUMN }
+
+const main_menu_background = {
+	Seasons.WINTER : preload("res://Arts/Gfx/Menu/torii-winter.png"),
+	Seasons.SPRING : preload("res://Arts/Gfx/Menu/torii-spring.png"),
+	Seasons.SUMMER : preload("res://Arts/Gfx/Menu/torii-summer.png"),
+	Seasons.AUTUMN : preload("res://Arts/Gfx/Menu/torii-autumn.png"),
+}
+
+
 const TileOffset = 32
 
 enum ButtonIDs { BUTTON_1PGAME, BUTTON_2PGAME, BUTTON_TOURNAMENT, BUTTON_ENHANCED, BUTTON_HELP, BUTTON_ABOUT, BUTTON_QUIT, BUTTON_SETTINGS, BUTTON_HIGHSCORES, BUTTON_SETTINGS_BACK, BUTTON_SETTINGS_SAVE }
@@ -242,6 +253,7 @@ var tile_shapes : int = 6
 var initialised : bool = false
 var previous_scene : String
 var configLoaded : bool = false
+var season : int = Seasons.WINTER
 
 var continue_tournament : bool = true
 var tournamentSeed : int

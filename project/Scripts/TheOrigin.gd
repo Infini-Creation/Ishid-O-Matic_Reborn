@@ -21,11 +21,31 @@ func _notification(what: int) -> void:
 
 func _init():
 	Global.debug_enabled = true #tmp
-	
+
 	Global.debug("origin: init called")
-	#
 	#also called again after qitting a game !
-	
+
+	var timeData : Dictionary = Time.get_datetime_dict_from_system()
+	#timeData["month"] = 6
+	#timeData["day"] = 20
+	Global.debug("Time data ="+str(timeData))
+	if (timeData["month"] <= 2 or (timeData["month"] == 3 and timeData["day"] < 21) ):
+		Global.debug("this is winter")
+		Global.season = Global.Seasons.WINTER
+	elif (timeData["month"] > 3 and timeData["month"] <= 5 or (timeData["month"] == 6 and timeData["day"] < 21) 
+		or (timeData["month"] == 3 and timeData["day"] >= 21)):
+		Global.debug("this is spring")
+		Global.season = Global.Seasons.SPRING
+	elif (timeData["month"] > 6 and timeData["month"] < 8 or (timeData["month"] == 9 and timeData["day"] < 21)
+		or (timeData["month"] == 6 and timeData["day"] >= 21)):
+		Global.debug("this is summer")
+		Global.season = Global.Seasons.SUMMER
+	elif (timeData["month"] > 9 and timeData["month"] < 12 or (timeData["month"] == 12 and timeData["day"] < 21)
+		or (timeData["month"] == 9 and timeData["day"] >= 21)):
+		Global.debug("this is autumn")
+		Global.season = Global.Seasons.AUTUMN
+
+
 	if !Global.initialised:
 		Global.debug("origin: init config & stuff")
 		Global.load_config()
