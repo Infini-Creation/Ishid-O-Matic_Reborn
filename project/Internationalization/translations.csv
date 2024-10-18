@@ -41,6 +41,7 @@ HIGHSCORESCLOSEB, Close , Fermer ,HSCB NYT
 HELPCLOSEB,  Close  ,  Fermer  ,HPCBT NYT
 DDTILESINDECK,Tiles in deck: ,Pièces restantes : ,DDTID NYT 
 DDAVAILMOVES,Available moves:,Coups possibles : ,DDAM NYT
+DDNOMORETILES,Empty,Vide,DDNMT NYT
 GAMETOURLABEL,Tournament (%d),Tournoi (%d),GTL NYT (%d)
 GAMEPANELPLAYER,Player ---,Joueur ---,GPP NYT ---
 GAMEQUITPTEXT,Do you really want to quit ?,Voulez-vous vraiment quitter ?,DYRWTQ NYT

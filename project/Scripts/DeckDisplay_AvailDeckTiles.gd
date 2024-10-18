@@ -19,7 +19,7 @@ func _on_deck_display_tile_picked(_tile : Node2D):
 	text = str(tiles_count)
 
 func _on_deck_display_deck_empty():
-	text = "Empty"
+	text = tr("DDNOMORETILES")
 
 
 func _on_deck_display_some_tiles_removed(count : int):
