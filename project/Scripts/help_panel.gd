@@ -35,6 +35,13 @@ func update_page(prevPage : int, nextPage : int) -> void:
 	#bad this way, need to init translation somewhere, fill misisng data with non fatal stuff
 	PagesHolder[nextPage].text = Global.lp_translations[Global.TRANSLATION_HELP_PAGE][TranslationServer.get_locale()][nextPage]
 
+	Global.debug("up currpg("+str(nextPage)+") len="+str(PagesHolder[nextPage].text.length()))
+	Global.debug("up currpg("+str(nextPage)+") label RS="+str(PagesHolder[nextPage].size))
+	if (PagesHolder[nextPage].size.y) > 510:
+		Global.debug("up currpg("+str(nextPage)+") label set font size to 16")
+		PagesHolder[nextPage].set("theme_override_font_sizes/font_size", 16)
+	#cent cont y size 510 px std, 548 too high => reduce font size for ??? can it be done on the fly ?
+		
 	PagesHolder[nextPage].show()
 
 # to remove eventually
@@ -85,11 +92,12 @@ func _on_visibility_changed():
 #
 	Global.debug("help: upd tr ??   curpg="+str(current_page)) #YES!! IF settings has changed !
 	#PH array not yet initialized here ?? => called BEFORE _ready !!
-	# need to wiat ready has been called/called after or call this in ready instead
+	# need to wait ready has been called/called after or call this in ready instead
 	if max_pages > 0 :
+		#occured only for page 0 !
 		PagesHolder[current_page].text = Global.lp_translations[Global.TRANSLATION_HELP_PAGE][TranslationServer.get_locale()][current_page]
-		Global.debug("currpg len="+str(PagesHolder[current_page].text.length()))
-		
+		Global.debug("currpg("+str(current_page)+") len="+str(PagesHolder[current_page].text.length()))
+		Global.debug("currpg("+str(current_page)+") label RS="+str(PagesHolder[current_page].size))
 		# little hack to make error message looks consistent with other as the text on first
 		# help page is longer than others, font size has been set to 18 on this one only.
 		if current_page == 0 and PagesHolder[current_page].text.length() < 100:
