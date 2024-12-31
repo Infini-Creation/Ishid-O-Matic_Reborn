@@ -113,7 +113,7 @@ released on various platforms in 1989.
 Thanks:
 	[rainbow]Michael Feinberg[/rainbow] & [rainbow]Robert Brandner[/rainbow]
 	sound effects & musics by [wave]Eric Matyas[/wave], get more on [url=https://soundimage.org/l]Soundimage.org[/url]
-	gfx by [shake]XXX[/shake]
+	visuals by [shake]Clément "[b]Ushoe[/b]" Deiana[/shake]
 	authors & contributors of [i]Godot Engine[/i]
 	[b]GDQuest[/b] for their great youtube videos & tutorials
 [/center]
@@ -133,7 +133,7 @@ distribué sur plusieurs ordinateurs en 1989.
 Remerciements :
 	[rainbow]Michael Feinberg[/rainbow] &  [rainbow]Robert Brandner[/rainbow]
 	effets sonores & musiques par [wave]Eric Matyas[/wave], site : [url=https://soundimage.org/l]Soundimage.org[/url]
-	graphisme par [shake]XXX[/shake]
+	graphismes par [shake]Clément "[b]Ushoe[/b]" Deiana[/shake]
 	auteurs & contributeurs de [i]Godot[/i]
 	[b]GDQuest[/b] pour leurs superbes vidéos youtube & tutoriels
 [/center]
