@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ldpwnmrxsxl1"]
 
-[ext_resource type="Script" path="res://Scripts/TheOrigin.gd" id="1_xflr7"]
+[ext_resource type="Script" uid="uid://chjdal4bduu52" path="res://Scripts/TheOrigin.gd" id="1_xflr7"]
 
 [node name="TheOrigin" type="Node"]
 auto_translate_mode = 1

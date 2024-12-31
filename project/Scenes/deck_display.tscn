@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://deac0ul1h72g8"]
 
-[ext_resource type="Script" path="res://Scripts/deck_display.gd" id="1_2v1u3"]
+[ext_resource type="Script" uid="uid://b1qsewe5b28kw" path="res://Scripts/deck_display.gd" id="1_2v1u3"]
 [ext_resource type="Texture2D" uid="uid://csi57sic10a42" path="res://Arts/Gfx/Panels/DeckPanel.png" id="2_r6gxt"]
 [ext_resource type="Texture2D" uid="uid://cc5gbvrvqwv1u" path="res://Arts/Gfx/Panels/PreviewNextTile-Display-background.png" id="3_ti0vi"]
-[ext_resource type="Script" path="res://Scripts/DeckDisplay_AvailDeckTiles.gd" id="6_fmiiv"]
+[ext_resource type="Script" uid="uid://bkr5ogo0cm6rj" path="res://Scripts/DeckDisplay_AvailDeckTiles.gd" id="6_fmiiv"]
 [ext_resource type="Texture2D" uid="uid://mgm1jfttmsj8" path="res://Arts/Gfx/Panels/MiniDeck-Display-Background.png" id="6_y17tg"]
 [ext_resource type="Texture2D" uid="uid://c400jrfnwotpr" path="res://Arts/Gfx/Panels/Copyright-Display-Background.png" id="8_e5rxw"]
-[ext_resource type="Script" path="res://Scripts/DeckDisplay-AvailMovesCounter.gd" id="9_en813"]
+[ext_resource type="Script" uid="uid://bjg3idd2n0ibj" path="res://Scripts/DeckDisplay-AvailMovesCounter.gd" id="9_en813"]
 
 [sub_resource type="SystemFont" id="SystemFont_b48kx"]
 subpixel_positioning = 0

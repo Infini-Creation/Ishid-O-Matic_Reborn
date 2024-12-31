@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://0l28e82ve3vg"]
 
-[ext_resource type="Script" path="res://Scripts/Menus/OnePlayerItem.gd" id="1_l4bkf"]
+[ext_resource type="Script" uid="uid://ds01w50y5nrh3" path="res://Scripts/Menus/OnePlayerItem.gd" id="1_l4bkf"]
 [ext_resource type="Texture2D" uid="uid://cfq636w474fye" path="res://Arts/Gfx/Icons/mini-tile.png" id="2_gbcsb"]
 
 [sub_resource type="SystemFont" id="SystemFont_v2spc"]

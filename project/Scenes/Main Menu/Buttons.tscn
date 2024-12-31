@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_ciodk"]
 [ext_resource type="PackedScene" uid="uid://ifrs2wp5p88" path="res://Scenes/Main Menu/OnePlayerItem.tscn" id="1_kvt8s"]
-[ext_resource type="Script" path="res://Scripts/Menus/MainMenuButtons.gd" id="2_13ico"]
+[ext_resource type="Script" uid="uid://q7ksmm7qh4f7" path="res://Scripts/Menus/MainMenuButtons.gd" id="2_13ico"]
 [ext_resource type="PackedScene" uid="uid://vtn37u3mpjb1" path="res://Scenes/Main Menu/Settings.tscn" id="2_oxaio"]
 [ext_resource type="PackedScene" uid="uid://b2q6e3ahrncl1" path="res://Scenes/Main Menu/TwoPlayersItem.tscn" id="3_ecrxp"]
 [ext_resource type="PackedScene" uid="uid://brngd5mluy5ee" path="res://Scenes/Main Menu/High_Scores.tscn" id="4_64so4"]

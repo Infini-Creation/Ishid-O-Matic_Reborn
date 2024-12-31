@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://lb3l2tsp01op"]
 
-[ext_resource type="Script" path="res://Scripts/help_panel.gd" id="1_r0ddy"]
+[ext_resource type="Script" uid="uid://dm8hhr6n2tv3x" path="res://Scripts/help_panel.gd" id="1_r0ddy"]
 [ext_resource type="Texture2D" uid="uid://dlloxxecitrn3" path="res://Arts/Gfx/Panels/help panel.png" id="2_fpbrh"]
-[ext_resource type="Texture2D" uid="uid://d256gllpwthid" path="res://Arts/Gfx/Menu/ishido-help-previous-arrow.png" id="3_4xwqk"]
+[ext_resource type="Texture2D" uid="uid://h5pao70xsvfa" path="res://Arts/Gfx/Menu/fleche-v2-gauche.png" id="3_3blxd"]
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="4_i8pjo"]
-[ext_resource type="Texture2D" uid="uid://csfojlg23jsah" path="res://Arts/Gfx/Menu/ishido-help-next-arrow.png" id="4_s4qct"]
+[ext_resource type="Texture2D" uid="uid://gbp0kkop4fpx" path="res://Arts/Gfx/Menu/fleche-v2-droite.png" id="5_skopq"]
 
 [sub_resource type="SystemFont" id="SystemFont_4np4h"]
 subpixel_positioning = 0
@@ -199,7 +199,7 @@ z_index = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 0
-texture_normal = ExtResource("3_4xwqk")
+texture_normal = ExtResource("3_3blxd")
 ignore_texture_size = true
 stretch_mode = 4
 
@@ -215,7 +215,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-texture_normal = ExtResource("4_s4qct")
+texture_normal = ExtResource("5_skopq")
 ignore_texture_size = true
 stretch_mode = 4
 
