@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1qsewe5b28kw" path="res://Scripts/deck_display.gd" id="1_2v1u3"]
 [ext_resource type="Texture2D" uid="uid://csi57sic10a42" path="res://Arts/Gfx/Panels/DeckPanel.png" id="2_r6gxt"]
-[ext_resource type="Texture2D" uid="uid://cc5gbvrvqwv1u" path="res://Arts/Gfx/Panels/PreviewNextTile-Display-background.png" id="3_ti0vi"]
+[ext_resource type="Texture2D" uid="uid://ccpm55swvqyrr" path="res://Arts/Gfx/Panels/PreviewNextTile-Display-Nobackground-gray.png" id="3_w2xij"]
 [ext_resource type="Script" uid="uid://bkr5ogo0cm6rj" path="res://Scripts/DeckDisplay_AvailDeckTiles.gd" id="6_fmiiv"]
 [ext_resource type="Texture2D" uid="uid://mgm1jfttmsj8" path="res://Arts/Gfx/Panels/MiniDeck-Display-Background.png" id="6_y17tg"]
 [ext_resource type="Texture2D" uid="uid://c400jrfnwotpr" path="res://Arts/Gfx/Panels/Copyright-Display-Background.png" id="8_e5rxw"]
@@ -43,7 +43,7 @@ alignment = 1
 
 [node name="NextTileDisplay_Background" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("3_ti0vi")
+texture = ExtResource("3_w2xij")
 
 [node name="NextTileDisplay" type="Control" parent="MarginContainer/VBoxContainer/NextTileDisplay_Background"]
 custom_minimum_size = Vector2(64, 64)
