@@ -84,7 +84,8 @@ var settings : Dictionary = {
 	"hints": 0,
 	"language": LANGUAGE.ENGLISH,
 	"tileSet": "default",
-	"saveReplay" : true    #tmp for test
+	"saveReplay" : true,    #tmp for test
+	"tutorialSeen" : false
 }
 
 var highScores : Dictionary = {

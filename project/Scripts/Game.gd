@@ -66,6 +66,7 @@ var deck : Array  #unused, to remove
 @onready var gameLossPanel = $GameOverPanel
 @onready var gameWinPanel = $GameWinPanel
 @onready var gameQuitPanel = $GameQuitPanel
+@onready var gameTutorialPanel = $GameTutorialPanel
 @onready var overlay = $BoardOverlay
 
 var game_end_status : int = -1
@@ -128,11 +129,15 @@ func _ready():
 	init_board()
 
 	highlight_mode = Global.settings["hints"]
-	if highlight_mode < 0 or highlight_mode > Global.HIGHLIGHT_MODE.size():
+	if highlight_mode < 0 or highlight_mode > Global.HIGHLIGHT_MODE.size() or Global.settings["tutorialSeen"] == true:
 		highlight_mode = 0
 
 	# default is one player game
 	$CenterContainer/FinalScorePanel.numberOfPlayers = 1
+
+	if Global.settings["tutorialSeen"] == false:
+		Global.debug("display play tutorial panel")
+		gameTutorialPanel.show()
 
 	if gameType == Global.GAMETYPE_TWOPLAYERS:
 		Players_Panels[current_player].highlight_current_player(1.0)
@@ -663,3 +668,13 @@ func _on_game_quit_panel_quit(confirm : bool):
 func _on_final_score_panel_is_closed():
 	Global.debug("final score panel signal close")
 	game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
+
+
+func _on_game_tutorial_panel_playtutorial(confirm: bool) -> void:
+	Global.debug("Play tutorial panel button clicked: "+str(confirm))
+	if confirm == true:
+		Global.debug("play tutorial...")
+		gameTutorialPanel.hide()
+	else:
+		Global.debug("don't play tutorial")
+		gameTutorialPanel.hide()

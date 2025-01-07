@@ -48,6 +48,9 @@ GAMEPANELPLAYER,Player ---,Joueur ---,GPP NYT ---
 GAMEQUITPTEXT,Do you really want to quit ?,Voulez-vous vraiment quitter ?,DYRWTQ NYT
 GAMEQUITPYES, Yes , Oui ,GQPY NYT
 GAMEQUITPNO, No , Non ,GQPN NYT
+GAMETUTORIALPLAYTEXT,Do you want to play the tutorial ?,Voulez-vous jouer le tutoriel ?,DYRWTQ NYT
+GAMETUTORIALPLAYYES, Yes , Oui ,GQPY NYT
+GAMETUTORIALPLAYNO, No , Non ,GQPN NYT
 TOURPANELTEXT,Do you want to continue the current tournament or to start a new one ?,Voulez-vous continuer le tournoi en cours ou en démarrer un nouveau ?,TOUPTEXT NYT
 TOURPANELYBUTTON,Continue,Continuer,TOUPYB NYT
 TOURPANELNBUTTON, New , Nouveau ,TOUPNB NYT
