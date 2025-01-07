@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2ahme0nrumhy"]
+[gd_scene load_steps=24 format=3 uid="uid://d2ahme0nrumhy"]
 
-[ext_resource type="Script" path="res://Scripts/BoardOverlay.gd" id="1_4a5n6"]
+[ext_resource type="Script" uid="uid://cas7v6osmfuqj" path="res://Scripts/BoardOverlay.gd" id="1_4a5n6"]
 [ext_resource type="Texture2D" uid="uid://ty2ekqkwt1mb" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
-[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_f3kqo"]
+[ext_resource type="Script" uid="uid://m6wa27ev2vxx" path="res://Scripts/Game.gd" id="1_f3kqo"]
 [ext_resource type="PackedScene" uid="uid://deac0ul1h72g8" path="res://Scenes/deck_display.tscn" id="3_8b4gb"]
 [ext_resource type="PackedScene" uid="uid://p31d8x3u5qus" path="res://Scenes/player_score_panel.tscn" id="4_3x01f"]
 [ext_resource type="PackedScene" uid="uid://b3ps20yf6g8vx" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
@@ -10,9 +10,46 @@
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_uawno"]
 [ext_resource type="PackedScene" uid="uid://dqqc553edp67k" path="res://Scenes/game_win_panel.tscn" id="8_fy08i"]
 [ext_resource type="PackedScene" uid="uid://cwmeqnmocd8lr" path="res://Scenes/game_quitconfirm_panel.tscn" id="9_akd7t"]
+[ext_resource type="PackedScene" uid="uid://0xkvk6r57gv6" path="res://Scenes/game_tutorial_panel.tscn" id="11_1phco"]
 [ext_resource type="PackedScene" uid="uid://bxlrwdfth54dw" path="res://Scenes/test_panel.tscn" id="11_s4t3q"]
 [ext_resource type="PackedScene" uid="uid://cwfcdv52iraox" path="res://Scenes/final_score_panel.tscn" id="11_vro1l"]
 [ext_resource type="PackedScene" uid="uid://bv1go035hdja2" path="res://Scenes/final_score_panel_2.tscn" id="12_kdsd7"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_rfjv2"]
+device = -1
+keycode = 72
+unicode = 104
+
+[sub_resource type="Shortcut" id="Shortcut_1phco"]
+events = [SubResource("InputEventKey_rfjv2")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_1phco"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="InputEventKey" id="InputEventKey_nb51f"]
+device = -1
+keycode = 81
+unicode = 113
+
+[sub_resource type="Shortcut" id="Shortcut_nnt18"]
+events = [SubResource("InputEventKey_1phco"), SubResource("InputEventKey_nb51f")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_nnt18"]
+device = -1
+keycode = 85
+unicode = 117
+
+[sub_resource type="Shortcut" id="Shortcut_ewbju"]
+events = [SubResource("InputEventKey_nnt18")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_85qyi"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_iivbl"]
+events = [SubResource("InputEventKey_85qyi")]
 
 [node name="Game" type="Node2D"]
 auto_translate_mode = 1
@@ -89,13 +126,33 @@ text = "GAMETOURLABEL"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DataDisplay" type="Label" parent="UI/HBoxContainer/MiddleContainer"]
+[node name="Helper buttons & icons" type="Label" parent="UI/HBoxContainer/MiddleContainer"]
 auto_translate_mode = 1
+visible = false
 layout_mode = 2
 theme = ExtResource("6_uawno")
-text = "Highlight Mode"
+text = "[MOBILE BUTTONS]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HBoxContainer/MiddleContainer"]
+layout_mode = 2
+
+[node name="HighlightButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_1phco")
+
+[node name="QuitButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_nnt18")
+
+[node name="UndoButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_ewbju")
+
+[node name="RedoButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_iivbl")
 
 [node name="Player2ScoreMargin" type="MarginContainer" parent="UI/HBoxContainer"]
 layout_mode = 2
@@ -132,6 +189,10 @@ z_index = 4
 visible = false
 z_index = 4
 
+[node name="GameTutorialPanel" parent="." instance=ExtResource("11_1phco")]
+visible = false
+z_index = 4
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(1024, 768)
 offset_right = 1024.0
@@ -157,4 +218,5 @@ layout_mode = 2
 [connection signal="is_closed" from="GameOverPanel" to="." method="_on_game_over_panel_is_closed"]
 [connection signal="is_closed" from="GameWinPanel" to="." method="_on_game_win_panel_is_closed"]
 [connection signal="quit" from="GameQuitPanel" to="." method="_on_game_quit_panel_quit"]
+[connection signal="playtutorial" from="GameTutorialPanel" to="." method="_on_game_tutorial_panel_playtutorial"]
 [connection signal="is_closed" from="CenterContainer/FinalScorePanel" to="." method="_on_final_score_panel_is_closed"]
