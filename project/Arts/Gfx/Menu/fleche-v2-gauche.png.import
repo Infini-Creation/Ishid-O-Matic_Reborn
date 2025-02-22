@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v8juxipvygqd"
-path="res://.godot/imported/player_panel_background.png-c0fdc73b8ba1e6540e4b73a5fb1d5383.ctex"
+uid="uid://h5pao70xsvfa"
+path="res://.godot/imported/fleche-v2-gauche.png-805383e09ce83e7f8238bbb20f91a4cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Arts/Gfx/Panels/player_panel_background.png"
-dest_files=["res://.godot/imported/player_panel_background.png-c0fdc73b8ba1e6540e4b73a5fb1d5383.ctex"]
+source_file="res://Arts/Gfx/Menu/fleche-v2-gauche.png"
+dest_files=["res://.godot/imported/fleche-v2-gauche.png-805383e09ce83e7f8238bbb20f91a4cb.ctex"]
 
 [params]
 
