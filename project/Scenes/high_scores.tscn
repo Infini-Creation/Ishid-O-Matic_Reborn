@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://bvflowtivbxvn"]
 
-[ext_resource type="Script" path="res://Scripts/Menus/high_scores_panel.gd" id="1_dtgif"]
+[ext_resource type="Script" uid="uid://plfcgfa5og08" path="res://Scripts/Menus/high_scores_panel.gd" id="1_dtgif"]
 [ext_resource type="Texture2D" uid="uid://dlloxxecitrn3" path="res://Arts/Gfx/Panels/help panel.png" id="2_gkn1x"]
 [ext_resource type="Texture2D" uid="uid://bma6ve7yy3mn6" path="res://Arts/Gfx/Menu/hall-of-fame.png" id="3_lmixh"]
-[ext_resource type="Texture2D" uid="uid://d256gllpwthid" path="res://Arts/Gfx/Menu/ishido-help-previous-arrow.png" id="3_ol3yw"]
-[ext_resource type="Texture2D" uid="uid://csfojlg23jsah" path="res://Arts/Gfx/Menu/ishido-help-next-arrow.png" id="5_yyf8v"]
+[ext_resource type="Texture2D" uid="uid://h5pao70xsvfa" path="res://Arts/Gfx/Menu/fleche-v2-gauche.png" id="4_vas7x"]
+[ext_resource type="Texture2D" uid="uid://gbp0kkop4fpx" path="res://Arts/Gfx/Menu/fleche-v2-droite.png" id="5_mn56e"]
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_q2v1t"]
 
 [node name="HallOfFamePanel" type="Control"]
@@ -54,7 +54,7 @@ size_flags_horizontal = 4
 [node name="PreviousButton" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture_normal = ExtResource("3_ol3yw")
+texture_normal = ExtResource("4_vas7x")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -71,7 +71,7 @@ vertical_alignment = 1
 [node name="NextButton" type="TextureButton" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-texture_normal = ExtResource("5_yyf8v")
+texture_normal = ExtResource("5_mn56e")
 ignore_texture_size = true
 stretch_mode = 5
 
