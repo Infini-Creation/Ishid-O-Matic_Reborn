@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d2ahme0nrumhy"]
+[gd_scene load_steps=28 format=3 uid="uid://d2ahme0nrumhy"]
 
 [ext_resource type="Script" uid="uid://cas7v6osmfuqj" path="res://Scripts/BoardOverlay.gd" id="1_4a5n6"]
 [ext_resource type="Texture2D" uid="uid://ty2ekqkwt1mb" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
@@ -8,8 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://b3ps20yf6g8vx" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
 [ext_resource type="Texture2D" uid="uid://771h0pty250w" path="res://Arts/Gfx/Menu/ishid-o-matic-title.png" id="5_g0j1r"]
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_uawno"]
+[ext_resource type="Texture2D" uid="uid://bhnir112kgwgv" path="res://Arts/Gfx/Buttons/mob_button_highlight.png" id="7_85qyi"]
 [ext_resource type="PackedScene" uid="uid://dqqc553edp67k" path="res://Scenes/game_win_panel.tscn" id="8_fy08i"]
+[ext_resource type="Texture2D" uid="uid://dty6vc06rr0kd" path="res://Arts/Gfx/Buttons/mob_button_quit.png" id="8_iivbl"]
+[ext_resource type="Texture2D" uid="uid://cquao2k7xgolx" path="res://Arts/Gfx/Buttons/mob_button_undo.png" id="9_7nbq1"]
 [ext_resource type="PackedScene" uid="uid://cwmeqnmocd8lr" path="res://Scenes/game_quitconfirm_panel.tscn" id="9_akd7t"]
+[ext_resource type="Texture2D" uid="uid://die2ggbiclmem" path="res://Arts/Gfx/Buttons/mob_button_redo.png" id="10_exi56"]
 [ext_resource type="PackedScene" uid="uid://0xkvk6r57gv6" path="res://Scenes/game_tutorial_panel.tscn" id="11_1phco"]
 [ext_resource type="PackedScene" uid="uid://bxlrwdfth54dw" path="res://Scenes/test_panel.tscn" id="11_s4t3q"]
 [ext_resource type="PackedScene" uid="uid://cwfcdv52iraox" path="res://Scenes/final_score_panel.tscn" id="11_vro1l"]
@@ -112,7 +116,7 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = -32
 
 [node name="LogoTexture" type="TextureRect" parent="UI/HBoxContainer/MiddleContainer/LogoMargin"]
-custom_minimum_size = Vector2(460, 160)
+custom_minimum_size = Vector2(460, 140)
 layout_mode = 2
 texture = ExtResource("5_g0j1r")
 expand_mode = 5
@@ -126,33 +130,38 @@ text = "GAMETOURLABEL"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Helper buttons & icons" type="Label" parent="UI/HBoxContainer/MiddleContainer"]
-auto_translate_mode = 1
-visible = false
-layout_mode = 2
-theme = ExtResource("6_uawno")
-text = "[MOBILE BUTTONS]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/HBoxContainer/MiddleContainer"]
 layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
 
 [node name="HighlightButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_1phco")
+texture_normal = ExtResource("7_85qyi")
+stretch_mode = 5
 
 [node name="QuitButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_nnt18")
+texture_normal = ExtResource("8_iivbl")
+stretch_mode = 5
 
 [node name="UndoButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_ewbju")
+texture_normal = ExtResource("9_7nbq1")
+stretch_mode = 5
 
 [node name="RedoButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_iivbl")
+texture_normal = ExtResource("10_exi56")
+stretch_mode = 5
 
 [node name="Player2ScoreMargin" type="MarginContainer" parent="UI/HBoxContainer"]
 layout_mode = 2
@@ -214,6 +223,10 @@ visible = false
 layout_mode = 2
 
 [connection signal="highlight_board_cell" from="." to="BoardOverlay" method="_on_game_highlight_board_cell"]
+[connection signal="pressed" from="UI/HBoxContainer/MiddleContainer/HBoxContainer/HighlightButton" to="." method="_on_highlight_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/MiddleContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/MiddleContainer/HBoxContainer/UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/MiddleContainer/HBoxContainer/RedoButton" to="." method="_on_redo_button_pressed"]
 [connection signal="deck_empty" from="UI/VBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_empty"]
 [connection signal="is_closed" from="GameOverPanel" to="." method="_on_game_over_panel_is_closed"]
 [connection signal="is_closed" from="GameWinPanel" to="." method="_on_game_win_panel_is_closed"]
