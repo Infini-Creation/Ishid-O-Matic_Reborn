@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d2ahme0nrumhy"]
+[gd_scene load_steps=30 format=3 uid="uid://d2ahme0nrumhy"]
 
 [ext_resource type="Script" uid="uid://cas7v6osmfuqj" path="res://Scripts/BoardOverlay.gd" id="1_4a5n6"]
 [ext_resource type="Texture2D" uid="uid://ty2ekqkwt1mb" path="res://Arts/Gfx/Board/board.png" id="1_ah41p"]
@@ -8,13 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://b3ps20yf6g8vx" path="res://Scenes/game_over_panel.tscn" id="5_aflaq"]
 [ext_resource type="Texture2D" uid="uid://771h0pty250w" path="res://Arts/Gfx/Menu/ishid-o-matic-title.png" id="5_g0j1r"]
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="6_uawno"]
-[ext_resource type="Texture2D" uid="uid://bhnir112kgwgv" path="res://Arts/Gfx/Buttons/mob_button_highlight.png" id="7_85qyi"]
+[ext_resource type="Texture2D" uid="uid://klp3jxo3rghv" path="res://Arts/Gfx/Buttons/highlight base.png" id="7_iivbl"]
+[ext_resource type="Texture2D" uid="uid://8pt8f86t0ohl" path="res://Arts/Gfx/Buttons/highlight pressed.png" id="8_7nbq1"]
 [ext_resource type="PackedScene" uid="uid://dqqc553edp67k" path="res://Scenes/game_win_panel.tscn" id="8_fy08i"]
-[ext_resource type="Texture2D" uid="uid://dty6vc06rr0kd" path="res://Arts/Gfx/Buttons/mob_button_quit.png" id="8_iivbl"]
-[ext_resource type="Texture2D" uid="uid://cquao2k7xgolx" path="res://Arts/Gfx/Buttons/mob_button_undo.png" id="9_7nbq1"]
+[ext_resource type="Texture2D" uid="uid://b0hu8pwg4ce2p" path="res://Arts/Gfx/Buttons/quit base.png" id="9_7nbq1"]
 [ext_resource type="PackedScene" uid="uid://cwmeqnmocd8lr" path="res://Scenes/game_quitconfirm_panel.tscn" id="9_akd7t"]
-[ext_resource type="Texture2D" uid="uid://die2ggbiclmem" path="res://Arts/Gfx/Buttons/mob_button_redo.png" id="10_exi56"]
+[ext_resource type="Texture2D" uid="uid://cl71cbr72tqgg" path="res://Arts/Gfx/Buttons/quit pressed.png" id="9_iivbl"]
+[ext_resource type="Texture2D" uid="uid://b8vgcjc4jxa7p" path="res://Arts/Gfx/Buttons/undo pressed.png" id="10_7nbq1"]
 [ext_resource type="PackedScene" uid="uid://0xkvk6r57gv6" path="res://Scenes/game_tutorial_panel.tscn" id="11_1phco"]
+[ext_resource type="Texture2D" uid="uid://ddylanm6ecvbk" path="res://Arts/Gfx/Buttons/redo pressed.png" id="11_exi56"]
 [ext_resource type="PackedScene" uid="uid://bxlrwdfth54dw" path="res://Scenes/test_panel.tscn" id="11_s4t3q"]
 [ext_resource type="PackedScene" uid="uid://cwfcdv52iraox" path="res://Scenes/final_score_panel.tscn" id="11_vro1l"]
 [ext_resource type="PackedScene" uid="uid://bv1go035hdja2" path="res://Scenes/final_score_panel_2.tscn" id="12_kdsd7"]
@@ -105,15 +107,16 @@ layout_mode = 2
 playerLabel = "GAMEPLAYERONE"
 
 [node name="MiddleContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
-custom_minimum_size = Vector2(380, 232)
+custom_minimum_size = Vector2(380, 212)
 layout_mode = 2
+theme_override_constants/separation = 2
 
 [node name="LogoMargin" type="MarginContainer" parent="UI/HBoxContainer/MiddleContainer"]
-custom_minimum_size = Vector2(460, 140)
+custom_minimum_size = Vector2(460, 120)
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = -32
+theme_override_constants/margin_bottom = -60
 
 [node name="LogoTexture" type="TextureRect" parent="UI/HBoxContainer/MiddleContainer/LogoMargin"]
 custom_minimum_size = Vector2(460, 140)
@@ -139,28 +142,32 @@ alignment = 1
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_1phco")
-texture_normal = ExtResource("7_85qyi")
+texture_normal = ExtResource("7_iivbl")
+texture_pressed = ExtResource("8_7nbq1")
 stretch_mode = 5
 
 [node name="QuitButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_nnt18")
-texture_normal = ExtResource("8_iivbl")
+texture_normal = ExtResource("9_7nbq1")
+texture_pressed = ExtResource("9_iivbl")
 stretch_mode = 5
 
 [node name="UndoButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_ewbju")
-texture_normal = ExtResource("9_7nbq1")
+texture_normal = ExtResource("10_7nbq1")
+texture_pressed = ExtResource("10_7nbq1")
 stretch_mode = 5
 
 [node name="RedoButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 shortcut = SubResource("Shortcut_iivbl")
-texture_normal = ExtResource("10_exi56")
+texture_normal = ExtResource("11_exi56")
+texture_pressed = ExtResource("11_exi56")
 stretch_mode = 5
 
 [node name="Player2ScoreMargin" type="MarginContainer" parent="UI/HBoxContainer"]
