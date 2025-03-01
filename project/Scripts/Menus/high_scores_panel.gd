@@ -54,6 +54,8 @@ func update_page(pageIdx : int) -> void:
 		else:
 			node = NodesStore[pageIdx][idx]
 
+		if node.get_parent() != null:
+			node.get_parent().remove_child(node)
 		$"CenterContainer/VBoxContainer/HighScores-Items".add_child(node)
 		NodesStore[pageIdx][idx] = node
 
