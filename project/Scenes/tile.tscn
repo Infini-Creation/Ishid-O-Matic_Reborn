@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://05yhi80rhe6"]
+[gd_scene load_steps=2 format=3 uid="uid://05yhi80rhe6"]
 
 [ext_resource type="Script" uid="uid://b7h68ag63tvql" path="res://Scripts/tile.gd" id="1_d0di5"]
-[ext_resource type="Texture2D" uid="uid://boabhab7qf7ax" path="res://Arts/Gfx/Tiles/default/A1.png" id="2_wlu0h"]
 
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_d0di5")
 
 [node name="Symbol" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_wlu0h")
