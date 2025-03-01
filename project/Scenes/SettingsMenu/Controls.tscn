@@ -5,16 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://d0k4fawrq62vx" path="res://Arts/Gfx/Menu/settings.png" id="3_35yh1"]
 [ext_resource type="Script" uid="uid://bk4qkau8bryjv" path="res://Scripts/Menus/Settings-MenuButton.gd" id="4_ajwwx"]
 [ext_resource type="PackedScene" uid="uid://ll6lo1qpru7x" path="res://Scenes/SettingsMenu/settings_audio_volume.tscn" id="4_iy873"]
-[ext_resource type="Texture2D" uid="uid://dmma2bje76kym" path="res://Arts/Gfx/Icons/settings-music-icon.png" id="5_rag66"]
-[ext_resource type="Texture2D" uid="uid://b5r7qirm0jrya" path="res://Arts/Gfx/Icons/ishido-settings-music-disabled-icon.png" id="6_8gc0w"]
+[ext_resource type="Texture2D" uid="uid://dx10o5an7l6kg" path="res://Arts/Gfx/Icons/MusicVolume Button.png" id="5_sljpj"]
 [ext_resource type="PackedScene" uid="uid://cxnlyh1x8abf6" path="res://Scenes/SettingsMenu/settings_player_name.tscn" id="6_i2aij"]
 [ext_resource type="PackedScene" uid="uid://0l28e82ve3vg" path="res://Scenes/SettingsMenu/Accept.tscn" id="6_kdmng"]
+[ext_resource type="Texture2D" uid="uid://cab63dn8qo8e3" path="res://Arts/Gfx/Icons/MusicVolume Button Disabled.png" id="6_sljpj"]
 [ext_resource type="PackedScene" uid="uid://b40tjnd3f60qf" path="res://Scenes/SettingsMenu/Back.tscn" id="7_p5yps"]
 [ext_resource type="Script" uid="uid://xyhhn74chwrn" path="res://Scripts/Menus/Settings-Accept.gd" id="7_v03cd"]
+[ext_resource type="Texture2D" uid="uid://oh6pidgva887" path="res://Arts/Gfx/Icons/SoundVolume Button.png" id="9_1ampf"]
 [ext_resource type="Script" uid="uid://dy01urluo6ix8" path="res://Scripts/Menus/Settings-Back.gd" id="9_o5jsf"]
-[ext_resource type="Texture2D" uid="uid://c7lkxtg5gnbvw" path="res://Arts/Gfx/Icons/settings-sounds-icon.png" id="10_8cjac"]
+[ext_resource type="Texture2D" uid="uid://btg20x0pw75v5" path="res://Arts/Gfx/Icons/SoundVolume Button Disabled.png" id="10_1ampf"]
 [ext_resource type="PackedScene" uid="uid://biw2cwn4b8eih" path="res://Scenes/SettingsMenu/settings_highlight_mode.tscn" id="11_vvp8f"]
-[ext_resource type="Texture2D" uid="uid://8lufgt6u5dy0" path="res://Arts/Gfx/Icons/ishido-settings-sounds-disabled-icon.png" id="11_wnhtc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncd48"]
 bg_color = Color(0.666667, 0.533333, 0.329412, 0.313726)
@@ -66,8 +66,8 @@ theme_override_constants/separation = 24
 [node name="AudioVolume" parent="ButtonsGroup/Music Row" instance=ExtResource("4_iy873")]
 layout_mode = 2
 audio_type = 1
-audio_enabled_icon = ExtResource("5_rag66")
-audio_disabled_icon = ExtResource("6_8gc0w")
+audio_enabled_icon = ExtResource("5_sljpj")
+audio_disabled_icon = ExtResource("6_sljpj")
 
 [node name="MenuButton" type="MenuButton" parent="ButtonsGroup/Music Row"]
 visible = false
@@ -114,8 +114,8 @@ theme_override_constants/separation = 24
 
 [node name="AudioVolume" parent="ButtonsGroup/Sound Row" instance=ExtResource("4_iy873")]
 layout_mode = 2
-audio_enabled_icon = ExtResource("10_8cjac")
-audio_disabled_icon = ExtResource("11_wnhtc")
+audio_enabled_icon = ExtResource("9_1ampf")
+audio_disabled_icon = ExtResource("10_1ampf")
 
 [node name="settings_player2_name" parent="ButtonsGroup/Sound Row" instance=ExtResource("6_i2aij")]
 layout_mode = 2
