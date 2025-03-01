@@ -109,12 +109,12 @@ var dummyNames : Array = [
 
 # can be removed
 const avail_tile_shapes = {
-	"A": preload("res://Scenes/tileA.tscn"),
-	"B": preload("res://Scenes/tileB.tscn"),
-	"C": preload("res://Scenes/tileC.tscn"),
-	"D": preload("res://Scenes/tileD.tscn"),
-	"E": preload("res://Scenes/tileE.tscn"),
-	"F": preload("res://Scenes/tileF.tscn")
+	"A": "",
+	"B": "",
+	"C": "",
+	"D": "",
+	"E": "",
+	"F": ""
 }
 
 const avail_tile_colors = {
@@ -134,43 +134,6 @@ const avail_tile_colors = {
 # even doesn't store them, reload each time they're changed
 const Stones : Dictionary = {
 		"Default": {
-		#~here add set key (default, set1, set2...) => prefs item
-			"A1": preload("res://Arts/Gfx/Tiles/default/A1.png"),
-			"A2": preload("res://Arts/Gfx/Tiles/default/A2.png"),
-			"A3": preload("res://Arts/Gfx/Tiles/default/A3.png"),
-			"A4": preload("res://Arts/Gfx/Tiles/default/A4.png"),
-			"A5": preload("res://Arts/Gfx/Tiles/default/A5.png"),
-			"A6": preload("res://Arts/Gfx/Tiles/default/A6.png"),
-			"B1": preload("res://Arts/Gfx/Tiles/default/B1.png"),
-			"B2": preload("res://Arts/Gfx/Tiles/default/B2.png"),
-			"B3": preload("res://Arts/Gfx/Tiles/default/B3.png"),
-			"B4": preload("res://Arts/Gfx/Tiles/default/B4.png"),
-			"B5": preload("res://Arts/Gfx/Tiles/default/B5.png"),
-			"B6": preload("res://Arts/Gfx/Tiles/default/B6.png"),
-			"C1": preload("res://Arts/Gfx/Tiles/default/C1.png"),
-			"C2": preload("res://Arts/Gfx/Tiles/default/C2.png"),
-			"C3": preload("res://Arts/Gfx/Tiles/default/C3.png"),
-			"C4": preload("res://Arts/Gfx/Tiles/default/C4.png"),
-			"C5": preload("res://Arts/Gfx/Tiles/default/C5.png"),
-			"C6": preload("res://Arts/Gfx/Tiles/default/C6.png"),
-			"D1": preload("res://Arts/Gfx/Tiles/default/D1.png"),
-			"D2": preload("res://Arts/Gfx/Tiles/default/D2.png"),
-			"D3": preload("res://Arts/Gfx/Tiles/default/D3.png"),
-			"D4": preload("res://Arts/Gfx/Tiles/default/D4.png"),
-			"D5": preload("res://Arts/Gfx/Tiles/default/D5.png"),
-			"D6": preload("res://Arts/Gfx/Tiles/default/D6.png"),
-			"E1": preload("res://Arts/Gfx/Tiles/default/E1.png"),
-			"E2": preload("res://Arts/Gfx/Tiles/default/E2.png"),
-			"E3": preload("res://Arts/Gfx/Tiles/default/E3.png"),
-			"E4": preload("res://Arts/Gfx/Tiles/default/E4.png"),
-			"E5": preload("res://Arts/Gfx/Tiles/default/E5.png"),
-			"E6": preload("res://Arts/Gfx/Tiles/default/E6.png"),
-			"F1": preload("res://Arts/Gfx/Tiles/default/F1.png"),
-			"F2": preload("res://Arts/Gfx/Tiles/default/F2.png"),
-			"F3": preload("res://Arts/Gfx/Tiles/default/F3.png"),
-			"F4": preload("res://Arts/Gfx/Tiles/default/F4.png"),
-			"F5": preload("res://Arts/Gfx/Tiles/default/F5.png"),
-			"F6": preload("res://Arts/Gfx/Tiles/default/F6.png")
 		},
 		"ushoe": {
 			"A1": preload("res://Arts/Gfx/Tiles/ushoe/losange-blanc-256px.png"),
@@ -219,7 +182,9 @@ const available_musics = [
 	preload("res://audio/musics/Distant-Mountains_Looping.mp3"),
 	preload("res://audio/musics/Hidden-Pond_Looping.mp3"),
 	preload("res://audio/musics/Icicles_Looping.mp3"),
-	preload("res://audio/musics/Valley-Sunrise_Looping.mp3")
+	preload("res://audio/musics/Valley-Sunrise_Looping.mp3"),
+	preload("res://audio/musics/Left-Behind_Looping.mp3"),
+	preload("res://audio/musics/The-Magic-Box_Lopping.mp3")
 ]
 
 const sound_effects = {
