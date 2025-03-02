@@ -20,7 +20,7 @@ func _notification(what: int) -> void:
 	Global.debug("origin: _notification called, what="+str(what))
 
 func _init():
-	Global.debug_enabled = true #tmp
+	Global.debug_enabled = false #tmp
 
 	Global.debug("origin: init called")
 	#also called again after qitting a game !
@@ -114,10 +114,14 @@ func _on_game_launched(gameType : String):
 
 	Global.debug("origin: remove menu & add game")
 	remove_child(menu)
+	
+	Global.debug("origin: connect signal ogio to game node")
+	var connect_error : Error = game.connect("game_end", _on_game_is_over)
+	Global.debug("origin: connect error ? " + str(connect_error))
+
 	add_child(game)
 	Global.debug("origin: game added to tree")
-	
-	game.connect("game_end", _on_game_is_over)
+
 
 	if Global.settings["Audio"]["soundEffects"] == true:
 		game.connect("playsound", _on_game_play_soundeffect)
