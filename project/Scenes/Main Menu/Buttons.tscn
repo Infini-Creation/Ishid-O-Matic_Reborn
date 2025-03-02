@@ -88,6 +88,16 @@ layout_mode = 2
 [node name="SpacerItem2" parent="ButtonsGroup/ButtonsRow5" instance=ExtResource("8_go3ci")]
 layout_mode = 2
 
+[node name="CenterContainer" type="CenterContainer" parent="ButtonsGroup"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ButtonsGroup/CenterContainer"]
+layout_mode = 2
+text = "MMBTUTORIALHINT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="oneplayer_game_requested" from="ButtonsGroup/ButtonsRow1/OnePlayerItem" to="." method="_on_one_player_item_oneplayer_game_requested"]
 [connection signal="twoplayers_game_requested" from="ButtonsGroup/ButtonsRow1/TwoPlayersItem" to="." method="_on_two_players_item_twoplayers_game_requested"]
 [connection signal="tournament_game_requested" from="ButtonsGroup/ButtonsRow2/TournamentItem" to="." method="_on_tournament_item_tournament_game_requested"]
