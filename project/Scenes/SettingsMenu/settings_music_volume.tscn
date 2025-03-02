@@ -1,12 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1y0ceoptlyy8"]
+[gd_scene load_steps=6 format=3 uid="uid://b1y0ceoptlyy8"]
 
-[ext_resource type="Script" path="res://Scripts/Menus/settings_music_volume.gd" id="1_1k4l1"]
+[ext_resource type="Script" uid="uid://nlf7knasmnmj" path="res://Scripts/Menus/settings_music_volume.gd" id="1_1k4l1"]
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="1_qhv2s"]
-[ext_resource type="Texture2D" uid="uid://dmma2bje76kym" path="res://Arts/Gfx/Icons/settings-music-icon.png" id="3_77t1i"]
-[ext_resource type="Texture2D" uid="uid://b5r7qirm0jrya" path="res://Arts/Gfx/Icons/ishido-settings-music-disabled-icon.png" id="4_a670l"]
-
-[sub_resource type="SystemFont" id="SystemFont_lxape"]
-subpixel_positioning = 0
+[ext_resource type="Texture2D" uid="uid://dx10o5an7l6kg" path="res://Arts/Gfx/Icons/MusicVolume Button.png" id="3_pwr15"]
+[ext_resource type="Texture2D" uid="uid://cab63dn8qo8e3" path="res://Arts/Gfx/Icons/MusicVolume Button Disabled.png" id="4_tl1us"]
 
 [sub_resource type="SystemFont" id="SystemFont_tuk2c"]
 subpixel_positioning = 0
@@ -22,13 +19,13 @@ size_flags_vertical = 3
 script = ExtResource("1_1k4l1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+auto_translate_mode = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-auto_translate = false
 localize_numeral_system = false
 theme = ExtResource("1_qhv2s")
 color = Color(0.0941176, 0.207843, 1, 1)
@@ -48,24 +45,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource("3_77t1i")
-texture_pressed = ExtResource("4_a670l")
+texture_normal = ExtResource("3_pwr15")
+texture_pressed = ExtResource("4_tl1us")
 ignore_texture_size = true
 stretch_mode = 5
-
-[node name="Music Icon" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("3_77t1i")
-expand_mode = 3
-
-[node name="tmpIcon Music" type="Label" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_lxape")
-theme_override_font_sizes/font_size = 20
-text = " Mus"
-horizontal_alignment = 1
 
 [node name="HSlider" type="HSlider" parent="HBoxContainer"]
 custom_minimum_size = Vector2(255, 0)

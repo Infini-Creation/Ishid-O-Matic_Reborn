@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://c8srptvs1yge6"]
 
-[ext_resource type="Texture2D" uid="uid://c7lkxtg5gnbvw" path="res://Arts/Gfx/Icons/settings-sounds-icon.png" id="1_scebq"]
-[ext_resource type="Script" path="res://Scripts/Menus/settings_sound_volume.gd" id="1_tp5td"]
+[ext_resource type="Script" uid="uid://gaclfny37vc" path="res://Scripts/Menus/settings_sound_volume.gd" id="1_tp5td"]
 [ext_resource type="Theme" uid="uid://0js83h3tu5ft" path="res://ishido-base.tres" id="2_ril1x"]
-[ext_resource type="Texture2D" uid="uid://8lufgt6u5dy0" path="res://Arts/Gfx/Icons/ishido-settings-sounds-disabled-icon.png" id="4_3peag"]
+[ext_resource type="Texture2D" uid="uid://oh6pidgva887" path="res://Arts/Gfx/Icons/SoundVolume Button.png" id="3_2x5k5"]
+[ext_resource type="Texture2D" uid="uid://btg20x0pw75v5" path="res://Arts/Gfx/Icons/SoundVolume Button Disabled.png" id="4_2jln6"]
 
 [sub_resource type="SystemFont" id="SystemFont_tuk2c"]
 subpixel_positioning = 0
@@ -45,8 +45,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 toggle_mode = true
 action_mode = 0
-texture_normal = ExtResource("1_scebq")
-texture_pressed = ExtResource("4_3peag")
+texture_normal = ExtResource("3_2x5k5")
+texture_pressed = ExtResource("4_2jln6")
 ignore_texture_size = true
 stretch_mode = 5
 
