@@ -25,7 +25,8 @@ var next_tile : Node2D = null
 var avail_move : int = -1
 ##var lastMove : Vector2  #unused, ~to remove
 var score_data : Array = []	#score, 4w count, bool updated
-var history : Array = []
+var history : Array = []		#for Undo
+var backHistory : Array = []	#for Redo
 var historyIdx : int = 0
 	#for undo/redo, store move, tile, score, 4w matches
 	#store dic item { tile, coord, score, 4wcount } can be used also for storing replay
@@ -135,7 +136,8 @@ func _ready():
 	# default is one player game
 	$CenterContainer/FinalScorePanel.numberOfPlayers = 1
 
-	if Global.settings["tutorialSeen"] == false:
+	#tmp disabled until tutorial is made
+	if false: ##Global.settings["tutorialSeen"] == false:
 		Global.debug("display play tutorial panel")
 		gameTutorialPanel.show()
 
@@ -147,32 +149,15 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("Quit"):
-		quit = true
+		quit_action()
 	elif event.is_action_pressed("Return_To_Menu"):
-		quit = true
+		quit_action()
 	elif event.is_action_pressed("Highlight_Mode"):
-		if gameType == Global.GAMETYPE_TOURNAMENT:
-			Global.debug("Help disabled in tournament mode")
-		else:
-			Global.debug("previous enum value=" + str(highlight_mode))
-			highlight_mode += 1
-			highlight_mode %= Global.HIGHLIGHT_MODE.size()
-			Global.debug("previous enum value=" + str(highlight_mode))
-			# update highlighted cells (just reemit signal ?? => not redo check avail move call)
-			check_available_move(highlight_mode)
-			$UI/HBoxContainer/MiddleContainer/DataDisplay.text = Global.HIGHLIGHT_MODE_LABELS[highlight_mode]
+		highlight_action()
 	elif event.is_action_pressed("Undo"):
-		if gameType == Global.GAMETYPE_TOURNAMENT:
-			Global.debug("Undo disabled in tournament mode")
-		else:
-			#TODO prevent move to be done while undoing previous one !
-			pass
+		undo_action()
 	elif event.is_action_pressed("Redo"):
-		if gameType == Global.GAMETYPE_TOURNAMENT:
-			Global.debug("Redo disabled in tournament mode")
-		else:
-			#TODO prevent move to be done while redoing previous one !
-			pass
+		redo_action()
 	# to remove before release (action as well)
 	elif event.is_action_pressed("FourWaysDebug"):
 		Global.debug("fake four ways event")
@@ -307,6 +292,7 @@ func get_mouse_grid_position() -> Vector2:
 
 
 func init_board():
+	##return #tmp test
 	var tileIndex : int = 0
 	var unique_tiles_set = DeckDisplay.get_unique_tiles_set()
 	
@@ -453,6 +439,7 @@ func check_adjacent_tiles(tile : Node2D, grid_position : Vector2) -> int:
 		
 	Global.debug("CAT: adji="+str(adjacent_index)+" adjt="+str(adjacent_tiles))
 
+	##return 1 ##TMP test
 	match adjacent_index:
 		0:
 			Global.debug("no neighbor case => FALSE")
@@ -585,6 +572,9 @@ func game_over(status : int):
 	elif status == Global.GAME_EXIT_STATUS.USER_QUIT:
 		Global.debug("game quit")
 		
+		#maybe pause game here during display panel (needed for enhanced)
+		# but not all nodes in the game tree here, only move timer !! and all
+		# linked to it
 		gameQuitPanel.show()
 		# go back to main menu or just exit
 		#Global.debug("emit game_end signal")
@@ -619,7 +609,7 @@ func _on_game_over_panel_is_closed():
 	# ?? $CenterContainer/FinalScorePanel.set_score(playersScores, numberOfPlayers)
 
 	# ==> do this ONLY when FSP is closed!
-	##Global.debug("GOP closed, emit game_end signal")
+	Global.debug("GOP closed") ##, emit game_end signal")
 	##game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 	
 ## bad way to get it
@@ -641,14 +631,14 @@ func _on_game_win_panel_is_closed():
 	#current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count()
 	$CenterContainer/FinalScorePanel.setup(playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 	#$CenterContainer/FinalScorePanel.set_score(playersScores, numberOfPlayers)
-	Global.debug("GOPw closed, emit game_end signal")
+	Global.debug("GOPw closed") ##, emit game_end signal")
 	##game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 
 
 func _on_game_quit_panel_quit(confirm : bool):
 	Global.debug("Quit Confirm panel closed: "+str(confirm))
 	if confirm == true:
-		Global.debug("Quit to main menu")
+		Global.debug("Quit to main menu, emit game_end signal")
 		# here: can display score anim or after sig emit
 		game_end.emit(Global.GAME_EXIT_STATUS.USER_QUIT, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 		gameQuitPanel.hide()
@@ -666,7 +656,7 @@ func _on_game_quit_panel_quit(confirm : bool):
 
 
 func _on_final_score_panel_is_closed():
-	Global.debug("final score panel signal close")
+	Global.debug("final score panel signal close, emit game_end signal")
 	game_end.emit(game_end_status, current_player, playersScores, fourWaysCounts, DeckDisplay.get_deck_count())
 
 
@@ -675,6 +665,60 @@ func _on_game_tutorial_panel_playtutorial(confirm: bool) -> void:
 	if confirm == true:
 		Global.debug("play tutorial...")
 		gameTutorialPanel.hide()
+		#tmp
+		Global.settings["tutorialSeen"] = true
 	else:
 		Global.debug("don't play tutorial")
 		gameTutorialPanel.hide()
+
+
+func quit_action() -> void:
+	quit = true
+	
+
+func highlight_action() -> void:
+	if gameType == Global.GAMETYPE_TOURNAMENT:
+		Global.debug("Help disabled in tournament mode")
+	else:
+		Global.debug("previous enum value=" + str(highlight_mode))
+		highlight_mode += 1
+		highlight_mode %= Global.HIGHLIGHT_MODE.size()
+		Global.debug("previous enum value=" + str(highlight_mode))
+		# update highlighted cells (just reemit signal ?? => not redo check avail move call)
+		check_available_move(highlight_mode)
+		##tmp rem $UI/HBoxContainer/MiddleContainer/DataDisplay.text = Global.HIGHLIGHT_MODE_LABELS[highlight_mode]
+		# ==> here display icon/change button icon
+
+
+func undo_action() -> void:
+	if gameType == Global.GAMETYPE_TOURNAMENT:
+		Global.debug("Undo disabled in tournament mode")
+	else:
+		#TODO prevent move to be done while undoing previous one !
+		pass
+
+
+func redo_action() -> void:
+	if gameType == Global.GAMETYPE_TOURNAMENT:
+		Global.debug("Redo disabled in tournament mode")
+	else:
+		#TODO prevent move to be done while redoing previous one !
+		pass
+
+
+
+#Move actions out of _input func first to avoid code dup
+func _on_highlight_button_pressed() -> void:
+	highlight_action()
+
+
+func _on_quit_button_pressed() -> void:
+	quit_action()
+
+
+func _on_undo_button_pressed() -> void:
+	undo_action()
+
+
+func _on_redo_button_pressed() -> void:
+	redo_action()
