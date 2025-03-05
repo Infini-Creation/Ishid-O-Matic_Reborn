@@ -5,12 +5,15 @@ extends Control
 @onready var highScoresPage : PackedScene = preload("res://Scenes/high_scores.tscn")
 @onready var gameScene : PackedScene = preload("res://Scenes/game.tscn")
 @onready var gameTournamentPanel = $GameTournamentPanel
+@onready var linksBox = $"HBoxC-Links"
+
 
 var mainMenuButtons
 var settingsMenu
 var highScores
 var game
 var mainMenuSave : Node
+
 
 signal launch_game(game_type : String)
 signal audio_volume_updated(type: int, volume: int)
@@ -84,8 +87,16 @@ func _ready():
 		MainMenuButtons.hide_quit_button()
 
 
+func _process(_delta: float) -> void:
+	if $HelpPanel.visible == true or $AboutPanel.visible == true or $HallOfFamePanel.visible == true:
+			linksBox.hide()
+	else:
+		linksBox.show()
+
+	 
 func _on_button_click_received(buttonID : int):
 	Global.debug("id="+str(buttonID))
+
 	match buttonID:
 	# Main menu buttons
 		Global.ButtonIDs.BUTTON_1PGAME:
@@ -181,3 +192,12 @@ func _on_game_tournament_panel_continue_tournament(cont : bool):
 
 func _on_game_tournament_panel_back_to_menu():
 	Global.debug("tournament cancelled")
+
+
+func _on_xlink_button_pressed() -> void:
+	Global.debug("X link pressed")
+	Global.open_link(Global.X_LINK)
+
+func _on_discord_link_button_pressed() -> void:
+	Global.debug("Discord link pressed")
+	Global.open_link(Global.DISCORD_LINK)
