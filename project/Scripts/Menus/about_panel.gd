@@ -2,11 +2,6 @@ extends Control
 
 var linkOpened : bool = false
 var aboutText : String = Global.TRANSLATION_ERROR_MESSAGE_BBCODE
-var zoomAnimation : Tween = null
-var zoomStatus : Array[bool] = [false, false, false]
-var artistPicsOrigSizes : Array[Vector2] = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
-
-@onready var containerSize : Vector2 = Vector2.ZERO
 
 
 func _init():
@@ -19,57 +14,36 @@ func _notification(what: int) -> void:
 
 func _ready():	#or only when visible, ~the 1st time ??
 	Global.debug("about: ready called, at="+aboutText.substr(50))
-	containerSize = $CenterContainer/VBoxContainer.size
-	Global.debug("about: ready contsize="+str(containerSize))
-	artistPicsOrigSizes[0] = $CenterContainer/ArtistContainer/TextureRect.size
-	artistPicsOrigSizes[1] = $CenterContainer/ArtistContainer/TextureRect2.size
-	artistPicsOrigSizes[2] = $CenterContainer/ArtistContainer/TextureRect3.size
 
 
-func _on_texture_button_pressed():
+func _on_texture_button_pressed() -> void:
 	Global.debug("about: textbutton pressed")
 	if !linkOpened:
 		Global.debug("hide panel")
 		hide()
 
 
-func _on_rich_text_label_meta_clicked(meta):
-	var err = OS.shell_open(meta)
-	if err == OK:
-		Global.debug("about: Opened link '%s' successfully!" % meta)
-		linkOpened = true
-	else:
-		Global.debug("about: Failed opening the link '%s'!" % meta)
-	linkOpened = false
+func _on_rich_text_label_meta_clicked(meta) ->  void:
+	linkOpened = Global.open_link(meta)
 
 
-func _on_action_button_pressed():
+func _on_action_button_pressed() -> void:
 	Global.debug("about: textbutton pressed lo="+str(linkOpened))
 	if !linkOpened:
 		Global.debug("hide panel")
 		hide()
 
 
-func _on_close_button_pressed():
+func _on_close_button_pressed() -> void:
 	Global.debug("about: close button pressed")
 	hide()
 
 
-func _on_visibility_changed():
+func _on_visibility_changed() -> void:
 	aboutText = Global.lp_translations[Global.TRANSLATION_ABOUT_PAGE][TranslationServer.get_locale()][0]
 
 	##Global.debug("about: vis chg: at="+aboutText)
-	
-	# ~not needed at all !!
-	#if Global.translation_setting_updated[Global.TRANSLATION_ABOUT_PAGE] == true:
-		#Global.debug("about: vis chg: lang updated")
-		#aboutText = Global.TRANSLATION_ERROR_MESSAGE_BBCODE
-#
-		#aboutText = Global.lp_translations[Global.TRANSLATION_ABOUT_PAGE][TranslationServer.get_locale()][0]
-		#Global.translation_setting_updated[Global.TRANSLATION_ABOUT_PAGE] = false
-		#Global.debug("about: vis chg: lang updated well, flag reset")
-#
-	#Global.debug("about: vis chg end, at="+aboutText)
+
 	$CenterContainer/VBoxContainer/TextureButton/CenterContainer/RichTextLabel.text = aboutText
 
 
