@@ -53,6 +53,9 @@ const LANGUAGE_NAME_TRANSLATION : Array = [ "English", "Français", "test" ]
 const HIGHLIGHT_MODE_LABELS : Array = [ "None", "First", "All", "Random", "Best score" ]
 # may add language as first level later
 
+const X_LINK : String = "https://x.com/Infini_Creation"
+const DISCORD_LINK : String = "https://discord.gg/EWPfuwC4vR"
+
 var stats : Dictionary = {
 	"GamesPlayed": 0,
 	"GamesWon": 0,
@@ -524,6 +527,16 @@ func load_long_texts() -> bool:
 	#status = true
 
 	return status
+
+
+func open_link(link : String = "") -> bool:
+	var err = OS.shell_open(link)
+	if err == OK:
+		Global.debug("about: Opened link '%s' successfully!" % link)
+		return true
+	else:
+		Global.debug("about: Failed opening the link '%s'!" % link)
+		return false
 
 
 func debug(msg : String) -> void:
