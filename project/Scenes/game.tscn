@@ -29,18 +29,6 @@ unicode = 104
 [sub_resource type="Shortcut" id="Shortcut_1phco"]
 events = [SubResource("InputEventKey_rfjv2")]
 
-[sub_resource type="InputEventKey" id="InputEventKey_1phco"]
-device = -1
-keycode = 4194305
-
-[sub_resource type="InputEventKey" id="InputEventKey_nb51f"]
-device = -1
-keycode = 81
-unicode = 113
-
-[sub_resource type="Shortcut" id="Shortcut_nnt18"]
-events = [SubResource("InputEventKey_1phco"), SubResource("InputEventKey_nb51f")]
-
 [sub_resource type="InputEventKey" id="InputEventKey_nnt18"]
 device = -1
 keycode = 85
@@ -56,6 +44,18 @@ unicode = 114
 
 [sub_resource type="Shortcut" id="Shortcut_iivbl"]
 events = [SubResource("InputEventKey_85qyi")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_1phco"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="InputEventKey" id="InputEventKey_nb51f"]
+device = -1
+keycode = 81
+unicode = 113
+
+[sub_resource type="Shortcut" id="Shortcut_nnt18"]
+events = [SubResource("InputEventKey_1phco"), SubResource("InputEventKey_nb51f")]
 
 [node name="Game" type="Node2D"]
 auto_translate_mode = 1
@@ -146,14 +146,6 @@ texture_normal = ExtResource("7_iivbl")
 texture_pressed = ExtResource("8_7nbq1")
 stretch_mode = 5
 
-[node name="QuitButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-shortcut = SubResource("Shortcut_nnt18")
-texture_normal = ExtResource("9_7nbq1")
-texture_pressed = ExtResource("9_iivbl")
-stretch_mode = 5
-
 [node name="UndoButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -168,6 +160,14 @@ layout_mode = 2
 shortcut = SubResource("Shortcut_iivbl")
 texture_normal = ExtResource("11_exi56")
 texture_pressed = ExtResource("11_exi56")
+stretch_mode = 5
+
+[node name="QuitButton" type="TextureButton" parent="UI/HBoxContainer/MiddleContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+shortcut = SubResource("Shortcut_nnt18")
+texture_normal = ExtResource("9_7nbq1")
+texture_pressed = ExtResource("9_iivbl")
 stretch_mode = 5
 
 [node name="Player2ScoreMargin" type="MarginContainer" parent="UI/HBoxContainer"]
@@ -231,9 +231,9 @@ layout_mode = 2
 
 [connection signal="highlight_board_cell" from="." to="BoardOverlay" method="_on_game_highlight_board_cell"]
 [connection signal="pressed" from="UI/HBoxContainer/MiddleContainer/HBoxContainer/HighlightButton" to="." method="_on_highlight_button_pressed"]
-[connection signal="pressed" from="UI/HBoxContainer/MiddleContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/MiddleContainer/HBoxContainer/UndoButton" to="." method="_on_undo_button_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/MiddleContainer/HBoxContainer/RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/MiddleContainer/HBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="deck_empty" from="UI/VBoxContainer/DeckDisplay" to="." method="_on_deck_display_deck_empty"]
 [connection signal="is_closed" from="GameOverPanel" to="." method="_on_game_over_panel_is_closed"]
 [connection signal="is_closed" from="GameWinPanel" to="." method="_on_game_win_panel_is_closed"]
