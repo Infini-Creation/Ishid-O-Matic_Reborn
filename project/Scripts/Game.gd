@@ -159,13 +159,14 @@ func _input(event):
 	elif event.is_action_pressed("Redo"):
 		redo_action()
 	# to remove before release (action as well)
-	elif event.is_action_pressed("FourWaysDebug"):
-		Global.debug("fake four ways event")
-		fakeFourWays = true
-	elif event.is_action_pressed("debug_win"):
-		game_over(Global.GAME_EXIT_STATUS.GAME_WON)
-	elif event.is_action_pressed("debug_loss"):
-		game_over(Global.GAME_EXIT_STATUS.GAME_LOSS)
+	#elif event.is_action_pressed("FourWaysDebug"):
+		#Global.debug("fake four ways event")
+		#fakeFourWays = true
+	#elif event.is_action_pressed("debug_win"):
+		#game_over(Global.GAME_EXIT_STATUS.GAME_WON)
+	#elif event.is_action_pressed("debug_loss"):
+		#game_over(Global.GAME_EXIT_STATUS.GAME_LOSS)
+	# to remove before release
 
 
 func _process(_delta):
@@ -209,7 +210,7 @@ func _process(_delta):
 				if potential_tile_score > 0: ## true: ##tmp test 
 					add_tile(mpos, next_tile)
 					playsound.emit("tile")
-					if potential_tile_score == 4 or fakeFourWays == true:
+					if potential_tile_score == 4: # or fakeFourWays == true:
 						play_fourWays_effects(mpos)
 						playsound.emit("fourways")
 						fakeFourWays = false
@@ -513,8 +514,9 @@ func highlight_cell(cells : Array) -> void:
 func play_fourWays_effects(gridpos : Vector2):
 	#Global.debug("4W effect on: "+str(gridpos))
 
+	#double effect is not very great, once will be enough
 	var tilesAnim = self.create_tween().set_parallel(true) #= no anim at all
-	tilesAnim.set_loops(2)
+	tilesAnim.set_loops(1)
 
 	for neighbor in [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]:
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(0.75,0.75), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -526,9 +528,17 @@ func play_fourWays_effects(gridpos : Vector2):
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(1,1), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "rotation", -PI, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+	tilesAnim.chain().tween_interval(0.25)
+
 	for neighbor in [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]:
+		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(0.75,0.75), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "rotation", 0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+	tilesAnim.chain().tween_interval(0.25)
+
+	for neighbor in [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0,-1), Vector2(0,1)]:
+		tilesAnim.parallel().tween_property(game_board[gridpos.x + neighbor.x][gridpos.y + neighbor.y], "scale", Vector2(1,1), 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
 	tilesAnim.play()
 
 # ~game_end signal => call this to do some work and ~display game over screen => fill name => highscore
